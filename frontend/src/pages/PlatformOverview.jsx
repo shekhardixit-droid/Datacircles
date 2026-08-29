@@ -1,33 +1,17 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import CTA from "../components/payments/CTA";
 
 /* =========================================================
    FIGMA ASSETS — CURRENT NODE 102:1475
    ========================================================= */
 
 const imgDashboard =
-  "https://www.figma.com/api/mcp/asset/a8538ac2-df4e-4eb7-b569-b8d954b5bb4c.png";
+  "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787985998/b785b93f10ee527292fd9e6b3cba9c838587764b_1.png";
 
 const imgFloatingDashboard =
-  "https://www.figma.com/api/mcp/asset/d7be9525-6d1f-475e-aeb6-029aaa014da4.png";
+  "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787986192/7318c219e2b5c2c73ed078df153915c50d9cc106_2.png";
 
-const imgLogo =
-  "https://www.figma.com/api/mcp/asset/effe62e2-1e6f-4111-831d-64e29d4159af.png";
-
-const imgPartner1 =
-  "https://www.figma.com/api/mcp/asset/63579206-d85d-44dd-9569-2846444651ed.png";
-
-const imgPartner2 =
-  "https://www.figma.com/api/mcp/asset/ccb75e06-9b34-408f-9666-62afc0d73bae.png";
-
-const imgPartner3 =
-  "https://www.figma.com/api/mcp/asset/906e054c-a96b-429e-92ed-b1a591e24f34.png";
-
-const imgPartner4 =
-  "https://www.figma.com/api/mcp/asset/b45ac2f8-38d5-4a66-ba49-4e01eca273ae.png";
-
-const imgPartner5 =
-  "https://www.figma.com/api/mcp/asset/78eb347e-74b9-466a-b0b0-e2c5e1172b23.png";
 
 const imgProblem =
   "https://www.figma.com/api/mcp/asset/660b337f-7ddf-4840-b081-24b11063395c.png";
@@ -36,7 +20,7 @@ const imgProblemOverlay =
   "https://www.figma.com/api/mcp/asset/e8fa4a3f-18eb-4f14-9c86-87ca7e4a9324.png";
 
 const imgFeature =
-  "https://www.figma.com/api/mcp/asset/3dd49189-0c7c-4f7b-a462-1ef75fc65dfc.png";
+  "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787917181/e1b401cb4e4c9b406541ebaf104107c3180075c3_5.png";
 
 const imgPattern =
   "https://www.figma.com/api/mcp/asset/af560372-12d0-4da2-9b06-70b1012c6d3f.svg";
@@ -44,11 +28,7 @@ const imgPattern =
 const imgGroup =
   "https://www.figma.com/api/mcp/asset/3723193f-cbcb-4762-82df-38ae8f908d84.svg";
 
-const imgDropdown =
-  "https://www.figma.com/api/mcp/asset/30e3eb3a-339e-45c6-ac81-f9d435afc81b.svg";
 
-const imgLogin =
-  "https://www.figma.com/api/mcp/asset/4916e2f4-e093-42f2-97da-d7bbef61d8fc.svg";
 
 const imgArrow =
   "https://www.figma.com/api/mcp/asset/97787264-fe83-4295-8892-1b7a706fe5ed.svg";
@@ -427,115 +407,6 @@ function Hero() {
           <p className="m-0 whitespace-nowrap text-center text-[9px] leading-[19.6px] text-[#635557]">
             7-day free trial · No card required · GST-ready · Works on any device
           </p>
-
-        </div>
-
-      </div>
-
-    </section>
-  );
-}
-
-
-/* =========================================================
-   PARTNERS
-   ========================================================= */
-
-function Partners() {
-  return (
-    <section
-      className="
-        absolute
-        left-1/2
-        top-[1325px]
-        h-[148px]
-        w-[1920px]
-        -translate-x-1/2
-        overflow-hidden
-        bg-white
-      "
-    >
-
-      <div
-        className="
-          absolute
-          left-1/2
-          top-0
-          flex
-          h-full
-          w-[1360px]
-          -translate-x-1/2
-          flex-col
-          items-center
-          justify-center
-          gap-[32px]
-        "
-      >
-
-        <div className="flex w-[640px] flex-col items-center">
-
-          <p
-            className="
-              m-0
-              whitespace-nowrap
-              text-center
-              text-[14px]
-              font-normal
-              uppercase
-              leading-[18px]
-              tracking-[0.5px]
-              text-[#666]
-            "
-          >
-            Trusted and used by
-          </p>
-
-        </div>
-
-
-        <div
-          className="
-            flex
-            h-[40px]
-            w-[820px]
-            items-center
-            justify-center
-          "
-        >
-
-          <div className="flex items-center gap-[24px]">
-
-            <img
-              src={imgPartner1}
-              alt=""
-              className="h-[39.89px] w-[169px] shrink-0 object-contain"
-            />
-
-            <img
-              src={imgPartner2}
-              alt=""
-              className="h-[39.97px] w-[127px] shrink-0 object-contain"
-            />
-
-            <img
-              src={imgPartner3}
-              alt=""
-              className="h-[39.89px] w-[176px] shrink-0 object-contain"
-            />
-
-            <img
-              src={imgPartner4}
-              alt=""
-              className="h-[39.86px] w-[136px] shrink-0 object-contain"
-            />
-
-            <img
-              src={imgPartner5}
-              alt=""
-              className="h-[39.94px] w-[195px] shrink-0 object-contain"
-            />
-
-          </div>
 
         </div>
 
@@ -1777,134 +1648,294 @@ function IndiaSection() {
 
 
 /* =========================================================
-   FINAL CTA
+   GUIDE FINAL FRAME
    ========================================================= */
 
-function FinalCTA() {
+function GuideFinalFrame() {
   return (
-    <section
-      className="
-        absolute
-        bottom-0
-        left-1/2
-        flex
-        h-[358px]
-        w-[1920px]
-        -translate-x-1/2
-        flex-col
-        items-center
-        justify-center
-        gap-[42px]
-        overflow-hidden
-        bg-gradient-to-r
-        from-[#0a55af]
-        to-[#0085ff]
-        px-[320px]
-        py-[80px]
-      "
-    >
+    <>
+      <style>{`
+        .guide-final-frame {
+          width: 1280px;
+          height: 543px;
+          margin: 0 auto;
 
-      {/* CONTENT */}
+          display: grid;
+          grid-template-columns: 818px 437px;
+          column-gap: 25px;
 
-      <div
-        className="
-          flex
-          flex-col
-          items-center
-          gap-[18px]
-          text-center
-          text-white
-        "
-      >
+          background: #ffffff;
 
-        <h2
-          className="
-            m-0
-            whitespace-nowrap
-            text-[42px]
-            font-medium
-            leading-[1.1]
-            text-white
-          "
-        >
-          See it on your own Business
-        </h2>
+          font-family: Inter, Arial, Helvetica, sans-serif;
+          box-sizing: border-box;
+        }
 
-        <p
-          className="
-            m-0
-            w-[662px]
-            text-center
-            text-[18px]
-            font-normal
-            leading-[1.4]
-            text-white
-          "
-        >
-          Start free for 7 days at full limits. No credit card needed, and our
-          team will help you bring your data across.
-        </p>
+        /* =========================================
+           LEFT IMAGE
+           ========================================= */
 
-      </div>
+        .guide-final-left {
+          width: 818px;
+          height: 543px;
 
+          border: 1px solid #e8e8e8;
+          border-radius: 10px;
 
-      {/* BUTTONS */}
+          background: #f8f8f8;
 
-      <div className="flex items-center gap-[8px]">
+          overflow: hidden;
+          position: relative;
 
-        <button
-          type="button"
-          className={`
-            flex
-            h-[42px]
-            w-[142px]
-            items-center
-            justify-center
-            overflow-hidden
-            rounded-[9999px]
-            bg-white
-            px-[12px]
-            text-center
-            text-[14px]
-            font-medium
-            leading-[1.2]
-            text-[#014c6c]
-            ${buttonEffect}
-          `}
-        >
-          Create Account
-        </button>
+          box-sizing: border-box;
+        }
 
-        <button
-          type="button"
-          className={`
-            flex
-            h-[42px]
-            w-[136px]
-            items-center
-            justify-center
-            overflow-hidden
-            rounded-[9999px]
-            border
-            border-white
-            px-[12px]
-            text-center
-            text-[14px]
-            font-medium
-            leading-[1.2]
-            text-white
-            ${buttonEffect}
-          `}
-        >
-          Book a Demo
-        </button>
+        .guide-final-left img {
+          width: 100%;
+          height: 100%;
 
-      </div>
+          display: block;
 
-    </section>
+          object-fit: cover;
+        }
+
+        /* =========================================
+           IMAGE SLOT
+           ========================================= */
+
+        .guide-final-image-slot {
+          position: absolute;
+          inset: 0;
+
+          width: 100%;
+          height: 100%;
+
+          background: #f8f8f8;
+        }
+
+        /* =========================================
+           RIGHT COLUMN
+           ========================================= */
+
+        .guide-final-right {
+          width: 437px;
+          height: 543px;
+
+          display: flex;
+          flex-direction: column;
+
+          gap: 16px;
+
+          box-sizing: border-box;
+        }
+
+        /* =========================================
+           CONTENT CARDS
+           ========================================= */
+
+        .guide-final-card {
+          width: 437px;
+          height: 170.33px;
+
+          flex: 0 0 170.33px;
+
+          background: #ffffff;
+
+          border: 1px solid #e5e5e5;
+
+          border-radius: 16px;
+
+          position: relative;
+
+          padding: 24px 30px;
+
+          box-sizing: border-box;
+
+          overflow: hidden;
+        }
+
+        /* =========================================
+           CARD NUMBERS
+           ========================================= */
+
+        .guide-final-number {
+          margin: 0;
+
+          color: #0085ff;
+
+          font-size: 52px;
+          line-height: 56px;
+
+          font-weight: 500;
+
+          letter-spacing: -2px;
+        }
+
+        /* =========================================
+           MADE IN INDIA
+           ========================================= */
+
+        .guide-final-made {
+          margin: 0;
+
+          color: #0085ff;
+
+          font-size: 40px;
+          line-height: 46px;
+
+          font-weight: 500;
+
+          letter-spacing: -1.8px;
+        }
+
+        /* =========================================
+           CARD DESCRIPTION
+           ========================================= */
+
+        .guide-final-card-text {
+          width: 100%;
+
+          margin: 14px 0 0;
+
+          color: #78788d;
+
+          font-size: 14px;
+          line-height: 20px;
+
+          font-weight: 400;
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+
+        @media (max-width: 1350px) {
+          .guide-final-frame {
+            transform-origin: top center;
+
+            transform: scale(
+              min(1, calc((100vw - 32px) / 1280))
+            );
+          }
+        }
+
+        @media (max-width: 800px) {
+          .guide-final-frame {
+            width: 100%;
+            height: auto;
+
+            transform: none;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 20px;
+          }
+
+          .guide-final-left {
+            width: 100%;
+            height: 400px;
+          }
+
+          .guide-final-right {
+            width: 100%;
+            height: auto;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 16px;
+          }
+
+          .guide-final-card {
+            width: 100%;
+            height: 170.33px;
+
+            flex: 0 0 170.33px;
+          }
+        }
+      `}</style>
+
+      <section className="guide-final-frame">
+
+        {/* =====================================================
+            LEFT — IMAGE SLOT
+            ===================================================== */}
+
+        <div className="guide-final-left">
+
+          {/*
+            PASTE YOUR IMAGE HERE:
+
+            <img
+              src="YOUR_CLOUDINARY_IMAGE_URL"
+              alt=""
+            />
+          */}
+
+          <div className="guide-final-image-slot" />
+
+        </div>
+
+        {/* =====================================================
+            RIGHT — THREE CONTENT CARDS
+            ===================================================== */}
+
+        <div className="guide-final-right">
+
+          {/* ===================================================
+              CARD 1 — 100+
+              =================================================== */}
+
+          <div className="guide-final-card">
+
+            <h3 className="guide-final-number">
+              100+
+            </h3>
+
+            <p className="guide-final-card-text">
+              Businesses run on Datacircles
+            </p>
+
+          </div>
+
+          {/* ===================================================
+              CARD 2 — 1,00,000+
+              =================================================== */}
+
+          <div className="guide-final-card">
+
+            <h3 className="guide-final-number">
+              1,00,000+
+            </h3>
+
+            <p className="guide-final-card-text">
+              Invoices Raised
+            </p>
+
+          </div>
+
+          {/* ===================================================
+              CARD 3 — MADE IN INDIA
+              =================================================== */}
+
+          <div className="guide-final-card">
+
+            <h3 className="guide-final-made">
+              Made in India
+            </h3>
+
+            <p className="guide-final-card-text">
+              Built in Mumbai, hosted in India
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+    </>
   );
 }
-
 
 /* =========================================================
    COMPLETE PAGE
@@ -1917,40 +1948,53 @@ export default function PlatformOverview() {
         w-full
         min-w-[1440px]
         overflow-x-hidden
-        bg-white
+        overflow-y-hidden
       "
     >
-
       <main
         className="
           relative
           mx-auto
-          h-[8589px]
+          h-[8200px]
           w-[1440px]
           bg-white
         "
       >
-
-        <Navbar />
+        {/* NAVBAR — SAME PLACEMENT AS CODE 2 */}
+        <div
+          className="
+            absolute
+            left-1/2
+            top-[30px]
+            z-[100]
+            -translate-x-1/2
+          "
+        >
+          <Navbar />
+        </div>
 
         <Hero />
-
-        <Partners />
-
         <ProblemSection />
-
         <BusinessFlow />
-
         <Features />
-
         <DashboardSection />
-
         <IndiaSection />
 
-        <FinalCTA />
-
+        {/* GUIDE FINAL FRAME — BEFORE CTA */}
+        <div
+          className="
+            absolute
+            left-1/2
+            top-[7650px]
+            z-[20]
+            -translate-x-1/2
+          "
+        >
+          <GuideFinalFrame />
+        </div>
       </main>
 
+      <CTA />
     </div>
   );
 }

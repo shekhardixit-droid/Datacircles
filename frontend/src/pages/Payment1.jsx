@@ -3,6 +3,7 @@ import React from "react";
 import FourCards from "../components/payments/FourCards";
 import Explore from "../components/payments/Explore";
 import CTA from "../components/payments/CTA";
+import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
 
 const Payment1 = () => {
   return (
@@ -72,7 +73,6 @@ const Payment1 = () => {
 
         </section>
 
-
  {/* Image */}
 <div className="mt-8 w-full">
   <img
@@ -81,6 +81,8 @@ const Payment1 = () => {
     className="h-auto w-full object-cover"
   />
 </div>
+
+        <TrustedAndUsedBy />
 
 {/* Invoicing Section */}
 <section className="mx-auto mt-16 md:mt-20 flex h-auto w-full max-w-[1200px] flex-col lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-0 gap-8 lg:gap-0">

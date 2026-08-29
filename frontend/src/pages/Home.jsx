@@ -1,31 +1,602 @@
 import Navbar from "../components/Navbar";
+import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
+import CRMPrice from "../components/CRMPrice";
 
 const HERO_IMAGE =
-  "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787746205/d5da18c5db90406a6e740b82dc3c12a903e7adb9.png";
+  "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787977676/Dashboard_IMG.png";
 
-/* Trusted company logos - exact order provided */
-const TRUSTED_LOGOS = [
-  {
-    src: "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787749787/6e8ca7c3e53836b10aab3e36b1c5f152347111a5.png",
-    alt: "Codecrafter",
-  },
-  {
-    src: "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787749800/77d17fd71ccd171c93a6b9ea1612c2bb49ba7d84.png",
-    alt: "3Portals",
-  },
-  {
-    src: "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787749813/96cd453112652b053c531a8b50744142de4f8157.png",
-    alt: "Watchtower",
-  },
-  {
-    src: "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787749824/e70fa1d06917acd1f0823a31d3e0f3afc7a25309.png",
-    alt: "Foresight",
-  },
-  {
-    src: "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787749851/7045ca502fa906344a3c06ce9a4b1ad9f91d3e50.png",
-    alt: "Cons",
-  },
-];
+/* =====================================================
+   SHARED BUSINESS IMAGE
+   Used by Section 5 and the final/Your Business section.
+===================================================== */
+
+const SHARED_BUSINESS_IMAGE =
+  "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787762725/e1b401cb4e4c9b406541ebaf104107c3180075c3.png";
+
+/* =====================================================
+   SECTION 6 — THREE IMAGE SLOTS
+   Keep blank for now.
+===================================================== */
+
+const SECTION6_CRM_IMAGE = "";
+const SECTION6_INVOICING_IMAGE = "";
+const SECTION6_PAYMENTS_IMAGE = "";
+
+/* =====================================================
+   SECTION 7 — THREE IMAGES + THREE VIDEOS
+   Reserved for future section.
+===================================================== */
+
+const SECTION7_IMAGE_1 = "";
+const SECTION7_IMAGE_2 = "";
+const SECTION7_IMAGE_3 = "";
+
+const SECTION7_VIDEO_1 = "";
+const SECTION7_VIDEO_2 = "";
+const SECTION7_VIDEO_3 = "";
+
+/* =====================================================
+   LAST SECTION
+   Uses the same image as Section 5.
+===================================================== */
+
+const LAST_SECTION_IMAGE ="https://res.cloudinary.com/tpxo8m6a/image/upload/v1787996595/Dashboard_IMG_2.png";
+
+
+/* =====================================================
+   SECTION 7 — EXACT SVG LAYOUT
+   SVG reference: 1440 × 2121
+   Three image slots + three video slots.
+   All media constants remain blank.
+===================================================== */
+
+function Section7() {
+  return (
+    <section
+      className="section7"
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "2121px",
+        overflow: "hidden",
+        background: "#000000",
+        color: "#FFFFFF",
+        fontFamily: "Inter, Arial, Helvetica, sans-serif",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          width: "1440px",
+          height: "2121px",
+          margin: "0 auto",
+        }}
+      >
+        {/* =================================================
+            TOP HEADING
+        ================================================== */}
+
+        <div
+          style={{
+            position: "absolute",
+            left: "108px",
+            top: "126px",
+            width: "620px",
+          }}
+        >
+          <h2
+            style={{
+              margin: 0,
+              color: "#FFFFFF",
+              fontSize: "34px",
+              lineHeight: "40px",
+              fontWeight: 400,
+              letterSpacing: "-1.2px",
+            }}
+          >
+            One Flow from Enquiry to Paid
+          </h2>
+
+          <p
+            style={{
+              margin: "10px 0 0",
+              width: "520px",
+              color: "#8E8E8E",
+              fontSize: "14px",
+              lineHeight: "18px",
+              fontWeight: 400,
+            }}
+          >
+            Each step carries the last one forward. Nothing is retyped, and
+            nothing falls through the gap between two apps.
+          </p>
+        </div>
+
+        {/* =================================================
+            TOP CTA
+        ================================================== */}
+
+        <button
+          type="button"
+          style={{
+            position: "absolute",
+            left: "1111px",
+            top: "180.13px",
+            width: "221px",
+            height: "52px",
+            border: "none",
+            borderRadius: "26px",
+            background: "#0085FF",
+            color: "#FFFFFF",
+            fontFamily: "Inter, Arial, Helvetica, sans-serif",
+            fontSize: "13px",
+            lineHeight: "16px",
+            fontWeight: 400,
+            cursor: "pointer",
+          }}
+        >
+          CTA BUTTON HERE
+        </button>
+
+        {/* =================================================
+            IMAGE 1
+        ================================================== */}
+
+        <div
+          style={{
+            position: "absolute",
+            left: "108px",
+            top: "285.13px",
+            width: "392px",
+            height: "512px",
+            borderRadius: "16px",
+            overflow: "hidden",
+            background: "#3A3A3A",
+          }}
+        >
+          {SECTION7_IMAGE_1 && (
+            <img
+              src={SECTION7_IMAGE_1}
+              alt=""
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "block",
+                objectFit: "cover",
+              }}
+            />
+          )}
+
+          <div
+            style={{
+              position: "absolute",
+              left: "16px",
+              right: "16px",
+              bottom: "28px",
+            }}
+          >
+            <h3
+              style={{
+                margin: 0,
+                color: "#FFFFFF",
+                fontSize: "16px",
+                lineHeight: "20px",
+                fontWeight: 600,
+              }}
+            >
+              Bring your data across
+            </h3>
+
+            <p
+              style={{
+                margin: "5px 0 0",
+                color: "#D0D0D0",
+                fontSize: "11px",
+                lineHeight: "15px",
+                fontWeight: 400,
+              }}
+            >
+              Send us your client list from Excel or Tally, and our team helps
+              you import it properly.
+            </p>
+          </div>
+        </div>
+
+        {/* =================================================
+            IMAGE 2
+        ================================================== */}
+
+        <div
+          style={{
+            position: "absolute",
+            left: "524px",
+            top: "285.13px",
+            width: "392px",
+            height: "512px",
+            borderRadius: "16px",
+            overflow: "hidden",
+            background: "#3A3A3A",
+          }}
+        >
+          {SECTION7_IMAGE_2 && (
+            <img
+              src={SECTION7_IMAGE_2}
+              alt=""
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "block",
+                objectFit: "cover",
+              }}
+            />
+          )}
+
+          <div
+            style={{
+              position: "absolute",
+              left: "16px",
+              right: "16px",
+              bottom: "28px",
+            }}
+          >
+            <h3
+              style={{
+                margin: 0,
+                color: "#FFFFFF",
+                fontSize: "16px",
+                lineHeight: "20px",
+                fontWeight: 600,
+              }}
+            >
+              Set up your pipeline
+            </h3>
+
+            <p
+              style={{
+                margin: "5px 0 0",
+                color: "#D0D0D0",
+                fontSize: "11px",
+                lineHeight: "15px",
+                fontWeight: 400,
+              }}
+            >
+              Use the stages your business actually works in, and add your
+              team when you're ready.
+            </p>
+          </div>
+        </div>
+
+        {/* =================================================
+            IMAGE 3
+        ================================================== */}
+
+        <div
+          style={{
+            position: "absolute",
+            left: "940px",
+            top: "285.13px",
+            width: "392px",
+            height: "512px",
+            borderRadius: "16px",
+            overflow: "hidden",
+            background: "#3A3A3A",
+          }}
+        >
+          {SECTION7_IMAGE_3 && (
+            <img
+              src={SECTION7_IMAGE_3}
+              alt=""
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "block",
+                objectFit: "cover",
+              }}
+            />
+          )}
+
+          <div
+            style={{
+              position: "absolute",
+              left: "16px",
+              right: "16px",
+              bottom: "28px",
+            }}
+          >
+            <h3
+              style={{
+                margin: 0,
+                color: "#FFFFFF",
+                fontSize: "16px",
+                lineHeight: "20px",
+                fontWeight: 600,
+              }}
+            >
+              Start winning and billing
+            </h3>
+
+            <p
+              style={{
+                margin: "5px 0 0",
+                color: "#D0D0D0",
+                fontSize: "11px",
+                lineHeight: "15px",
+                fontWeight: 400,
+              }}
+            >
+              Chase leads, send GST invoices, and watch the payments land in
+              one place.
+            </p>
+          </div>
+        </div>
+
+        {/* =================================================
+            REAL BUSINESSES / REAL RESULTS
+        ================================================== */}
+
+        <div
+          style={{
+            position: "absolute",
+            left: "131px",
+            top: "962px",
+            width: "760px",
+          }}
+        >
+          <div
+            style={{
+              color: "#0085FF",
+              fontSize: "12px",
+              lineHeight: "16px",
+              fontWeight: 500,
+            }}
+          >
+            Real Businesses. Real Results.
+          </div>
+
+          <h2
+            style={{
+              margin: "20px 0 0",
+              width: "500px",
+              color: "#FFFFFF",
+              fontSize: "34px",
+              lineHeight: "39px",
+              fontWeight: 400,
+              letterSpacing: "-1.4px",
+            }}
+          >
+            Datacircles Replaced
+            <br />
+            3 Tools for Us
+          </h2>
+
+          <p
+            style={{
+              margin: "17px 0 0",
+              width: "610px",
+              color: "#858585",
+              fontSize: "14px",
+              lineHeight: "19px",
+              fontWeight: 400,
+            }}
+          >
+            Founders, accountants, and agency owners trust DataCircles to stay
+            on top of sales and money without the stress of complex software.
+          </p>
+        </div>
+
+        {/* =================================================
+            VIDEO 1 — LEFT PARTIAL CARD
+        ================================================== */}
+
+        <div
+          style={{
+            position: "absolute",
+            left: "-1102px",
+            top: "1249.13px",
+            width: "1177.33px",
+            height: "685px",
+            borderRadius: "8px",
+            overflow: "hidden",
+            background: "#111216",
+            opacity: 0.72,
+          }}
+        >
+          {SECTION7_VIDEO_1 && (
+            <video
+              src={SECTION7_VIDEO_1}
+              playsInline
+              controls
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "block",
+                objectFit: "cover",
+              }}
+            />
+          )}
+        </div>
+
+        {/* =================================================
+            VIDEO 2 — CENTER CARD
+        ================================================== */}
+
+        <div
+          style={{
+            position: "absolute",
+            left: "131.333px",
+            top: "1249.13px",
+            width: "1177.33px",
+            height: "685px",
+            borderRadius: "8px",
+            overflow: "hidden",
+            background: "#111216",
+          }}
+        >
+          {SECTION7_VIDEO_2 && (
+            <video
+              src={SECTION7_VIDEO_2}
+              playsInline
+              controls
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "block",
+                objectFit: "cover",
+              }}
+            />
+          )}
+
+          <div
+            style={{
+              position: "absolute",
+              left: "32px",
+              right: "32px",
+              bottom: "29px",
+              pointerEvents: "none",
+            }}
+          >
+            <div
+              style={{
+                color: "#FFFFFF",
+                fontSize: "16px",
+                lineHeight: "20px",
+                fontWeight: 600,
+              }}
+            >
+              Pradhyumn Dhondi, Creative Director
+            </div>
+
+            <p
+              style={{
+                margin: "5px 0 0",
+                width: "560px",
+                color: "rgba(255,255,255,0.72)",
+                fontSize: "11px",
+                lineHeight: "15px",
+                fontWeight: 400,
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+        </div>
+
+        {/* =================================================
+            VIDEO 3 — RIGHT PARTIAL CARD
+        ================================================== */}
+
+        <div
+          style={{
+            position: "absolute",
+            left: "1364.67px",
+            top: "1249.13px",
+            width: "1177.33px",
+            height: "685px",
+            borderRadius: "8px",
+            overflow: "hidden",
+            background: "#111216",
+            opacity: 0.72,
+          }}
+        >
+          {SECTION7_VIDEO_3 && (
+            <video
+              src={SECTION7_VIDEO_3}
+              playsInline
+              controls
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "block",
+                objectFit: "cover",
+              }}
+            />
+          )}
+        </div>
+
+        {/* =================================================
+            CAROUSEL ARROWS
+        ================================================== */}
+
+        <button
+          type="button"
+          aria-label="Previous story"
+          style={{
+            position: "absolute",
+            left: "1218px",
+            top: "1990.13px",
+            width: "38px",
+            height: "38px",
+            padding: 0,
+            border: "none",
+            borderRadius: "50%",
+            background: "#111216",
+            color: "#F4F3EA",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "20px",
+            lineHeight: 1,
+            cursor: "pointer",
+          }}
+        >
+          ←
+        </button>
+
+        <button
+          type="button"
+          aria-label="Next story"
+          style={{
+            position: "absolute",
+            left: "1272px",
+            top: "1990.13px",
+            width: "38px",
+            height: "38px",
+            padding: 0,
+            border: "none",
+            borderRadius: "50%",
+            background: "#111216",
+            color: "#F4F3EA",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "20px",
+            lineHeight: 1,
+            cursor: "pointer",
+          }}
+        >
+          →
+        </button>
+      </div>
+
+      {/* =====================================================
+          SECTION 7 RESPONSIVE SCALING
+      ===================================================== */}
+
+      <style>{`
+        @media (max-width: 1439px) {
+          .section7 {
+            height: calc(2121px * (100vw / 1440));
+            min-height: 0;
+          }
+
+          .section7 > div {
+            transform-origin: top center;
+            transform: scale(
+              calc(100vw / 1440)
+            );
+          }
+        }
+
+        @media (max-width: 700px) {
+          .section7 {
+            height: calc(2121px * (100vw / 1440));
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
 
 function Home() {
   return (
@@ -582,53 +1153,6 @@ function Home() {
             decoding="async"
           />
 
-          {/* =================================================
-              DASHBOARD BOTTOM BLUR + FADE
-          ================================================== */}
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              inset-x-0
-              bottom-0
-              h-[38%]
-              overflow-hidden
-              rounded-b-[23px]
-              backdrop-blur-[8px]
-              bg-[linear-gradient(
-                to_bottom,
-                rgba(255,255,255,0)_0%,
-                rgba(255,255,255,0.02)_10%,
-                rgba(255,255,255,0.10)_25%,
-                rgba(186,222,255,0.28)_48%,
-                rgba(186,222,255,0.62)_72%,
-                rgba(186,222,255,0.90)_90%,
-                #BADEFF_100%
-              )]
-            "
-          />
-
-          {/* Stronger bottom blur */}
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              inset-x-0
-              bottom-0
-              h-[18%]
-              rounded-b-[23px]
-              backdrop-blur-[14px]
-              bg-[linear-gradient(
-                to_bottom,
-                rgba(186,222,255,0.10)_0%,
-                rgba(186,222,255,0.38)_35%,
-                rgba(186,222,255,0.78)_70%,
-                #BADEFF_100%
-              )]
-            "
-          />
         </div>
       </section>
 
@@ -636,130 +1160,7 @@ function Home() {
     TRUSTED AND USED BY
 ====================================================== */}
 
-<section
-  className="
-    relative
-    mx-auto
-    mt-[32px]
-    h-[90px]
-    w-[calc(100%-32px)]
-    max-w-[1360px]
-    overflow-hidden
-    bg-white
-  "
->
-  {/* TITLE */}
-
-  <div className="flex justify-center">
-    <span
-      className="
-        text-[14px]
-        font-normal
-        uppercase
-        leading-[18px]
-        tracking-[0.5px]
-        text-[#666666]
-      "
-    >
-      Trusted and used by
-    </span>
-  </div>
-
-  {/* LOGOS */}
-
-  <div
-    className="
-      relative
-      mt-[14px]
-      h-[38px]
-      w-full
-    "
-  >
-    <div
-      className="
-        absolute
-        left-1/2
-        top-0
-        flex
-        h-[32px]
-        w-[820px]
-        -translate-x-1/2
-        items-center
-        justify-between
-      "
-    >
-      {TRUSTED_LOGOS.map((logo, index) => (
-        <div
-          key={logo.src}
-          className="
-            flex
-            h-[30px]
-            w-[130px]
-            shrink-0
-            items-center
-            justify-center
-          "
-        >
-          <img
-            src={logo.src}
-            alt={logo.alt}
-            className="
-              max-h-[24px]
-              max-w-[120px]
-              object-contain
-            "
-            loading={index === 0 ? "eager" : "lazy"}
-            decoding="async"
-          />
-        </div>
-      ))}
-    </div>
-
-    {/* =================================================
-        LEFT EDGE BLUR
-        Blurs only the existing logo row underneath.
-    ================================================== */}
-
-    <div
-      className="
-        pointer-events-none
-        absolute
-        left-0
-        top-[-4px]
-        z-20
-        h-[42px]
-        w-[150px]
-        backdrop-blur-[5px]
-        bg-gradient-to-r
-        from-white
-        via-white/70
-        to-transparent
-      "
-    />
-
-    {/* =================================================
-        RIGHT EDGE BLUR
-        Blurs only the existing logo row underneath.
-    ================================================== */}
-
-    <div
-      className="
-        pointer-events-none
-        absolute
-        right-0
-        top-[-4px]
-        z-20
-        h-[42px]
-        w-[150px]
-        backdrop-blur-[5px]
-        bg-gradient-to-l
-        from-white
-        via-white/70
-        to-transparent
-      "
-    />
-  </div>
-</section>
+      <TrustedAndUsedBy />
 {/* =====================================================
     BUSINESS VALUE SECTION
 ====================================================== */}
@@ -1541,7 +1942,7 @@ function Home() {
       {/* Dashboard image */}
 
       <img
-        src="https://res.cloudinary.com/tpxo8m6a/image/upload/v1787762725/e1b401cb4e4c9b406541ebaf104107c3180075c3.png"
+        src={SHARED_BUSINESS_IMAGE}
         alt="DataCircles dashboard"
         loading="lazy"
         decoding="async"
@@ -1772,19 +2173,1181 @@ function Home() {
     </button>
   </div>
 
-  {/* ================= RIGHT SIDE ================= */}
+  {/* =====================================================
+    SECTION 6 — CRM / INVOICING / PAYMENTS
+    EXACT SVG LAYOUT
+===================================================== */}
+
+<section
+  className="
+    mx-auto
+    w-full
+    max-w-[523px]
+    bg-white
+    font-inter
+  "
+>
+  {/* =================================================
+      CRM IMAGE
+  ================================================== */}
+
   <div
-    style={{
-      width: "100%",
-      minWidth: 0,
-      boxSizing: "border-box",
-    }}
+    className="
+      h-[300px]
+      w-full
+      overflow-hidden
+      rounded-[8px]
+      bg-[#EAEAEA]
+    "
   >
-    {/* Keep the right-side Section 6 content here.
-        We will build this part separately next. */}
+    {SECTION6_CRM_IMAGE && (
+      <img
+        src={SECTION6_CRM_IMAGE}
+        alt="CRM dashboard"
+        className="
+          block
+          h-full
+          w-full
+          object-cover
+        "
+      />
+    )}
   </div>
+
+
+  {/* =================================================
+      CRM CONTENT
+  ================================================== */}
+
+  <div className="w-full pt-[21px]">
+    <h2
+      className="
+        m-0
+        text-[24px]
+        font-semibold
+        leading-[29px]
+        tracking-[-0.6px]
+        text-[#242424]
+      "
+    >
+      Never lose a lead again.
+    </h2>
+
+    <p
+      className="
+        m-0
+        mt-[12px]
+        w-full
+        text-[16px]
+        font-normal
+        leading-[24px]
+        text-[#303030]
+      "
+    >
+      Every enquiry in one pipeline, every follow-up on time, and every
+      client's full history in one record. Tasks, meetings and notes sit
+      where they belong.
+    </p>
+
+    <div
+      className="
+        mt-[18px]
+        flex
+        w-full
+        flex-wrap
+        gap-[8px]
+      "
+    >
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Deal pipeline
+      </span>
+
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Contacts &amp; companies
+      </span>
+
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Tasks &amp; meetings
+      </span>
+
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Activity timeline
+      </span>
+    </div>
+  </div>
+
+
+  {/* =================================================
+      INVOICING IMAGE
+  ================================================== */}
+
+  <div
+    className="
+      mt-[42px]
+      h-[300px]
+      w-full
+      overflow-hidden
+      rounded-[8px]
+      bg-[#EAEAEA]
+    "
+  >
+    {SECTION6_INVOICING_IMAGE && (
+      <img
+        src={SECTION6_INVOICING_IMAGE}
+        alt="GST invoicing dashboard"
+        className="
+          block
+          h-full
+          w-full
+          object-cover
+        "
+      />
+    )}
+  </div>
+
+
+  {/* =================================================
+      INVOICING CONTENT
+  ================================================== */}
+
+  <div className="w-full pt-[21px]">
+    <h2
+      className="
+        m-0
+        text-[24px]
+        font-semibold
+        leading-[29px]
+        tracking-[-0.6px]
+        text-[#242424]
+      "
+    >
+      GST invoices in seconds, from the deal you just won.
+    </h2>
+
+    <p
+      className="
+        m-0
+        mt-[12px]
+        w-full
+        text-[16px]
+        font-normal
+        leading-[24px]
+        text-[#303030]
+      "
+    >
+      The client details and line items are already there. Quotations,
+      proforma invoices, delivery challans and credit notes too, with
+      unlimited invoices on every plan.
+    </p>
+
+    <div
+      className="
+        mt-[18px]
+        flex
+        w-full
+        flex-wrap
+        gap-[8px]
+      "
+    >
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        GST handled
+      </span>
+
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Unlimited invoices
+      </span>
+
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Your branding
+      </span>
+
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Every document type
+      </span>
+    </div>
+  </div>
+
+
+  {/* =================================================
+      PAYMENTS IMAGE
+  ================================================== */}
+
+  <div
+    className="
+      mt-[42px]
+      h-[300px]
+      w-full
+      overflow-hidden
+      rounded-[8px]
+      bg-[#EAEAEA]
+    "
+  >
+    {SECTION6_PAYMENTS_IMAGE && (
+      <img
+        src={SECTION6_PAYMENTS_IMAGE}
+        alt="Payments dashboard"
+        className="
+          block
+          h-full
+          w-full
+          object-cover
+        "
+      />
+    )}
+  </div>
+
+
+  {/* =================================================
+      PAYMENTS CONTENT
+  ================================================== */}
+
+  <div className="w-full pt-[21px] pb-[40px]">
+    <h2
+      className="
+        m-0
+        text-[24px]
+        font-semibold
+        leading-[29px]
+        tracking-[-0.6px]
+        text-[#242424]
+      "
+    >
+      Know exactly who owes you what.
+    </h2>
+
+    <p
+      className="
+        m-0
+        mt-[12px]
+        w-full
+        text-[16px]
+        font-normal
+        leading-[24px]
+        text-[#303030]
+      "
+    >
+      Invoiced, pending, overdue and collected, on one screen. Late
+      invoices flag themselves, and reminders do the chasing you'd
+      rather not do.
+    </p>
+
+    <div
+      className="
+        mt-[18px]
+        flex
+        w-full
+        flex-wrap
+        gap-[8px]
+      "
+    >
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Payment status
+      </span>
+
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Overdue alerts
+      </span>
+
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Reminders
+      </span>
+
+      <span
+        className="
+          rounded-full
+          border
+          border-[#75B9FF]
+          bg-[#EAF5FF]
+          px-[16px]
+          py-[7px]
+          text-[12px]
+          font-medium
+          leading-[16px]
+          text-[#0069D9]
+        "
+      >
+        Cash flow reports
+      </span>
+    </div>
+  </div>
+
+</section>
 </section>
 
+
+      {/* =====================================================
+          SECTION 7 — CUSTOMER STORIES / MEDIA
+      ====================================================== */}
+
+      <Section7 />
+
+      <CRMPrice />
+      {/* =========================================================
+    SECTION 9 — FRAME 11
+    SVG SIZE: 1440 × 708
+========================================================= */}
+
+<section
+  style={{
+    position: "relative",
+    width: "100%",
+    height: "708px",
+    background: "#FFFFFF",
+    overflow: "hidden",
+    fontFamily: "Inter, Arial, sans-serif",
+  }}
+>
+  <div
+    style={{
+      position: "relative",
+      width: "1440px",
+      height: "708px",
+      margin: "0 auto",
+    }}
+  >
+
+    {/* =====================================================
+        LEFT CONTENT
+    ====================================================== */}
+
+    <div
+      style={{
+        position: "absolute",
+        left: "122px",
+        top: "109px",
+        width: "500px",
+      }}
+    >
+
+      {/* LABEL */}
+
+      <div
+        style={{
+          fontSize: "14px",
+          lineHeight: "18px",
+          fontWeight: 500,
+          color: "#0085FF",
+        }}
+      >
+        Lorem ipsum
+      </div>
+
+      {/* HEADING */}
+
+      <h2
+        style={{
+          width: "410px",
+          margin: "28px 0 0",
+
+          fontSize: "34px",
+          lineHeight: "32px",
+          fontWeight: 500,
+
+          letterSpacing: "-1.5px",
+
+          color: "#171717",
+        }}
+      >
+        Lorem ipsum dolor
+        <br />
+        self amet consectetyr alit
+      </h2>
+
+      {/* DESCRIPTION */}
+
+      <p
+        style={{
+          width: "500px",
+          margin: "26px 0 0",
+
+          fontSize: "16px",
+          lineHeight: "24px",
+          fontWeight: 400,
+
+          color: "#6E7079",
+        }}
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+
+    </div>
+
+
+    {/* =====================================================
+        RIGHT ACCORDION
+        SVG:
+        x = 720
+        width = 603
+    ====================================================== */}
+
+    <div
+      style={{
+        position: "absolute",
+        left: "720px",
+        top: "96px",
+        width: "603px",
+      }}
+    >
+
+      {/* ===================================================
+          OPEN ITEM
+      ==================================================== */}
+
+      <details
+        open
+        style={{
+          width: "603px",
+          borderTop: "1px solid #A8A8A8",
+          borderBottom: "1px solid #A8A8A8",
+        }}
+      >
+        <summary
+          style={{
+            height: "72px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+
+            padding: "0 16px",
+
+            cursor: "pointer",
+            listStyle: "none",
+
+            fontSize: "15px",
+            lineHeight: "20px",
+            fontWeight: 400,
+
+            color: "#171717",
+          }}
+        >
+          <span>
+            Lorem ipsum dolor self amet, consectetur
+          </span>
+
+          <span
+            style={{
+              fontSize: "22px",
+              lineHeight: "22px",
+              fontWeight: 300,
+              color: "#171717",
+            }}
+          >
+            −
+          </span>
+        </summary>
+
+        <div
+          style={{
+            width: "100%",
+            height: "160px",
+
+            padding: "19px 16px 18px",
+
+            borderTop: "1px solid #A8A8A8",
+          }}
+        >
+          <p
+            style={{
+              width: "550px",
+              margin: 0,
+
+              fontSize: "13px",
+              lineHeight: "18px",
+              fontWeight: 400,
+
+              color: "#7C7E87",
+            }}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+
+          <a
+            href="#"
+            style={{
+              display: "inline-block",
+              marginTop: "12px",
+
+              fontSize: "12px",
+              lineHeight: "16px",
+              fontWeight: 400,
+
+              color: "#0085FF",
+              textDecoration: "underline",
+            }}
+          >
+            Learn More
+          </a>
+        </div>
+      </details>
+
+
+      {/* ===================================================
+          CLOSED ITEM 1
+      ==================================================== */}
+
+      <details
+        style={{
+          width: "603px",
+          height: "72px",
+          borderBottom: "1px solid #A8A8A8",
+        }}
+      >
+        <summary
+          style={{
+            width: "100%",
+            height: "72px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+
+            padding: "0 16px",
+
+            cursor: "pointer",
+            listStyle: "none",
+
+            fontSize: "15px",
+            lineHeight: "20px",
+            fontWeight: 400,
+
+            color: "#171717",
+          }}
+        >
+          <span>
+            Lorem ipsum dolor self amet, consectetur
+          </span>
+
+          <span
+            style={{
+              fontSize: "22px",
+              lineHeight: "22px",
+              fontWeight: 300,
+            }}
+          >
+            +
+          </span>
+        </summary>
+      </details>
+
+
+      {/* ===================================================
+          CLOSED ITEM 2
+      ==================================================== */}
+
+      <details
+        style={{
+          width: "603px",
+          height: "72px",
+          borderBottom: "1px solid #A8A8A8",
+        }}
+      >
+        <summary
+          style={{
+            width: "100%",
+            height: "72px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+
+            padding: "0 16px",
+
+            cursor: "pointer",
+            listStyle: "none",
+
+            fontSize: "15px",
+            lineHeight: "20px",
+            fontWeight: 400,
+
+            color: "#171717",
+          }}
+        >
+          <span>
+            Lorem ipsum dolor self amet, consectetur
+          </span>
+
+          <span
+            style={{
+              fontSize: "22px",
+              lineHeight: "22px",
+              fontWeight: 300,
+            }}
+          >
+            +
+          </span>
+        </summary>
+      </details>
+
+
+      {/* ===================================================
+          CLOSED ITEM 3
+      ==================================================== */}
+
+      <details
+        style={{
+          width: "603px",
+          height: "72px",
+          borderBottom: "1px solid #A8A8A8",
+        }}
+      >
+        <summary
+          style={{
+            width: "100%",
+            height: "72px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+
+            padding: "0 16px",
+
+            cursor: "pointer",
+            listStyle: "none",
+
+            fontSize: "15px",
+            lineHeight: "20px",
+            fontWeight: 400,
+
+            color: "#171717",
+          }}
+        >
+          <span>
+            Lorem ipsum dolor self amet, consectetur
+          </span>
+
+          <span
+            style={{
+              fontSize: "22px",
+              lineHeight: "22px",
+              fontWeight: 300,
+            }}
+          >
+            +
+          </span>
+        </summary>
+      </details>
+
+
+      {/* ===================================================
+          CLOSED ITEM 4
+      ==================================================== */}
+
+      <details
+        style={{
+          width: "603px",
+          height: "72px",
+          borderBottom: "1px solid #A8A8A8",
+        }}
+      >
+        <summary
+          style={{
+            width: "100%",
+            height: "72px",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+
+            padding: "0 16px",
+
+            cursor: "pointer",
+            listStyle: "none",
+
+            fontSize: "15px",
+            lineHeight: "20px",
+            fontWeight: 400,
+
+            color: "#171717",
+          }}
+        >
+          <span>
+            Lorem ipsum dolor self amet, consectetur
+          </span>
+
+          <span
+            style={{
+              fontSize: "22px",
+              lineHeight: "22px",
+              fontWeight: 300,
+            }}
+          >
+            +
+          </span>
+        </summary>
+      </details>
+
+    </div>
+
+  </div>
+
+
+  {/* =====================================================
+      RESPONSIVE
+  ====================================================== */}
+
+  <style>{`
+    @media (max-width: 1439px) {
+      .section9-scale {
+        transform-origin: top left;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .section9 {
+        height: auto !important;
+        min-height: 708px;
+      }
+    }
+  `}</style>
+
+</section>
+
+
+
+{/* =========================================================
+    SECTION 10 — FRAME 2147223788
+    SVG SIZE: 1440 × 1072
+========================================================= */}
+
+<section
+  style={{
+    position: "relative",
+    width: "100%",
+    height: "1072px",
+    overflow: "hidden",
+
+    background: "#FFFFFF",
+  }}
+>
+  <div
+    style={{
+      position: "relative",
+      width: "1440px",
+      height: "1072px",
+      margin: "0 auto",
+    }}
+  >
+
+    {/* =====================================================
+        HEADING
+    ====================================================== */}
+
+    <h2
+      style={{
+        position: "absolute",
+
+        top: "8px",
+        left: "50%",
+
+        transform: "translateX(-50%)",
+
+        width: "850px",
+
+        margin: 0,
+
+        textAlign: "center",
+
+        color: "#000000",
+
+        fontSize: "50px",
+        lineHeight: "58px",
+
+        fontWeight: 400,
+
+        letterSpacing: "-2.2px",
+      }}
+    >
+      Stop switching between apps.
+    </h2>
+
+
+    {/* =====================================================
+        DESCRIPTION
+    ====================================================== */}
+
+    <p
+      style={{
+        position: "absolute",
+
+        top: "91px",
+        left: "50%",
+
+        transform: "translateX(-50%)",
+
+        width: "600px",
+
+        margin: 0,
+
+        textAlign: "center",
+
+        color: "#8F8F8F",
+
+        fontSize: "14px",
+        lineHeight: "19px",
+
+        fontWeight: 400,
+      }}
+    >
+      Try DataCircles free for 7 days at full limits and see your leads,
+      <br />
+      invoices and payments in one place. No credit card needed.
+    </p>
+
+
+    {/* =====================================================
+        BUTTONS
+    ====================================================== */}
+
+    <div
+      style={{
+        position: "absolute",
+
+        top: "178px",
+        left: "50%",
+
+        transform: "translateX(-50%)",
+
+        display: "flex",
+        alignItems: "center",
+
+        gap: "12px",
+      }}
+    >
+
+      {/* START NOW */}
+
+      <a
+        href="/signup"
+        style={{
+          width: "134px",
+          height: "40px",
+
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+
+          borderRadius: "5px",
+
+          background: "#0085FF",
+          color: "#FFFFFF",
+
+          fontSize: "12px",
+          lineHeight: "16px",
+
+          fontWeight: 400,
+
+          textDecoration: "none",
+        }}
+      >
+        Get Start Now
+      </a>
+
+
+      {/* BOOK DEMO */}
+
+      <a
+        href="/demo"
+        style={{
+          width: "117px",
+          height: "40px",
+
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+
+          borderRadius: "5px",
+
+          border: "1px solid #CCCCCC",
+
+          background: "#FFFFFF",
+          color: "#000000",
+
+          fontSize: "12px",
+          lineHeight: "16px",
+
+          fontWeight: 400,
+
+          textDecoration: "none",
+        }}
+      >
+        Book Demo
+      </a>
+
+    </div>
+
+
+    {/* =====================================================
+        FINAL IMAGE
+
+        Uses the existing LAST_SECTION_IMAGE constant.
+    ====================================================== */}
+
+    <div
+      style={{
+        position: "absolute",
+
+        left: 0,
+        top: "287px",
+
+        width: "1440px",
+        height: "785px",
+
+        overflow: "hidden",
+
+        borderTopLeftRadius: "14px",
+        borderTopRightRadius: "14px",
+
+        background: "#F7F7F7",
+      }}
+    >
+
+      {LAST_SECTION_IMAGE && (
+        <img
+          src={LAST_SECTION_IMAGE}
+          alt="DataCircles dashboard"
+          style={{
+            position: "absolute",
+
+            left: "0",
+            top: "0",
+
+            width: "1440px",
+            height: "785px",
+
+            display: "block",
+
+            objectFit: "cover",
+          }}
+        />
+      )}
+
+
+      {/* ===================================================
+          FADE OVER IMAGE
+
+          The SVG gradually fades the dashboard toward the
+          bottom and sides.
+      ==================================================== */}
+
+      <div
+        style={{
+          position: "absolute",
+
+          inset: 0,
+
+          pointerEvents: "none",
+
+          background:
+            "linear-gradient(to bottom, rgba(255,255,255,0) 38%, rgba(255,255,255,0.18) 58%, rgba(255,255,255,0.72) 82%, rgba(255,255,255,1) 100%)",
+        }}
+      />
+
+      <div
+        style={{
+          position: "absolute",
+
+          left: 0,
+          top: 0,
+
+          width: "120px",
+          height: "100%",
+
+          pointerEvents: "none",
+
+          background:
+            "linear-gradient(to right, rgba(255,255,255,0.88), rgba(255,255,255,0))",
+        }}
+      />
+
+      <div
+        style={{
+          position: "absolute",
+
+          right: 0,
+          top: 0,
+
+          width: "120px",
+          height: "100%",
+
+          pointerEvents: "none",
+
+          background:
+            "linear-gradient(to left, rgba(255,255,255,0.88), rgba(255,255,255,0))",
+        }}
+      />
+
+    </div>
+
+  </div>
+
+
+  {/* =====================================================
+      RESPONSIVE
+  ====================================================== */}
+
+  <style>{`
+    @media (max-width: 1439px) {
+      .section10-canvas {
+        transform-origin: top left;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .section10 {
+        height: 900px !important;
+      }
+    }
+  `}</style>
+
+</section>
 
 </main>
   );

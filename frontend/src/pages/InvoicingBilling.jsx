@@ -1,4 +1,6 @@
 import React from "react";
+import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
+import CTA from "../components/payments/CTA";
 import Navbar from "../components/Navbar";
 
 
@@ -532,71 +534,6 @@ function Hero() {
         </div>
 
       </div>
-
-    </section>
-  );
-}
-
-
-/* =========================================================
-   TRUSTED AND USED BY
-   ========================================================= */
-
-function TrustedAndUsedBy() {
-  return (
-    <section
-      style={{
-        width: "100%",
-        height: "148px",
-        background: "#FFFFFF",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        boxSizing: "border-box",
-        padding: "32px 40px",
-      }}
-    >
-
-      <div
-        style={{
-          width: "640px",
-          maxWidth: "100%",
-          height: "18px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: baseFont,
-            fontSize: "14px",
-            lineHeight: "18px",
-            fontWeight: 400,
-            letterSpacing: "0.5px",
-            textTransform: "uppercase",
-            color: "#666666",
-          }}
-        >
-          Trusted and used by
-        </span>
-      </div>
-
-
-      {/* BLANK LOGO AREA */}
-
-      <div
-        style={{
-          width: "820px",
-          maxWidth: "90%",
-          height: "40px",
-          marginTop: "20px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      />
 
     </section>
   );
@@ -2141,136 +2078,6 @@ function PaymentsSection() {
 
 
 /* =========================================================
-   FINAL CTA
-   ========================================================= */
-
-function FinalCTA() {
-  return (
-    <section
-      style={{
-        width: "100%",
-        minHeight: "358px",
-        padding: "80px 40px",
-        boxSizing: "border-box",
-        background:
-          "linear-gradient(90deg, #0A55AF 0%, #0085FF 100%)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "42px",
-      }}
-    >
-
-      {/* TEXT */}
-
-      <div
-        style={{
-          width: "747px",
-          maxWidth: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "18px",
-          textAlign: "center",
-        }}
-      >
-
-        <h2
-          style={{
-            margin: 0,
-            fontFamily: baseFont,
-            fontSize: "42px",
-            lineHeight: "110%",
-            fontWeight: 500,
-            letterSpacing: "-2px",
-            color: "#FFFFFF",
-          }}
-        >
-          Ready to stop chasing invoices?
-        </h2>
-
-
-        <p
-          style={{
-            margin: 0,
-            width: "662px",
-            maxWidth: "100%",
-            fontFamily: baseFont,
-            fontSize: "18px",
-            lineHeight: "140%",
-            fontWeight: 400,
-            textAlign: "center",
-            color: "#FFFFFF",
-          }}
-        >
-          Turn every won deal into a professional invoice, send it, and get
-          paid without the spreadsheet shuffle.
-        </p>
-
-      </div>
-
-
-      {/* BUTTONS */}
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "8px",
-        }}
-      >
-
-        <button
-          type="button"
-          style={{
-            width: "142px",
-            height: "42px",
-            padding: "0 12px",
-            border: "none",
-            borderRadius: "9999px",
-            background: "#FFFFFF",
-            fontFamily: baseFont,
-            fontSize: "14px",
-            lineHeight: "120%",
-            fontWeight: 500,
-            color: "#014C6C",
-            cursor: "pointer",
-          }}
-        >
-          Start Free
-        </button>
-
-
-        <button
-          type="button"
-          style={{
-            width: "136px",
-            height: "42px",
-            padding: "0 12px",
-            border: "1px solid #FFFFFF",
-            borderRadius: "9999px",
-            background: "transparent",
-            fontFamily: baseFont,
-            fontSize: "14px",
-            lineHeight: "120%",
-            fontWeight: 500,
-            color: "#FFFFFF",
-            cursor: "pointer",
-          }}
-        >
-          Book a Demo
-        </button>
-
-      </div>
-
-    </section>
-  );
-}
-
-
-/* =========================================================
    RESPONSIVE CSS
    ========================================================= */
 
@@ -2634,7 +2441,7 @@ export default function ProductCRM() {
             ================================================= */}
 
         <div className="product-crm-final">
-          <FinalCTA />
+          <CTA />
         </div>
 
       </main>

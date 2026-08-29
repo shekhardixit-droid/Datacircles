@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import CTA from "../components/payments/CTA";
 
 export default function Blog() {
   /*
@@ -75,7 +76,8 @@ export default function Blog() {
 
         .blog-page {
           width: 100%;
-          min-height: 2543px;
+          min-height: unset;
+          height: auto;
           background: #ffffff;
           overflow-x: hidden;
           position: relative;
@@ -83,7 +85,8 @@ export default function Blog() {
 
         .blog-canvas {
           width: 1440px;
-          min-height: 2543px;
+          min-height: unset;
+          height: auto;
           margin: 0 auto;
           position: relative;
           background: #ffffff;
@@ -1023,7 +1026,8 @@ export default function Blog() {
 
         @media (max-width: 700px) {
           .blog-page {
-            min-height: 100vh;
+            min-height: unset;
+            height: auto;
           }
 
           .blog-hero {
@@ -1461,44 +1465,10 @@ export default function Blog() {
 
           </main>
 
-          {/* ==========================================================
-              BLUE CTA FOOTER
-              ========================================================== */}
-
-          <section className="blog-footer">
-
-            <h2 className="blog-footer-title">
-              Let's Connect
-              <br />
-              More than just works
-            </h2>
-
-            <p className="blog-footer-description">
-              Start free for 7 days at full limits. No credit card needed,
-              and our team will help you bring your data across.
-            </p>
-
-            <div className="blog-footer-buttons">
-
-              <button
-                type="button"
-                className="blog-footer-button primary"
-              >
-                Create Account
-              </button>
-
-              <button
-                type="button"
-                className="blog-footer-button secondary"
-              >
-                Book a Demo
-              </button>
-
-            </div>
-
-          </section>
-
         </div>
+
+        <CTA />
+
       </div>
     </>
   );

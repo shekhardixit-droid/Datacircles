@@ -4,7 +4,6 @@ function CTA() {
   return (
     <section
       className="
-        mx-auto
         flex
         h-auto
         w-full
@@ -80,17 +79,19 @@ function CTA() {
             justify-center
             overflow-hidden
             rounded-full
-            bg-white
+            border
+            border-white
+            bg-transparent
             px-[12px]
             text-center
             text-[14px]
             font-medium
             leading-[1.2]
-            text-[#014c6c]
+            text-white
             transition-all
             duration-200
-            hover:bg-black
-            hover:text-white
+            hover:bg-white
+            hover:text-[#014c6c]
           "
         >
           Create Account
@@ -110,6 +111,7 @@ function CTA() {
             rounded-full
             border
             border-white
+            bg-transparent
             px-[12px]
             text-center
             text-[14px]
