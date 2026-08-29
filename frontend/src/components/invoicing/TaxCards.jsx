@@ -1,20 +1,22 @@
 import React from "react";
+import TaxCard1 from "../../assets/TaxCard1.svg";
+import TaxCard2 from "../../assets/TaxCard2.svg";
 
 const features = [
   {
-    icon: "dist/assets/TaxCard1.svg",
+    icon: TaxCard1,
     title: "Same State",
     description:
       "CGST and SGST, split automatically at the right rate..",
   },
   {
-    icon: "dist/assets/TaxCard2.svg",
+    icon: TaxCard2,
     title: "Different State",
     description:
       "IGST applied instead, with no thinking required.",
   },
   {
-    icon: "dist/assets/TaxCard2.svg",
+    icon: TaxCard2,
     title: "Every Field Covered",
     description:
       "GSTIN, HSN and SAC codes, invoice numbering in sequence..",
