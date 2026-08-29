@@ -8,6 +8,8 @@ import Payment2 from "./pages/Payment2";
 import  InvoicingBilling from "./pages/InvoicingBilling";
 import Blog from "./pages/Blog";
 import HowToGuide from "./pages/HowToGuide";
+import PlatformOverview2 from "./pages/PlatformOverview2";
+import FreeTools from "./pages/FreeTools";
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
       <Route path="/invoicing-billing" element={<InvoicingBilling />} />
       <Route path="/blogs" element={<Blog />} />
       <Route path="/how-to-guide" element={<HowToGuide />} />
+         <Route path="/platform-overview2" element={<PlatformOverview2 />} />
+         <Route path="/freetools" element={<FreeTools />} />
     </Routes>
   );
 }
