@@ -3,6 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import PlatformOverview from "./pages/PlatformOverview";
 import ProductCRM from "./pages/ProductCRM";
+import  InvoicingBilling from "./pages/InvoicingBilling";
+import Blog from "./pages/Blog";
+import HowToGuide from "./pages/HowToGuide";
+
 
 function App() {
   return (
@@ -10,6 +14,9 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/platform-overview" element={<PlatformOverview />} />
       <Route path="/product-crm" element={<ProductCRM />} />
+      <Route path="/invoicing-billing" element={<InvoicingBilling />} />
+      <Route path="/blogs" element={<Blog />} />
+      <Route path="/how-to-guide" element={<HowToGuide />} />
     </Routes>
   );
 }
