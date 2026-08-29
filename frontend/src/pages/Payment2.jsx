@@ -1,4 +1,4 @@
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import React from "react";
 import FourCards from "../components/payments/FourCards";
 import Explore from "../components/payments/Explore";
