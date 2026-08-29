@@ -1,4 +1,4 @@
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 
 const HERO_IMAGE =
   "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787746205/d5da18c5db90406a6e740b82dc3c12a903e7adb9.png";

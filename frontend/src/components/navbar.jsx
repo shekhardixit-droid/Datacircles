@@ -5,8 +5,7 @@ const LOGO_URL =
 
 function Navbar() {
   return (
-    <nav className="flex h-[56px] w-[720px] items-center rounded-full bg-black px-[4px] font-inter">
-
+   <nav className="mx-auto flex h-[56px] w-[720px] items-center rounded-full bg-black px-[4px] font-inter">
       {/* DataCircles Logo */}
       <a
         href="/"
