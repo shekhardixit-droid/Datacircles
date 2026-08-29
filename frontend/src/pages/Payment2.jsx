@@ -22,15 +22,14 @@ const Payment1 = () => {
         {/* Hero / Payment Section */}
         <section className="flex h-auto w-full flex-col items-center mt-12 md:mt-16 lg:mt-20 px-4 sm:px-6">
           
-          {/* Top Pill */}
-          <div className="flex h-[25px] w-[160px] items-center justify-start gap-2 rounded-full px-3 bg-[#EBE6E033]">
-            <span className="h-[7px] w-[7px] rounded-full bg-[#0085FF]" />
+        {/* Top Pill */}
+<div className="flex w-fit items-center justify-center gap-2 rounded-full bg-[#EBE6E033] px-3 py-1">
+  <span className="h-[7px] w-[7px] shrink-0 rounded-full bg-[#0085FF]" />
 
-            <span className="font-inter text-[11px] font-normal text-black">
-              Integrations
-            </span>
-          </div>
-
+  <span className="font-inter text-[11px] font-normal leading-none text-black">
+    Integrations
+  </span>
+</div>
           {/* Main Text */}
           <div className="mt-6 flex h-auto w-full max-w-[635px] items-center justify-center text-center">
             <h1 className="font-inter text-[32px] sm:text-[40px] md:text-[48px] font-semibold leading-[1.1] text-black">
