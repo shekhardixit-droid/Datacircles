@@ -1,8 +1,12 @@
 import React from "react";
+import apartmentIcon from "../../assets/apartment.svg";
+import corporateFareIcon from "../../assets/corporate_fare.svg";
+import domainAddIcon from "../../assets/domain_add.svg";
+import updateIcon from "../../assets/update.svg";
 
 const cards = [
   {
-    icon: "dist/assets/apartment.svg",
+    icon: apartmentIcon,
     label: "Total Invoiced",
     amount: "₹17,28,339",
     change: "12.4%",
@@ -11,7 +15,7 @@ const cards = [
     positive: true,
   },
   {
-    icon: "dist/assets/corporate_fare.svg",
+    icon: corporateFareIcon,
     label: "Pending",
     amount: "₹82,93,898",
     change: "in the last 30 days",
@@ -19,7 +23,7 @@ const cards = [
     positive: true,
   },
   {
-    icon: "dist/assets/domain_add.svg",
+    icon: domainAddIcon,
     label: "Overdue",
     amount: "₹12,93,898",
     change: "7.3%",
@@ -28,7 +32,7 @@ const cards = [
     positive: false,
   },
   {
-    icon: "dist/assets/update.svg",
+    icon: updateIcon,
     label: "Collected",
     amount: "₹2,93,898",
     change: "12.4%",
