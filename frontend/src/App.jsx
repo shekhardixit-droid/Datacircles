@@ -12,7 +12,7 @@ import PlatformOverview2 from "./pages/PlatformOverview2";
 import FreeTools from "./pages/FreeTools";
 import CustomerStories from "./pages/CustomerStories";
 import SubDetails from "./pages/SubDetails";
-
+import CreateInvoice from "./components/invoice/CreateInvoice";
 function App() {
   return (
     <Routes>
@@ -28,6 +28,8 @@ function App() {
       <Route path="/freetools" element={<FreeTools />} />
       <Route path="/customer-stories" element={<CustomerStories />} />
       <Route path="/sub-details" element={<SubDetails />} />
+        <Route path="/invoice-preview" element={<CreateInvoice />} />
+
     </Routes>
   );
 }

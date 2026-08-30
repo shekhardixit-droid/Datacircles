@@ -1095,215 +1095,1170 @@ const DownloadAndShare = ({ selectedAction, onDownload, onShare, onEmail }) => {
 /* LIVE INVOICE PREVIEW */
 /* ============================================================= */
 
-const InvoicePreview = ({ formData, items, selectedColor, selectedLayout, subtotal, taxAmount, total }) => {
-  const previewColor = selectedColor === "rainbow" ? "#0085FF" : selectedColor;
+const InvoicePreview = ({
+  formData,
+  items,
+  selectedColor,
+  selectedLayout,
+  subtotal,
+  taxAmount,
+  total,
+}) => {
+  /*
+   * The invoice data below intentionally uses ONLY fields that already
+   * exist in the current InvoiceBuilder form:
+   *
+   * businessName, businessLogo, businessAddress,
+   * clientName, email, clientAddress, clientPhone,
+   * invoiceNumber, dueDate, notes, signedBy, taxRate, upiId,
+   * items, subtotal, taxAmount, total.
+   *
+   * No new form fields are required for this template.
+   */
+
+  const previewColor =
+    selectedColor === "rainbow" ? "#0085FF" : selectedColor;
+
+  const borderColor = "#111827";
+  const muted = "#4B5563";
+  const lightBorder = "#D1D5DB";
+
+  const taxRateValue = parseFloat(formData.taxRate) || 0;
+  const halfTaxRate = taxRateValue / 2;
 
   const paperBorder =
     selectedLayout === "Side Accent"
-      ? { borderLeft: `10px solid ${previewColor}` }
+      ? { borderLeft: `8px solid ${previewColor}` }
       : selectedLayout === "Minimal"
-      ? { borderTop: `8px solid ${previewColor}` }
+      ? { borderTop: `6px solid ${previewColor}` }
       : {};
 
-  const hexToRgba = (hex, alpha) => {
-    const clean = hex.replace("#", "");
-    const bigint = parseInt(clean, 16);
-    const r = (bigint >> 16) & 255;
-    const g = (bigint >> 8) & 255;
-    const b = bigint & 255;
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  };
+  const amountInWords = numberToWordsIndian(total);
 
   return (
     <div
       className="invoice-preview-shell"
-      style={{ width: "100%", overflow: "hidden", borderRadius: 14, border: "1px solid #E1E5EA", background: "#fff", boxShadow: "0 1px 2px rgba(0,0,0,0.05)" }}
+      style={{
+        width: "100%",
+        overflow: "hidden",
+        borderRadius: 14,
+        border: "1px solid #E1E5EA",
+        background: "#fff",
+        boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
+      }}
     >
-      {/* Chrome around the sheet — hidden on print/download */}
+      {/* Preview chrome - not included in PDF */}
       <div
         className="no-print"
-        style={{ display: "flex", height: 54, alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #E5E5E5", padding: "0 16px" }}
+        style={{
+          display: "flex",
+          height: 54,
+          alignItems: "center",
+          justifyContent: "space-between",
+          borderBottom: "1px solid #E5E5E5",
+          padding: "0 16px",
+        }}
       >
-        <span style={{ fontSize: 14, fontWeight: 500, color: "#000" }}>Live Preview</span>
-        <span style={{ borderRadius: 999, background: "#F3F6F9", padding: "4px 12px", fontSize: 11, color: "#78788D" }}>A4 Invoice</span>
+        <span style={{ fontSize: 14, fontWeight: 500, color: "#000" }}>
+          Live Preview
+        </span>
+
+        <span
+          style={{
+            borderRadius: 999,
+            background: "#F3F6F9",
+            padding: "4px 12px",
+            fontSize: 11,
+            color: "#78788D",
+          }}
+        >
+          A4 Pro Forma Invoice
+        </span>
       </div>
 
-      <div className="invoice-canvas" style={{ background: "#F5F7F9", padding: 20 }}>
-        {/* This is the only element that survives printing */}
+      <div
+        className="invoice-canvas"
+        style={{
+          background: "#F5F7F9",
+          padding: 20,
+        }}
+      >
+        {/* =========================================================
+            A4 INVOICE PAPER
+           ========================================================= */}
         <div
           className="invoice-paper"
           style={{
             margin: "0 auto",
-            minHeight: 820,
             width: "100%",
-            maxWidth: 520,
+            maxWidth: 794,
+            minHeight: 1123,
             overflow: "hidden",
             background: "#fff",
             boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+            fontFamily: "Inter, Arial, sans-serif",
+            fontSize: 11,
+            color: "#111827",
             ...paperBorder,
           }}
         >
-          {selectedLayout === "Colour Band" && <div style={{ height: 70, width: "100%", background: previewColor }} />}
+          {/* ===================== TITLE ===================== */}
 
-          <div style={{ padding: 28 }}>
-            {/* Business + Invoice Info */}
-            <div style={{ display: "flex", justifyContent: "space-between", gap: 20 }}>
-              <div style={{ minWidth: 0 }}>
+          <div
+            style={{
+              border: `1px solid ${borderColor}`,
+              borderBottom: "none",
+              textAlign: "center",
+              padding: "9px 12px",
+            }}
+          >
+            <h1
+              style={{
+                margin: 0,
+                fontSize: 18,
+                fontWeight: 700,
+                letterSpacing: 2,
+                color: previewColor,
+              }}
+            >
+              PRO FORMA INVOICE
+            </h1>
+
+            <p
+              style={{
+                margin: "3px 0 0",
+                fontSize: 9,
+                color: muted,
+                textTransform: "uppercase",
+              }}
+            >
+              ORIGINAL FOR RECIPIENT
+            </p>
+          </div>
+
+          {/* ===================== SELLER + INVOICE INFO ===================== */}
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.15fr 0.85fr",
+              border: `1px solid ${borderColor}`,
+            }}
+          >
+            {/* Seller */}
+            <div
+              style={{
+                borderRight: `1px solid ${borderColor}`,
+                padding: 14,
+                minHeight: 150,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 12,
+                }}
+              >
                 <div
                   style={{
-                    marginBottom: 12,
                     display: "flex",
-                    height: 48,
-                    width: 48,
+                    height: 55,
+                    width: 55,
+                    flexShrink: 0,
                     alignItems: "center",
                     justifyContent: "center",
                     overflow: "hidden",
-                    borderRadius: 6,
-                    color: "#fff",
-                    background: previewColor,
+                    border: `1px solid ${lightBorder}`,
+                    borderRadius: 4,
+                    background: "#fff",
                   }}
                 >
                   {formData.businessLogo ? (
-                    <img src={formData.businessLogo} alt="Business logo" style={{ height: "100%", width: "100%", objectFit: "cover" }} />
+                    <img
+                      src={formData.businessLogo}
+                      alt="Business logo"
+                      style={{
+                        height: "100%",
+                        width: "100%",
+                        objectFit: "contain",
+                      }}
+                    />
                   ) : (
-                    <span style={{ fontSize: 18, fontWeight: 600 }}>
-                      {formData.businessName ? formData.businessName.charAt(0).toUpperCase() : "B"}
+                    <span
+                      style={{
+                        fontSize: 20,
+                        fontWeight: 700,
+                        color: previewColor,
+                      }}
+                    >
+                      {formData.businessName
+                        ? formData.businessName.charAt(0).toUpperCase()
+                        : "B"}
                     </span>
                   )}
                 </div>
 
-                <h2 style={{ fontSize: 20, fontWeight: 600, color: "#000", margin: 0 }}>{formData.businessName || "Your Business Name"}</h2>
-
-                <p style={{ marginTop: 4, maxWidth: 220, whiteSpace: "pre-line", fontSize: 11, lineHeight: "17px", color: "#78788D" }}>
-                  {formData.businessAddress || "Business address, GSTIN and contact details"}
-                </p>
-              </div>
-
-              <div style={{ textAlign: "right" }}>
-                <h1 style={{ fontSize: 25, fontWeight: 600, color: "#000", margin: 0 }}>INVOICE</h1>
-                <p style={{ marginTop: 8, fontSize: 11, color: "#78788D" }}>Invoice No.</p>
-                <p style={{ fontSize: 13, fontWeight: 500, color: "#000" }}>{formData.invoiceNumber || "INV-2026-14"}</p>
-                <p style={{ marginTop: 8, fontSize: 11, color: "#78788D" }}>Due Date</p>
-                <p style={{ fontSize: 13, fontWeight: 500, color: "#000" }}>{formData.dueDate || "DD/MM/YYYY"}</p>
-              </div>
-            </div>
-
-            <div style={{ margin: "28px 0", height: 1, width: "100%", background: hexToRgba(previewColor, 0.2) }} />
-
-            {/* Bill To */}
-            <div>
-              <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, color: previewColor, margin: 0 }}>Bill To</p>
-              <h3 style={{ marginTop: 8, fontSize: 16, fontWeight: 600, color: "#000" }}>{formData.clientName || "Client Name"}</h3>
-              <p style={{ marginTop: 4, maxWidth: 260, fontSize: 11, lineHeight: "17px", color: "#78788D" }}>{formData.clientAddress || "Client address"}</p>
-              {formData.email && <p style={{ marginTop: 4, fontSize: 11, color: "#78788D" }}>{formData.email}</p>}
-              {formData.clientPhone && <p style={{ marginTop: 4, fontSize: 11, color: "#78788D" }}>{formData.clientPhone}</p>}
-            </div>
-
-            {/* ITEMS TABLE */}
-            <div style={{ marginTop: 28, overflow: "hidden", borderRadius: 5, border: "1px solid #E3E7EB" }}>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "2fr 1fr 45px 70px",
-                  alignItems: "center",
-                  padding: "10px 12px",
-                  background: hexToRgba(previewColor, 0.07),
-                }}
-              >
-                <span style={{ fontSize: 10, fontWeight: 600, color: "#000" }}>ITEM</span>
-                <span style={{ fontSize: 10, fontWeight: 600, color: "#000" }}>RATE</span>
-                <span style={{ textAlign: "center", fontSize: 10, fontWeight: 600, color: "#000" }}>QTY</span>
-                <span style={{ textAlign: "right", fontSize: 10, fontWeight: 600, color: "#000" }}>AMOUNT</span>
-              </div>
-
-              {items.map((item, index) => {
-                const rateValue = parseFloat(String(item.rate).replace(/[^0-9.]/g, "")) || 0;
-                return (
-                  <div
-                    key={index}
+                <div style={{ minWidth: 0 }}>
+                  <h2
                     style={{
-                      display: "grid",
-                      gridTemplateColumns: "2fr 1fr 45px 70px",
-                      alignItems: "center",
-                      borderTop: "1px solid #E8EBEE",
-                      padding: "12px",
+                      margin: 0,
+                      fontSize: 16,
+                      fontWeight: 700,
+                      color: "#111827",
                     }}
                   >
-                    <div>
-                      <p style={{ fontSize: 11, fontWeight: 500, color: "#000", margin: 0 }}>{item.item || "Item name"}</p>
-                      {item.description && <p style={{ marginTop: 2, fontSize: 9, color: "#78788D" }}>{item.description}</p>}
-                    </div>
-                    <span style={{ fontSize: 10, color: "#525252" }}>{item.rate ? currency(rateValue) : "₹0"}</span>
-                    <span style={{ textAlign: "center", fontSize: 10, color: "#525252" }}>{item.quantity || 1}</span>
-                    <span style={{ textAlign: "right", fontSize: 10, fontWeight: 500, color: "#000" }}>{currency(item.amountValue)}</span>
-                  </div>
-                );
-              })}
+                    {formData.businessName || "Your Business Name"}
+                  </h2>
+
+                  <p
+                    style={{
+                      margin: "5px 0 0",
+                      whiteSpace: "pre-line",
+                      fontSize: 10,
+                      lineHeight: "15px",
+                      color: muted,
+                    }}
+                  >
+                    {formData.businessAddress ||
+                      "Business address, GSTIN and contact details"}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            {/* TOTAL */}
-            <div style={{ marginTop: 20, display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 20 }}>
-              <div style={{ flex: 1 }}>
-                {formData.upiId && (
-                  <div style={{ textAlign: "left" }}>
-                    <p style={{ fontSize: 10, fontWeight: 600, color: previewColor, margin: 0 }}>
-                      Scan to Pay
-                    </p>
-                    <img
-                      src={`https://quickchart.io/qr?size=140&text=${encodeURIComponent(
-                        `upi://pay?pa=${formData.upiId}&pn=${formData.businessName || "Business"}&am=${Number(total || 0).toFixed(2)}&cu=INR`
-                      )}`}
-                      alt="UPI payment QR code"
+            {/* Invoice metadata */}
+            <div>
+              <InvoiceInfoRow
+                label="Pro Forma Invoice #"
+                value={formData.invoiceNumber || "INV-2026-14"}
+              />
+
+              <InvoiceInfoRow
+                label="Proforma Invoice Date"
+                value={formatInvoiceDate(new Date())}
+              />
+
+              <InvoiceInfoRow
+                label="Due Date"
+                value={formData.dueDate || "DD/MM/YYYY"}
+                last
+              />
+            </div>
+          </div>
+
+          {/* ===================== CUSTOMER + SHIPPING ===================== */}
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              borderLeft: `1px solid ${borderColor}`,
+              borderRight: `1px solid ${borderColor}`,
+              borderBottom: `1px solid ${borderColor}`,
+            }}
+          >
+            {/* Customer */}
+            <div
+              style={{
+                borderRight: `1px solid ${borderColor}`,
+                padding: 14,
+                minHeight: 135,
+              }}
+            >
+              <h3
+                style={{
+                  margin: "0 0 8px",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: "#111827",
+                }}
+              >
+                Customer Details:
+              </h3>
+
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 12,
+                  fontWeight: 700,
+                }}
+              >
+                {formData.clientName || "Client Name"}
+              </p>
+
+              {formData.email && (
+                <p
+                  style={{
+                    margin: "4px 0 0",
+                    fontSize: 10,
+                    color: muted,
+                  }}
+                >
+                  Email: {formData.email}
+                </p>
+              )}
+
+              {formData.clientPhone && (
+                <p
+                  style={{
+                    margin: "3px 0 0",
+                    fontSize: 10,
+                    color: muted,
+                  }}
+                >
+                  Ph: {formData.clientPhone}
+                </p>
+              )}
+
+              <p
+                style={{
+                  margin: "8px 0 0",
+                  fontSize: 10,
+                  fontWeight: 600,
+                }}
+              >
+                Billing Address:
+              </p>
+
+              <p
+                style={{
+                  margin: "3px 0 0",
+                  whiteSpace: "pre-line",
+                  fontSize: 10,
+                  lineHeight: "15px",
+                  color: muted,
+                }}
+              >
+                {formData.clientAddress || "Client address"}
+              </p>
+            </div>
+
+            {/* Shipping / business details available in existing form */}
+            <div
+              style={{
+                padding: 14,
+                minHeight: 135,
+              }}
+            >
+              <h3
+                style={{
+                  margin: "0 0 8px",
+                  fontSize: 11,
+                  fontWeight: 700,
+                }}
+              >
+                Invoice Details:
+              </h3>
+
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 10,
+                  lineHeight: "15px",
+                  color: muted,
+                }}
+              >
+                Invoice Number:{" "}
+                <strong style={{ color: "#111827" }}>
+                  {formData.invoiceNumber || "INV-2026-14"}
+                </strong>
+              </p>
+
+              <p
+                style={{
+                  margin: "5px 0 0",
+                  fontSize: 10,
+                  lineHeight: "15px",
+                  color: muted,
+                }}
+              >
+                Due Date:{" "}
+                <strong style={{ color: "#111827" }}>
+                  {formData.dueDate || "DD/MM/YYYY"}
+                </strong>
+              </p>
+
+              <p
+                style={{
+                  margin: "12px 0 0",
+                  fontSize: 10,
+                  fontWeight: 600,
+                }}
+              >
+                Business Contact:
+              </p>
+
+              <p
+                style={{
+                  margin: "3px 0 0",
+                  whiteSpace: "pre-line",
+                  fontSize: 10,
+                  lineHeight: "15px",
+                  color: muted,
+                }}
+              >
+                {formData.businessAddress || "Business contact details"}
+              </p>
+            </div>
+          </div>
+
+          {/* ===================== ITEMS TABLE ===================== */}
+
+          <div
+            style={{
+              borderLeft: `1px solid ${borderColor}`,
+              borderRight: `1px solid ${borderColor}`,
+            }}
+          >
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                tableLayout: "fixed",
+              }}
+            >
+              <thead>
+                <tr style={{ background: "#F8FAFC" }}>
+                  <th
+                    style={{
+                      width: 35,
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: "8px 6px",
+                      textAlign: "center",
+                      fontSize: 9,
+                    }}
+                  >
+                    #
+                  </th>
+
+                  <th
+                    style={{
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: "8px",
+                      textAlign: "left",
+                      fontSize: 9,
+                    }}
+                  >
+                    Item
+                  </th>
+
+                  <th
+                    style={{
+                      width: 105,
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: "8px 6px",
+                      textAlign: "right",
+                      fontSize: 9,
+                    }}
+                  >
+                    Rate / Item
+                  </th>
+
+                  <th
+                    style={{
+                      width: 60,
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: "8px 6px",
+                      textAlign: "center",
+                      fontSize: 9,
+                    }}
+                  >
+                    Qty
+                  </th>
+
+                  <th
+                    style={{
+                      width: 115,
+                      borderBottom: `1px solid ${borderColor}`,
+                      padding: "8px 6px",
+                      textAlign: "right",
+                      fontSize: 9,
+                    }}
+                  >
+                    Amount
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {items.map((item, index) => (
+                  <tr key={index}>
+                    <td
                       style={{
-                        display: "block",
-                        height: 90,
-                        width: 90,
-                        marginTop: 6,
+                        verticalAlign: "top",
+                        borderBottom: `1px solid ${borderColor}`,
+                        borderRight: `1px solid ${borderColor}`,
+                        padding: 8,
+                        textAlign: "center",
+                        fontSize: 10,
+                      }}
+                    >
+                      {index + 1}
+                    </td>
+
+                    <td
+                      style={{
+                        verticalAlign: "top",
+                        borderBottom: `1px solid ${borderColor}`,
+                        borderRight: `1px solid ${borderColor}`,
+                        padding: 8,
+                      }}
+                    >
+                      <p
+                        style={{
+                          margin: 0,
+                          fontSize: 10,
+                          fontWeight: 700,
+                          color: "#111827",
+                        }}
+                      >
+                        {item.item || "Item name"}
+                      </p>
+
+                      {item.description && (
+                        <p
+                          style={{
+                            margin: "4px 0 0",
+                            whiteSpace: "pre-line",
+                            fontSize: 9,
+                            lineHeight: "14px",
+                            color: muted,
+                          }}
+                        >
+                          {item.description}
+                        </p>
+                      )}
+                    </td>
+
+                    <td
+                      style={{
+                        verticalAlign: "top",
+                        borderBottom: `1px solid ${borderColor}`,
+                        borderRight: `1px solid ${borderColor}`,
+                        padding: 8,
+                        textAlign: "right",
+                        fontSize: 10,
+                      }}
+                    >
+                      {currency(
+                        parseFloat(
+                          String(item.rate).replace(/[^0-9.]/g, "")
+                        ) || 0
+                      )}
+                    </td>
+
+                    <td
+                      style={{
+                        verticalAlign: "top",
+                        borderBottom: `1px solid ${borderColor}`,
+                        borderRight: `1px solid ${borderColor}`,
+                        padding: 8,
+                        textAlign: "center",
+                        fontSize: 10,
+                      }}
+                    >
+                      {item.quantity || 1}
+                    </td>
+
+                    <td
+                      style={{
+                        verticalAlign: "top",
+                        borderBottom: `1px solid ${borderColor}`,
+                        padding: 8,
+                        textAlign: "right",
+                        fontSize: 10,
+                        fontWeight: 600,
+                      }}
+                    >
+                      {currency(item.amountValue)}
+                    </td>
+                  </tr>
+                ))}
+
+                {/* Empty space to preserve the invoice-style item area */}
+                {items.length < 3 && (
+                  <tr>
+                    <td
+                      colSpan={5}
+                      style={{
+                        height: 65,
+                        borderBottom: `1px solid ${borderColor}`,
                       }}
                     />
-                    
-                  </div>
+                  </tr>
                 )}
-              </div>
 
-              <div style={{ width: 190, flexShrink: 0 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 0" }}>
-                  <span style={{ fontSize: 10, color: "#78788D" }}>Subtotal</span>
-                  <span style={{ fontSize: 10, color: "#000" }}>{currency(subtotal)}</span>
+                {/* Shipping isn't a separate form field in the original code,
+                    so no invented shipping amount is added here. */}
+              </tbody>
+
+              <tfoot>
+                <tr>
+                  <td
+                    colSpan={4}
+                    style={{
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: 9,
+                      textAlign: "right",
+                      fontWeight: 600,
+                      fontSize: 10,
+                    }}
+                  >
+                    Taxable Amount
+                  </td>
+
+                  <td
+                    style={{
+                      borderBottom: `1px solid ${borderColor}`,
+                      padding: 9,
+                      textAlign: "right",
+                      fontWeight: 600,
+                      fontSize: 10,
+                    }}
+                  >
+                    {currency(subtotal)}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td
+                    colSpan={4}
+                    style={{
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: 8,
+                      textAlign: "right",
+                      fontSize: 10,
+                    }}
+                  >
+                    Tax {taxRateValue}%
+                  </td>
+
+                  <td
+                    style={{
+                      borderBottom: `1px solid ${borderColor}`,
+                      padding: 8,
+                      textAlign: "right",
+                      fontSize: 10,
+                    }}
+                  >
+                    {currency(taxAmount)}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td
+                    colSpan={4}
+                    style={{
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: 10,
+                      textAlign: "right",
+                      fontWeight: 700,
+                      fontSize: 12,
+                    }}
+                  >
+                    Total
+                  </td>
+
+                  <td
+                    style={{
+                      borderBottom: `1px solid ${borderColor}`,
+                      padding: 10,
+                      textAlign: "right",
+                      fontWeight: 700,
+                      fontSize: 13,
+                    }}
+                  >
+                    {currency(total)}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          {/* ===================== AMOUNT IN WORDS ===================== */}
+
+          <div
+            style={{
+              border: `1px solid ${borderColor}`,
+              borderTop: "none",
+              padding: "9px 10px",
+              lineHeight: "15px",
+            }}
+          >
+            <strong style={{ fontSize: 9 }}>
+              Amount Chargeable (in words):
+            </strong>
+
+            <span
+              style={{
+                marginLeft: 6,
+                fontSize: 9,
+              }}
+            >
+              INR {amountInWords} Rupees Only.
+            </span>
+
+            <span
+              style={{
+                marginLeft: 6,
+                fontSize: 9,
+                fontStyle: "italic",
+              }}
+            >
+              E & O.E
+            </span>
+          </div>
+
+          {/* ===================== TAX SUMMARY ===================== */}
+
+          <div
+            style={{
+              borderLeft: `1px solid ${borderColor}`,
+              borderRight: `1px solid ${borderColor}`,
+              borderBottom: `1px solid ${borderColor}`,
+            }}
+          >
+            <div
+              style={{
+                padding: "8px 10px",
+                fontWeight: 700,
+                fontSize: 10,
+                borderBottom: `1px solid ${borderColor}`,
+              }}
+            >
+              Tax Summary
+            </div>
+
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+              }}
+            >
+              <thead>
+                <tr>
+                  <th style={taxHeaderStyle}>Taxable Value</th>
+                  <th style={taxHeaderStyle}>Tax Rate</th>
+                  <th style={taxHeaderStyle}>Tax Amount</th>
+                  <th style={{ ...taxHeaderStyle, borderRight: "none" }}>Total Tax</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td style={taxCellStyle}>{currency(subtotal)}</td>
+                  <td style={taxCellStyle}>{taxRateValue}%</td>
+                  <td style={taxCellStyle}>{currency(taxAmount)}</td>
+                  <td
+                    style={{
+                      ...taxCellStyle,
+                      borderRight: "none",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {currency(taxAmount)}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td
+                    colSpan={3}
+                    style={{
+                      ...taxCellStyle,
+                      borderBottom: "none",
+                      textAlign: "right",
+                      fontWeight: 700,
+                    }}
+                  >
+                    TOTAL
+                  </td>
+
+                  <td
+                    style={{
+                      ...taxCellStyle,
+                      borderRight: "none",
+                      borderBottom: "none",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {currency(taxAmount)}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* ===================== PAYMENT + SIGNATURE ===================== */}
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              borderLeft: `1px solid ${borderColor}`,
+              borderRight: `1px solid ${borderColor}`,
+              borderBottom: `1px solid ${borderColor}`,
+              minHeight: 155,
+            }}
+          >
+            {/* Payment */}
+            <div
+              style={{
+                borderRight: `1px solid ${borderColor}`,
+                padding: 12,
+              }}
+            >
+              <h3
+                style={{
+                  margin: "0 0 10px",
+                  fontSize: 10,
+                  fontWeight: 700,
+                }}
+              >
+                Payment Details:
+              </h3>
+
+              {formData.upiId ? (
+                <>
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: 10,
+                    }}
+                  >
+                    <strong>Pay using UPI:</strong>{" "}
+                    {formData.upiId}
+                  </p>
+
+                  <img
+                    src={`https://quickchart.io/qr?size=140&text=${encodeURIComponent(
+                      `upi://pay?pa=${formData.upiId}&pn=${
+                        formData.businessName || "Business"
+                      }&am=${Number(total || 0).toFixed(2)}&cu=INR`
+                    )}`}
+                    alt="UPI payment QR code"
+                    style={{
+                      display: "block",
+                      height: 90,
+                      width: 90,
+                      marginTop: 8,
+                    }}
+                  />
+                </>
+              ) : (
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: 9,
+                    color: muted,
+                  }}
+                >
+                  Payment details can be added using the UPI ID field.
+                </p>
+              )}
+            </div>
+
+            {/* Signature */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+                padding: 12,
+              }}
+            >
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 10,
+                  fontWeight: 700,
+                }}
+              >
+                For {formData.businessName || "Your Business"}
+              </p>
+
+              <div
+                style={{
+                  textAlign: "center",
+                  minWidth: 160,
+                }}
+              >
+                <div
+                  style={{
+                    height: 45,
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "center",
+                    fontSize: 20,
+                    fontStyle: "italic",
+                    color: "#374151",
+                  }}
+                >
+                  {formData.signedBy ? "Signature" : ""}
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 0" }}>
-                  <span style={{ fontSize: 10, color: "#78788D" }}>Tax</span>
-                  <span style={{ fontSize: 10, color: "#000" }}>{currency(taxAmount)}</span>
-                </div>
-                <div style={{ marginTop: 8, display: "flex", justifyContent: "space-between", borderTop: `1px solid ${hexToRgba(previewColor, 0.33)}`, paddingTop: 12 }}>
-                  <span style={{ fontSize: 12, fontWeight: 600, color: "#000" }}>Total</span>
-                  <span style={{ fontSize: 14, fontWeight: 600, color: previewColor }}>{currency(total)}</span>
+
+                <div
+                  style={{
+                    borderTop: `1px solid ${borderColor}`,
+                    paddingTop: 6,
+                  }}
+                >
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: 9,
+                      color: muted,
+                    }}
+                  >
+                    {formData.signedBy || "Authorized Signatory"}
+                  </p>
                 </div>
               </div>
             </div>
+          </div>
 
-            {formData.notes && (
-              <div style={{ marginTop: 32 }}>
-                <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, color: previewColor, margin: 0 }}>Notes</p>
-                <p style={{ marginTop: 8, fontSize: 10, lineHeight: "16px", color: "#78788D" }}>{formData.notes}</p>
-              </div>
-            )}
+          {/* ===================== NOTES + TERMS ===================== */}
 
-            <div style={{ marginTop: 40, display: "flex", justifyContent: "flex-end" }}>
-              <div style={{ textAlign: "right" }}>
-                <div style={{ marginLeft: "auto", height: 1, width: 120, background: hexToRgba(previewColor, 0.4) }} />
-                <p style={{ marginTop: 8, fontSize: 10, color: "#78788D" }}>{formData.signedBy || "For Your Business"}</p>
-              </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              borderLeft: `1px solid ${borderColor}`,
+              borderRight: `1px solid ${borderColor}`,
+              borderBottom: `1px solid ${borderColor}`,
+            }}
+          >
+            {/* Notes */}
+            <div
+              style={{
+                borderRight: `1px solid ${borderColor}`,
+                padding: 12,
+                minHeight: 125,
+              }}
+            >
+              <h3
+                style={{
+                  margin: "0 0 7px",
+                  fontSize: 10,
+                  fontWeight: 700,
+                }}
+              >
+                Notes:
+              </h3>
+
+              <p
+                style={{
+                  margin: 0,
+                  whiteSpace: "pre-line",
+                  fontSize: 9,
+                  lineHeight: "14px",
+                  color: muted,
+                }}
+              >
+                {formData.notes || "No notes added."}
+              </p>
             </div>
 
-            <div style={{ marginTop: 48, borderTop: "1px solid #E8EBEE", paddingTop: 16, textAlign: "center" }}>
-              <p style={{ fontSize: 9, color: previewColor, margin: 0 }}>Thank you for your business</p>
+            {/* Terms */}
+            <div
+              style={{
+                padding: 12,
+                minHeight: 125,
+              }}
+            >
+              <h3
+                style={{
+                  margin: "0 0 7px",
+                  fontSize: 10,
+                  fontWeight: 700,
+                }}
+              >
+                Terms and Conditions:
+              </h3>
+
+              <ol
+                style={{
+                  margin: 0,
+                  paddingLeft: 17,
+                  fontSize: 9,
+                  lineHeight: "14px",
+                  color: muted,
+                }}
+              >
+                <li>Invoice terms apply as agreed between both parties.</li>
+                <li>Products/services are subject to the agreed order.</li>
+                <li>Please complete payment by the due date.</li>
+                <li>Any additional requests may result in extra charges.</li>
+                <li>Invoice information should be verified by the recipient.</li>
+              </ol>
             </div>
+          </div>
+
+          {/* ===================== FOOTER ===================== */}
+
+          <div
+            style={{
+              borderLeft: `1px solid ${borderColor}`,
+              borderRight: `1px solid ${borderColor}`,
+              borderBottom: `1px solid ${borderColor}`,
+              padding: "7px 10px",
+              textAlign: "center",
+              fontSize: 8,
+              color: muted,
+            }}
+          >
+            Page 1 / 1 • This is a digitally generated document.
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+/* =============================================================
+   INVOICE PREVIEW HELPERS
+   ============================================================= */
+
+const InvoiceInfoRow = ({ label, value, last = false }) => (
+  <div
+    style={{
+      borderBottom: last ? "none" : "1px solid #111827",
+      padding: "8px 10px",
+    }}
+  >
+    <p
+      style={{
+        margin: 0,
+        fontSize: 9,
+        fontWeight: 700,
+      }}
+    >
+      {label}
+    </p>
+
+    <p
+      style={{
+        margin: "3px 0 0",
+        fontSize: 10,
+      }}
+    >
+      {value}
+    </p>
+  </div>
+);
+
+const taxHeaderStyle = {
+  borderRight: "1px solid #111827",
+  borderBottom: "1px solid #111827",
+  padding: "6px 5px",
+  fontSize: 8,
+  textAlign: "center",
+};
+
+const taxCellStyle = {
+  borderRight: "1px solid #111827",
+  borderBottom: "1px solid #111827",
+  padding: "7px 5px",
+  fontSize: 9,
+  textAlign: "right",
+};
+
+const formatInvoiceDate = (date) => {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
+    return "DD/MM/YYYY";
+  }
+
+  return date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+};
+
+const numberToWordsIndian = (number) => {
+  const value = Math.round(Number(number) || 0);
+
+  if (value === 0) return "Zero";
+
+  const ones = [
+    "",
+    "One",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten",
+    "Eleven",
+    "Twelve",
+    "Thirteen",
+    "Fourteen",
+    "Fifteen",
+    "Sixteen",
+    "Seventeen",
+    "Eighteen",
+    "Nineteen",
+  ];
+
+  const tens = [
+    "",
+    "",
+    "Twenty",
+    "Thirty",
+    "Forty",
+    "Fifty",
+    "Sixty",
+    "Seventy",
+    "Eighty",
+    "Ninety",
+  ];
+
+  const twoDigits = (num) => {
+    if (num < 20) return ones[num];
+
+    return `${tens[Math.floor(num / 10)]}${
+      num % 10 ? ` ${ones[num % 10]}` : ""
+    }`;
+  };
+
+  const convert = (num) => {
+    if (num < 100) return twoDigits(num);
+
+    if (num < 1000) {
+      return `${ones[Math.floor(num / 100)]} Hundred${
+        num % 100 ? ` ${convert(num % 100)}` : ""
+      }`;
+    }
+
+    if (num < 100000) {
+      return `${convert(Math.floor(num / 1000))} Thousand${
+        num % 1000 ? ` ${convert(num % 1000)}` : ""
+      }`;
+    }
+
+    if (num < 10000000) {
+      return `${convert(Math.floor(num / 100000))} Lakh${
+        num % 100000 ? ` ${convert(num % 100000)}` : ""
+      }`;
+    }
+
+    return `${convert(Math.floor(num / 10000000))} Crore${
+      num % 10000000 ? ` ${convert(num % 10000000)}` : ""
+    }`;
+  };
+
+  return convert(value);
 };
 
 /* ============================================================= */
@@ -1368,5 +2323,6 @@ const SectionTitle = ({ children }) => (
 );
 
 const TableHeader = ({ children }) => <span style={{ fontSize: 12, color: "#525252" }}>{children}</span>;
+
 
 export default InvoiceBuilder;
