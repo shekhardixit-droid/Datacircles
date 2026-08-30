@@ -171,6 +171,27 @@ export default function Blog() {
           z-index: 2;
         }
 
+
+        /* ============================================================
+           NAVBAR
+           Same responsive behavior as Customer Stories / shared Navbar
+           ============================================================ */
+
+        .blog-navbar {
+          position: absolute;
+          top: 12px;
+          left: 0;
+          z-index: 50;
+
+          width: 100%;
+
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+
+          padding: 0 8px;
+        }
+
         .blog-hero-content {
           position: absolute;
           top: 164px;
@@ -1021,6 +1042,40 @@ export default function Blog() {
         }
 
         /* ============================================================
+           NAVBAR RESPONSIVE
+           ============================================================ */
+
+        @media (max-width: 999px) {
+          .blog-navbar {
+            top: 12px;
+            width: 100%;
+            padding: 0 8px;
+          }
+
+          .blog-navbar > * {
+            width: 100%;
+            max-width: 100%;
+          }
+        }
+
+        @media (max-width: 700px) {
+          .blog-navbar {
+            top: 12px;
+            left: 0;
+            width: 100%;
+            padding: 0 8px;
+            display: flex;
+            justify-content: center;
+            transform: none;
+          }
+
+          .blog-navbar > * {
+            width: 100%;
+            max-width: 100%;
+          }
+        }
+
+        /* ============================================================
            MOBILE
            ============================================================ */
 
@@ -1191,7 +1246,7 @@ export default function Blog() {
             line-height: 18px;
           }
         }
-      `}</style>
+\n      `}</style>
 
       <div className="blog-page">
         <div className="blog-canvas">
@@ -1214,18 +1269,7 @@ export default function Blog() {
                 Same placement/scaling as Code 2
                 ======================================================== */}
 
-            <div
-              className="
-                absolute
-                left-1/2
-                top-[0.7%]
-                z-50
-                -translate-x-1/2
-                scale-[0.5]
-                min-[1000px]:scale-[0.75]
-                min-[1400px]:scale-100
-              "
-            >
+            <div className="blog-navbar">
               <Navbar />
             </div>
             <div className="blog-hero-content">

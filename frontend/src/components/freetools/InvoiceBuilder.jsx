@@ -361,6 +361,7 @@ const InvoiceBuilder = () => {
 
         {/* LEFT - BUILDER (hidden entirely when printing) */}
         <div className="lg-col no-print" style={{ width: "100%" }}>
+
           {/* STEP NAVIGATION */}
           <div
             style={{
@@ -1095,7 +1096,7 @@ const DownloadAndShare = ({ selectedAction, onDownload, onShare, onEmail }) => {
 /* LIVE INVOICE PREVIEW */
 /* ============================================================= */
 
-const InvoicePreview = ({
+export const InvoicePreview = ({
   formData,
   items,
   selectedColor,

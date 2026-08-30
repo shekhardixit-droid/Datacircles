@@ -2,6 +2,7 @@ import React from "react";
 import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
 import CTA from "../components/payments/CTA";
 import Navbar from "../components/Navbar";
+import CreateInvoiceSection from "../components/invoice/CreateInvoiceSection";
 
 
 /* =========================================================
@@ -2046,7 +2047,7 @@ function PaymentsSection() {
       </div>
 
 
-      {/* IMAGE */}
+      {/* WIZARD — replaces static image */}
 
       <div
         className="product-crm-payment-card"
@@ -2054,22 +2055,13 @@ function PaymentsSection() {
           boxSizing: "border-box",
           width: "1216px",
           maxWidth: "100%",
-          height: "666px",
-          padding: "28px",
           border: "1px solid #ECECEC",
           borderRadius: "8px",
           background: "#FFFFFF",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          alignItems: "center",
           overflow: "hidden",
         }}
       >
-        <ImagePlaceholder
-          src={paymentsImage}
-          label="IMAGE 4"
-        />
+        <CreateInvoiceSection />
       </div>
 
     </section>

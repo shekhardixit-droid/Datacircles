@@ -671,10 +671,13 @@ export default function CustomerStories() {
            RESPONSIVE
            ========================================================= */
 
-        @media (max-width: 1439px) {
+        /* Desktop/tablet width adaptation only.
+           All original desktop dimensions/content remain unchanged. */
 
+        @media (max-width: 1439px) {
           .customer-stories-canvas {
             width: 100%;
+            min-width: 0;
           }
 
           .customer-stories-hero {
@@ -683,11 +686,11 @@ export default function CustomerStories() {
 
           .customer-stories-main {
             width: calc(100% - 48px);
+            max-width: 1236px;
           }
 
           .customer-stories-featured {
             width: 100%;
-
             grid-template-columns:
               minmax(0, 0.83fr)
               minmax(0, 1fr);
@@ -696,17 +699,28 @@ export default function CustomerStories() {
           .customer-stories-featured-content,
           .customer-stories-featured-media {
             width: 100%;
+            min-width: 0;
+          }
+
+          .customer-stories-featured-quote,
+          .customer-stories-featured-description {
+            width: 100%;
+            max-width: 500px;
           }
 
           .customer-stories-grid {
             width: 100%;
-
             grid-template-columns:
               minmax(0, 1fr)
               minmax(0, 1fr);
           }
 
           .customer-stories-card {
+            width: 100%;
+            min-width: 0;
+          }
+
+          .customer-stories-card-description {
             width: 100%;
           }
 
@@ -717,41 +731,63 @@ export default function CustomerStories() {
           .customer-stories-share-content {
             width: auto;
             flex: 1;
+            min-width: 0;
+          }
+
+          .customer-stories-share-description {
+            width: 100%;
           }
         }
 
+        /* Tablet */
         @media (max-width: 900px) {
+          .customer-stories-navbar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-left: 8px;
+            padding-right: 8px;
+            overflow: hidden;
+          }
+
+          .customer-stories-hero {
+            height: 430px;
+          }
 
           .customer-stories-hero-content {
             width: calc(100% - 40px);
+            max-width: 700px;
           }
 
           .customer-stories-hero-title {
             width: 100%;
-
+            max-width: 650px;
             font-size: 43px;
             line-height: 47px;
           }
 
           .customer-stories-hero-description {
             width: 100%;
+            max-width: 520px;
           }
 
           .customer-stories-featured {
             height: auto;
-
             grid-template-columns: 1fr;
-
             row-gap: 20px;
-
             padding: 16px;
           }
 
           .customer-stories-featured-content {
             width: 100%;
             height: auto;
-
             padding: 24px;
+          }
+
+          .customer-stories-featured-quote,
+          .customer-stories-featured-description {
+            width: 100%;
+            max-width: 100%;
           }
 
           .customer-stories-featured-media {
@@ -761,6 +797,7 @@ export default function CustomerStories() {
 
           .customer-stories-grid {
             grid-template-columns: 1fr;
+            row-gap: 16px;
           }
 
           .customer-stories-card {
@@ -772,7 +809,6 @@ export default function CustomerStories() {
           .customer-stories-share {
             height: auto;
             min-height: 200px;
-
             padding: 25px;
           }
 
@@ -785,56 +821,124 @@ export default function CustomerStories() {
           }
         }
 
+        /* Mobile */
         @media (max-width: 600px) {
-
           .customer-stories-page {
+            width: 100%;
             min-height: 100vh;
+            overflow-x: hidden;
+          }
+
+          .customer-stories-canvas {
+            width: 100%;
+            min-width: 0;
+            overflow: visible;
+          }
+
+          .customer-stories-navbar {
+            width: 100%;
+            height: auto;
+            padding-top: 12px;
+            padding-left: 0;
+            padding-right: 0;
+            overflow: visible;
+            z-index: 100;
+          }
+
+          /* Keep the existing Navbar component; only make its
+             surrounding area fit smaller screens. */
+          .customer-stories-navbar > * {
+            max-width: 100%;
+            overflow: visible;
           }
 
           .customer-stories-hero {
+            width: 100%;
             height: 390px;
           }
 
           .customer-stories-hero-content {
             top: 135px;
+            left: 50%;
+            width: calc(100% - 28px);
+            max-width: 600px;
+          }
+
+          .customer-stories-label {
+            margin-bottom: 22px;
           }
 
           .customer-stories-hero-title {
+            width: 100%;
+            max-width: 100%;
             font-size: 34px;
             line-height: 39px;
             letter-spacing: -1.8px;
           }
 
           .customer-stories-hero-description {
+            width: 100%;
+            max-width: 520px;
             font-size: 12px;
             line-height: 18px;
           }
 
+          .customer-stories-testimonials-background {
+            width: 100%;
+            height: 1300px;
+            top: 390px;
+          }
+
+          .customer-stories-testimonials-grid {
+            width: 100%;
+            height: 1250px;
+            top: 390px;
+            background-size: 90px 90px;
+          }
+
           .customer-stories-main {
-            width: calc(100% - 32px);
+            width: calc(100% - 24px);
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
           }
 
           .customer-stories-featured {
             width: 100%;
-
+            height: auto;
+            grid-template-columns: 1fr;
+            row-gap: 16px;
             padding: 10px;
-
             border-radius: 10px;
           }
 
           .customer-stories-featured-content {
+            width: 100%;
+            height: auto;
             padding: 20px 10px;
+          }
+
+          .customer-stories-featured-label {
+            margin-bottom: 18px;
           }
 
           .customer-stories-featured-quote {
             width: 100%;
-
+            max-width: 100%;
             font-size: 18px;
             line-height: 23px;
+            letter-spacing: -0.4px;
           }
 
           .customer-stories-featured-description {
             width: 100%;
+            max-width: 100%;
+            font-size: 11px;
+            line-height: 17px;
+          }
+
+          .customer-stories-person {
+            margin-top: 18px;
           }
 
           .customer-stories-featured-media {
@@ -842,21 +946,34 @@ export default function CustomerStories() {
             height: 270px;
           }
 
+          .customer-stories-grid {
+            width: 100%;
+            grid-template-columns: 1fr;
+            row-gap: 12px;
+            margin-top: 12px;
+          }
+
           .customer-stories-card {
+            width: 100%;
+            height: auto;
+            min-height: 177px;
             padding: 22px;
           }
 
           .customer-stories-card-description {
             width: 100%;
+            font-size: 11px;
+            line-height: 16px;
           }
 
           .customer-stories-share {
+            width: 100%;
+            height: auto;
+            min-height: 0;
+            margin-top: 40px;
             flex-direction: column;
-
             align-items: flex-start;
-
             gap: 18px;
-
             padding: 24px;
           }
 
@@ -875,13 +992,88 @@ export default function CustomerStories() {
             line-height: 24px;
           }
 
+          .customer-stories-share-description {
+            width: 100%;
+            font-size: 11px;
+            line-height: 17px;
+          }
+
           .customer-stories-share-button {
             width: 180px;
+            height: 44px;
             margin-left: 0;
           }
 
           .customer-stories-cta {
+            width: 100%;
             margin-top: 30px;
+            margin-left: 0;
+          }
+        }
+
+        /* Very small phones */
+        @media (max-width: 420px) {
+          .customer-stories-main {
+            width: calc(100% - 20px);
+          }
+
+          .customer-stories-hero-content {
+            width: calc(100% - 20px);
+          }
+
+          .customer-stories-hero-title {
+            font-size: 30px;
+            line-height: 35px;
+            letter-spacing: -1.5px;
+          }
+
+          .customer-stories-hero-description {
+            font-size: 11px;
+            line-height: 17px;
+          }
+
+          .customer-stories-featured {
+            padding: 8px;
+          }
+
+          .customer-stories-featured-content {
+            padding: 18px 8px;
+          }
+
+          .customer-stories-featured-quote {
+            font-size: 17px;
+            line-height: 22px;
+          }
+
+          .customer-stories-featured-media {
+            height: 220px;
+          }
+
+          .customer-stories-card {
+            padding: 18px;
+          }
+
+          .customer-stories-card-description {
+            font-size: 10px;
+            line-height: 15px;
+          }
+
+          .customer-stories-share {
+            padding: 18px;
+          }
+
+          .customer-stories-share-title {
+            font-size: 17px;
+            line-height: 22px;
+          }
+
+          .customer-stories-share-description {
+            font-size: 10px;
+            line-height: 15px;
+          }
+
+          .customer-stories-share-button {
+            width: 170px;
           }
         }
       `}</style>
