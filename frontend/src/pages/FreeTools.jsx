@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import FAQ from "../components/freetools/FAQ";
+import InvoiceBuilder from "../components/freetools/InvoiceBuilder";
 
 const FreeTools = () => {
   const cards = [
@@ -58,6 +59,8 @@ const FreeTools = () => {
 
       {/* Main Page */}
       <main className="w-full">
+
+        <InvoiceBuilder/>
 
         {/* Main Container */}
         <section className="mx-auto mt-16 h-auto min-h-[981px] w-full max-w-[1216px] px-4 sm:px-6 md:px-0">
