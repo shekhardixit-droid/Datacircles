@@ -1,6 +1,6 @@
 import React from "react";
 import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
-import CTA from "../components/payments/CTA";
+import CTA from "../components/invoicing-billing/CTA";
 import Navbar from "../components/Navbar";
 import CreateInvoiceSection from "../components/invoice/CreateInvoiceSection";
 

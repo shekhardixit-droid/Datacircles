@@ -42,9 +42,7 @@ function CTA() {
             text-white
           "
         >
-          Let’s Connect
-          <br/>
-More than just works
+          Send your next invoice in under a minute.
         </h2>
 
         <p

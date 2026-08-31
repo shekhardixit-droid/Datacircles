@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
-import CTA from "../components/payments/CTA";
+import CTA from "../components/product-crm/CTA";
 import CRMPrice from "../components/CRMPrice";
 
 /* =========================================================

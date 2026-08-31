@@ -42,9 +42,7 @@ function CTA() {
             text-white
           "
         >
-          Let’s Connect
-          <br/>
-More than just works
+          Try it on your own leads.
         </h2>
 
         <p

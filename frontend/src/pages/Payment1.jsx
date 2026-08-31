@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import React from "react";
 import FourCards from "../components/payments/FourCards";
 import Explore from "../components/payments/Explore";
-import CTA from "../components/payments/CTA";
+import CTA from "../components/invoicing-billing/CTA";
 import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
 
 const Payment1 = () => {
