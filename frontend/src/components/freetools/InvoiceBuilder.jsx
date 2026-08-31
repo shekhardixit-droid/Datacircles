@@ -168,7 +168,7 @@ const InvoiceBuilder = () => {
     clientAddress: "",
     clientPhone: "",
     shippingAddress: "",
-    invoiceNumber: "INV-2026-14",
+    invoiceNumber: "",
     dueDate: "",
     customerNumber: "",
     orderNumber: "",
@@ -901,7 +901,38 @@ const WriteContent = ({
             value={formData.orderNumber}
             onChange={(v) => handleChange("orderNumber", v)}
           />
-          <Field label="Due Date" placeholder="DD/MM/YYYY" value={formData.dueDate} onChange={(v) => handleChange("dueDate", v)} />
+          <div>
+  <label
+    style={{
+      display: "block",
+      marginBottom: 6,
+      fontSize: 13,
+      fontWeight: 500,
+      color: "#111827",
+    }}
+  >
+    Due Date
+  </label>
+
+  <input
+    type="date"
+    value={formData.dueDate}
+    onChange={(e) => handleChange("dueDate", e.target.value)}
+    style={{
+      width: "100%",
+      height: 46,
+      boxSizing: "border-box",
+      borderRadius: 999,
+      border: "1px solid #DDE5EF",
+      background: "#fff",
+      padding: "0 14px",
+      fontSize: 14,
+      outline: "none",
+      color: "#111827",
+      ...font,
+    }}
+  />
+</div>
         </div>
       </div>
 
@@ -1432,37 +1463,48 @@ export const InvoicePreview = ({
     >
       {/* Preview chrome - not included in PDF */}
       <div
-        className="no-print"
-        style={{
-          display: "flex",
-          height: 54,
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottom: "1px solid #E5E5E5",
-          padding: "0 16px",
-        }}
-      >
-        <span style={{ fontSize: 14, fontWeight: 500, color: "#000" }}>
-          Live Preview
-        </span>
+  className="no-print"
+  style={{
+    display: "flex",
+    height: 54,
+    alignItems: "center",
+    borderBottom: "1px solid #E5E5E5",
+    padding: "0 16px",
+  }}
+>
+  <div>
+    <span
+      style={{
+        fontSize: 14,
+        fontWeight: 500,
+        color: "#000",
+      }}
+    >
+      Invoice Preview
+    </span>
 
-        <span
-          style={{
-            borderRadius: 999,
-            background: "#F3F6F9",
-            padding: "4px 12px",
-            fontSize: 11,
-            color: "#78788D",
-          }}
-        >
-          A4 Pro Forma Invoice
-        </span>
-      </div>
+    <p
+      style={{
+        margin: "2px 0 0",
+        fontFamily: "Inter",
+        fontWeight: 400,
+        fontStyle: "normal",
+        fontSize: 10,
+        lineHeight: "120%",
+        letterSpacing: "0px",
+        verticalAlign: "middle",
+        color: "#595454",
+      }}
+    >
+      This is how your invoice appears to the customer.
+    </p>
+  </div>
+</div>
 
       <div
         className="invoice-canvas"
         style={{
-          background: "#F5F7F9",
+        background: "#FFFFFF",
           padding: 20,
         }}
       >
