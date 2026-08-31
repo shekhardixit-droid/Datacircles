@@ -48,6 +48,14 @@ const FreeTools = () => {
     button: "Explore",
   },
 ];
+
+const pills = [
+  "100% Free",
+  "No Sign Up",
+  "No Watermark",
+  "GST Ready",
+];
+
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-white">
 
@@ -59,6 +67,94 @@ const FreeTools = () => {
 
       {/* Main Page */}
       <main className="w-full">
+
+        <div
+  className="
+    flex
+    ml-30
+    mt-10
+    h-[20px]
+    w-[265px]
+    items-center
+    justify-center
+    font-['Inter']
+    text-[16px]
+    font-light
+    leading-[100%]
+    tracking-[-1px]
+    text-black/40
+  "
+>
+  Free Tools GST Invoice Generator
+</div>
+
+
+
+<div className="ml-36 mt-4 h-[168px] w-[705px]">
+
+  {/* Heading */}
+  <h2
+    className="
+      h-[38px]
+      w-[480px]
+      font-['Inter']
+      text-[32px]
+      font-medium
+      leading-[100%]
+      tracking-[-2px]
+      text-black
+    "
+  >
+    Free GST Invoice Generator
+  </h2>
+
+  {/* Description */}
+  <div
+    className="
+      h-[50px]
+      w-[705px]
+      ml-1
+      font-['Inter']
+      text-[18px]
+      font-normal
+      leading-[140%]
+      tracking-[0px]
+      text-black/40
+    "
+  >
+    Make a clean, GST-ready invoice in seconds. No sign-up, no watermark, and it's yours to download and share.
+  </div>
+
+  {/* Pills */}
+  <div className="flex mt-3 h-[32px] w-[496px] items-center gap-[8px]">
+    {pills.map((pill) => (
+      <div
+        key={pill}
+        className="
+          flex
+          h-[32px]
+          w-fit
+          items-center
+          justify-center
+          rounded-full
+          bg-[#0085FF]
+          px-[14px]
+          font-['Inter']
+          text-[14px]
+          font-medium
+          leading-[16px]
+          tracking-[-0.04em]
+          text-white
+          whitespace-nowrap
+        "
+      >
+        {pill}
+      </div>
+    ))}
+  </div>
+
+</div>
+
 
         <InvoiceBuilder/>
 

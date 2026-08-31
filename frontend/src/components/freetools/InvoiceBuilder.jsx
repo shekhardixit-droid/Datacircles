@@ -42,11 +42,11 @@ const PrintStyles = () => (
   <style>{`
     @media print {
       html, body {
-        background: #fff !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        height: auto !important;
-      }
+              margin: 0 !important;
+              padding: 0 !important;
+              width: auto !important;
+              background: #fff !important;
+            }
 
       /* Bulletproof isolation: hide every single element in the
          document, then explicitly re-show only the invoice sheet
@@ -63,24 +63,27 @@ const PrintStyles = () => (
       }
 
       .invoice-paper {
-        position: absolute !important;
-        left: 0 !important;
-        top: 0 !important;
-        margin: 0 !important;
-        width: 210mm !important;
-        min-height: 297mm !important;
-        max-width: none !important;
-        box-shadow: none !important;
-        border: none !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        color-adjust: exact !important;
-      }
+              position: static !important;
+              width: 100% !important;
+              max-width: none !important;
+              min-height: 0 !important;
+              height: auto !important;
+              margin: 0 !important;
+              padding: 0 !important;
+              overflow: visible !important;
+              box-shadow: none !important;
+              border: none !important;
+              box-sizing: border-box !important;
+              page-break-inside: avoid !important;
+              break-inside: avoid !important;
+              line-height: 1.22 !important;
+              font-size: 9.5px !important;
+            }
 
       @page {
-        size: A4;
-        margin: 0;
-      }
+              size: A4;
+              margin: 10mm;
+            }
     }
 
     @media (min-width: 1024px) {
@@ -92,7 +95,53 @@ const PrintStyles = () => (
       .sm-grid-2 { grid-template-columns: 1fr 1fr !important; }
       .sm-grid-3 { grid-template-columns: 1fr 1fr 1fr !important; }
     }
-  `}</style>
+  
+.invoice-paper table {
+              width: 100% !important;
+              margin: 4px 0 !important;
+              border-collapse: collapse !important;
+            }
+
+            .invoice-paper th,
+            .invoice-paper td {
+              padding: 4px 6px !important;
+              line-height: 1.2 !important;
+              vertical-align: middle !important;
+            }
+
+            .invoice-paper p {
+              margin-top: 2px !important;
+              margin-bottom: 2px !important;
+              line-height: 1.22 !important;
+            }
+
+            .invoice-paper h1,
+            .invoice-paper h2,
+            .invoice-paper h3 {
+              margin-top: 0 !important;
+              margin-bottom: 4px !important;
+              line-height: 1.15 !important;
+            }
+
+            .invoice-paper img {
+              max-height: 42px !important;
+              width: auto !important;
+              object-fit: contain !important;
+            }
+
+            .invoice-paper tr,
+            .invoice-paper > div {
+              page-break-inside: avoid !important;
+              break-inside: avoid !important;
+            }
+
+            .invoice-download-paper {
+              page-break-after: avoid !important;
+              break-after: avoid-page !important;
+            }
+`}
+            
+</style>
 );
 
 /* ============================================================= */
@@ -110,16 +159,32 @@ const InvoiceBuilder = () => {
     businessName: "",
     businessLogo: "",
     businessAddress: "",
+    businessGSTIN: "",
+    businessContact: "",
+    businessPhone: "",
+    businessMail: "",
     clientName: "",
     email: "",
     clientAddress: "",
     clientPhone: "",
+    shippingAddress: "",
     invoiceNumber: "INV-2026-14",
     dueDate: "",
+    customerNumber: "",
+    orderNumber: "",
     notes: "",
-    signedBy: "For Studio Nimbus",
+    signedBy: "",
+    signatureImage: "",
     taxRate: "0",
     upiId: "",
+  });
+
+  // Holds the human-readable file name for any uploaded image so the
+  // input field can display "logo.png" instead of the long base64
+  // data URL that actually gets stored in formData for rendering.
+  const [uploadedFileNames, setUploadedFileNames] = useState({
+    businessLogo: "",
+    signatureImage: "",
   });
 
   const [items, setItems] = useState([
@@ -157,6 +222,27 @@ const InvoiceBuilder = () => {
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleImageUpload = (field, file) => {
+    if (!file) {
+      setUploadedFileNames((prev) => ({ ...prev, [field]: "" }));
+      handleChange(field, "");
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      window.alert("Please select an image file.");
+      return;
+    }
+
+    setUploadedFileNames((prev) => ({ ...prev, [field]: file.name }));
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      handleChange(field, event.target?.result || "");
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleItemChange = (index, field, value) => {
@@ -255,27 +341,68 @@ const InvoiceBuilder = () => {
             }
 
             body {
-              width: 210mm;
-              margin: 0 auto;
+              width: auto;
+              margin: 0;
+              padding: 0;
             }
 
             .invoice-paper {
               position: static !important;
-              width: 210mm !important;
-              max-width: 210mm !important;
+              width: 100% !important;
+              max-width: none !important;
               min-height: 0 !important;
               height: auto !important;
               margin: 0 !important;
+              box-sizing: border-box !important;
               overflow: visible !important;
               box-shadow: none !important;
               border: none !important;
               page-break-inside: auto !important;
               break-inside: auto !important;
+              line-height: 1.35 !important;
+            }
+
+            /* Keep the downloaded invoice visually compact and aligned. */
+            .invoice-paper p,
+            .invoice-paper h1,
+            .invoice-paper h2,
+            .invoice-paper h3 {
+              margin-block-start: 0;
+            }
+
+            .invoice-paper table {
+              margin: 0 !important;
+            }
+
+            .invoice-paper th,
+            .invoice-paper td {
+              vertical-align: middle !important;
+            }
+
+            .invoice-paper img {
+              display: block;
+              max-width: 100%;
+            }
+
+            .invoice-download-paper > div,
+            .invoice-download-paper > table {
+              break-inside: avoid;
+            }
+
+            .invoice-download-paper tr {
+              break-inside: avoid;
+              page-break-inside: avoid;
+            }
+
+            .invoice-download-paper td,
+            .invoice-download-paper th {
+              padding-top: 7px !important;
+              padding-bottom: 7px !important;
             }
 
             @page {
               size: A4;
-              margin: 0;
+              margin: 14mm;
             }
           </style>
         </head>
@@ -343,9 +470,15 @@ const InvoiceBuilder = () => {
 
   return (
     <div
-      className="app-shell"
-      style={{ ...font, minHeight: "100vh", width: "100%", background: "#F8FAFC", padding: "16px 12px" }}
-    >
+  className="app-shell"
+  style={{
+    ...font,
+    minHeight: "100vh",
+    width: "100%",
+    background: `url("https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/Platform2/Hero%20Sction%20(3).png?updatedAt=1787977487476") center -180px / cover no-repeat`,
+    padding: "16px 12px",
+  }}
+>
       <div
         className="lg-row"
         style={{
@@ -448,6 +581,8 @@ const InvoiceBuilder = () => {
               taxAmount={taxAmount}
               total={total}
               onSave={handleSaveInvoice}
+              onImageUpload={handleImageUpload}
+              uploadedFileNames={uploadedFileNames}
             />
           )}
 
@@ -586,6 +721,8 @@ const WriteContent = ({
   taxAmount,
   total,
   onSave,
+  onImageUpload,
+  uploadedFileNames,
 }) => {
   return (
     <div
@@ -610,30 +747,124 @@ const WriteContent = ({
       {/* YOUR BUSINESS */}
       <div style={{ padding: "16px 12px 0" }}>
         <SectionTitle>YOUR BUSINESS</SectionTitle>
-        <div className="sm-grid-2" style={{ marginTop: 12, display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
+
+        <div
+          className="sm-grid-2"
+          style={{
+            marginTop: 12,
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: 12,
+          }}
+        >
           <Field
             label="Business Name"
             placeholder="Enter Business Name"
             value={formData.businessName}
             onChange={(v) => handleChange("businessName", v)}
           />
+
           <Field
             label="Business Logo"
-            placeholder="Paste logo image URL"
-            value={formData.businessLogo}
+            placeholder="Paste logo image URL or upload an image"
+            value={uploadedFileNames.businessLogo || formData.businessLogo}
             onChange={(v) => handleChange("businessLogo", v)}
             upload
+            onUpload={(file) => onImageUpload("businessLogo", file)}
           />
         </div>
-        <div style={{ marginTop: 12 }}>
+
+        {/* Address / GSTIN / Contact / UPI - 2 x 2 */}
+        <div
+          style={{
+            marginTop: 12,
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 12,
+          }}
+        >
           <Field
-            label="Address, GSTIN, Contact"
+            label="Address"
             placeholder="Enter business address"
             value={formData.businessAddress}
             onChange={(v) => handleChange("businessAddress", v)}
           />
-        </div>
-        <div style={{ marginTop: 12 }}>
+
+          <Field
+            label="GSTIN"
+            placeholder="Enter GSTIN"
+            value={formData.businessGSTIN || ""}
+            onChange={(v) => handleChange("businessGSTIN", v)}
+          />
+
+          <div>
+            <label
+              style={{
+                display: "block",
+                marginBottom: 6,
+                fontSize: 13,
+                fontWeight: 500,
+                color: "#111827",
+              }}
+            >
+              Contact Details
+            </label>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 8,
+              }}
+            >
+              <input
+                type="tel"
+                required
+                placeholder="Phone number"
+                value={formData.businessPhone || ""}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  handleChange("businessPhone", value);
+                  handleChange("businessContact", value);
+                }}
+                style={{
+                  width: "100%",
+                  height: 46,
+                  boxSizing: "border-box",
+                  borderRadius: 999,
+                  border: "1px solid #DDE5EF",
+                  background: "#fff",
+                  padding: "0 14px",
+                  fontSize: 14,
+                  outline: "none",
+                  color: "#111827",
+                }}
+              />
+
+              <input
+                type="email"
+                required
+                placeholder="Email address"
+                value={formData.businessMail || ""}
+                onChange={(e) =>
+                  handleChange("businessMail", e.target.value)
+                }
+                style={{
+                  width: "100%",
+                  height: 46,
+                  boxSizing: "border-box",
+                  borderRadius: 999,
+                  border: "1px solid #DDE5EF",
+                  background: "#fff",
+                  padding: "0 14px",
+                  fontSize: 14,
+                  outline: "none",
+                  color: "#111827",
+                }}
+              />
+            </div>
+          </div>
+
           <Field
             label="UPI ID for Payment QR"
             placeholder="yourupi@bank"
@@ -651,11 +882,24 @@ const WriteContent = ({
           <Field label="Email" placeholder="email@company.com" value={formData.email} onChange={(v) => handleChange("email", v)} />
           <Field label="Client Address" placeholder="Enter Client Address" value={formData.clientAddress} onChange={(v) => handleChange("clientAddress", v)} />
           <Field label="Phone" placeholder="+91 123456789" value={formData.clientPhone} onChange={(v) => handleChange("clientPhone", v)} />
+          <Field label="Shipping Address" placeholder="Enter Shipping Address" value={formData.shippingAddress} onChange={(v) => handleChange("shippingAddress", v)} />
           <Field
             label={<>Invoice No. <span style={{ color: "#ef4444" }}>*</span></>}
             placeholder="INV-2026-14"
             value={formData.invoiceNumber}
             onChange={(v) => handleChange("invoiceNumber", v)}
+          />
+          <Field
+            label="Customer Number"
+            placeholder="Customer Number"
+            value={formData.customerNumber}
+            onChange={(v) => handleChange("customerNumber", v)}
+          />
+          <Field
+            label="Order Number"
+            placeholder="Order Number"
+            value={formData.orderNumber}
+            onChange={(v) => handleChange("orderNumber", v)}
           />
           <Field label="Due Date" placeholder="DD/MM/YYYY" value={formData.dueDate} onChange={(v) => handleChange("dueDate", v)} />
         </div>
@@ -836,7 +1080,22 @@ const WriteContent = ({
           <Field label="Notes / Items" placeholder="Add notes" value={formData.notes} onChange={(v) => handleChange("notes", v)} />
         </div>
         <div style={{ marginTop: 12 }}>
-          <Field label="Signed By" placeholder="" value={formData.signedBy} onChange={(v) => handleChange("signedBy", v)} />
+          <Field
+            label="Signed By"
+            placeholder=""
+            value={formData.signedBy}
+            onChange={(v) => handleChange("signedBy", v)}
+          />
+        </div>
+        <div style={{ marginTop: 12 }}>
+          <Field
+            label="Signature Image"
+            placeholder="Upload signature image"
+            value={uploadedFileNames.signatureImage || formData.signatureImage}
+            onChange={(v) => handleChange("signatureImage", v)}
+            upload
+            onUpload={(file) => onImageUpload("signatureImage", file)}
+          />
         </div>
 
         <button
@@ -968,49 +1227,72 @@ const ThemeAndColor = ({ selectedColor, setSelectedColor, selectedLayout, setSel
 
 const DownloadAndShare = ({ selectedAction, onDownload, onShare, onEmail }) => {
   const actions = [
-    {
-      title: "Download PDF",
-      type: "download",
-      onClick: onDownload,
-      icon: (
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M14 6.5H25L31 12.5V25" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M25 6.5V12.5H31" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M22 19V33" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" />
-          <path d="M17.5 28.5L22 33L26.5 28.5" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M15 37.5H29" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      title: "Share Link",
-      type: "link",
-      onClick: onShare,
-      icon: (
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M18.5 25.5L25.5 18.5" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" />
-          <path d="M16.5 29.5H14.5C11.4624 29.5 9 27.0376 9 24C9 20.9624 11.4624 18.5 14.5 18.5H20" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" />
-          <path d="M24 15.5H29.5C32.5376 15.5 35 17.9624 35 21C35 24.0376 32.5376 26.5 29.5 26.5H27.5" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" />
-          <path d="M29 11V18" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" />
-          <path d="M25.5 14.5H32.5" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      title: "Email It",
-      type: "email",
-      onClick: onEmail,
-      icon: (
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="9" y="13" width="22" height="17" rx="2" stroke="#171717" strokeWidth="1.8" />
-          <path d="M10 15L20 22L30 15" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M27 28L34 21" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" />
-          <path d="M30.5 21H34V24.5" stroke="#171717" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ),
-    },
-  ];
+  {
+    title: "Download PDF",
+    type: "download",
+    onClick: onDownload,
+    icon: (
+      <svg
+        width="44"
+        height="44"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M18 17.6443L21.644 14L20.6 12.9557L18.75 14.8057V10.275H17.25V14.8057L15.4 12.9557L14.3557 14L18 17.6443ZM14.25 20.75V19.25H21.75V20.75H14.25ZM6.0577 16.75C5.5654 16.75 5.1411 16.5718 4.7847 16.2153C4.4282 15.8589 4.25 15.4346 4.25 14.9423V1.0577C4.25 0.5654 4.4282 0.1411 4.7847 -0.2152C5.1411 -0.5717 5.5654 -0.75 6.0577 -0.75H13L18.75 5V8.0828H17.25V5.75H12.25V0.75H6.0577C5.9807 0.75 5.9102 0.7821 5.8462 0.8462C5.7821 0.9102 5.75 0.9807 5.75 1.0577V14.9423C5.75 15.0192 5.7821 15.0898 5.8462 15.1538C5.9102 15.2179 5.9807 15.25 6.0577 15.25H12.0577V16.75H6.0577Z"
+          fill="#1C1B1F"
+          transform="translate(1.75 4)"
+        />
+      </svg>
+    ),
+  },
 
+  {
+    title: "Share Link",
+    type: "link",
+    onClick: onShare,
+    icon: (
+      <svg
+        width="44"
+        height="44"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M17.038 19.5V16.5385H14.077V15.0385H17.038V12.077H18.538V15.0385H21.5V16.5385H18.538V19.5H17.038ZM10.808 16.5385H7.039C5.783 16.5385 4.713 16.096 3.828 15.211C2.943 14.3262 2.5 13.256 2.5 12.0005C2.5 10.745 2.943 9.6747 3.828 8.7895C4.713 7.9042 5.783 7.4615 7.039 7.4615H10.808V8.9615H7.039C6.199 8.9615 5.482 9.258 4.89 9.851C4.297 10.444 4 11.1603 4 12C4 12.8397 4.297 13.556 4.89 14.149C5.482 14.742 6.199 15.0385 7.039 15.0385H10.808V16.5385ZM8.25 12.75V11.25H15.75V12.75H8.25ZM21.5 12H20C20 11.1603 19.704 10.444 19.111 9.851C18.518 9.258 17.801 8.9615 16.962 8.9615H13.192V7.4615H16.962C18.217 7.4615 19.288 7.904 20.173 8.789C21.058 9.674 21.5 10.7443 21.5 12Z"
+          fill="#1C1B1F"
+          transform="translate(-1.5 -1)"
+        />
+      </svg>
+    ),
+  },
+
+  {
+    title: "Email It",
+    type: "email",
+    onClick: onEmail,
+    icon: (
+      <svg
+        width="44"
+        height="44"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M18 17.6443L16.956 16.6L18.771 14.75H14.25V13.25H18.771L16.956 11.4L18 10.3558L21.644 14L18 17.6443ZM4.058 14.75C3.561 14.75 3.135 14.573 2.781 14.219C2.427 13.865 2.25 13.4394 2.25 12.9423V3.0577C2.25 2.5606 2.427 2.135 2.781 1.781C3.135 1.427 3.561 1.25 4.058 1.25H16.942C17.439 1.25 17.865 1.427 18.219 1.781C18.573 2.135 18.75 2.5606 18.75 3.0577V8.3115C18.625 8.291 18.5 8.2757 18.375 8.2655C18.25 8.2552 18.125 8.25 18 8.25C17.875 8.25 17.75 8.2526 17.625 8.2578C17.5 8.2629 17.375 8.2757 17.25 8.2962V3.823L10.4 8.6923L3.75 3.8385V12.9423C3.75 13.0321 3.779 13.1058 3.836 13.1635C3.894 13.2212 3.968 13.25 4.058 13.25H12.296C12.276 13.375 12.263 13.5 12.258 13.625C12.253 13.75 12.25 13.875 12.25 14C12.25 14.125 12.255 14.25 12.265 14.375C12.276 14.5 12.291 14.625 12.311 14.75H4.058ZM4.796 2.75L10.4 6.8577L16.173 2.75H4.796Z"
+          fill="#1C1B1F"
+          transform="translate(0.75 4)"
+        />
+      </svg>
+    ),
+  },
+];
   return (
     <div
       style={{
@@ -1109,8 +1391,8 @@ export const InvoicePreview = ({
    * The invoice data below intentionally uses ONLY fields that already
    * exist in the current InvoiceBuilder form:
    *
-   * businessName, businessLogo, businessAddress,
-   * clientName, email, clientAddress, clientPhone,
+   * businessName, businessLogo, businessAddress, businessGSTIN, businessContact,
+   * clientName, email, clientAddress, clientPhone, shippingAddress,
    * invoiceNumber, dueDate, notes, signedBy, taxRate, upiId,
    * items, subtotal, taxAmount, total.
    *
@@ -1188,7 +1470,7 @@ export const InvoicePreview = ({
             A4 INVOICE PAPER
            ========================================================= */}
         <div
-          className="invoice-paper"
+          className="invoice-paper invoice-download-paper"
           style={{
             margin: "0 auto",
             width: "100%",
@@ -1312,18 +1594,31 @@ export const InvoicePreview = ({
                     {formData.businessName || "Your Business Name"}
                   </h2>
 
-                  <p
+                  <div
                     style={{
-                      margin: "5px 0 0",
-                      whiteSpace: "pre-line",
+                      marginTop: 5,
                       fontSize: 10,
                       lineHeight: "15px",
                       color: muted,
                     }}
                   >
-                    {formData.businessAddress ||
-                      "Business address, GSTIN and contact details"}
-                  </p>
+                    <p style={{ margin: 0, whiteSpace: "pre-line" }}>
+                      <strong style={{ color: "#111827" }}>Address:</strong>{" "}
+                      {formData.businessAddress || "Business address"}
+                    </p>
+                    <p style={{ margin: "3px 0 0" }}>
+                      <strong style={{ color: "#111827" }}>GSTIN:</strong>{" "}
+                      {formData.businessGSTIN || "GSTIN"}
+                    </p>
+                    <p style={{ margin: "3px 0 0", whiteSpace: "pre-line" }}>
+                      <strong style={{ color: "#111827" }}>Phone:</strong>{" "}
+                      {formData.businessPhone || "Phone number"}
+                    </p>
+                    <p style={{ margin: "3px 0 0" }}>
+                      <strong style={{ color: "#111827" }}>Mail:</strong>{" "}
+                      {formData.businessMail || "Email address"}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1460,9 +1755,9 @@ export const InvoicePreview = ({
                   color: muted,
                 }}
               >
-                Invoice Number:{" "}
+                Customer Number:{" "}
                 <strong style={{ color: "#111827" }}>
-                  {formData.invoiceNumber || "INV-2026-14"}
+                  {formData.customerNumber || "Customer number"}
                 </strong>
               </p>
 
@@ -1474,9 +1769,9 @@ export const InvoicePreview = ({
                   color: muted,
                 }}
               >
-                Due Date:{" "}
+                Order Number:{" "}
                 <strong style={{ color: "#111827" }}>
-                  {formData.dueDate || "DD/MM/YYYY"}
+                  {formData.orderNumber || "Order number"}
                 </strong>
               </p>
 
@@ -1487,7 +1782,7 @@ export const InvoicePreview = ({
                   fontWeight: 600,
                 }}
               >
-                Business Contact:
+                Shipping Address:
               </p>
 
               <p
@@ -1499,7 +1794,7 @@ export const InvoicePreview = ({
                   color: muted,
                 }}
               >
-                {formData.businessAddress || "Business contact details"}
+                {formData.shippingAddress || "Shipping address"}
               </p>
             </div>
           </div>
@@ -2003,7 +2298,15 @@ export const InvoicePreview = ({
                     color: "#374151",
                   }}
                 >
-                  {formData.signedBy ? "Signature" : ""}
+                  {formData.signatureImage ? (
+                    <img
+                      src={formData.signatureImage}
+                      alt="Signature"
+                      style={{ maxHeight: 42, maxWidth: 150, objectFit: "contain" }}
+                    />
+                  ) : (
+                    formData.signedBy ? "Signature" : ""
+                  )}
                 </div>
 
                 <div
@@ -2094,11 +2397,7 @@ export const InvoicePreview = ({
                   color: muted,
                 }}
               >
-                <li>Invoice terms apply as agreed between both parties.</li>
-                <li>Products/services are subject to the agreed order.</li>
-                <li>Please complete payment by the due date.</li>
-                <li>Any additional requests may result in extra charges.</li>
-                <li>Invoice information should be verified by the recipient.</li>
+              
               </ol>
             </div>
           </div>
@@ -2266,35 +2565,135 @@ const numberToWordsIndian = (number) => {
 /* SHARED PRIMITIVES */
 /* ============================================================= */
 
-const Field = ({ label, placeholder, value, onChange, upload = false }) => {
+const Field = ({ label, placeholder, value, onChange, upload, onUpload, type = "text" }) => {
   return (
-    <div style={{ width: "100%" }}>
-      <label style={{ marginBottom: 6, display: "block", fontSize: 12, fontWeight: 400, lineHeight: "16px", color: "#000" }}>{label}</label>
-      <div style={{ position: "relative" }}>
+    <label style={{ display: "block", marginTop: 12 }}>
+      <span
+        style={{
+          display: "block",
+          marginBottom: 6,
+          fontSize: 13,
+          fontWeight: 500,
+          color: "#111827",
+        }}
+      >
+        {label}
+      </span>
+
+      <div
+        style={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          minHeight: 46,
+          boxSizing: "border-box",
+          borderRadius: 999,
+          border: "1px solid #DDE5EF",
+          background: "#fff",
+          paddingLeft: 14,
+          paddingRight: upload ? 76 : 14,
+          overflow: "hidden",
+        }}
+      >
         <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
+          type={type}
+          value={value || ""}
           placeholder={placeholder}
+          onChange={(e) => onChange(e.target.value)}
           style={{
-            height: 32,
+            display: "block",
             width: "100%",
-            borderRadius: 999,
-            border: "1px solid #E5E5E5",
-            background: "#fff",
-            padding: upload ? "0 36px 0 12px" : "0 12px",
-            fontSize: 12,
-            color: "#525252",
+            minWidth: 0,
+            height: 42,
+            border: "none",
             outline: "none",
-            boxSizing: "border-box",
-            ...font,
+            background: "transparent",
+            fontSize: 14,
+            color: "#111827",
           }}
         />
+
         {upload && (
-          <span style={{ pointerEvents: "none", position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", fontSize: 16, color: "#525252" }}>↑</span>
+          <div
+            style={{
+              position: "absolute",
+              right: 8,
+              top: "50%",
+              transform: "translateY(-50%)",
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              height: 34,
+              padding: 2,
+              borderRadius: 999,
+              background: "#fff",
+              zIndex: 2,
+            }}
+          >
+            {value && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (onUpload) onUpload(null);
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 30,
+                  height: 30,
+                  border: "none",
+                  borderRadius: "50%",
+                  background: "transparent",
+                  cursor: "pointer",
+                  fontSize: 18,
+                  lineHeight: 1,
+                  color: "#78788D",
+                }}
+                title="Remove uploaded image"
+                aria-label="Remove uploaded image"
+              >
+                ×
+              </button>
+            )}
+
+            <label
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 30,
+                height: 30,
+                border: "none",
+                borderRadius: "50%",
+                background: "transparent",
+                cursor: "pointer",
+                fontSize: 15,
+                lineHeight: 1,
+                color: "#78788D",
+              }}
+              title="Upload image"
+            >
+              ↑
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file && onUpload) onUpload(file);
+                  e.target.value = "";
+                }}
+              />
+            </label>
+          </div>
         )}
       </div>
-    </div>
+    </label>
   );
 };
 
