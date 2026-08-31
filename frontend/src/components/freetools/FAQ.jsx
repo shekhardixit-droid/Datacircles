@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 
 const FAQ = () => {
@@ -33,8 +34,17 @@ const FAQ = () => {
   };
 
   return (
-    <div className="flex h-[556px] w-full max-w-[608px] flex-col">
-
+    <div
+      className="
+        flex
+        h-auto
+        min-h-[556px]
+        w-full
+        max-w-[608px]
+        flex-col
+        max-[640px]:min-h-0
+      "
+    >
       {questions.map((item, index) => {
         const isOpen = openIndex === index;
 
@@ -43,19 +53,52 @@ const FAQ = () => {
             key={index}
             className="w-full border-b border-[#48494C66]"
           >
-
             {/* Question */}
             <button
               type="button"
               onClick={() => toggleFAQ(index)}
-              className="flex min-h-[72px] w-full items-center justify-between px-4 text-left"
+              className="
+                flex
+                min-h-[72px]
+                w-full
+                items-center
+                justify-between
+                px-4
+                text-left
+                max-[480px]:px-3
+              "
             >
-              <span className="font-inter text-[16px] font-normal leading-[24px] text-black">
+              <span
+                className="
+                  pr-2
+                  font-inter
+                  text-[16px]
+                  font-normal
+                  leading-[24px]
+                  text-black
+                  max-[480px]:text-[15px]
+                "
+              >
                 {item.question}
               </span>
 
               {/* Plus / Minus */}
-              <span className="ml-4 flex h-[24px] w-[24px] shrink-0 items-center justify-center font-inter text-[24px] font-normal leading-none text-black">
+              <span
+                className="
+                  ml-4
+                  flex
+                  h-[24px]
+                  w-[24px]
+                  shrink-0
+                  items-center
+                  justify-center
+                  font-inter
+                  text-[24px]
+                  font-normal
+                  leading-none
+                  text-black
+                "
+              >
                 {isOpen ? "−" : "+"}
               </span>
             </button>
@@ -68,34 +111,56 @@ const FAQ = () => {
                   : "grid-rows-[0fr] opacity-0"
               }`}
             >
-              <div className="min-h-0 overflow-hidden px-4">
+              <div
+                className="
+                  min-h-0
+                  overflow-hidden
+                  px-4
+                  max-[480px]:px-3
+                "
+              >
                 {item.answer && (
                   <div className="pb-6">
-
-                    <p className="font-inter text-[16px] font-normal leading-[20px] text-[#78788D]">
+                    <p
+                      className="
+                        font-inter
+                        text-[16px]
+                        font-normal
+                        leading-[20px]
+                        text-[#78788D]
+                        max-[480px]:text-[15px]
+                        max-[480px]:leading-[20px]
+                      "
+                    >
                       {item.answer}
                     </p>
 
                     {item.link && (
                       <button
                         type="button"
-                        className="mt-5 font-inter text-[14px] font-normal text-[#0085FF] underline underline-offset-2"
+                        className="
+                          mt-5
+                          font-inter
+                          text-[14px]
+                          font-normal
+                          text-[#0085FF]
+                          underline
+                          underline-offset-2
+                        "
                       >
                         {item.link}
                       </button>
                     )}
-
                   </div>
                 )}
               </div>
             </div>
-
           </div>
         );
       })}
-
     </div>
   );
 };
 
 export default FAQ;
+

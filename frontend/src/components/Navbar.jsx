@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { ChevronDown, ArrowRight, Menu, X } from "lucide-react";
 
@@ -21,6 +22,9 @@ function Navbar() {
           bg-black
           px-[4px]
           font-inter
+          max-[600px]:h-[52px]
+          max-[400px]:h-[50px]
+          max-[360px]:max-w-[calc(100%-10px)]
         "
       >
         {/* DataCircles Logo */}
@@ -32,7 +36,7 @@ function Navbar() {
             w-[190px]
             shrink-0
             items-center
-            max-[600px]:ml-[8px]
+            max-[600px]:ml-[7px]
             max-[600px]:w-auto
           "
         >
@@ -47,6 +51,8 @@ function Navbar() {
               invert
               opacity-[0.22]
               max-[600px]:w-[145px]
+              max-[480px]:w-[130px]
+              max-[400px]:w-[120px]
             "
             fetchPriority="high"
             decoding="async"
@@ -195,12 +201,31 @@ function Navbar() {
             transition
             hover:bg-[#087de4]
             max-[600px]:flex
+            max-[480px]:mr-[5px]
+            max-[480px]:h-[40px]
+            max-[480px]:w-[40px]
+            max-[400px]:h-[38px]
+            max-[400px]:w-[38px]
           "
         >
           {mobileOpen ? (
-            <X size={20} strokeWidth={2} />
+            <X
+              size={20}
+              strokeWidth={2}
+              className="
+                max-[480px]:h-[18px]
+                max-[480px]:w-[18px]
+              "
+            />
           ) : (
-            <Menu size={21} strokeWidth={2} />
+            <Menu
+              size={21}
+              strokeWidth={2}
+              className="
+                max-[480px]:h-[19px]
+                max-[480px]:w-[19px]
+              "
+            />
           )}
         </button>
       </nav>
@@ -221,6 +246,8 @@ function Navbar() {
             p-3
             shadow-2xl
             min-[601px]:hidden
+            max-[400px]:top-[58px]
+            max-[400px]:w-[calc(100%-16px)]
           "
         >
           <div className="flex flex-col gap-1">
@@ -347,3 +374,4 @@ function Navbar() {
 }
 
 export default Navbar;
+
