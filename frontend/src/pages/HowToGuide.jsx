@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import { ChevronRight } from "lucide-react";
 
 export default function HowToGuide() {
   /* ============================================================
@@ -92,12 +93,8 @@ export default function HowToGuide() {
 
   return (
     <>
+
       <style>{`
-
-        /* ============================================================
-           GLOBAL
-           ============================================================ */
-
         * {
           box-sizing: border-box;
         }
@@ -112,7 +109,7 @@ export default function HowToGuide() {
           margin: 0;
           padding: 0;
           background: #ffffff;
-          color: #242424;
+          color: #000000;
           font-family: "Inter", Arial, Helvetica, sans-serif;
         }
 
@@ -125,1105 +122,822 @@ export default function HowToGuide() {
           cursor: pointer;
         }
 
-        /* ============================================================
-           PAGE
-           ============================================================ */
-
         .guide-page {
           width: 100%;
-          min-height: 4412px;
+          min-height: 100vh;
           overflow-x: hidden;
           background: #ffffff;
         }
 
         .guide-canvas {
           position: relative;
-          width: 1440px;
-          min-height: 4412px;
+          width: 100%;
+          min-height: 100vh;
           margin: 0 auto;
           overflow: hidden;
           background: #ffffff;
         }
 
-        /* ============================================================
-           BACKGROUND
-           ============================================================ */
-
-        .guide-background {
-          position: absolute;
-          z-index: 0;
-          top: 269.939px;
-          left: 50%;
-          width: 1920px;
-          height: 945px;
-          transform: translateX(-50%);
-          pointer-events: none;
-          opacity: 0.5;
-
-          background:
-            linear-gradient(
-              to bottom,
-              #ffffff 9.46%,
-              #9cd0ff 45.045%,
-              #ffffff 89.631%,
-              #ffffff 100%
-            );
-        }
-
-        .guide-grid {
-          position: absolute;
-          z-index: 0;
-          top: 203px;
-          left: 50%;
-          width: 1340px;
-          height: 1078px;
-          transform: translateX(-50%);
-          pointer-events: none;
-          opacity: 0.25;
-
-          background-image:
-            linear-gradient(
-              rgba(255,255,255,0.9) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              90deg,
-              rgba(255,255,255,0.9) 1px,
-              transparent 1px
-            );
-
-          background-size: 135px 135px;
-
-          mask-image: linear-gradient(
-            to bottom,
-            #000 0%,
-            #000 80%,
-            transparent 100%
-          );
-
-          -webkit-mask-image: linear-gradient(
-            to bottom,
-            #000 0%,
-            #000 80%,
-            transparent 100%
-          );
-        }
-
-        /* ============================================================
-           HEADER
-           ============================================================ */
+        /* =========================
+           NAVBAR / HERO
+           ========================= */
 
         .guide-header {
           position: relative;
           z-index: 5;
           width: 100%;
-          height: 570px;
-
+          min-height: 560px;
           padding-top: 168px;
+          background:
+            linear-gradient(
+              to bottom,
+              #ffffff 8%,
+              #ffffff 22%,
+              #ffffff 54%,
+              #ffffff 96%
+            );
         }
-
-        /* ============================================================
-           NAVBAR
-           ============================================================ */
 
         .guide-navbar-wrapper {
           position: absolute;
           z-index: 50;
-          top: 0.7%;
+          top: 12px;
           left: 50%;
           transform: translateX(-50%);
           transform-origin: top center;
         }
 
-        /* ============================================================
-           ARTICLE CATEGORY
-           ============================================================ */
+        .guide-resource-nav {
+          position: absolute;
+          z-index: 100;
+          top: 92px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: min(1120px, calc(100% - 64px));
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 8px;
+          overflow-x: auto;
+          padding: 0;
+          margin: 0;
+          scrollbar-width: none;
+        }
 
-        .guide-category {
-          width: 760px;
+        .guide-resource-nav::-webkit-scrollbar {
+          display: none;
+        }
+
+        .guide-resource-tab {
+          flex: 0 0 auto;
+          height: 40px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 18px;
+          border: 1px solid #dce7f0;
+          border-radius: 8px;
+          background: #ffffff;
+          color: #635557;
+          font-family: "Inter", Arial, Helvetica, sans-serif;
+          font-size: 12px;
+          line-height: 17px;
+          font-weight: 600;
+          white-space: nowrap;
+          cursor: pointer;
+          opacity: 1;
+        }
+
+        .guide-resource-tab.active {
+          border-color: #0085ff;
+          background: #0085ff;
+          color: #ffffff;
+        }
+
+        .guide-header-inner {
+          width: min(1180px, calc(100% - 64px));
           margin: 0 auto;
-          padding-top: 0;
+        }
+
+        .guide-breadcrumb {
+          color: #635557;
+          font-size: 12px;
+          line-height: 18px;
+          font-weight: 500;
+          margin-bottom: 18px;
         }
 
         .guide-category-pill {
-          width: 112px;
-          height: 36px;
-
+          width: 132px;
+          height: 38px;
           display: flex;
           align-items: center;
           justify-content: center;
-
-          border-radius: 18px;
-
+          border-radius: 19px;
           background: #0085ff;
           color: #ffffff;
-
-          font-size: 13px;
-          line-height: 19px;
-          font-weight: 500;
+          font-size: 12px;
+          line-height: 17px;
+          font-weight: 600;
         }
-
-        /* ============================================================
-           ARTICLE TITLE
-           ============================================================ */
 
         .guide-title {
-          width: 760px;
-
-          margin: 32px 0 0;
-          padding: 0;
-
-          color: #242424;
-
-          font-size: 36px;
-          line-height: 43px;
-
-          font-weight: 500;
-
-          letter-spacing: -1.5px;
+          width: 100%;
+          max-width: 940px;
+          margin: 28px 0 0;
+          color: #000000;
+          font-size: clamp(42px, 4.2vw, 62px);
+          line-height: 1.05;
+          font-weight: 600;
+          letter-spacing: -2.5px;
         }
-
-        /* ============================================================
-           ARTICLE SUBTITLE
-           ============================================================ */
 
         .guide-subtitle {
-          width: 760px;
-
-          margin: 10px 0 0;
-
-          color: #78788d;
-
-          font-size: 16px;
-          line-height: 23px;
-
+          width: 100%;
+          max-width: 820px;
+          margin: 18px 0 0;
+          color: #635557;
+          font-size: clamp(17px, 1.35vw, 20px);
+          line-height: 1.5;
           font-weight: 400;
         }
-
-        /* ============================================================
-           AUTHOR
-           ============================================================ */
 
         .guide-author {
           display: flex;
           align-items: center;
-
-          gap: 12px;
-
-          margin-top: 28px;
+          gap: 14px;
+          margin-top: 30px;
         }
 
         .guide-author-avatar {
-          width: 40px;
-          height: 40px;
-
+          width: 48px;
+          height: 48px;
           flex: none;
-
           border-radius: 50%;
-
-          background: #d9d9d9;
-
+          background: #dce7f0;
           overflow: hidden;
         }
 
         .guide-author-avatar img {
           width: 100%;
           height: 100%;
-
           display: block;
-
           object-fit: cover;
         }
 
         .guide-author-info {
           display: flex;
           flex-direction: column;
-
-          gap: 2px;
+          gap: 3px;
         }
 
         .guide-author-name {
-          color: #242424;
-
-          font-size: 12px;
-          line-height: 16px;
-
+          color: #000000;
+          font-size: 13px;
+          line-height: 18px;
           font-weight: 600;
         }
 
         .guide-author-meta {
-          color: #a2a2a8;
-
-          font-size: 10px;
-          line-height: 14px;
-
+          color: #635557;
+          font-size: 11px;
+          line-height: 16px;
           font-weight: 400;
         }
-
-        /* ============================================================
-           HEADER RULE
-           ============================================================ */
 
         .guide-header-rule {
-          width: 760px;
+          width: 100%;
           height: 1px;
-
-          margin: 28px auto 0;
-
-          background: #d9d9d9;
+          margin: 32px 0 0;
+          background: #dce7f0;
         }
 
-        /* ============================================================
-           PREVIOUS / NEXT RESOURCE
-           ============================================================ */
-
-        .guide-prev,
-        .guide-next {
-          position: absolute;
-
-          top: 177px;
-
-          color: #999aa2;
-
-          font-size: 11px;
-          line-height: 17px;
-
-          font-weight: 400;
-
-          white-space: nowrap;
-
-          border: 0;
-          background: transparent;
-
-          padding: 0;
-        }
-
-        .guide-prev {
-          left: 20px;
-        }
-
-        .guide-next {
-          right: 20px;
-        }
-
-        /* ============================================================
-           ARTICLE BODY
-           ============================================================ */
+        /* =========================
+           ARTICLE
+           ========================= */
 
         .guide-body {
           position: relative;
           z-index: 5;
-
-          width: 760px;
-
+          width: min(960px, calc(100% - 64px));
           margin: 0 auto;
+          padding-bottom: 80px;
         }
 
-        /* ============================================================
-           HERO IMAGE
-           ============================================================ */
-
         .guide-hero-image {
-          width: 760px;
-          height: 424px;
-
+          width: 100%;
+          aspect-ratio: 16 / 9;
           overflow: hidden;
-
-          border-radius: 8px;
-
-          background: #d9d9d9;
+          border-radius: 14px;
+          background: #ffffff;
         }
 
         .guide-hero-image img {
           width: 100%;
           height: 100%;
-
           display: block;
-
           object-fit: cover;
         }
 
-        /* ============================================================
-           ARTICLE COPY
-           ============================================================ */
+        .guide-image-placeholder {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #635557;
+          font-size: 15px;
+          font-weight: 500;
+          background: #ffffff;
+        }
 
         .guide-copy {
-          width: 760px;
-
-          margin-top: 48px;
+          width: 100%;
+          margin-top: 54px;
         }
 
-        .guide-section {
-          margin: 0 0 28px;
+        .guide-wire-label {
+          display: inline-flex;
+          align-items: center;
+          min-height: 30px;
+          padding: 7px 12px;
+          border-radius: 7px;
+          background: #dce7f033;
+          color: #0085ff;
+          font-size: 11px;
+          line-height: 16px;
+          font-weight: 700;
+          letter-spacing: .35px;
+          text-transform: uppercase;
         }
 
-        .guide-section-title {
-          margin: 0 0 5px;
-
-          color: #242424;
-
-          font-size: 16px;
-          line-height: 21px;
-
-          font-weight: 600;
-        }
-
-        .guide-section-text {
-          margin: 0;
-
-          color: #78788d;
-
-          font-size: 16px;
-          line-height: 22px;
-
+        .guide-intro-text,
+        .guide-close-text {
+          margin: 18px 0 0;
+          color: #635557;
+          font-size: 18px;
+          line-height: 1.65;
           font-weight: 400;
         }
 
-        /* ============================================================
-           IN THIS RESOURCE
-           ============================================================ */
+        .guide-copy-lines {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-top: 22px;
+        }
+
+        .guide-copy-line {
+          height: 12px;
+          border-radius: 6px;
+          background: #dce7f0;
+        }
+
+        .guide-copy-line:nth-child(1) { width: 100%; }
+        .guide-copy-line:nth-child(2) { width: 94%; }
+        .guide-copy-line:nth-child(3) { width: 76%; }
 
         .guide-resource-box {
-          width: 760px;
-          min-height: 170px;
-
-          margin: 32px 0;
-
-          padding: 28px 30px;
-
-          border-radius: 12px;
-
-          background: #f1f8fc;
+          width: 100%;
+          margin: 34px 0 44px;
+          padding: 30px 34px;
+          border: 1px solid #dce7f0;
+          border-radius: 14px;
+          background: #ffffff;
         }
 
         .guide-resource-title {
-          margin: 0 0 16px;
-
-          color: #242424;
-
-          font-size: 17px;
-          line-height: 22px;
-
+          margin: 0 0 20px;
+          color: #000000;
+          font-size: 18px;
+          line-height: 24px;
           font-weight: 600;
         }
 
         .guide-resource-list {
           display: grid;
-
           grid-template-columns: 1fr 1fr;
-
-          column-gap: 80px;
-          row-gap: 12px;
+          column-gap: 60px;
+          row-gap: 16px;
         }
 
         .guide-resource-item {
           display: flex;
-
           align-items: center;
-
-          gap: 8px;
-
-          color: #78788d;
-
-          font-size: 12px;
-          line-height: 17px;
+          gap: 10px;
+          color: #635557;
+          font-size: 14px;
+          line-height: 20px;
         }
 
         .guide-resource-check {
-          color: #8b8d96;
-
-          font-size: 14px;
+          color: #0085ff;
+          font-size: 16px;
           line-height: 1;
+          font-weight: 700;
         }
 
-        /* ============================================================
-           ARTICLE CTA
-           ============================================================ */
+        .guide-steps-label {
+          margin-bottom: 26px;
+        }
 
-        .guide-article-cta {
-          width: 760px;
-          height: 260px;
+        .guide-step {
+          display: grid;
+          grid-template-columns: 44px 1fr;
+          gap: 18px;
+          margin-bottom: 34px;
+        }
 
-          margin-top: 32px;
-
+        .guide-step-number {
+          width: 44px;
+          height: 44px;
           display: flex;
-
-          flex-direction: column;
-
           align-items: center;
           justify-content: center;
+          border-radius: 50%;
+          background: #0085ff;
+          color: #ffffff;
+          font-size: 16px;
+          line-height: 1;
+          font-weight: 700;
+        }
 
-          border-radius: 10px;
+        .guide-step-content {
+          padding-top: 4px;
+        }
 
-          background:
-            linear-gradient(
-              90deg,
-              #0a55af 0%,
-              #0085ff 100%
-            );
+        .guide-step-title {
+          margin: 0;
+          color: #000000;
+          font-size: 21px;
+          line-height: 28px;
+          font-weight: 600;
+        }
 
-          text-align: center;
+        .guide-step-text {
+          margin: 10px 0 0;
+          color: #635557;
+          font-size: 16px;
+          line-height: 1.65;
+        }
+
+        .guide-step-lines {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-top: 16px;
+        }
+
+        .guide-step-lines span {
+          height: 10px;
+          border-radius: 5px;
+          background: #dce7f0;
+        }
+
+        .guide-step-lines span:first-child { width: 72%; }
+        .guide-step-lines span:last-child { width: 58%; }
+
+        .guide-callout {
+          width: 100%;
+          margin: 44px 0;
+          padding: 24px 28px;
+          border: 1px solid #0085ff;
+          border-radius: 14px;
+          background: #ffffff;
+        }
+
+        .guide-callout-title {
+          margin: 0 0 8px;
+          color: #0085ff;
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 700;
+        }
+
+        .guide-callout-text {
+          margin: 0;
+          color: #635557;
+          font-size: 15px;
+          line-height: 1.55;
+        }
+
+        .guide-article-cta {
+          width: 100%;
+          min-height: 260px;
+          margin: 44px 0;
+          padding: 42px 48px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+          border-radius: 16px;
+          background: linear-gradient(90deg, #0a55af 0%, #0085ff 100%);
         }
 
         .guide-article-cta-title {
           margin: 0;
-
           color: #ffffff;
-
-          font-size: 28px;
-          line-height: 35px;
-
-          font-weight: 500;
-
+          font-size: 30px;
+          line-height: 38px;
+          font-weight: 600;
           letter-spacing: -1px;
         }
 
         .guide-article-cta-text {
-          width: 620px;
-
-          margin: 16px 0 0;
-
-          color: rgba(255,255,255,0.75);
-
-          font-size: 14px;
-          line-height: 20px;
-
-          font-weight: 400;
+          width: 100%;
+          max-width: 720px;
+          margin: 12px 0 0;
+          color: #ffffff;
+          font-size: 15px;
+          line-height: 1.6;
         }
 
         .guide-article-cta-button {
-          width: 180px;
+          width: 150px;
           height: 48px;
-
           margin-top: 22px;
-
           border: 0;
-
           border-radius: 24px;
-
           background: #ffffff;
-
           color: #0085ff;
-
-          font-size: 12px;
-          line-height: 17px;
-
-          font-weight: 500;
+          font-size: 13px;
+          line-height: 18px;
+          font-weight: 600;
         }
 
-        .guide-article-cta-button:hover {
-          transform: translateY(-2px);
+        .guide-close {
+          margin-top: 18px;
         }
-
-        /* ============================================================
-           ARTICLE ACTIONS
-           ============================================================ */
 
         .guide-actions {
-          width: 760px;
-          min-height: 116px;
-
+          width: 100%;
+          min-height: 110px;
           display: flex;
-
           align-items: center;
           justify-content: center;
-
-          gap: 12px;
-
-          border-top: 1px solid #d9d9d9;
-          border-bottom: 1px solid #d9d9d9;
+          gap: 14px;
+          border-top: 1px solid #dce7f0;
+          border-bottom: 1px solid #dce7f0;
+          margin-top: 42px;
         }
 
         .guide-action {
-          height: 32px;
-
-          padding: 0 15px;
-
+          min-width: 150px;
+          height: 44px;
+          padding: 0 18px;
           border: 0;
-
-          border-radius: 16px;
-
-          background: #11151a;
-
+          border-radius: 22px;
+          background: #000000;
           color: #ffffff;
-
-          font-size: 11px;
-          line-height: 16px;
-
-          font-weight: 500;
+          font-size: 12px;
+          line-height: 17px;
+          font-weight: 600;
         }
 
-        /* ============================================================
+        /* =========================
            MORE READS
-           ============================================================ */
+           ========================= */
 
         .guide-more {
           position: relative;
-
           z-index: 5;
-
-          width: 1304px;
-
-          margin: 48px auto 0;
+          width: min(1260px, calc(100% - 64px));
+          margin: 0 auto;
+          padding: 28px 0 80px;
         }
 
         .guide-more-title {
-          margin: 0 0 30px;
-
-          color: #242424;
-
-          font-size: 32px;
-          line-height: 40px;
-
-          font-weight: 500;
-
-          letter-spacing: -1.5px;
+          margin: 0 0 28px;
+          color: #000000;
+          font-size: 38px;
+          line-height: 46px;
+          font-weight: 600;
+          letter-spacing: -1.6px;
         }
-
-        /* ============================================================
-           MORE READS TRACK
-           ============================================================ */
 
         .guide-more-track {
-          display: flex;
-
-          gap: 20px;
-
-          width: max-content;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 22px;
+          width: 100%;
         }
 
-        /* ============================================================
-           MORE READ CARD
-           ============================================================ */
-
         .guide-more-card {
-          width: 438px;
-          height: 456px;
-
-          padding: 14px;
-
-          border-radius: 5px;
-
-          background: #f1f8fc;
-
+          width: 100%;
+          min-height: 480px;
+          padding: 16px;
+          border-radius: 14px;
+          background: #ffffff;
           overflow: hidden;
         }
 
         .guide-more-image {
-          width: 410px;
-          height: 315px;
-
+          width: 100%;
+          aspect-ratio: 1.32 / 1;
           overflow: hidden;
-
-          border-radius: 4px;
-
-          background: #d9d9d9;
+          border-radius: 10px;
+          background: #ffffff;
         }
 
         .guide-more-image img {
           width: 100%;
           height: 100%;
-
           display: block;
-
           object-fit: cover;
         }
 
         .guide-more-tags {
-          margin-top: 14px;
-
-          color: #707173;
-
-          font-size: 12px;
-          line-height: 17px;
+          margin-top: 16px;
+          color: #0085ff;
+          font-size: 11px;
+          line-height: 16px;
+          font-weight: 600;
+          text-transform: uppercase;
         }
 
         .guide-more-card-title {
-          margin: 7px 0 0;
-
-          color: #242424;
-
-          font-size: 22px;
-          line-height: 27px;
-
-          font-weight: 500;
-
-          letter-spacing: -0.7px;
+          margin: 8px 0 0;
+          color: #000000;
+          font-size: 24px;
+          line-height: 30px;
+          font-weight: 600;
+          letter-spacing: -.7px;
         }
 
         .guide-more-card-text {
-          margin: 7px 0 0;
-
+          margin: 9px 0 0;
           color: #635557;
-
-          font-size: 12px;
-          line-height: 17px;
-        }
-
-        /* ============================================================
-           MORE READ ARROWS
-           ============================================================ */
-
-        .guide-more-arrows {
-          display: flex;
-
-          justify-content: flex-end;
-
-          gap: 14px;
-
-          margin-top: 30px;
-
-          padding-right: 4px;
-        }
-
-        .guide-more-arrow {
-          width: 38px;
-          height: 38px;
-
-          border: 0;
-
-          border-radius: 50%;
-
-          background: #11151a;
-
-          color: #ffffff;
-
-          font-size: 21px;
-          line-height: 38px;
-
-          text-align: center;
-        }
-
-        /* ============================================================
-           BLACK PRACTICE SECTION
-           ============================================================ */
-
-        .guide-practice {
-          position: absolute;
-
-          z-index: 4;
-
-          left: 0;
-          top: 3090px;
-
-          width: 1440px;
-          height: 1322px;
-
-          background: #000000;
-
-          text-align: center;
-
-          color: #ffffff;
-
-          padding-top: 78px;
-        }
-
-        /* ============================================================
-           PRACTICE LABEL
-           ============================================================ */
-
-        .guide-practice-label {
-          margin: 0;
-
-          color: #0085ff;
-
-          font-size: 13px;
-          line-height: 19px;
-
-          font-weight: 500;
-        }
-
-        /* ============================================================
-           PRACTICE TITLE
-           ============================================================ */
-
-        .guide-practice-title {
-          margin: 18px 0 0;
-
-          color: #ffffff;
-
-          font-size: 42px;
-          line-height: 50px;
-
-          font-weight: 500;
-
-          letter-spacing: -1.8px;
-        }
-
-        /* ============================================================
-           PRACTICE DESCRIPTION
-           ============================================================ */
-
-        .guide-practice-text {
-          width: 620px;
-
-          margin: 20px auto 0;
-
-          color: #b7b7b7;
-
           font-size: 14px;
           line-height: 20px;
         }
 
-        /* ============================================================
-           PRACTICE BUTTONS
-           ============================================================ */
-
-        .guide-practice-buttons {
+        .guide-more-arrows {
           display: flex;
-
-          justify-content: center;
-
-          gap: 10px;
-
+          justify-content: flex-end;
+          gap: 12px;
           margin-top: 24px;
         }
 
+        .guide-more-arrow {
+          width: 48px;
+          height: 48px;
+          border: 0;
+          border-radius: 50%;
+          background: #000000;
+          color: #ffffff;
+          font-size: 24px;
+          line-height: 48px;
+          text-align: center;
+        }
+
+        /* =========================
+           PRACTICE / CTA
+           ========================= */
+
+        .guide-practice {
+          position: relative;
+          z-index: 4;
+          width: 100%;
+          min-height: 900px;
+          padding: 90px 32px 60px;
+          background: #0085ff;
+          text-align: center;
+          color: #ffffff;
+        }
+
+        .guide-practice-label {
+          margin: 0;
+          color: #0085ff;
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 700;
+        }
+
+        .guide-practice-title {
+          margin: 18px 0 0;
+          color: #ffffff;
+          font-size: clamp(40px, 4vw, 56px);
+          line-height: 1.05;
+          font-weight: 600;
+          letter-spacing: -2px;
+        }
+
+        .guide-practice-text {
+          width: min(700px, 100%);
+          margin: 20px auto 0;
+          color: #ffffff;
+          font-size: 16px;
+          line-height: 24px;
+        }
+
+        .guide-practice-buttons {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          margin-top: 28px;
+        }
+
         .guide-practice-button {
-          height: 40px;
-
-          padding: 0 22px;
-
-          border-radius: 20px;
-
-          font-size: 11px;
-          line-height: 16px;
-
-          font-weight: 500;
+          height: 50px;
+          padding: 0 26px;
+          border-radius: 25px;
+          font-size: 13px;
+          line-height: 18px;
+          font-weight: 600;
         }
 
         .guide-practice-button.primary {
           border: 0;
-
           background: #ffffff;
-
-          color: #00538a;
+          color: #0085ff;
         }
 
         .guide-practice-button.secondary {
           border: 1px solid #ffffff;
-
           background: transparent;
-
           color: #ffffff;
         }
 
-        /* ============================================================
-           PRACTICE IMAGE CAROUSEL
-           ============================================================ */
-
         .guide-practice-carousel {
-          position: absolute;
-
-          left: 0;
-          top: 0;
-
-          width: 1440px;
-          height: 1012px;
-
-          overflow: visible;
-          background: transparent;
-
+          position: relative;
+          width: min(1120px, 100%);
+          height: 560px;
+          margin: 64px auto 0;
+          overflow: hidden;
           pointer-events: none;
         }
 
-        /* ============================================================
-           MAIN IMAGE
-           ============================================================ */
-
         .guide-practice-slide {
           position: absolute;
-
-          box-sizing: border-box;
-
           overflow: hidden;
-
-          border-radius: 7px;
-
+          border-radius: 12px;
           background: #ffffff;
-
-          transform-origin: center center;
-
           transition:
-            left 650ms cubic-bezier(0.22, 1, 0.36, 1),
-            top 650ms cubic-bezier(0.22, 1, 0.36, 1),
-            width 650ms cubic-bezier(0.22, 1, 0.36, 1),
-            height 650ms cubic-bezier(0.22, 1, 0.36, 1),
-            opacity 500ms ease,
-            filter 500ms ease,
-            box-shadow 500ms ease;
-
-          will-change:
-            left,
-            top,
-            width,
-            height,
-            opacity,
-            filter;
-
-          pointer-events: none;
+            left 650ms cubic-bezier(.22,1,.36,1),
+            top 650ms cubic-bezier(.22,1,.36,1),
+            width 650ms cubic-bezier(.22,1,.36,1),
+            height 650ms cubic-bezier(.22,1,.36,1),
+            opacity 500ms ease;
         }
 
         .guide-practice-slide img {
           width: 100%;
           height: 100%;
-
           display: block;
-
           object-fit: contain;
-
           background: #ffffff;
         }
 
-        /* ============================================================
-           ACTIVE / CENTER IMAGE
-           ============================================================ */
-
         .guide-practice-slide.active {
           z-index: 10;
-
           left: 50%;
-          top: 360px;
-
-          width: 942px;
-          height: 652px;
-
+          top: 0;
+          width: 72%;
+          height: 500px;
           opacity: 1;
-
-          filter: none;
-
-          box-shadow:
-            0 26px 65px rgba(255, 255, 255, 0.05),
-            0 18px 40px rgba(0, 0, 0, 0.20);
-
           transform: translateX(-50%);
         }
 
-        /* ============================================================
-           PREVIOUS / LOWER-LEFT IMAGE
-           ============================================================ */
-
         .guide-practice-slide.previous {
-          z-index: 20;
-
-          left: 139px;
-          top: 757px;
-
-          width: 206px;
-          height: 191px;
-
-          opacity: 0.72;
-
-          filter: none;
-
-          box-shadow:
-            0 16px 30px rgba(0, 0, 0, 0.35);
-
-          transform: none;
+          z-index: 5;
+          left: 0;
+          top: 250px;
+          width: 20%;
+          height: 185px;
+          opacity: 1;
         }
 
-        /* ============================================================
-           NEXT / UPPER-RIGHT IMAGE
-           ============================================================ */
-
         .guide-practice-slide.next {
-          z-index: 20;
-
-          left: 1040px;
-          top: 546px;
-
-          width: 206px;
-          height: 191px;
-
-          opacity: 0.72;
-
-          filter: none;
-
-          box-shadow:
-            0 16px 30px rgba(0, 0, 0, 0.35);
-
-          transform: none;
+          z-index: 5;
+          right: 0;
+          left: auto;
+          top: 130px;
+          width: 20%;
+          height: 185px;
+          opacity: 1;
         }
 
         .guide-practice-slide-empty {
           width: 100%;
           height: 100%;
-
           background: #ffffff;
         }
 
-        /* ============================================================
-           PRACTICE CONTROLS
-           ============================================================ */
-
         .guide-practice-controls {
           position: absolute;
-
           left: 50%;
-          bottom: 42px;
-
+          bottom: 20px;
           transform: translateX(-50%);
-
           z-index: 50;
-
           display: flex;
           align-items: center;
           justify-content: center;
-
           gap: 12px;
         }
 
         .guide-practice-control {
-          width: 38px;
-          height: 38px;
-
-          border: 1px solid rgba(255,255,255,0.35);
-
+          width: 46px;
+          height: 46px;
+          border: 1px solid #ffffff;
           border-radius: 50%;
-
-          background: rgba(255,255,255,0.08);
-
+          background: #ffffff;
           color: #ffffff;
-
-          font-size: 18px;
-          line-height: 38px;
-
+          font-size: 20px;
+          line-height: 46px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
-        .guide-practice-control:hover {
-          background: rgba(255,255,255,0.16);
-        }
-
-        /* ============================================================
-           PRACTICE DOTS
-           ============================================================ */
-
         .guide-practice-dots {
           position: absolute;
-
           left: 50%;
-          bottom: 28px;
-
+          bottom: 2px;
           transform: translateX(-50%);
-
           z-index: 50;
-
           display: flex;
           align-items: center;
-
-          gap: 6px;
+          gap: 7px;
         }
 
         .guide-practice-dot {
-          width: 6px;
-          height: 6px;
-
+          width: 7px;
+          height: 7px;
           padding: 0;
-
           border: 0;
-
           border-radius: 50%;
-
-          background: rgba(255,255,255,0.35);
+          background: #ffffff;
         }
 
         .guide-practice-dot.active {
           background: #ffffff;
         }
 
-        /* ============================================================
+        /* =========================
            RESPONSIVE
-           ============================================================ */
+           ========================= */
 
-        @media (max-width: 1439px) {
-
-          .guide-canvas {
-            width: 100%;
-            min-width: 0;
+        @media (max-width: 1000px) {
+          .guide-header-inner {
+            width: calc(100% - 40px);
           }
 
-          .guide-header {
-            width: 100%;
-          }
-
-          .guide-category,
-          .guide-title,
-          .guide-subtitle,
-          .guide-header-rule,
-          .guide-body {
-            width: calc(100% - 48px);
-          }
-
-          .guide-title {
-            max-width: 760px;
-          }
-
-          .guide-subtitle {
-            max-width: 760px;
-          }
-
-          .guide-header-rule {
-            max-width: 760px;
-          }
-
-          .guide-hero-image,
-          .guide-copy,
-          .guide-resource-box,
-          .guide-article-cta,
-          .guide-actions {
-            width: 100%;
-          }
-
+          .guide-body,
           .guide-more {
-            width: calc(100% - 48px);
+            width: calc(100% - 40px);
           }
 
-          .guide-practice {
-            width: 100%;
+          .guide-resource-list {
+            grid-template-columns: 1fr;
+          }
+
+          .guide-more-track {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
           }
 
           .guide-practice-carousel {
-            left: 50%;
-            width: 1440px;
-            height: 1012px;
+            height: 470px;
+          }
 
-            transform:
-              translateX(-50%)
-              scale(
-                min(
-                  1,
-                  calc((100vw - 48px) / 1440)
-                )
-              );
-
-            transform-origin: top center;
+          .guide-practice-slide.active {
+            width: 78%;
+            height: 410px;
           }
         }
 
-        /* ============================================================
-           TABLET
-           ============================================================ */
-
-        @media (max-width: 1000px) {
-
-          .guide-navbar-wrapper {
-            transform:
-              translateX(-50%)
-              scale(0.75);
-
-            transform-origin: top center;
+        @media (max-width: 700px) {
+          .guide-header {
+            min-height: 520px;
+            padding-top: 140px;
           }
 
-          .guide-header {
-            padding-top: 155px;
+          .guide-header-inner,
+          .guide-body,
+          .guide-more {
+            width: calc(100% - 32px);
+          }
+
+          .guide-navbar-wrapper {
+            transform: translateX(-50%) scale(.7);
+          }
+
+          .guide-resource-nav {
+            top: 86px;
+            width: calc(100% - 32px);
+            gap: 6px;
+          }
+
+          .guide-resource-tab {
+            height: 36px;
+            padding: 0 14px;
+            font-size: 11px;
+            line-height: 15px;
           }
 
           .guide-title {
-            font-size: 32px;
-            line-height: 39px;
+            font-size: 38px;
+            line-height: 1.08;
+            letter-spacing: -1.6px;
           }
 
           .guide-subtitle {
@@ -1231,223 +945,156 @@ export default function HowToGuide() {
             line-height: 22px;
           }
 
-          .guide-resource-list {
-            grid-template-columns: 1fr;
-          }
-
-          .guide-practice-title {
-            font-size: 36px;
-            line-height: 44px;
-          }
-
-          .guide-practice-text {
-            width: 80%;
-          }
-        }
-
-        /* ============================================================
-           MOBILE
-           ============================================================ */
-
-        @media (max-width: 700px) {
-
-          .guide-page {
-            min-height: 100vh;
-          }
-
-          .guide-canvas {
-            min-height: 3500px;
-          }
-
-          .guide-navbar-wrapper {
-            transform:
-              translateX(-50%)
-              scale(0.5);
-
-            transform-origin: top center;
-          }
-
-          .guide-header {
-            height: 520px;
-
-            padding-top: 145px;
-          }
-
-          .guide-prev,
-          .guide-next {
-            display: none;
-          }
-
-          .guide-category,
-          .guide-title,
-          .guide-subtitle,
-          .guide-header-rule,
-          .guide-body {
-            width: calc(100% - 32px);
-          }
-
-          .guide-title {
-            margin-top: 28px;
-
-            font-size: 30px;
-            line-height: 36px;
-          }
-
-          .guide-subtitle {
-            font-size: 14px;
-            line-height: 20px;
-          }
-
-          .guide-hero-image {
-            height: 260px;
+          .guide-author {
+            margin-top: 24px;
           }
 
           .guide-copy {
-            margin-top: 32px;
+            margin-top: 38px;
           }
 
-          .guide-section-text {
+          .guide-intro-text,
+          .guide-close-text {
+            font-size: 16px;
+            line-height: 1.6;
+          }
+
+          .guide-resource-box {
+            padding: 22px;
+          }
+
+          .guide-step {
+            grid-template-columns: 38px 1fr;
+            gap: 12px;
+          }
+
+          .guide-step-number {
+            width: 38px;
+            height: 38px;
             font-size: 14px;
-            line-height: 20px;
           }
 
-          .guide-resource-list {
-            grid-template-columns: 1fr;
+          .guide-step-title {
+            font-size: 18px;
+            line-height: 25px;
+          }
+
+          .guide-step-text {
+            font-size: 14px;
+            line-height: 21px;
           }
 
           .guide-article-cta {
-            height: 230px;
-
-            padding: 20px;
+            padding: 32px 24px;
           }
 
           .guide-article-cta-title {
-            font-size: 24px;
-            line-height: 30px;
+            font-size: 25px;
+            line-height: 32px;
           }
 
           .guide-article-cta-text {
-            width: 100%;
-
-            font-size: 12px;
+            font-size: 14px;
           }
 
-          .guide-more {
-            width: calc(100% - 32px);
+          .guide-actions {
+            flex-direction: column;
+            padding: 22px 0;
+          }
+
+          .guide-action {
+            width: 190px;
+          }
+
+          .guide-more-title {
+            font-size: 32px;
+            line-height: 40px;
           }
 
           .guide-more-track {
-            width: 100%;
-
-            flex-direction: column;
+            grid-template-columns: 1fr;
           }
 
           .guide-more-card {
-            width: 100%;
-
-            height: auto;
-          }
-
-          .guide-more-image {
-            width: 100%;
-
-            height: 250px;
+            min-height: 0;
           }
 
           .guide-practice {
-            position: relative;
-
-            top: auto;
-
-            height: 700px;
-
-            margin-top: 70px;
-
-            padding: 60px 20px;
+            min-height: 700px;
+            padding: 64px 16px 40px;
           }
 
           .guide-practice-title {
-            font-size: 32px;
-            line-height: 38px;
+            font-size: 38px;
           }
 
           .guide-practice-text {
-            width: 100%;
+            font-size: 14px;
+            line-height: 21px;
+          }
+
+          .guide-practice-buttons {
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .guide-practice-button {
+            width: 190px;
           }
 
           .guide-practice-carousel {
-            top: 330px;
-
-            width: calc(100% - 32px);
-
-            height: 300px;
+            height: 320px;
+            margin-top: 42px;
           }
 
-          .guide-practice-controls {
-            bottom: 18px;
+          .guide-practice-slide.active {
+            width: 88%;
+            height: 275px;
           }
 
-          .guide-practice-dots {
-            bottom: 33px;
+          .guide-practice-slide.previous,
+          .guide-practice-slide.next {
+            display: none;
           }
         }
-
       `}</style>
 
       <div className="guide-page">
-
         <div className="guide-canvas">
 
-          {/* ==========================================================
-              BACKGROUND
-              ========================================================== */}
-
-          <div className="guide-background" />
-
-          <div className="guide-grid" />
-
-          {/* ==========================================================
-              NAVBAR
-              Same positioned placement approach as the previous page.
-              ========================================================== */}
-
+          {/* NAVBAR */}
           <div className="guide-navbar-wrapper">
             <Navbar />
           </div>
 
-          {/* ==========================================================
-              ARTICLE HEADER
-              ========================================================== */}
+          {/* TOP RESOURCE NAVIGATION */}
+          <nav className="guide-resource-nav" aria-label="Guide sections">
+            <button type="button" className="guide-resource-tab active">
+              1 · How-To Guide
+            </button>
 
+            <button type="button" className="guide-resource-tab">
+              2 · Checklist / Explainer
+            </button>
+
+            <button type="button" className="guide-resource-tab">
+              3 · Comparison
+            </button>
+
+            <button type="button" className="guide-resource-tab">
+              4 · CRM for [audience]
+            </button>
+          </nav>
+
+          {/* HERO / ARTICLE HEADER */}
           <header className="guide-header">
+            <div className="guide-header-inner">
 
-            {/* ========================================================
-                PREVIOUS RESOURCE
-                ======================================================== */}
+              
 
-            <button
-              type="button"
-              className="guide-prev"
-            >
-              ‹ Previous Resource
-            </button>
-
-            {/* ========================================================
-                NEXT RESOURCE
-                ======================================================== */}
-
-            <button
-              type="button"
-              className="guide-next"
-            >
-              Next Resource ›
-            </button>
-
-            {/* ========================================================
-                CATEGORY + TITLE
-                ======================================================== */}
-
-            <div className="guide-category">
+<div className="guide-breadcrumb flex items-center whitespace-nowrap">
+  Blog <ChevronRight size={16} strokeWidth={2} /> Getting paid
+</div>
 
               <div className="guide-category-pill">
                 Getting Paid
@@ -1462,18 +1109,10 @@ export default function HowToGuide() {
                 no-drama way to get paid when you're supposed to be.
               </p>
 
-              {/* ======================================================
-                  AUTHOR
-                  ====================================================== */}
-
               <div className="guide-author">
-
-                <div className="guide-author-avatar">
-                  {/* Keep blank for now */}
-                </div>
+                <div className="guide-author-avatar" />
 
                 <div className="guide-author-info">
-
                   <div className="guide-author-name">
                     Author Name
                   </div>
@@ -1481,309 +1120,187 @@ export default function HowToGuide() {
                   <div className="guide-author-meta">
                     22 Jul 2026 · 6 min read
                   </div>
-
                 </div>
-
               </div>
 
-              {/* ======================================================
-                  RULE
-                  ====================================================== */}
-
               <div className="guide-header-rule" />
-
             </div>
-
           </header>
 
-          {/* ==========================================================
-              ARTICLE BODY
-              ========================================================== */}
-
+          {/* ARTICLE BODY */}
           <main className="guide-body">
 
-            {/* ========================================================
-                IMAGE SLOT 1
-                HERO IMAGE
-                ======================================================== */}
-
+            {/* COVER IMAGE */}
             <div className="guide-hero-image">
-
               {HERO_IMAGE ? (
-                <img
-                  src={HERO_IMAGE}
-                  alt=""
-                />
-              ) : null}
-
+                <img src={HERO_IMAGE} alt="" />
+              ) : (
+                <div className="guide-image-placeholder">
+                  Cover image (16:9)
+                </div>
+              )}
             </div>
-
-            {/* ========================================================
-                ARTICLE COPY
-                ======================================================== */}
 
             <div className="guide-copy">
 
-              {/* ======================================================
-                  SECTION 1
-                  ====================================================== */}
+              {/* INTRO */}
+              <section>
+                
 
-              <section className="guide-section">
-
-                <h2 className="guide-section-title">
-                  Lorem ipsum
-                </h2>
-
-                <p className="guide-section-text">
-                  dolor sit amet consectetur adipiscing elit. Quisque
-                  faucibus ex sapien vitae pellentesque sem placerat. In id
-                  cursus mi pretium tellus duis convallis. Tempus leo eu
-                  aenean sed diam urna tempor. Pulvinar vivamus fringilla
-                  lacus nec metus bibendum egestas. Iaculis massa nisl
-                  malesuada lacinia integer nunc posuere. Ut hendrerit
-                  semper vel class aptent taciti sociosqu. Ad litora
-                  torquent per conubia nostra inceptos himenaeos.
+                <p className="guide-intro-text">
+                  Late payments choke small businesses. Here's a practical,
+                  no-drama way to get paid when you're supposed to be.
                 </p>
 
+                <div className="guide-copy-lines" aria-hidden="true">
+                  <span className="guide-copy-line" />
+                  <span className="guide-copy-line" />
+                  <span className="guide-copy-line" />
+                </div>
               </section>
 
-              {/* ======================================================
-                  SECTION 2
-                  ====================================================== */}
-
-              <section className="guide-section">
-
-                <h2 className="guide-section-title">
-                  Lorem ipsum
-                </h2>
-
-                <p className="guide-section-text">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit.
-                  Quisque faucibus ex sapien vitae pellentesque sem
-                  placerat. In id cursus mi pretium tellus duis convallis.
-                  Tempus leo eu aenean sed diam urna tempor. Pulvinar
-                  vivamus fringilla lacus nec metus bibendum egestas.
-                  Iaculis massa nisl malesuada lacinia integer nunc
-                  posuere. Ut hendrerit semper vel class aptent taciti
-                  sociosqu. Ad litora torquent per conubia nostra
-                  inceptos himenaeos.
-                </p>
-
-              </section>
-
-              {/* ======================================================
-                  IN THIS RESOURCE
-                  ====================================================== */}
-
+              {/* IN THIS ARTICLE */}
               <section className="guide-resource-box">
-
                 <h2 className="guide-resource-title">
-                  In this Resource
+                  In this Article
                 </h2>
 
                 <div className="guide-resource-list">
-
-                  <div className="guide-resource-item">
-                    <span className="guide-resource-check">
-                      ✓
-                    </span>
-
-                    <span>
-                      Lorem ipsum dolor
-                    </span>
-                  </div>
-
-                  <div className="guide-resource-item">
-                    <span className="guide-resource-check">
-                      ✓
-                    </span>
-
-                    <span>
-                      Lorem ipsum dolor
-                    </span>
-                  </div>
-
-                  <div className="guide-resource-item">
-                    <span className="guide-resource-check">
-                      ✓
-                    </span>
-
-                    <span>
-                      Lorem ipsum dolor
-                    </span>
-                  </div>
-
-                  <div className="guide-resource-item">
-                    <span className="guide-resource-check">
-                      ✓
-                    </span>
-
-                    <span>
-                      Lorem ipsum dolor
-                    </span>
-                  </div>
-
-                  <div className="guide-resource-item">
-                    <span className="guide-resource-check">
-                      ✓
-                    </span>
-
-                    <span>
-                      Lorem ipsum dolor
-                    </span>
-                  </div>
-
-                  <div className="guide-resource-item">
-                    <span className="guide-resource-check">
-                      ✓
-                    </span>
-
-                    <span>
-                      Lorem ipsum dolor
-                    </span>
-                  </div>
-
+                  {[
+                    "First step heading",
+                    "Second step heading",
+                    "Third step heading",
+                  ].map((item, index) => (
+                    <div className="guide-resource-item" key={index}>
+                      <span className="guide-resource-check">✓</span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
                 </div>
-
               </section>
 
-              {/* ======================================================
-                  SECTION 3
-                  ====================================================== */}
+              {/* NUMBERED BODY */}
+              <section>
+                
 
-              <section className="guide-section">
+                {[
+                  {
+                    title: "First step heading",
+                    text: "Start with clear payment terms before the work begins. Put the amount, due date and payment method in writing so there is no ambiguity later."
+                  },
+                  {
+                    title: "Second step heading",
+                    text: "Make the next action easy. Send the invoice promptly, keep the payment instructions visible and follow up before a late payment becomes a problem."
+                  },
+                  {
+                    title: "Third step heading",
+                    text: "Follow a simple reminder rhythm. Keep every follow-up short, polite and consistent so getting paid becomes a process instead of a confrontation."
+                  }
+                ].map((step, index) => (
+                  <article className="guide-step" key={index}>
+                    <div className="guide-step-number">
+                      {index + 1}
+                    </div>
 
-                <h2 className="guide-section-title">
-                  Lorem ipsum
-                </h2>
+                    <div className="guide-step-content">
+                      <h2 className="guide-step-title">
+                        {step.title}
+                      </h2>
 
-                <p className="guide-section-text">
-                  dolor sit amet consectetur adipiscing elit. Quisque
-                  faucibus ex sapien vitae pellentesque sem placerat. In id
-                  cursus mi pretium tellus duis convallis. Tempus leo eu
-                  aenean sed diam urna tempor. Pulvinar vivamus fringilla
-                  lacus nec metus bibendum egestas. Iaculis massa nisl
-                  malesuada lacinia integer nunc posuere. Ut hendrerit
-                  semper vel class aptent taciti sociosqu. Ad litora
-                  torquent per conubia nostra inceptos himenaeos.
+                      <p className="guide-step-text">
+                        {step.text}
+                      </p>
+
+                      <div className="guide-step-lines" aria-hidden="true">
+                        <span />
+                        <span />
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </section>
+
+              {/* CALLOUT */}
+              <aside className="guide-callout">
+                <h3 className="guide-callout-title">
+                  Worth knowing
+                </h3>
+
+                <p className="guide-callout-text">
+                  Optional callout for a tip, stat, or “the mistake most people
+                  make”. Breaks up the page and gives the reader one useful
+                  takeaway.
+                </p>
+              </aside>
+
+              {/* PRODUCT TIE-IN */}
+              <section>
+              
+
+                <div className="guide-article-cta">
+                  <h2 className="guide-article-cta-title">
+                    DataCircles chases payments for you.
+                  </h2>
+
+                  <p className="guide-article-cta-text">
+                    Send an invoice, and automatic reminders do the follow-up
+                    so you don't have to. Everything in one place, from lead
+                    to paid.
+                  </p>
+
+                  <button type="button" className="guide-article-cta-button">
+                    Start free
+                  </button>
+                </div>
+              </section>
+
+              {/* CLOSE */}
+              <section className="guide-close">
+               
+
+                <p className="guide-close-text">
+                  Clear terms, timely invoices and consistent reminders make
+                  payment easier for everyone. The goal is a process your
+                  business can repeat without chasing every rupee manually.
                 </p>
 
+                <div className="guide-copy-lines" aria-hidden="true">
+                  <span className="guide-copy-line" />
+                  <span className="guide-copy-line" />
+                </div>
               </section>
 
-              {/* ======================================================
-                  SECTION 4
-                  ====================================================== */}
-
-              <section className="guide-section">
-
-                <h2 className="guide-section-title">
-                  Lorem ipsum
-                </h2>
-
-                <p className="guide-section-text">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit.
-                  Quisque faucibus ex sapien vitae pellentesque sem
-                  placerat. In id cursus mi pretium tellus duis convallis.
-                  Tempus leo eu aenean sed diam urna tempor. Pulvinar
-                  vivamus fringilla lacus nec metus bibendum egestas.
-                  Iaculis massa nisl malesuada lacinia integer nunc
-                  posuere. Ut hendrerit semper vel class aptent taciti
-                  sociosqu. Ad litora torquent per conubia nostra
-                  inceptos himenaeos.
-                </p>
-
-              </section>
-
-              {/* ======================================================
-                  ARTICLE CTA
-                  ====================================================== */}
-
-              <section className="guide-article-cta">
-
-                <h2 className="guide-article-cta-title">
-                  DataCircles chases payments for you.
-                </h2>
-
-                <p className="guide-article-cta-text">
-                  Send an invoice, and automatic reminders do the follow-up
-                  so you don't have to. Everything in one place, from lead
-                  to paid.
-                </p>
-
-                <button
-                  type="button"
-                  className="guide-article-cta-button"
-                >
-                  Start Free
-                </button>
-
-              </section>
-
-              {/* ======================================================
-                  ARTICLE ACTIONS
-                  ====================================================== */}
-
+              {/* ACTIONS */}
               <div className="guide-actions">
-
-                <button
-                  type="button"
-                  className="guide-action"
-                >
+                <button type="button" className="guide-action">
                   ↓ Download PDF
                 </button>
 
-                <button
-                  type="button"
-                  className="guide-action"
-                >
-                  ♧ Share
+                <button type="button" className="guide-action">
+                  Share
                 </button>
 
-                <button
-                  type="button"
-                  className="guide-action"
-                >
-                  ♧ Set Alert
+                <button type="button" className="guide-action">
+                  Set Alert
                 </button>
-
               </div>
 
             </div>
-
           </main>
 
-          {/* ==========================================================
-              MORE READS
-              ========================================================== */}
-
+          {/* MORE READS */}
           <section className="guide-more">
-
             <h2 className="guide-more-title">
               More Reads
             </h2>
 
             <div className="guide-more-track">
-
               {moreReads.map((post, index) => (
-
-                <article
-                  className="guide-more-card"
-                  key={index}
-                >
-
-                  {/* ==================================================
-                      IMAGE SLOT 2 / 3 / 4
-                      ================================================== */}
-
+                <article className="guide-more-card" key={index}>
                   <div className="guide-more-image">
-
                     {post.image ? (
-                      <img
-                        src={post.image}
-                        alt=""
-                      />
+                      <img src={post.image} alt="" />
                     ) : null}
-
                   </div>
 
                   <div className="guide-more-tags">
@@ -1799,46 +1316,36 @@ export default function HowToGuide() {
                     getting paid on time, written for the people actually
                     running Indian businesses.
                   </p>
-
                 </article>
-
               ))}
-
             </div>
 
-            {/* ========================================================
-                MORE READ ARROWS
-                ======================================================== */}
-
             <div className="guide-more-arrows">
-
-              <button
-                type="button"
-                className="guide-more-arrow"
-              >
+              <button type="button" className="guide-more-arrow">
                 ←
               </button>
 
-              <button
-                type="button"
-                className="guide-more-arrow"
-              >
+              <button type="button" className="guide-more-arrow">
                 →
               </button>
-
             </div>
-
           </section>
 
-          {/* ==========================================================
-              PUT THIS INTO PRACTICE
-              ========================================================== */}
-
+          {/* PUT THIS INTO PRACTICE */}
           <section className="guide-practice">
-
-            <p className="guide-practice-label">
-              One Dashboard
-            </p>
+            
+ <p
+          className="
+            m-0
+            text-[13px]
+            font-bold
+            uppercase
+            tracking-[.4px]
+            text-white
+          "
+        >
+          One Dashboard
+        </p>
 
             <h2 className="guide-practice-title">
               Put this into Practice
@@ -1850,26 +1357,14 @@ export default function HowToGuide() {
             </p>
 
             <div className="guide-practice-buttons">
-
-              <button
-                type="button"
-                className="guide-practice-button primary"
-              >
+              <button type="button" className="guide-practice-button primary">
                 Create Account
               </button>
 
-              <button
-                type="button"
-                className="guide-practice-button secondary"
-              >
+              <button type="button" className="guide-practice-button secondary">
                 Book a Demo
               </button>
-
             </div>
-
-            {/* ========================================================
-                THREE IMAGE LAYERED SLIDER
-                ======================================================== */}
 
             <div className="guide-practice-carousel">
 
@@ -1883,10 +1378,7 @@ export default function HowToGuide() {
                 }`}
               >
                 {PRACTICE_IMAGE_1 ? (
-                  <img
-                    src={PRACTICE_IMAGE_1}
-                    alt=""
-                  />
+                  <img src={PRACTICE_IMAGE_1} alt="" />
                 ) : (
                   <div className="guide-practice-slide-empty" />
                 )}
@@ -1902,10 +1394,7 @@ export default function HowToGuide() {
                 }`}
               >
                 {PRACTICE_IMAGE_2 ? (
-                  <img
-                    src={PRACTICE_IMAGE_2}
-                    alt=""
-                  />
+                  <img src={PRACTICE_IMAGE_2} alt="" />
                 ) : (
                   <div className="guide-practice-slide-empty" />
                 )}
@@ -1921,10 +1410,7 @@ export default function HowToGuide() {
                 }`}
               >
                 {PRACTICE_IMAGE_3 ? (
-                  <img
-                    src={PRACTICE_IMAGE_3}
-                    alt=""
-                  />
+                  <img src={PRACTICE_IMAGE_3} alt="" />
                 ) : (
                   <div className="guide-practice-slide-empty" />
                 )}
@@ -1932,14 +1418,13 @@ export default function HowToGuide() {
 
             </div>
 
-            
-
            
+
+            
 
           </section>
 
         </div>
-
       </div>
     </>
   );

@@ -13,6 +13,11 @@ import FreeTools from "./pages/FreeTools";
 import CustomerStories from "./pages/CustomerStories";
 import SubDetails from "./pages/SubDetails";
 import CreateInvoice from "./components/invoice/CreateInvoice";
+import ToolsMain from "./pages/ToolsMain";
+import ChecklistExplainer from "./pages/ChecklistExplainer";
+import Comparison from "./pages/Comparison";
+import CRMAudience from "./pages/CRMAudience";
+
 function App() {
   return (
     <Routes>
@@ -29,6 +34,10 @@ function App() {
       <Route path="/customer-stories" element={<CustomerStories />} />
       <Route path="/sub-details" element={<SubDetails />} />
         <Route path="/invoice-preview" element={<CreateInvoice />} />
+        <Route path="/toolsmain" element={<ToolsMain />} />
+        <Route path="/checklist" element={<ChecklistExplainer />} />
+        <Route path="/comparison" element={<Comparison />} />
+        <Route path="/crm-for-audience" element={<CRMAudience/>} />
 
     </Routes>
   );

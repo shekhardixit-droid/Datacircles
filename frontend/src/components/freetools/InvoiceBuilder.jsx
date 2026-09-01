@@ -29,6 +29,12 @@ const currency = (n) =>
     maximumFractionDigits: 2,
   })}`;
 
+const num = (n) =>
+  (Number.isFinite(n) ? n : 0).toLocaleString("en-IN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
 /* ============================================================= */
 /* PRINT STYLES                                                   */
 /* Only elements marked .invoice-paper survive @media print.      */
@@ -156,27 +162,47 @@ const InvoiceBuilder = () => {
   const [selectedAction, setSelectedAction] = useState(null);
 
   const [formData, setFormData] = useState({
+    // Seller
     businessName: "",
     businessLogo: "",
     businessAddress: "",
     businessGSTIN: "",
+    businessPAN: "",
+    businessWebsite: "",
     businessContact: "",
     businessPhone: "",
     businessMail: "",
+
+    // Buyer
     clientName: "",
+    clientCompany: "",
+    clientGSTIN: "",
     email: "",
     clientAddress: "",
     clientPhone: "",
     shippingAddress: "",
+    dispatchFrom: "",
+
+    // Invoice meta
     invoiceNumber: "",
+    placeOfSupply: "",
+    manufacturingSheet: "",
     dueDate: "",
     customerNumber: "",
     orderNumber: "",
+
+    // Footer
     notes: "",
     signedBy: "",
     signatureImage: "",
     taxRate: "0",
+
+    // Payment
     upiId: "",
+    bankName: "",
+    bankAccount: "",
+    ifscCode: "",
+    branch: "",
   });
 
   // Holds the human-readable file name for any uploaded image so the
@@ -188,7 +214,7 @@ const InvoiceBuilder = () => {
   });
 
   const [items, setItems] = useState([
-    { item: "", description: "", rate: "", quantity: 1 },
+    { item: "", description: "", hsn: "", unit: "NOS", rate: "", quantity: 1 },
   ]);
 
   const steps = [
@@ -217,6 +243,24 @@ const InvoiceBuilder = () => {
   const taxRateValue = parseFloat(formData.taxRate) || 0;
   const taxAmount = (subtotal * taxRateValue) / 100;
   const total = subtotal + taxAmount;
+
+  // CGST + SGST are always an even split of the overall tax rate,
+  // matching the "2.5% + 2.5% = 5%" style used on the reference invoice.
+  const halfTaxRate = taxRateValue / 2;
+  const cgstAmount = taxAmount / 2;
+  const sgstAmount = taxAmount / 2;
+
+  // Group items by HSN/SAC so the Tax Summary table can show one row
+  // per HSN code, the same way the reference invoice does.
+  const hsnSummary = useMemo(() => {
+    const groups = {};
+    computedItems.forEach((it) => {
+      const key = it.hsn?.trim() || "—";
+      if (!groups[key]) groups[key] = { hsn: key, taxableValue: 0 };
+      groups[key].taxableValue += it.amountValue;
+    });
+    return Object.values(groups);
+  }, [computedItems]);
 
   /* ---- handlers ---- */
 
@@ -256,7 +300,10 @@ const InvoiceBuilder = () => {
   };
 
   const addItem = () => {
-    setItems((prev) => [...prev, { item: "", description: "", rate: "", quantity: 1 }]);
+    setItems((prev) => [
+      ...prev,
+      { item: "", description: "", hsn: "", unit: "NOS", rate: "", quantity: 1 },
+    ]);
   };
 
   const handleNext = () => currentStep < 3 && setCurrentStep((p) => p + 1);
@@ -270,6 +317,8 @@ const InvoiceBuilder = () => {
         items: items.map((item) => ({
           item: item.item,
           description: item.description,
+          hsn: item.hsn,
+          unit: item.unit,
           rate: parseFloat(String(item.rate).replace(/[^0-9.]/g, "")) || 0,
           quantity: parseFloat(item.quantity) || 1,
         })),
@@ -698,6 +747,10 @@ const InvoiceBuilder = () => {
             selectedLayout={selectedLayout}
             subtotal={subtotal}
             taxAmount={taxAmount}
+            cgstAmount={cgstAmount}
+            sgstAmount={sgstAmount}
+            halfTaxRate={halfTaxRate}
+            hsnSummary={hsnSummary}
             total={total}
           />
         </div>
@@ -774,7 +827,7 @@ const WriteContent = ({
           />
         </div>
 
-        {/* Address / GSTIN / Contact / UPI - 2 x 2 */}
+        {/* Address / GSTIN / PAN / Website / Contact / UPI */}
         <div
           style={{
             marginTop: 12,
@@ -784,7 +837,7 @@ const WriteContent = ({
           }}
         >
           <Field
-            label="Address"
+            label="Registered Address"
             placeholder="Enter business address"
             value={formData.businessAddress}
             onChange={(v) => handleChange("businessAddress", v)}
@@ -795,6 +848,20 @@ const WriteContent = ({
             placeholder="Enter GSTIN"
             value={formData.businessGSTIN || ""}
             onChange={(v) => handleChange("businessGSTIN", v)}
+          />
+
+          <Field
+            label="PAN"
+            placeholder="Enter PAN"
+            value={formData.businessPAN || ""}
+            onChange={(v) => handleChange("businessPAN", v)}
+          />
+
+          <Field
+            label="Website"
+            placeholder="www.example.com"
+            value={formData.businessWebsite || ""}
+            onChange={(v) => handleChange("businessWebsite", v)}
           />
 
           <div>
@@ -879,15 +946,30 @@ const WriteContent = ({
         <SectionTitle>BILL TO</SectionTitle>
         <div className="sm-grid-2" style={{ marginTop: 12, display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
           <Field label="Client Name" placeholder="Enter Client Name" value={formData.clientName} onChange={(v) => handleChange("clientName", v)} />
+          <Field label="Client Company" placeholder="Enter Company Name" value={formData.clientCompany} onChange={(v) => handleChange("clientCompany", v)} />
+          <Field label="Client GSTIN" placeholder="Enter Client GSTIN" value={formData.clientGSTIN} onChange={(v) => handleChange("clientGSTIN", v)} />
           <Field label="Email" placeholder="email@company.com" value={formData.email} onChange={(v) => handleChange("email", v)} />
-          <Field label="Client Address" placeholder="Enter Client Address" value={formData.clientAddress} onChange={(v) => handleChange("clientAddress", v)} />
+          <Field label="Billing Address" placeholder="Enter Client Address" value={formData.clientAddress} onChange={(v) => handleChange("clientAddress", v)} />
           <Field label="Phone" placeholder="+91 123456789" value={formData.clientPhone} onChange={(v) => handleChange("clientPhone", v)} />
           <Field label="Shipping Address" placeholder="Enter Shipping Address" value={formData.shippingAddress} onChange={(v) => handleChange("shippingAddress", v)} />
+          <Field label="Dispatch From" placeholder="Enter Dispatch Address" value={formData.dispatchFrom} onChange={(v) => handleChange("dispatchFrom", v)} />
           <Field
             label={<>Invoice No. <span style={{ color: "#ef4444" }}>*</span></>}
-            placeholder="INV-2026-14"
+            placeholder="CC/PI/26-27/42"
             value={formData.invoiceNumber}
             onChange={(v) => handleChange("invoiceNumber", v)}
+          />
+          <Field
+            label="Place of Supply"
+            placeholder="27-MAHARASHTRA"
+            value={formData.placeOfSupply}
+            onChange={(v) => handleChange("placeOfSupply", v)}
+          />
+          <Field
+            label="Manufacturing Sheet"
+            placeholder="CC/MS/26-27/140"
+            value={formData.manufacturingSheet}
+            onChange={(v) => handleChange("manufacturingSheet", v)}
           />
           <Field
             label="Customer Number"
@@ -941,11 +1023,11 @@ const WriteContent = ({
         <SectionTitle>Invoice Items</SectionTitle>
 
         <div style={{ marginTop: 8, overflowX: "auto", borderRadius: 8, border: "1px solid #DDE1E5" }}>
-          <div style={{ minWidth: 640 }}>
+          <div style={{ minWidth: 780 }}>
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "2fr 1.5fr 0.8fr 0.6fr 0.9fr 32px",
+                gridTemplateColumns: "1.6fr 1.3fr 0.8fr 0.6fr 0.7fr 0.6fr 0.9fr 32px",
                 alignItems: "center",
                 height: 40,
                 background: "#F4F6F8",
@@ -954,8 +1036,10 @@ const WriteContent = ({
             >
               <TableHeader>Item</TableHeader>
               <TableHeader>Description</TableHeader>
+              <TableHeader>HSN/SAC</TableHeader>
               <TableHeader>Rate</TableHeader>
               <TableHeader>Qty</TableHeader>
+              <TableHeader>Per</TableHeader>
               <TableHeader>Amount</TableHeader>
               <span />
             </div>
@@ -965,7 +1049,7 @@ const WriteContent = ({
                 key={index}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "2fr 1.5fr 0.8fr 0.6fr 0.9fr 32px",
+                  gridTemplateColumns: "1.6fr 1.3fr 0.8fr 0.6fr 0.7fr 0.6fr 0.9fr 32px",
                   alignItems: "center",
                   gap: 8,
                   minHeight: 58,
@@ -982,6 +1066,11 @@ const WriteContent = ({
                   value={item.description}
                   onChange={(v) => handleItemChange(index, "description", v)}
                   placeholder="Description"
+                />
+                <TextInput
+                  value={item.hsn}
+                  onChange={(v) => handleItemChange(index, "hsn", v)}
+                  placeholder="HSN/SAC"
                 />
                 <TextInput
                   value={item.rate}
@@ -1005,6 +1094,11 @@ const WriteContent = ({
                     outline: "none",
                     ...font,
                   }}
+                />
+                <TextInput
+                  value={item.unit}
+                  onChange={(v) => handleItemChange(index, "unit", v)}
+                  placeholder="NOS"
                 />
                 <span style={{ whiteSpace: "nowrap", fontSize: 13, fontWeight: 500, color: "#111827" }}>
                   {currency(item.amountValue)}
@@ -1058,13 +1152,13 @@ const WriteContent = ({
 
         {/* TOTALS */}
         <div style={{ marginTop: 16, display: "flex", justifyContent: "flex-end" }}>
-          <div style={{ width: "100%", maxWidth: 240, borderRadius: 8, border: "1px solid #E5E5E5", background: "#FAFBFC", padding: 12 }}>
+          <div style={{ width: "100%", maxWidth: 260, borderRadius: 8, border: "1px solid #E5E5E5", background: "#FAFBFC", padding: 12 }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "4px 0" }}>
-              <span style={{ fontSize: 12, color: "#78788D" }}>Subtotal</span>
+              <span style={{ fontSize: 12, color: "#78788D" }}>Taxable Amount</span>
               <span style={{ fontSize: 12, color: "#000" }}>{currency(subtotal)}</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "4px 0" }}>
-              <span style={{ fontSize: 12, color: "#78788D" }}>Tax %</span>
+              <span style={{ fontSize: 12, color: "#78788D" }}>Total Tax % (CGST+SGST)</span>
               <input
                 type="number"
                 min="0"
@@ -1084,8 +1178,12 @@ const WriteContent = ({
               />
             </div>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "4px 0" }}>
-              <span style={{ fontSize: 12, color: "#78788D" }}>Tax Amount</span>
-              <span style={{ fontSize: 12, color: "#000" }}>{currency(taxAmount)}</span>
+              <span style={{ fontSize: 12, color: "#78788D" }}>CGST {(parseFloat(formData.taxRate) || 0) / 2}%</span>
+              <span style={{ fontSize: 12, color: "#000" }}>{currency(taxAmount / 2)}</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "4px 0" }}>
+              <span style={{ fontSize: 12, color: "#78788D" }}>SGST {(parseFloat(formData.taxRate) || 0) / 2}%</span>
+              <span style={{ fontSize: 12, color: "#000" }}>{currency(taxAmount / 2)}</span>
             </div>
             <div
               style={{
@@ -1101,6 +1199,20 @@ const WriteContent = ({
               <span style={{ fontSize: 13, fontWeight: 600, color: "#0085FF" }}>{currency(total)}</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* PAYMENT DETAILS */}
+      <div style={{ padding: "18px 12px 0" }}>
+        <SectionTitle>PAYMENT DETAILS</SectionTitle>
+        <div
+          className="sm-grid-2"
+          style={{ marginTop: 12, display: "grid", gridTemplateColumns: "1fr", gap: 12 }}
+        >
+          <Field label="Bank Name" placeholder="e.g. HDFC Bank Ltd" value={formData.bankName} onChange={(v) => handleChange("bankName", v)} />
+          <Field label="Account Number" placeholder="Enter account number" value={formData.bankAccount} onChange={(v) => handleChange("bankAccount", v)} />
+          <Field label="IFSC Code" placeholder="Enter IFSC code" value={formData.ifscCode} onChange={(v) => handleChange("ifscCode", v)} />
+          <Field label="Branch" placeholder="Enter branch" value={formData.branch} onChange={(v) => handleChange("branch", v)} />
         </div>
       </div>
 
@@ -1416,20 +1528,12 @@ export const InvoicePreview = ({
   selectedLayout,
   subtotal,
   taxAmount,
+  cgstAmount,
+  sgstAmount,
+  halfTaxRate,
+  hsnSummary,
   total,
 }) => {
-  /*
-   * The invoice data below intentionally uses ONLY fields that already
-   * exist in the current InvoiceBuilder form:
-   *
-   * businessName, businessLogo, businessAddress, businessGSTIN, businessContact,
-   * clientName, email, clientAddress, clientPhone, shippingAddress,
-   * invoiceNumber, dueDate, notes, signedBy, taxRate, upiId,
-   * items, subtotal, taxAmount, total.
-   *
-   * No new form fields are required for this template.
-   */
-
   const previewColor =
     selectedColor === "rainbow" ? "#0085FF" : selectedColor;
 
@@ -1438,7 +1542,10 @@ export const InvoicePreview = ({
   const lightBorder = "#D1D5DB";
 
   const taxRateValue = parseFloat(formData.taxRate) || 0;
-  const halfTaxRate = taxRateValue / 2;
+  const half = Number.isFinite(halfTaxRate) ? halfTaxRate : taxRateValue / 2;
+  const cgst = Number.isFinite(cgstAmount) ? cgstAmount : taxAmount / 2;
+  const sgst = Number.isFinite(sgstAmount) ? sgstAmount : taxAmount / 2;
+  const summary = hsnSummary && hsnSummary.length ? hsnSummary : [];
 
   const paperBorder =
     selectedLayout === "Side Accent"
@@ -1531,12 +1638,15 @@ export const InvoicePreview = ({
 
           <div
             style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
               border: `1px solid ${borderColor}`,
               borderBottom: "none",
-              textAlign: "center",
               padding: "9px 12px",
             }}
           >
+            <span style={{ fontSize: 8, color: muted, visibility: "hidden" }}>spacer</span>
             <h1
               style={{
                 margin: 0,
@@ -1544,17 +1654,20 @@ export const InvoicePreview = ({
                 fontWeight: 700,
                 letterSpacing: 2,
                 color: previewColor,
+                textAlign: "center",
+                flex: 1,
               }}
             >
-              PRO FORMA INVOICE
+              PROFORMA INVOICE
             </h1>
 
             <p
               style={{
-                margin: "3px 0 0",
+                margin: 0,
                 fontSize: 9,
                 color: muted,
                 textTransform: "uppercase",
+                whiteSpace: "nowrap",
               }}
             >
               ORIGINAL FOR RECIPIENT
@@ -1644,22 +1757,31 @@ export const InvoicePreview = ({
                       color: muted,
                     }}
                   >
-                    <p style={{ margin: 0, whiteSpace: "pre-line" }}>
-                      <strong style={{ color: "#111827" }}>Address:</strong>{" "}
-                      {formData.businessAddress || "Business address"}
-                    </p>
-                    <p style={{ margin: "3px 0 0" }}>
+                    <p style={{ margin: 0 }}>
                       <strong style={{ color: "#111827" }}>GSTIN:</strong>{" "}
                       {formData.businessGSTIN || "GSTIN"}
                     </p>
+                    <p style={{ margin: "3px 0 0" }}>
+                      <strong style={{ color: "#111827" }}>PAN:</strong>{" "}
+                      {formData.businessPAN || "PAN"}
+                    </p>
                     <p style={{ margin: "3px 0 0", whiteSpace: "pre-line" }}>
-                      <strong style={{ color: "#111827" }}>Phone:</strong>{" "}
+                      {formData.businessAddress || "Registered office address"}
+                    </p>
+                    <p style={{ margin: "3px 0 0" }}>
+                      <strong style={{ color: "#111827" }}>Mobile:</strong>{" "}
                       {formData.businessPhone || "Phone number"}
                     </p>
                     <p style={{ margin: "3px 0 0" }}>
-                      <strong style={{ color: "#111827" }}>Mail:</strong>{" "}
+                      <strong style={{ color: "#111827" }}>Email:</strong>{" "}
                       {formData.businessMail || "Email address"}
                     </p>
+                    {formData.businessWebsite && (
+                      <p style={{ margin: "3px 0 0" }}>
+                        <strong style={{ color: "#111827" }}>Website:</strong>{" "}
+                        {formData.businessWebsite}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1667,19 +1789,42 @@ export const InvoicePreview = ({
 
             {/* Invoice metadata */}
             <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+                <InvoiceInfoRow
+                  label="Pro Forma Invoice #"
+                  value={formData.invoiceNumber || "INV-2026-14"}
+                  borderRight
+                />
+                <InvoiceInfoRow
+                  label="Proforma Invoice Date"
+                  value={formatInvoiceDate(new Date())}
+                />
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+                <InvoiceInfoRow
+                  label="Place of Supply"
+                  value={formData.placeOfSupply || "State - MAHARASHTRA"}
+                  borderRight
+                />
+                <InvoiceInfoRow
+                  label="Due Date"
+                  value={formData.dueDate || "DD/MM/YYYY"}
+                />
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+                <InvoiceInfoRow
+                  label="Manufacturing Sheet"
+                  value={formData.manufacturingSheet || "—"}
+                  borderRight
+                />
+                <InvoiceInfoRow
+                  label="Order Number"
+                  value={formData.orderNumber || "—"}
+                />
+              </div>
               <InvoiceInfoRow
-                label="Pro Forma Invoice #"
-                value={formData.invoiceNumber || "INV-2026-14"}
-              />
-
-              <InvoiceInfoRow
-                label="Proforma Invoice Date"
-                value={formatInvoiceDate(new Date())}
-              />
-
-              <InvoiceInfoRow
-                label="Due Date"
-                value={formData.dueDate || "DD/MM/YYYY"}
+                label="Customer Number"
+                value={formData.customerNumber || "—"}
                 last
               />
             </div>
@@ -1725,27 +1870,15 @@ export const InvoicePreview = ({
                 {formData.clientName || "Client Name"}
               </p>
 
-              {formData.email && (
-                <p
-                  style={{
-                    margin: "4px 0 0",
-                    fontSize: 10,
-                    color: muted,
-                  }}
-                >
-                  Email: {formData.email}
+              {formData.clientCompany && (
+                <p style={{ margin: "2px 0 0", fontSize: 11, fontWeight: 700 }}>
+                  {formData.clientCompany}
                 </p>
               )}
 
-              {formData.clientPhone && (
-                <p
-                  style={{
-                    margin: "3px 0 0",
-                    fontSize: 10,
-                    color: muted,
-                  }}
-                >
-                  Ph: {formData.clientPhone}
+              {formData.clientGSTIN && (
+                <p style={{ margin: "3px 0 0", fontSize: 10, color: muted }}>
+                  GSTIN: {formData.clientGSTIN}
                 </p>
               )}
 
@@ -1770,9 +1903,21 @@ export const InvoicePreview = ({
               >
                 {formData.clientAddress || "Client address"}
               </p>
+
+              {formData.clientPhone && (
+                <p
+                  style={{
+                    margin: "6px 0 0",
+                    fontSize: 10,
+                    color: muted,
+                  }}
+                >
+                  Ph: {formData.clientPhone}
+                </p>
+              )}
             </div>
 
-            {/* Shipping / business details available in existing form */}
+            {/* Shipping */}
             <div
               style={{
                 padding: 14,
@@ -1786,45 +1931,29 @@ export const InvoicePreview = ({
                   fontWeight: 700,
                 }}
               >
-                Invoice Details:
+                Shipping Address:
               </h3>
 
               <p
                 style={{
                   margin: 0,
+                  whiteSpace: "pre-line",
                   fontSize: 10,
                   lineHeight: "15px",
                   color: muted,
                 }}
               >
-                Customer Number:{" "}
-                <strong style={{ color: "#111827" }}>
-                  {formData.customerNumber || "Customer number"}
-                </strong>
+                {formData.shippingAddress || "Shipping address"}
               </p>
 
               <p
                 style={{
-                  margin: "5px 0 0",
-                  fontSize: 10,
-                  lineHeight: "15px",
-                  color: muted,
-                }}
-              >
-                Order Number:{" "}
-                <strong style={{ color: "#111827" }}>
-                  {formData.orderNumber || "Order number"}
-                </strong>
-              </p>
-
-              <p
-                style={{
-                  margin: "12px 0 0",
+                  margin: "10px 0 0",
                   fontSize: 10,
                   fontWeight: 600,
                 }}
               >
-                Shipping Address:
+                Dispatch From:
               </p>
 
               <p
@@ -1836,7 +1965,7 @@ export const InvoicePreview = ({
                   color: muted,
                 }}
               >
-                {formData.shippingAddress || "Shipping address"}
+                {formData.dispatchFrom || "Dispatch address"}
               </p>
             </div>
           </div>
@@ -1860,7 +1989,7 @@ export const InvoicePreview = ({
                 <tr style={{ background: "#F8FAFC" }}>
                   <th
                     style={{
-                      width: 35,
+                      width: 26,
                       borderBottom: `1px solid ${borderColor}`,
                       borderRight: `1px solid ${borderColor}`,
                       padding: "8px 6px",
@@ -1885,20 +2014,33 @@ export const InvoicePreview = ({
 
                   <th
                     style={{
-                      width: 105,
+                      width: 62,
                       borderBottom: `1px solid ${borderColor}`,
                       borderRight: `1px solid ${borderColor}`,
                       padding: "8px 6px",
-                      textAlign: "right",
+                      textAlign: "center",
                       fontSize: 9,
                     }}
                   >
-                    Rate / Item
+                    HSN/SAC
                   </th>
 
                   <th
                     style={{
-                      width: 60,
+                      width: 38,
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: "8px 6px",
+                      textAlign: "center",
+                      fontSize: 9,
+                    }}
+                  >
+                    Tax
+                  </th>
+
+                  <th
+                    style={{
+                      width: 55,
                       borderBottom: `1px solid ${borderColor}`,
                       borderRight: `1px solid ${borderColor}`,
                       padding: "8px 6px",
@@ -1911,7 +2053,33 @@ export const InvoicePreview = ({
 
                   <th
                     style={{
-                      width: 115,
+                      width: 90,
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: "8px 6px",
+                      textAlign: "right",
+                      fontSize: 9,
+                    }}
+                  >
+                    Rate / Item
+                  </th>
+
+                  <th
+                    style={{
+                      width: 34,
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: "8px 6px",
+                      textAlign: "center",
+                      fontSize: 9,
+                    }}
+                  >
+                    Per
+                  </th>
+
+                  <th
+                    style={{
+                      width: 95,
                       borderBottom: `1px solid ${borderColor}`,
                       padding: "8px 6px",
                       textAlign: "right",
@@ -1979,6 +2147,45 @@ export const InvoicePreview = ({
                         borderBottom: `1px solid ${borderColor}`,
                         borderRight: `1px solid ${borderColor}`,
                         padding: 8,
+                        textAlign: "center",
+                        fontSize: 10,
+                      }}
+                    >
+                      {item.hsn || "—"}
+                    </td>
+
+                    <td
+                      style={{
+                        verticalAlign: "top",
+                        borderBottom: `1px solid ${borderColor}`,
+                        borderRight: `1px solid ${borderColor}`,
+                        padding: 8,
+                        textAlign: "center",
+                        fontSize: 10,
+                      }}
+                    >
+                      {taxRateValue}%
+                    </td>
+
+                    <td
+                      style={{
+                        verticalAlign: "top",
+                        borderBottom: `1px solid ${borderColor}`,
+                        borderRight: `1px solid ${borderColor}`,
+                        padding: 8,
+                        textAlign: "center",
+                        fontSize: 10,
+                      }}
+                    >
+                      {item.quantity || 1} {item.unit || "NOS"}
+                    </td>
+
+                    <td
+                      style={{
+                        verticalAlign: "top",
+                        borderBottom: `1px solid ${borderColor}`,
+                        borderRight: `1px solid ${borderColor}`,
+                        padding: 8,
                         textAlign: "right",
                         fontSize: 10,
                       }}
@@ -2000,7 +2207,7 @@ export const InvoicePreview = ({
                         fontSize: 10,
                       }}
                     >
-                      {item.quantity || 1}
+                      {item.unit || "NOS"}
                     </td>
 
                     <td
@@ -2022,23 +2229,20 @@ export const InvoicePreview = ({
                 {items.length < 3 && (
                   <tr>
                     <td
-                      colSpan={5}
+                      colSpan={8}
                       style={{
-                        height: 65,
+                        height: 55,
                         borderBottom: `1px solid ${borderColor}`,
                       }}
                     />
                   </tr>
                 )}
-
-                {/* Shipping isn't a separate form field in the original code,
-                    so no invented shipping amount is added here. */}
               </tbody>
 
               <tfoot>
                 <tr>
                   <td
-                    colSpan={4}
+                    colSpan={6}
                     style={{
                       borderBottom: `1px solid ${borderColor}`,
                       borderRight: `1px solid ${borderColor}`,
@@ -2052,6 +2256,7 @@ export const InvoicePreview = ({
                   </td>
 
                   <td
+                    colSpan={2}
                     style={{
                       borderBottom: `1px solid ${borderColor}`,
                       padding: 9,
@@ -2066,7 +2271,7 @@ export const InvoicePreview = ({
 
                 <tr>
                   <td
-                    colSpan={4}
+                    colSpan={6}
                     style={{
                       borderBottom: `1px solid ${borderColor}`,
                       borderRight: `1px solid ${borderColor}`,
@@ -2075,10 +2280,11 @@ export const InvoicePreview = ({
                       fontSize: 10,
                     }}
                   >
-                    Tax {taxRateValue}%
+                    CGST {half}%
                   </td>
 
                   <td
+                    colSpan={2}
                     style={{
                       borderBottom: `1px solid ${borderColor}`,
                       padding: 8,
@@ -2086,13 +2292,40 @@ export const InvoicePreview = ({
                       fontSize: 10,
                     }}
                   >
-                    {currency(taxAmount)}
+                    {currency(cgst)}
                   </td>
                 </tr>
 
                 <tr>
                   <td
-                    colSpan={4}
+                    colSpan={6}
+                    style={{
+                      borderBottom: `1px solid ${borderColor}`,
+                      borderRight: `1px solid ${borderColor}`,
+                      padding: 8,
+                      textAlign: "right",
+                      fontSize: 10,
+                    }}
+                  >
+                    SGST {half}%
+                  </td>
+
+                  <td
+                    colSpan={2}
+                    style={{
+                      borderBottom: `1px solid ${borderColor}`,
+                      padding: 8,
+                      textAlign: "right",
+                      fontSize: 10,
+                    }}
+                  >
+                    {currency(sgst)}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td
+                    colSpan={6}
                     style={{
                       borderBottom: `1px solid ${borderColor}`,
                       borderRight: `1px solid ${borderColor}`,
@@ -2106,6 +2339,7 @@ export const InvoicePreview = ({
                   </td>
 
                   <td
+                    colSpan={2}
                     style={{
                       borderBottom: `1px solid ${borderColor}`,
                       padding: 10,
@@ -2164,17 +2398,6 @@ export const InvoicePreview = ({
               borderBottom: `1px solid ${borderColor}`,
             }}
           >
-            <div
-              style={{
-                padding: "8px 10px",
-                fontWeight: 700,
-                fontSize: 10,
-                borderBottom: `1px solid ${borderColor}`,
-              }}
-            >
-              Tax Summary
-            </div>
-
             <table
               style={{
                 width: "100%",
@@ -2183,70 +2406,88 @@ export const InvoicePreview = ({
             >
               <thead>
                 <tr>
+                  <th style={taxHeaderStyle}>HSN/SAC</th>
                   <th style={taxHeaderStyle}>Taxable Value</th>
-                  <th style={taxHeaderStyle}>Tax Rate</th>
-                  <th style={taxHeaderStyle}>Tax Amount</th>
+                  <th style={{ ...taxHeaderStyle }} colSpan={2}>
+                    Central Tax
+                  </th>
+                  <th style={{ ...taxHeaderStyle }} colSpan={2}>
+                    State/UT Tax
+                  </th>
                   <th style={{ ...taxHeaderStyle, borderRight: "none" }}>Total Tax</th>
+                </tr>
+                <tr>
+                  <th style={taxHeaderStyle}></th>
+                  <th style={taxHeaderStyle}></th>
+                  <th style={taxHeaderStyle}>Rate</th>
+                  <th style={taxHeaderStyle}>Amount</th>
+                  <th style={taxHeaderStyle}>Rate</th>
+                  <th style={taxHeaderStyle}>Amount</th>
+                  <th style={{ ...taxHeaderStyle, borderRight: "none" }}></th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr>
-                  <td style={taxCellStyle}>{currency(subtotal)}</td>
-                  <td style={taxCellStyle}>{taxRateValue}%</td>
-                  <td style={taxCellStyle}>{currency(taxAmount)}</td>
-                  <td
-                    style={{
-                      ...taxCellStyle,
-                      borderRight: "none",
-                      fontWeight: 700,
-                    }}
-                  >
-                    {currency(taxAmount)}
-                  </td>
-                </tr>
+                {summary.map((row) => {
+                  const rowCgst = (row.taxableValue * half) / 100;
+                  const rowSgst = (row.taxableValue * half) / 100;
+                  return (
+                    <tr key={row.hsn}>
+                      <td style={taxCellStyle}>{row.hsn}</td>
+                      <td style={taxCellStyle}>{num(row.taxableValue)}</td>
+                      <td style={taxCellStyle}>{half}%</td>
+                      <td style={taxCellStyle}>{num(rowCgst)}</td>
+                      <td style={taxCellStyle}>{half}%</td>
+                      <td style={taxCellStyle}>{num(rowSgst)}</td>
+                      <td style={{ ...taxCellStyle, borderRight: "none", fontWeight: 700 }}>
+                        {num(rowCgst + rowSgst)}
+                      </td>
+                    </tr>
+                  );
+                })}
 
                 <tr>
                   <td
-                    colSpan={3}
+                    colSpan={2}
                     style={{
                       ...taxCellStyle,
-                      borderBottom: "none",
-                      textAlign: "right",
+                      textAlign: "left",
                       fontWeight: 700,
                     }}
                   >
                     TOTAL
                   </td>
-
+                  <td style={taxCellStyle}></td>
+                  <td style={taxCellStyle}>{num(cgst)}</td>
+                  <td style={taxCellStyle}></td>
+                  <td style={taxCellStyle}>{num(sgst)}</td>
                   <td
                     style={{
                       ...taxCellStyle,
                       borderRight: "none",
-                      borderBottom: "none",
                       fontWeight: 700,
                     }}
                   >
-                    {currency(taxAmount)}
+                    {num(cgst + sgst)}
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          {/* ===================== PAYMENT + SIGNATURE ===================== */}
+          {/* ===================== BANK + PAYMENT + SIGNATURE ===================== */}
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              gridTemplateColumns: "1fr 1fr 1fr",
               borderLeft: `1px solid ${borderColor}`,
               borderRight: `1px solid ${borderColor}`,
               borderBottom: `1px solid ${borderColor}`,
               minHeight: 155,
             }}
           >
-            {/* Payment */}
+            {/* Bank Details */}
             <div
               style={{
                 borderRight: `1px solid ${borderColor}`,
@@ -2260,36 +2501,54 @@ export const InvoicePreview = ({
                   fontWeight: 700,
                 }}
               >
-                Payment Details:
+                Bank Details:
+              </h3>
+
+              <p style={{ margin: 0, fontSize: 9, lineHeight: "15px", color: muted }}>
+                Bank: <strong style={{ color: "#111827" }}>{formData.bankName || "—"}</strong>
+              </p>
+              <p style={{ margin: "3px 0 0", fontSize: 9, lineHeight: "15px", color: muted }}>
+                Account #: <strong style={{ color: "#111827" }}>{formData.bankAccount || "—"}</strong>
+              </p>
+              <p style={{ margin: "3px 0 0", fontSize: 9, lineHeight: "15px", color: muted }}>
+                IFSC Code: <strong style={{ color: "#111827" }}>{formData.ifscCode || "—"}</strong>
+              </p>
+              <p style={{ margin: "3px 0 0", fontSize: 9, lineHeight: "15px", color: muted }}>
+                Branch: <strong style={{ color: "#111827" }}>{formData.branch || "—"}</strong>
+              </p>
+            </div>
+
+            {/* UPI Payment */}
+            <div
+              style={{
+                borderRight: `1px solid ${borderColor}`,
+                padding: 12,
+              }}
+            >
+              <h3
+                style={{
+                  margin: "0 0 10px",
+                  fontSize: 10,
+                  fontWeight: 700,
+                }}
+              >
+                Pay using UPI:
               </h3>
 
               {formData.upiId ? (
-                <>
-                  <p
-                    style={{
-                      margin: 0,
-                      fontSize: 10,
-                    }}
-                  >
-                    <strong>Pay using UPI:</strong>{" "}
-                    {formData.upiId}
-                  </p>
-
-                  <img
-                    src={`https://quickchart.io/qr?size=140&text=${encodeURIComponent(
-                      `upi://pay?pa=${formData.upiId}&pn=${
-                        formData.businessName || "Business"
-                      }&am=${Number(total || 0).toFixed(2)}&cu=INR`
-                    )}`}
-                    alt="UPI payment QR code"
-                    style={{
-                      display: "block",
-                      height: 90,
-                      width: 90,
-                      marginTop: 8,
-                    }}
-                  />
-                </>
+                <img
+                  src={`https://quickchart.io/qr?size=140&text=${encodeURIComponent(
+                    `upi://pay?pa=${formData.upiId}&pn=${
+                      formData.businessName || "Business"
+                    }&am=${Number(total || 0).toFixed(2)}&cu=INR`
+                  )}`}
+                  alt="UPI payment QR code"
+                  style={{
+                    display: "block",
+                    height: 90,
+                    width: 90,
+                  }}
+                />
               ) : (
                 <p
                   style={{
@@ -2298,7 +2557,7 @@ export const InvoicePreview = ({
                     color: muted,
                   }}
                 >
-                  Payment details can be added using the UPI ID field.
+                  Add a UPI ID to show a payment QR code.
                 </p>
               )}
             </div>
@@ -2326,7 +2585,7 @@ export const InvoicePreview = ({
               <div
                 style={{
                   textAlign: "center",
-                  minWidth: 160,
+                  minWidth: 140,
                 }}
               >
                 <div
@@ -2344,7 +2603,7 @@ export const InvoicePreview = ({
                     <img
                       src={formData.signatureImage}
                       alt="Signature"
-                      style={{ maxHeight: 42, maxWidth: 150, objectFit: "contain" }}
+                      style={{ maxHeight: 42, maxWidth: 140, objectFit: "contain" }}
                     />
                   ) : (
                     formData.signedBy ? "Signature" : ""
@@ -2469,10 +2728,11 @@ export const InvoicePreview = ({
    INVOICE PREVIEW HELPERS
    ============================================================= */
 
-const InvoiceInfoRow = ({ label, value, last = false }) => (
+const InvoiceInfoRow = ({ label, value, last = false, borderRight = false }) => (
   <div
     style={{
       borderBottom: last ? "none" : "1px solid #111827",
+      borderRight: borderRight ? "1px solid #111827" : "none",
       padding: "8px 10px",
     }}
   >

@@ -14,18 +14,51 @@ const imgCustomer5 = "";
 const imgCustomer6 = "";
 const imgCustomer7 = "";
 
-/* =========================================================
-   FEATURED / MAIN CUSTOMER STORY IMAGE
-   ========================================================= */
-
 const imgCustomerMain = "";
-
-/* =========================================================
-   USING DATACIRCLES SECTION IMAGE
-   ========================================================= */
-
 const imgUsingDatacircles = "";
 
+/* =========================================================
+   DATA
+   ========================================================= */
+
+const customerStories = [
+  {
+    image: imgCustomer2,
+    name: "[ Business name ]",
+    role: "[ Business type ] · [ City ]",
+    description: '[“One-line pulled quote from this customer.”]',
+  },
+  {
+    image: imgCustomer3,
+    name: "[ Business name ]",
+    role: "[ Business type ] · [ City ]",
+    description: '[“One-line pulled quote from this customer.”]',
+  },
+  {
+    image: imgCustomer4,
+    name: "[ Business name ]",
+    role: "[ Business type ] · [ City ]",
+    description: '[“One-line pulled quote from this customer.”]',
+  },
+  {
+    image: imgCustomer5,
+    name: "[ Business name ]",
+    role: "[ Business type ] · [ City ]",
+    description: '[“One-line pulled quote from this customer.”]',
+  },
+  {
+    image: imgCustomer6,
+    name: "[ Business name ]",
+    role: "[ Business type ] · [ City ]",
+    description: '[“One-line pulled quote from this customer.”]',
+  },
+  {
+    image: imgCustomer7,
+    name: "[ Business name ]",
+    role: "[ Business type ] · [ City ]",
+    description: '[“One-line pulled quote from this customer.”]',
+  },
+];
 
 export default function CustomerStories() {
   return (
@@ -45,16 +78,22 @@ export default function CustomerStories() {
           margin: 0;
           padding: 0;
           background: #ffffff;
-          color: #231014;
+          color: #ffffff;
           font-family: Inter, Arial, Helvetica, sans-serif;
         }
 
-        button {
+        button,
+        input,
+        textarea {
           font-family: inherit;
+        }
+
+        button {
           cursor: pointer;
         }
 
         a {
+          color: inherit;
           text-decoration: none;
         }
 
@@ -64,14 +103,15 @@ export default function CustomerStories() {
 
         .customer-stories-page {
           width: 100%;
-          min-height: 0;
-          background: #ffffff;
+          min-height: 100vh;
           overflow-x: hidden;
+          background: #ffffff;
         }
 
         .customer-stories-canvas {
-          width: 1440px;
-          min-height: 0;
+          width: 100%;
+          max-width: 1680px;
+          min-height: 100vh;
           margin: 0 auto;
           position: relative;
           background: #ffffff;
@@ -82,9 +122,47 @@ export default function CustomerStories() {
            ========================================================= */
 
         .customer-stories-navbar {
-          padding-top: 24px;
+          width: 100%;
+          padding: 32px 32px 0;
           position: relative;
           z-index: 20;
+        }
+
+        /* =========================================================
+           SMALL SECTION LABEL / WIREFRAME MARKER
+           ========================================================= */
+
+        .customer-stories-section-heading {
+          width: 100%;
+          max-width: 1280px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          color: #8a8585;
+          font-size: 12px;
+          line-height: 18px;
+          font-weight: 400;
+        }
+
+        .customer-stories-section-number {
+          width: 20px;
+          height: 20px;
+          flex: none;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 6px;
+          background: #0085ff;
+          color: #ffffff;
+          font-size: 10px;
+          line-height: 1;
+          font-weight: 600;
+        }
+
+        .customer-stories-section-heading strong {
+          color: #242424;
+          font-weight: 500;
         }
 
         /* =========================================================
@@ -92,563 +170,484 @@ export default function CustomerStories() {
            ========================================================= */
 
         .customer-stories-hero {
-          width: 1440px;
-          height: 470px;
-          position: relative;
+          width: 100%;
+          min-height: 420px;
+          padding: 40px 32px 0;
           background: #ffffff;
         }
 
+        .customer-stories-hero-inner {
+          width: 100%;
+          max-width: 1280px;
+          margin: 0 auto;
+        }
+
+        .customer-stories-breadcrumb {
+          margin-bottom: 64px;
+        }
+
         .customer-stories-hero-content {
-          position: absolute;
-          top: 166px;
-          left: 50%;
-          transform: translateX(-50%);
-
-          width: 650px;
-
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
+          width: 100%;
+          max-width: 900px;
+          margin: 0 auto;
           text-align: center;
         }
 
         .customer-stories-label {
-          height: 26px;
-          min-width: 132px;
-
           display: inline-flex;
           align-items: center;
           justify-content: center;
-
-          gap: 7px;
-
-          padding: 0 12px;
-
-          border-radius: 14px;
-
+          gap: 9px;
+          height: 36px;
+          min-width: 168px;
+          padding: 0 18px;
+          margin-bottom: 22px;
+          border-radius: 18px;
           background: rgba(235, 230, 224, 0.24);
-
           color: #635557;
-
-          font-size: 11px;
-          line-height: 17px;
+          font-size: 14px;
+          line-height: 21px;
           font-weight: 400;
-
-          margin-bottom: 28px;
         }
 
         .customer-stories-label-dot {
-          width: 6px;
-          height: 6px;
-
+          width: 8px;
+          height: 8px;
           flex: none;
-
           border-radius: 50%;
-
           background: #0085ff;
         }
 
         .customer-stories-hero-title {
-          width: 650px;
-
+          max-width: 900px;
           margin: 0;
-          padding: 0;
-
-          color: #231014;
-
-          font-size: 51px;
-          line-height: 53px;
-
+          color: #000000;
+          font-size: 56px;
+          line-height: 62px;
           font-weight: 500;
-
-          letter-spacing: -2.7px;
+          letter-spacing: -2.4px;
         }
 
         .customer-stories-hero-description {
-          width: 520px;
-
-          margin: 19px 0 0;
-
+          max-width: 780px;
+          margin: 18px auto 0;
           color: #635557;
-
-          font-size: 13px;
-          line-height: 20px;
-
+          font-size: 16px;
+          line-height: 24px;
           font-weight: 400;
         }
 
         /* =========================================================
-           TESTIMONIAL BACKGROUND
+           FEATURED VIDEO / TESTIMONIAL
            ========================================================= */
 
-        .customer-stories-testimonials-background {
-          position: absolute;
-
-          top: 470px;
-          left: 50%;
-
-          transform: translateX(-50%);
-
-          width: 1920px;
-          height: 1220px;
-
-          pointer-events: none;
-
-          background:
-            linear-gradient(
-              to bottom,
-              #ffffff 0%,
-              #dcefff 27%,
-              #b6ddff 48%,
-              #eaf6ff 70%,
-              #ffffff 100%
-            );
-
-          opacity: 0.78;
+        .customer-stories-featured-section {
+          width: 100%;
+          padding: 0 32px;
+          background: #f5f9f7;
         }
 
-        .customer-stories-testimonials-grid {
-          position: absolute;
-
-          top: 450px;
-          left: 50%;
-
-          transform: translateX(-50%);
-
-          width: 1340px;
-          height: 1150px;
-
-          pointer-events: none;
-
-          opacity: 0.17;
-
-          background-image:
-            linear-gradient(
-              rgba(255, 255, 255, 0.9) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              90deg,
-              rgba(255, 255, 255, 0.9) 1px,
-              transparent 1px
-            );
-
-          background-size: 135px 135px;
-
-          mask-image:
-            linear-gradient(
-              to bottom,
-              #000 0%,
-              #000 70%,
-              transparent 100%
-            );
-
-          -webkit-mask-image:
-            linear-gradient(
-              to bottom,
-              #000 0%,
-              #000 70%,
-              transparent 100%
-            );
-        }
-
-        /* =========================================================
-           MAIN CONTENT
-           ========================================================= */
-
-        .customer-stories-main {
-          position: relative;
-
-          width: 1236px;
-
+        .customer-stories-featured-wrap {
+          width: 100%;
+          max-width: 1280px;
           margin: 0 auto;
-
-          z-index: 5;
+          padding: 28px 0 34px;
         }
 
-        /* =========================================================
-           FEATURED STORY
-           ========================================================= */
+        .customer-stories-featured-heading {
+          margin-bottom: 20px;
+        }
 
         .customer-stories-featured {
-          width: 1236px;
-          height: 454px;
-
+          width: 100%;
+          min-height: 440px;
           display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+          gap: 40px;
+          align-items: stretch;
+        }
 
-          grid-template-columns: 548px 660px;
-
-          column-gap: 28px;
-
-          padding: 0;
-
-          border-radius: 14px;
-
-          background: #ffffff;
-
+        .customer-stories-featured-media {
+          width: 100%;
+          min-height: 440px;
+          position: relative;
           overflow: hidden;
+          border-radius: 16px;
+          background: #d9d9d9;
+        }
+
+        .customer-stories-featured-media img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+        }
+
+        .customer-stories-video-placeholder {
+          width: 100%;
+          height: 100%;
+          min-height: 440px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #d9d9d9;
+        }
+
+        .customer-stories-play {
+          width: 72px;
+          height: 72px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: #ffffff;
+          color: #0085ff;
+          font-size: 24px;
+          padding-left: 4px;
+          box-shadow: 0 10px 26px rgba(35, 16, 20, 0.1);
+        }
+
+        .customer-stories-video-caption {
+          position: absolute;
+          left: 18px;
+          bottom: 16px;
+          color: #ffffff;
+          font-size: 11px;
+          line-height: 16px;
+          font-weight: 400;
         }
 
         .customer-stories-featured-content {
-          width: 548px;
-          height: 454px;
-
+          min-width: 0;
           display: flex;
           flex-direction: column;
-
           justify-content: center;
-
-          padding: 38px 20px 38px 27px;
+          padding: 16px 6px 16px 0;
         }
 
         .customer-stories-featured-label {
           margin: 0 0 22px;
-
           color: #0085ff;
-
-          font-size: 12px;
-          line-height: 17px;
-
+          font-size: 14px;
+          line-height: 20px;
           font-weight: 500;
         }
 
         .customer-stories-featured-quote {
-          width: 500px;
-
+          max-width: 600px;
           margin: 0;
-
           color: #242424;
-
-          font-size: 20px;
-          line-height: 24px;
-
+          font-size: 26px;
+          line-height: 33px;
           font-weight: 500;
-
           letter-spacing: -0.5px;
         }
 
         .customer-stories-featured-description {
-          width: 500px;
-
+          max-width: 580px;
           margin: 18px 0 0;
-
-          color: #48494c;
-
-          font-size: 12px;
-          line-height: 18px;
-
+          color: #707173;
+          font-size: 13px;
+          line-height: 20px;
           font-weight: 400;
         }
-
-        /* =========================================================
-           FEATURED PERSON
-           ========================================================= */
 
         .customer-stories-person {
           display: flex;
           align-items: center;
-
-          gap: 10px;
-
-          margin-top: 20px;
+          gap: 14px;
+          margin-top: 24px;
         }
 
         .customer-stories-avatar {
-          width: 31px;
-          height: 31px;
-
+          width: 44px;
+          height: 44px;
           flex: none;
-
-          border-radius: 50%;
-
-          background: #dddddd;
-
           overflow: hidden;
+          border-radius: 50%;
+          background: #dddddd;
         }
 
         .customer-stories-avatar img {
           width: 100%;
           height: 100%;
-
           display: block;
-
           object-fit: cover;
         }
 
         .customer-stories-person-details {
           display: flex;
           flex-direction: column;
-
           gap: 3px;
         }
 
         .customer-stories-person-name {
           margin: 0;
-
           color: #242424;
-
-          font-size: 11px;
-          line-height: 15px;
-
+          font-size: 14px;
+          line-height: 19px;
           font-weight: 500;
         }
 
         .customer-stories-person-role {
           margin: 0;
-
           color: #635557;
-
-          font-size: 10px;
-          line-height: 14px;
-
+          font-size: 12px;
+          line-height: 17px;
           font-weight: 400;
         }
 
-        /* =========================================================
-           FEATURED MAIN IMAGE
-           ========================================================= */
-
-        .customer-stories-featured-media {
-          width: 660px;
-          height: 454px;
-
-          margin: 0;
-
-          border-radius: 10px;
-
-          background: #d9d9d9;
-
-          overflow: hidden;
-
-          position: relative;
+        .customer-stories-featured-result {
+          width: fit-content;
+          max-width: 100%;
+          margin-top: 20px;
+          padding: 8px 14px;
+          border-radius: 8px;
+          background: rgba(0, 133, 255, 0.08);
+          color: #0085ff;
+          font-size: 12px;
+          line-height: 17px;
+          font-weight: 500;
         }
 
-        .customer-stories-featured-media img {
+        /* =========================================================
+           OTHER STORIES
+           ========================================================= */
+
+        .customer-stories-other {
           width: 100%;
-          height: 100%;
-
-          display: block;
-
-          object-fit: cover;
+          padding: 28px 32px 0;
+          background: #ffffff;
         }
 
-        /* =========================================================
-           STORY GRID
-           ========================================================= */
+        .customer-stories-other-wrap {
+          width: 100%;
+          max-width: 1280px;
+          margin: 0 auto;
+        }
+
+        .customer-stories-other-heading {
+          margin-bottom: 18px;
+        }
 
         .customer-stories-grid {
-          width: 1236px;
-
+          width: 100%;
           display: grid;
-
-          grid-template-columns: 610px 610px;
-
-          column-gap: 16px;
-          row-gap: 16px;
-
-          margin-top: 16px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
         }
 
-        /* =========================================================
-           STORY CARD
-           ========================================================= */
-
         .customer-stories-card {
-          width: 610px;
-          height: 177px;
-
-          padding: 28px 28px 24px;
-
-          border-radius: 10px;
-
-          background: rgba(255, 255, 255, 0.72);
-
+          width: 100%;
+          min-height: 178px;
+          padding: 22px 24px 20px;
+          border: 1px solid #dfe5e2;
+          border-radius: 13px;
+          background: #ffffff;
           display: flex;
           flex-direction: column;
-
           position: relative;
-
           overflow: hidden;
         }
 
         .customer-stories-card-person {
           display: flex;
           align-items: center;
-
-          gap: 10px;
+          gap: 13px;
         }
 
         .customer-stories-card-avatar {
-          width: 31px;
-          height: 31px;
-
+          width: 44px;
+          height: 44px;
           flex: none;
-
-          border-radius: 50%;
-
-          background: #dddddd;
-
           overflow: hidden;
+          border-radius: 50%;
+          background: #edf1ef;
+          border: 1px solid #dce5e1;
         }
 
         .customer-stories-card-avatar img {
           width: 100%;
           height: 100%;
-
           display: block;
-
           object-fit: cover;
         }
 
         .customer-stories-card-person-info {
           display: flex;
           flex-direction: column;
-
           gap: 3px;
         }
 
         .customer-stories-card-name {
           margin: 0;
-
           color: #242424;
-
-          font-size: 11px;
-          line-height: 15px;
-
+          font-size: 14px;
+          line-height: 19px;
           font-weight: 500;
         }
 
         .customer-stories-card-role {
           margin: 0;
-
           color: #635557;
-
-          font-size: 10px;
-          line-height: 14px;
-
+          font-size: 12px;
+          line-height: 17px;
           font-weight: 400;
         }
 
         .customer-stories-card-description {
-          width: 540px;
-
-          margin: 16px 0 0;
-
+          margin: 14px 0 0;
           color: #48494c;
-
-          font-size: 11px;
-          line-height: 16px;
-
+          font-size: 14px;
+          line-height: 21px;
           font-weight: 400;
         }
 
         .customer-stories-card-link {
           margin-top: auto;
-
+          padding-top: 12px;
           color: #0085ff;
-
-          font-size: 11px;
+          font-size: 12px;
           line-height: 17px;
-
           font-weight: 500;
         }
 
         /* =========================================================
-           USING DATACIRCLES SECTION
+           STATS STRIP
            ========================================================= */
 
-        .customer-stories-share {
-          width: 1236px;
-          height: 220px;
-
-          margin-top: 58px;
-
-          border-radius: 12px;
-
+        .customer-stories-stats {
+          width: 100%;
+          margin-top: 28px;
+          padding: 26px 32px;
           background: #f1f9fd;
+        }
 
+        .customer-stories-stats-wrap {
+          width: 100%;
+          max-width: 1020px;
+          margin: 0 auto;
+        }
+
+        .customer-stories-stats-heading {
+          max-width: 1280px;
+          margin: 0 auto 16px;
+        }
+
+        .customer-stories-stats-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .customer-stories-stat {
+          min-height: 112px;
+          padding: 20px 16px;
+          border-radius: 13px;
+          background: #ffffff;
           display: flex;
-
+          flex-direction: column;
           align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
 
-          padding: 32px 38px;
+        .customer-stories-stat-value {
+          margin: 0;
+          color: #0085ff;
+          font-size: 26px;
+          line-height: 31px;
+          font-weight: 600;
+          letter-spacing: -0.7px;
+        }
+
+        .customer-stories-stat-label {
+          max-width: 190px;
+          margin: 6px 0 0;
+          color: #8a8585;
+          font-size: 11px;
+          line-height: 16px;
+          font-weight: 400;
+        }
+
+        /* =========================================================
+           SHARE YOUR STORY
+           ========================================================= */
+
+        .customer-stories-share-section {
+          width: 100%;
+          padding: 26px 32px 30px;
+          background: #ffffff;
+        }
+
+        .customer-stories-share-wrap {
+          width: 100%;
+          max-width: 1280px;
+          margin: 0 auto;
+        }
+
+        .customer-stories-share-heading {
+          margin-bottom: 18px;
+        }
+
+        .customer-stories-share {
+          width: 100%;
+          min-height: 112px;
+          display: flex;
+          align-items: center;
+          gap: 22px;
+          padding: 18px 26px;
+          border-radius: 13px;
+          background: #ffffff;
         }
 
         .customer-stories-share-image {
-          width: 120px;
-          height: 120px;
-
+          width: 58px;
+          height: 58px;
           flex: none;
-
-          border-radius: 8px;
-
-          background: #d9d9d9;
-
           overflow: hidden;
+          border-radius: 10px;
+          background: #eaf5f0;
         }
 
         .customer-stories-share-image img {
           width: 100%;
           height: 100%;
-
           display: block;
-
           object-fit: cover;
         }
 
         .customer-stories-share-content {
-          margin-left: 32px;
-
-          width: 700px;
-
-          display: flex;
-          flex-direction: column;
+          min-width: 0;
+          flex: 1;
         }
 
         .customer-stories-share-title {
           margin: 0;
-
           color: #242424;
-
-          font-size: 22px;
-          line-height: 28px;
-
+          font-size: 17px;
+          line-height: 22px;
           font-weight: 500;
-
-          letter-spacing: -0.7px;
         }
 
         .customer-stories-share-description {
-          width: 610px;
-
-          margin: 13px 0 0;
-
+          margin: 5px 0 0;
           color: #707173;
-
-          font-size: 12px;
-          line-height: 18px;
-
+          font-size: 13px;
+          line-height: 19px;
           font-weight: 400;
         }
 
         .customer-stories-share-button {
-          width: 190px;
-          height: 48px;
-
-          margin-left: auto;
-
+          width: 170px;
+          height: 46px;
+          flex: none;
           border: 0;
-
-          border-radius: 24px;
-
+          border-radius: 23px;
           background: #ffffff;
-
           color: #0085ff;
-
-          font-size: 11px;
-          line-height: 17px;
-
+          font-size: 13px;
+          line-height: 18px;
           font-weight: 500;
         }
 
@@ -657,433 +656,251 @@ export default function CustomerStories() {
            ========================================================= */
 
         .customer-stories-cta {
+          width: 100%;
+          margin: 0;
           position: relative;
-
-          width: 100vw;
-
-          margin-top: 42px;
-          margin-left: calc(50% - 50vw);
-
           z-index: 10;
         }
 
         /* =========================================================
-           RESPONSIVE
+           FOOTER
            ========================================================= */
 
-        /* Desktop/tablet width adaptation only.
-           All original desktop dimensions/content remain unchanged. */
-
-        @media (max-width: 1439px) {
-          .customer-stories-canvas {
-            width: 100%;
-            min-width: 0;
-          }
-
-          .customer-stories-hero {
-            width: 100%;
-          }
-
-          .customer-stories-main {
-            width: calc(100% - 48px);
-            max-width: 1236px;
-          }
-
-          .customer-stories-featured {
-            width: 100%;
-            grid-template-columns:
-              minmax(0, 0.83fr)
-              minmax(0, 1fr);
-          }
-
-          .customer-stories-featured-content,
-          .customer-stories-featured-media {
-            width: 100%;
-            min-width: 0;
-          }
-
-          .customer-stories-featured-quote,
-          .customer-stories-featured-description {
-            width: 100%;
-            max-width: 500px;
-          }
-
-          .customer-stories-grid {
-            width: 100%;
-            grid-template-columns:
-              minmax(0, 1fr)
-              minmax(0, 1fr);
-          }
-
-          .customer-stories-card {
-            width: 100%;
-            min-width: 0;
-          }
-
-          .customer-stories-card-description {
-            width: 100%;
-          }
-
-          .customer-stories-share {
-            width: 100%;
-          }
-
-          .customer-stories-share-content {
-            width: auto;
-            flex: 1;
-            min-width: 0;
-          }
-
-          .customer-stories-share-description {
-            width: 100%;
-          }
+        .customer-stories-footer {
+          width: 100%;
+          min-height: 72px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 18px 32px;
+          background: #f1f4f2;
         }
 
-        /* Tablet */
+        .customer-stories-footer-inner {
+          width: 100%;
+          max-width: 1280px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 26px;
+        }
+
+        .customer-stories-footer-copy,
+        .customer-stories-footer-links {
+          color: #8a8585;
+          font-size: 11px;
+          line-height: 16px;
+          font-weight: 400;
+        }
+
+        .customer-stories-footer-links {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+        }
+
+        /* =========================================================
+           TABLET
+           ========================================================= */
+
         @media (max-width: 900px) {
           .customer-stories-navbar {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding-left: 8px;
-            padding-right: 8px;
-            overflow: hidden;
+            padding-left: 18px;
+            padding-right: 18px;
           }
 
           .customer-stories-hero {
-            height: 430px;
+            min-height: 400px;
+            padding-left: 24px;
+            padding-right: 24px;
           }
 
-          .customer-stories-hero-content {
-            width: calc(100% - 40px);
-            max-width: 700px;
-          }
-
-          .customer-stories-hero-title {
-            width: 100%;
-            max-width: 650px;
-            font-size: 43px;
-            line-height: 47px;
-          }
-
-          .customer-stories-hero-description {
-            width: 100%;
-            max-width: 520px;
+          .customer-stories-featured-section,
+          .customer-stories-other,
+          .customer-stories-share-section {
+            padding-left: 24px;
+            padding-right: 24px;
           }
 
           .customer-stories-featured {
-            height: auto;
             grid-template-columns: 1fr;
-            row-gap: 20px;
-            padding: 16px;
+            gap: 26px;
+          }
+
+          .customer-stories-featured-media,
+          .customer-stories-video-placeholder {
+            min-height: 400px;
           }
 
           .customer-stories-featured-content {
-            width: 100%;
-            height: auto;
-            padding: 24px;
-          }
-
-          .customer-stories-featured-quote,
-          .customer-stories-featured-description {
-            width: 100%;
-            max-width: 100%;
-          }
-
-          .customer-stories-featured-media {
-            width: 100%;
-            height: 420px;
+            padding: 0 6px 16px;
           }
 
           .customer-stories-grid {
             grid-template-columns: 1fr;
-            row-gap: 16px;
           }
 
-          .customer-stories-card {
-            width: 100%;
-            height: auto;
-            min-height: 177px;
+          .customer-stories-stats {
+            padding-left: 24px;
+            padding-right: 24px;
           }
 
           .customer-stories-share {
-            height: auto;
-            min-height: 200px;
-            padding: 25px;
-          }
-
-          .customer-stories-share-content {
-            margin-left: 20px;
-          }
-
-          .customer-stories-share-description {
-            width: 100%;
+            padding: 17px;
           }
         }
 
-        /* Mobile */
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
         @media (max-width: 600px) {
-          .customer-stories-page {
-            width: 100%;
-            min-height: 100vh;
-            overflow-x: hidden;
-          }
-
-          .customer-stories-canvas {
-            width: 100%;
-            min-width: 0;
-            overflow: visible;
-          }
-
           .customer-stories-navbar {
-            width: 100%;
-            height: auto;
-            padding-top: 12px;
-            padding-left: 0;
-            padding-right: 0;
-            overflow: visible;
-            z-index: 100;
+            padding-top: 18px;
           }
 
-          /* Keep the existing Navbar component; only make its
-             surrounding area fit smaller screens. */
-          .customer-stories-navbar > * {
-            max-width: 100%;
-            overflow: visible;
+          .customer-stories-section-heading {
+            font-size: 11px;
           }
 
           .customer-stories-hero {
-            width: 100%;
-            height: 390px;
+            min-height: 380px;
+            padding: 28px 18px 0;
           }
 
-          .customer-stories-hero-content {
-            top: 135px;
-            left: 50%;
-            width: calc(100% - 28px);
-            max-width: 600px;
-          }
-
-          .customer-stories-label {
-            margin-bottom: 22px;
+          .customer-stories-breadcrumb {
+            margin-bottom: 46px;
           }
 
           .customer-stories-hero-title {
-            width: 100%;
-            max-width: 100%;
-            font-size: 34px;
-            line-height: 39px;
-            letter-spacing: -1.8px;
+            font-size: 42px;
+            line-height: 48px;
+            letter-spacing: -2px;
           }
 
           .customer-stories-hero-description {
-            width: 100%;
             max-width: 520px;
-            font-size: 12px;
-            line-height: 18px;
+            font-size: 15px;
+            line-height: 22px;
           }
 
-          .customer-stories-testimonials-background {
-            width: 100%;
-            height: 1300px;
-            top: 390px;
+          .customer-stories-featured-section,
+          .customer-stories-other,
+          .customer-stories-share-section {
+            padding-left: 16px;
+            padding-right: 16px;
           }
 
-          .customer-stories-testimonials-grid {
-            width: 100%;
-            height: 1250px;
-            top: 390px;
-            background-size: 90px 90px;
-          }
-
-          .customer-stories-main {
-            width: calc(100% - 24px);
-            max-width: 100%;
-            margin-left: auto;
-            margin-right: auto;
+          .customer-stories-featured-wrap {
+            padding-top: 20px;
+            padding-bottom: 24px;
           }
 
           .customer-stories-featured {
-            width: 100%;
-            height: auto;
-            grid-template-columns: 1fr;
-            row-gap: 16px;
-            padding: 10px;
-            border-radius: 10px;
+            gap: 20px;
           }
 
-          .customer-stories-featured-content {
-            width: 100%;
-            height: auto;
-            padding: 20px 10px;
+          .customer-stories-featured-media,
+          .customer-stories-video-placeholder {
+            min-height: 300px;
           }
 
-          .customer-stories-featured-label {
-            margin-bottom: 18px;
+          .customer-stories-play {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
           }
 
           .customer-stories-featured-quote {
-            width: 100%;
-            max-width: 100%;
-            font-size: 18px;
-            line-height: 23px;
-            letter-spacing: -0.4px;
+            font-size: 23px;
+            line-height: 29px;
           }
 
           .customer-stories-featured-description {
-            width: 100%;
-            max-width: 100%;
-            font-size: 11px;
-            line-height: 17px;
-          }
-
-          .customer-stories-person {
-            margin-top: 18px;
-          }
-
-          .customer-stories-featured-media {
-            width: 100%;
-            height: 270px;
+            font-size: 13px;
+            line-height: 20px;
           }
 
           .customer-stories-grid {
-            width: 100%;
-            grid-template-columns: 1fr;
-            row-gap: 12px;
-            margin-top: 12px;
+            gap: 14px;
           }
 
           .customer-stories-card {
-            width: 100%;
-            height: auto;
-            min-height: 177px;
-            padding: 22px;
+            min-height: 172px;
           }
 
-          .customer-stories-card-description {
-            width: 100%;
-            font-size: 11px;
-            line-height: 16px;
+          .customer-stories-stats {
+            margin-top: 22px;
+            padding: 22px 16px;
+          }
+
+          .customer-stories-stats-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+          }
+
+          .customer-stories-stat {
+            min-height: 92px;
+          }
+
+          .customer-stories-share-section {
+            padding-top: 22px;
+            padding-bottom: 24px;
           }
 
           .customer-stories-share {
-            width: 100%;
-            height: auto;
-            min-height: 0;
-            margin-top: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 15px;
+          }
+
+          .customer-stories-share-content {
+            width: calc(100% - 78px);
+            flex: none;
+          }
+
+          .customer-stories-share-button {
+            margin-left: 78px;
+          }
+
+          .customer-stories-footer-inner {
             flex-direction: column;
             align-items: flex-start;
-            gap: 18px;
-            padding: 24px;
+            gap: 11px;
           }
 
-          .customer-stories-share-image {
-            width: 80px;
-            height: 80px;
-          }
-
-          .customer-stories-share-content {
-            width: 100%;
-            margin-left: 0;
-          }
-
-          .customer-stories-share-title {
-            font-size: 18px;
-            line-height: 24px;
-          }
-
-          .customer-stories-share-description {
-            width: 100%;
-            font-size: 11px;
-            line-height: 17px;
-          }
-
-          .customer-stories-share-button {
-            width: 180px;
-            height: 44px;
-            margin-left: 0;
-          }
-
-          .customer-stories-cta {
-            width: 100%;
-            margin-top: 30px;
-            margin-left: 0;
+          .customer-stories-footer-links {
+            gap: 16px;
+            flex-wrap: wrap;
           }
         }
 
-        /* Very small phones */
         @media (max-width: 420px) {
-          .customer-stories-main {
-            width: calc(100% - 20px);
-          }
-
-          .customer-stories-hero-content {
-            width: calc(100% - 20px);
-          }
-
           .customer-stories-hero-title {
-            font-size: 30px;
-            line-height: 35px;
-            letter-spacing: -1.5px;
-          }
-
-          .customer-stories-hero-description {
-            font-size: 11px;
-            line-height: 17px;
-          }
-
-          .customer-stories-featured {
-            padding: 8px;
-          }
-
-          .customer-stories-featured-content {
-            padding: 18px 8px;
+            font-size: 36px;
+            line-height: 42px;
           }
 
           .customer-stories-featured-quote {
-            font-size: 17px;
-            line-height: 22px;
-          }
-
-          .customer-stories-featured-media {
-            height: 220px;
+            font-size: 21px;
+            line-height: 27px;
           }
 
           .customer-stories-card {
             padding: 18px;
           }
 
-          .customer-stories-card-description {
-            font-size: 10px;
-            line-height: 15px;
-          }
-
           .customer-stories-share {
-            padding: 18px;
-          }
-
-          .customer-stories-share-title {
-            font-size: 17px;
-            line-height: 22px;
-          }
-
-          .customer-stories-share-description {
-            font-size: 10px;
-            line-height: 15px;
-          }
-
-          .customer-stories-share-button {
-            width: 170px;
+            padding: 15px;
           }
         }
       `}</style>
 
       <div className="customer-stories-page">
-
         <div className="customer-stories-canvas">
 
           {/* =====================================================
-              EXISTING NAVBAR
+              NAVBAR
               ===================================================== */}
 
           <div className="customer-stories-navbar">
@@ -1091,15 +908,7 @@ export default function CustomerStories() {
           </div>
 
           {/* =====================================================
-              BACKGROUND
-              ===================================================== */}
-
-          <div className="customer-stories-testimonials-background" />
-
-          <div className="customer-stories-testimonials-grid" />
-
-          {/* =====================================================
-              HERO
+              G1 — HEADER / HERO
               ===================================================== */}
 
           <section className="customer-stories-hero">
@@ -1117,14 +926,14 @@ export default function CustomerStories() {
               </div>
 
               <h1 className="customer-stories-hero-title">
-                Real Businesses,
-                <br />
+                Real businesses,
+                
                 in their own words
               </h1>
 
               <p className="customer-stories-hero-description">
                 Hear from the Indian businesses using DataCircles to keep their
-                leads and invoices in one place, and get paid without the chaos.
+                leads and <br/> invoices in one place, and get paid without the chaos.
               </p>
 
             </div>
@@ -1132,413 +941,194 @@ export default function CustomerStories() {
           </section>
 
           {/* =====================================================
-              MAIN CUSTOMER STORIES
+              G2 — HERO VIDEO / FEATURED STORY
               ===================================================== */}
 
-          <main className="customer-stories-main">
+          <section className="customer-stories-featured-section">
+            <div className="customer-stories-featured-wrap">
 
-            {/* ===================================================
-                FEATURED CUSTOMER STORY
-                =================================================== */}
+             
+              <div className="customer-stories-featured">
 
-            <section className="customer-stories-featured">
+                <div className="customer-stories-featured-media">
+                  {imgCustomerMain ? (
+                    <img src={imgCustomerMain} alt="Featured customer story" />
+                  ) : (
+                    <div className="customer-stories-video-placeholder">
+                      <div className="customer-stories-play" aria-hidden="true">
+                        ▶
+                      </div>
+                    </div>
+                  )}
 
-              <div className="customer-stories-featured-content">
+                  <span className="customer-stories-video-caption">
+                    [Customer video testimonial — YouTube/Vimeo embed]
+                  </span>
+                </div>
 
-                <p className="customer-stories-featured-label">
-                  Customer Testimonial
-                </p>
+                <div className="customer-stories-featured-content">
+                  <p className="customer-stories-featured-label">
+                    Customer Testimonial
+                  </p>
 
-                <h2 className="customer-stories-featured-quote">
-                  "[Pulled quote from the video, e.g. "We used
-                  to juggle a CRM and a separate billing app.
-                  Now it's all in one place."]"
-                </h2>
+                  <h2 className="customer-stories-featured-quote">
+                    "[Pulled quote from the video, e.g. “We used to juggle a CRM
+                    and a separate billing app. Now it’s all in one place.”]"
+                  </h2>
 
-                <p className="customer-stories-featured-description">
-                  [2 to 3 line summary in the DataCircles voice, so the point
-                  lands even for people who don't press play. Describe the
-                  before and after.]
-                </p>
+                  <p className="customer-stories-featured-description">
+                    [2 to 3 line summary in the DataCircles voice, so the point
+                    lands even for people who don't press play. Describe the
+                    before and after.]
+                  </p>
 
-                <div className="customer-stories-person">
+                  <div className="customer-stories-person">
+                    <div className="customer-stories-avatar">
+                      {imgCustomer1 && (
+                        <img src={imgCustomer1} alt="" />
+                      )}
+                    </div>
 
-                  <div className="customer-stories-avatar">
-
-                    {imgCustomer1 && (
-                      <img
-                        src={imgCustomer1}
-                        alt=""
-                      />
-                    )}
-
+                    <div className="customer-stories-person-details">
+                      <p className="customer-stories-person-name">
+                        [Customer name]
+                      </p>
+                      <p className="customer-stories-person-role">
+                        [Role] · [Business name]
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="customer-stories-person-details">
-
-                    <p className="customer-stories-person-name">
-                      [ Customer Name ]
-                    </p>
-
-                    <p className="customer-stories-person-role">
-                      [ Role ] · [ Business Name ]
-                    </p>
-
+                  <div className="customer-stories-featured-result">
+                    [The change, e.g. “CRM + invoicing, finally in one place”]
                   </div>
-
                 </div>
 
               </div>
-
-              {/* =================================================
-                  MAIN CUSTOMER IMAGE
-                  ================================================= */}
-
-              <div className="customer-stories-featured-media">
-
-                {imgCustomerMain && (
-                  <img
-                    src={imgCustomerMain}
-                    alt=""
-                  />
-                )}
-
-              </div>
-
-            </section>
-
-            {/* ===================================================
-                CUSTOMER STORY CARDS
-                =================================================== */}
-
-            <section className="customer-stories-grid">
-
-              {/* CARD 1 */}
-
-              <article className="customer-stories-card">
-
-                <div className="customer-stories-card-person">
-
-                  <div className="customer-stories-card-avatar">
-
-                    {imgCustomer2 && (
-                      <img
-                        src={imgCustomer2}
-                        alt=""
-                      />
-                    )}
-
-                  </div>
-
-                  <div className="customer-stories-card-person-info">
-
-                    <p className="customer-stories-card-name">
-                      [ Customer Name ]
-                    </p>
-
-                    <p className="customer-stories-card-role">
-                      [ Role ] · [ Business Name ]
-                    </p>
-
-                  </div>
-
-                </div>
-
-                <p className="customer-stories-card-description">
-                  [2 to 3 line summary in the DataCircles voice, so the point
-                  lands even for people who don't press play. Describe the
-                  before and after.]
-                </p>
-
-                <a
-                  href="#"
-                  className="customer-stories-card-link"
-                >
-                  Watch / Read Story
-                </a>
-
-              </article>
-
-              {/* CARD 2 */}
-
-              <article className="customer-stories-card">
-
-                <div className="customer-stories-card-person">
-
-                  <div className="customer-stories-card-avatar">
-
-                    {imgCustomer3 && (
-                      <img
-                        src={imgCustomer3}
-                        alt=""
-                      />
-                    )}
-
-                  </div>
-
-                  <div className="customer-stories-card-person-info">
-
-                    <p className="customer-stories-card-name">
-                      [ Customer Name ]
-                    </p>
-
-                    <p className="customer-stories-card-role">
-                      [ Role ] · [ Business Name ]
-                    </p>
-
-                  </div>
-
-                </div>
-
-                <p className="customer-stories-card-description">
-                  [2 to 3 line summary in the DataCircles voice, so the point
-                  lands even for people who don't press play. Describe the
-                  before and after.]
-                </p>
-
-                <a
-                  href="#"
-                  className="customer-stories-card-link"
-                >
-                  Watch / Read Story
-                </a>
-
-              </article>
-
-              {/* CARD 3 */}
-
-              <article className="customer-stories-card">
-
-                <div className="customer-stories-card-person">
-
-                  <div className="customer-stories-card-avatar">
-
-                    {imgCustomer4 && (
-                      <img
-                        src={imgCustomer4}
-                        alt=""
-                      />
-                    )}
-
-                  </div>
-
-                  <div className="customer-stories-card-person-info">
-
-                    <p className="customer-stories-card-name">
-                      [ Customer Name ]
-                    </p>
-
-                    <p className="customer-stories-card-role">
-                      [ Role ] · [ Business Name ]
-                    </p>
-
-                  </div>
-
-                </div>
-
-                <p className="customer-stories-card-description">
-                  [2 to 3 line summary in the DataCircles voice, so the point
-                  lands even for people who don't press play. Describe the
-                  before and after.]
-                </p>
-
-                <a
-                  href="#"
-                  className="customer-stories-card-link"
-                >
-                  Watch / Read Story
-                </a>
-
-              </article>
-
-              {/* CARD 4 */}
-
-              <article className="customer-stories-card">
-
-                <div className="customer-stories-card-person">
-
-                  <div className="customer-stories-card-avatar">
-
-                    {imgCustomer5 && (
-                      <img
-                        src={imgCustomer5}
-                        alt=""
-                      />
-                    )}
-
-                  </div>
-
-                  <div className="customer-stories-card-person-info">
-
-                    <p className="customer-stories-card-name">
-                      [ Customer Name ]
-                    </p>
-
-                    <p className="customer-stories-card-role">
-                      [ Role ] · [ Business Name ]
-                    </p>
-
-                  </div>
-
-                </div>
-
-                <p className="customer-stories-card-description">
-                  [2 to 3 line summary in the DataCircles voice, so the point
-                  lands even for people who don't press play. Describe the
-                  before and after.]
-                </p>
-
-                <a
-                  href="#"
-                  className="customer-stories-card-link"
-                >
-                  Watch / Read Story
-                </a>
-
-              </article>
-
-              {/* CARD 5 */}
-
-              <article className="customer-stories-card">
-
-                <div className="customer-stories-card-person">
-
-                  <div className="customer-stories-card-avatar">
-
-                    {imgCustomer6 && (
-                      <img
-                        src={imgCustomer6}
-                        alt=""
-                      />
-                    )}
-
-                  </div>
-
-                  <div className="customer-stories-card-person-info">
-
-                    <p className="customer-stories-card-name">
-                      [ Customer Name ]
-                    </p>
-
-                    <p className="customer-stories-card-role">
-                      [ Role ] · [ Business Name ]
-                    </p>
-
-                  </div>
-
-                </div>
-
-                <p className="customer-stories-card-description">
-                  [2 to 3 line summary in the DataCircles voice, so the point
-                  lands even for people who don't press play. Describe the
-                  before and after.]
-                </p>
-
-                <a
-                  href="#"
-                  className="customer-stories-card-link"
-                >
-                  Watch / Read Story
-                </a>
-
-              </article>
-
-              {/* CARD 6 */}
-
-              <article className="customer-stories-card">
-
-                <div className="customer-stories-card-person">
-
-                  <div className="customer-stories-card-avatar">
-
-                    {imgCustomer7 && (
-                      <img
-                        src={imgCustomer7}
-                        alt=""
-                      />
-                    )}
-
-                  </div>
-
-                  <div className="customer-stories-card-person-info">
-
-                    <p className="customer-stories-card-name">
-                      [ Customer Name ]
-                    </p>
-
-                    <p className="customer-stories-card-role">
-                      [ Role ] · [ Business Name ]
-                    </p>
-
-                  </div>
-
-                </div>
-
-                <p className="customer-stories-card-description">
-                  [2 to 3 line summary in the DataCircles voice, so the point
-                  lands even for people who don't press play. Describe the
-                  before and after.]
-                </p>
-
-                <a
-                  href="#"
-                  className="customer-stories-card-link"
-                >
-                  Watch / Read Story
-                </a>
-
-              </article>
-
-            </section>
-
-            {/* ===================================================
-                USING DATACIRCLES SECTION
-                =================================================== */}
-
-            <section className="customer-stories-share">
-
-              <div className="customer-stories-share-image">
-
-                {imgUsingDatacircles && (
-                  <img
-                    src={imgUsingDatacircles}
-                    alt=""
-                  />
-                )}
-
-              </div>
-
-              <div className="customer-stories-share-content">
-
-                <h2 className="customer-stories-share-title">
-                  Using DataCircles and happy with it?
-                </h2>
-
-                <p className="customer-stories-share-description">
-                  We'd love to hear your story. It takes a few minutes,
-                  and it helps other businesses like yours.
-                </p>
-
-              </div>
-
-              <button
-                type="button"
-                className="customer-stories-share-button"
-              >
-                Share Your Story
-              </button>
-
-            </section>
-
-          </main>
+            </div>
+          </section>
 
           {/* =====================================================
-              EXISTING CTA — EDGE TO EDGE
+              G3 — OTHER STORIES
+              ===================================================== */}
+
+          <section className="customer-stories-other">
+            <div className="customer-stories-other-wrap">
+
+
+              <div className="customer-stories-grid">
+                {customerStories.map((story, index) => (
+                  <article className="customer-stories-card" key={index}>
+                    <div className="customer-stories-card-person">
+                      <div className="customer-stories-card-avatar">
+                        {story.image && (
+                          <img src={story.image} alt="" />
+                        )}
+                      </div>
+
+                      <div className="customer-stories-card-person-info">
+                        <p className="customer-stories-card-name">
+                          {story.name}
+                        </p>
+                        <p className="customer-stories-card-role">
+                          {story.role}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="customer-stories-card-description">
+                      {story.description}
+                    </p>
+
+                    <a href="#" className="customer-stories-card-link">
+                      Watch / read story
+                    </a>
+                  </article>
+                ))}
+              </div>
+
+            </div>
+          </section>
+
+          {/* =====================================================
+              G4 — TRUST / STATS STRIP
+              ===================================================== */}
+
+          <section className="customer-stories-stats">
+           
+
+            <div className="customer-stories-stats-wrap">
+              <div className="customer-stories-stats-grid">
+
+                <div className="customer-stories-stat">
+                  <p className="customer-stories-stat-value">100+</p>
+                  <p className="customer-stories-stat-label">
+                    businesses run on DataCircles
+                  </p>
+                </div>
+
+                <div className="customer-stories-stat">
+                  <p className="customer-stories-stat-value">1,00,000+</p>
+                  <p className="customer-stories-stat-label">
+                    invoices raised
+                  </p>
+                </div>
+
+                <div className="customer-stories-stat">
+                  <p className="customer-stories-stat-value">Mumbai</p>
+                  <p className="customer-stories-stat-label">
+                    built in India, for India
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          {/* =====================================================
+              G5 — SHARE YOUR STORY
+              ===================================================== */}
+
+          <section className="customer-stories-share-section">
+            <div className="customer-stories-share-wrap">
+
+             
+
+              <div className="customer-stories-share">
+
+                <div className="customer-stories-share-image">
+                  {imgUsingDatacircles && (
+                    <img src={imgUsingDatacircles} alt="" />
+                  )}
+                </div>
+
+                <div className="customer-stories-share-content">
+                  <h2 className="customer-stories-share-title">
+                    Using DataCircles and happy with it?
+                  </h2>
+
+                  <p className="customer-stories-share-description">
+                    We'd love to hear your story. It takes a few minutes, and it
+                    helps other businesses like yours.
+                  </p>
+                </div>
+
+                <button type="button" className="customer-stories-share-button">
+                  Share your story
+                </button>
+
+              </div>
+            </div>
+          </section>
+
+          {/* =====================================================
+              G6 — CTA
               ===================================================== */}
 
           <section className="customer-stories-cta">
             <CTA />
           </section>
+
 
         </div>
       </div>
