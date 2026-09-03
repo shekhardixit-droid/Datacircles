@@ -4,14 +4,9 @@ export default function Careers() {
   return (
     <div className="min-h-screen w-full bg-white text-[#37413D]">
       
-      {/* =========================
-          NAVBAR
-      ========================== */}
-      <section className="relative w-full mt-5 overflow-hidden">
-        <div className="relative z-20">
-          <Navbar />
-        </div>
-      </section>
+  
+      <Navbar />
+      
 
       <main className="w-full">
 
