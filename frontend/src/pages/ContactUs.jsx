@@ -188,8 +188,7 @@ export default function ContactUs() {
     {/* Button */}
     <button
       type="button"
-      className="flex h-[40px] w-full flex-shrink-0 items-center justify-center rounded-[9px] bg-[#0085FF] px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF] hover:border hover:border-[#0085FF] sm:hidden md:flex md:w-auto"
-    >
+className="flex h-[40px] w-full flex-shrink-0 items-center justify-center rounded-[9px] bg-white px-5 font-inter text-[13px] font-semibold text-[#0085FF] border border-[#0085FF] transition-all duration-200 hover:bg-[#0085FF] hover:text-white hover:border-[#0085FF] sm:hidden md:flex md:w-auto"    >
       Book a demo
     </button>
 
@@ -337,14 +336,48 @@ export default function ContactUs() {
 
       <a
         href="mailto:contact@datacircles.in"
-        className="flex h-[42px] min-w-[93px] items-center justify-center rounded-[9px] bg-[#0085FF] px-5 font-inter text-[13px] font-semibold border border-white/60 text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF] hover:border hover:border-white"
-      >
+ className="
+              h-[50px]
+              rounded-[25px]
+              border
+              border-white
+              bg-transparent
+              px-7
+              text-[13px]
+              font-semibold
+              text-white
+              transition-all
+              duration-200
+              ease-out
+              hover:-translate-y-0.5
+              hover:bg-white
+              hover:text-[#0085ff]
+              max-[600px]:w-[190px]
+              flex items-center justify-center
+            "      >
         Email us
       </a>
 
       <button
-        type="button"
-        className="flex h-[42px] min-w-[126px] items-center justify-center rounded-[9px] border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+        className="
+              h-[50px]
+              rounded-[25px]
+              border
+              border-white
+              bg-transparent
+              px-7
+              text-[13px]
+              font-semibold
+              text-white
+              transition-all
+              duration-200
+              ease-out
+              hover:-translate-y-0.5
+              hover:bg-white
+              hover:text-[#0085ff]
+              max-[600px]:w-[190px]
+              flex items-center justify-center
+            "
       >
         Book a demo
       </button>

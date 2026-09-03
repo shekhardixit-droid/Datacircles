@@ -540,16 +540,50 @@ export default function Careers() {
     <div className="mt-5 flex flex-col items-center gap-3 sm:flex-row">
 
       <button
-        type="button"
-        className="flex h-[42px] min-w-[138px] items-center justify-center rounded-[10px] border border-white/60 bg-[#0085FF] px-5 font-inter text-[13px] font-semibold text-white  transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+        className="
+              h-[50px]
+              rounded-[25px]
+              border
+              border-white
+              bg-transparent
+              px-7
+              text-[13px]
+              font-semibold
+              text-white
+              transition-all
+              duration-200
+              ease-out
+              hover:-translate-y-0.5
+              hover:bg-white
+              hover:text-[#0085ff]
+              max-[600px]:w-[190px]
+              flex items-center justify-center
+            "
       >
         See open roles
       </button>
 
       <a
         href="mailto:careers@datacircles.in"
-        className="flex h-[42px] min-w-[112px] items-center justify-center rounded-[10px] border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
-      >
+className="
+              h-[50px]
+              rounded-[25px]
+              border
+              border-white
+              bg-transparent
+              px-7
+              text-[13px]
+              font-semibold
+              text-white
+              transition-all
+              duration-200
+              ease-out
+              hover:-translate-y-0.5
+              hover:bg-white
+              hover:text-[#0085ff]
+              max-[600px]:w-[190px]
+              flex items-center justify-center
+            "      >
         Write to us
       </a>
 

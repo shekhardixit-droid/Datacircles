@@ -478,15 +478,47 @@ export default function SecurityCompliance() {
     {/* Buttons */}
     <div className="mt-5 flex flex-col items-center gap-3 sm:flex-row">
       <button
-  type="button"
-  className="flex h-[42px] min-w-[101px] items-center justify-center border border-white/60 rounded-[10px] bg-[#0085FF] px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+ className="
+              h-[50px]
+              rounded-[25px]
+              border
+              border-white
+              bg-transparent
+              px-7
+              text-[13px]
+              font-semibold
+              text-white
+              transition-all
+              duration-200
+              ease-out
+              hover:-translate-y-0.5
+              hover:bg-white
+              hover:text-[#0085ff]
+              max-[600px]:w-[190px]
+            "
 >
   Start free
 </button>
 
       <button
-        type="button"
-        className="flex h-[42px] min-w-[103px] items-center justify-center rounded-[10px] border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+        className="
+              h-[50px]
+              rounded-[25px]
+              border
+              border-white
+              bg-transparent
+              px-7
+              text-[13px]
+              font-semibold
+              text-white
+              transition-all
+              duration-200
+              ease-out
+              hover:-translate-y-0.5
+              hover:bg-white
+              hover:text-[#0085ff]
+              max-[600px]:w-[190px]
+            "
       >
         Talk to us
       </button>

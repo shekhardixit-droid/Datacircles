@@ -867,17 +867,19 @@ export default function CRMAudience() {
             className="
               h-[50px]
               rounded-[25px]
-              bg-white
+              border
+              border-white
+              bg-transparent
               px-7
               text-[13px]
               font-semibold
-              text-[#0085ff]
+              text-white
               transition-all
               duration-200
               ease-out
               hover:-translate-y-0.5
-              hover:bg-black
-              hover:text-white
+              hover:bg-white
+              hover:text-[#0085ff]
               max-[600px]:w-[190px]
             "
           >

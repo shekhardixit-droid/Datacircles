@@ -1369,11 +1369,47 @@ export default function HowToGuide() {
             </p>
 
             <div className="guide-practice-buttons">
-              <button type="button" className="guide-practice-button primary">
+              <button type="button"
+            className="
+              h-[50px]
+              rounded-[25px]
+              border
+              border-white
+              bg-transparent
+              px-7
+              text-[13px]
+              font-semibold
+              text-white
+              transition-all
+              duration-200
+              ease-out
+              hover:-translate-y-0.5
+              hover:bg-white
+              hover:text-[#0085ff]
+              max-[600px]:w-[190px]
+            ">  
                 Create Account
               </button>
 
-              <button type="button" className="guide-practice-button secondary">
+              <button type="button"
+            className="
+              h-[50px]
+              rounded-[25px]
+              border
+              border-white
+              bg-transparent
+              px-7
+              text-[13px]
+              font-semibold
+              text-white
+              transition-all
+              duration-200
+              ease-out
+              hover:-translate-y-0.5
+              hover:bg-white
+              hover:text-[#0085ff]
+              max-[600px]:w-[190px]
+            ">  
                 Book a Demo
               </button>
             </div>
