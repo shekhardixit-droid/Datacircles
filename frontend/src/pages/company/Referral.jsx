@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Navbar from "../../components/Navbar";
 
 export default function Referral() {
@@ -10,12 +9,11 @@ export default function Referral() {
       {/* =========================
           NAVBAR
       ========================== */}
-      <section className="relative mt-5 w-full overflow-hidden">
-        <div className="relative z-20">
-          <Navbar />
-        </div>
-      </section>
-
+      <section className="relative mt-5 w-full">
+  <div className="relative z-20">
+    <Navbar />
+  </div>
+</section>
       <main className="w-full">
         
 <section className="flex h-auto w-full flex-col items-center mt-12 md:mt-16 lg:mt-20 px-4 sm:px-6">
@@ -275,14 +273,14 @@ export default function Referral() {
 {/* =========================
     SECTION 05 — WHO TO INVITE
 ========================== */}
-<section className="mx-auto mt-16 w-[80%] rounded-[20px] bg-white sm:mt-20 md:mt-24">
+<section className="mx-auto  w-[95%] rounded-[20px] bg-white ">
   <div className="mx-auto w-[90%] py-10 sm:py-12 md:py-14">
 
    
 
     {/* Content */}
     <div className="mt-6 max-w-[620px]">
-      <h2 className="font-inter text-[30px] font-semibold leading-[1.15] tracking-[-0.8px] text-[#37413D] sm:text-[34px]">
+      <h2 className="font-inter text-[40px] font-semibold leading-[1.15] tracking-[-0.8px] text-[#37413D] ">
         Not sure who to invite?
       </h2>
 
@@ -300,27 +298,8 @@ export default function Referral() {
 {/* =========================
     SECTION 06 — FAQ
 ========================== */}
-<<<<<<< Updated upstream
 <section className="mx-auto w-[95%] rounded-[20px] bg-[#F6F9F7]">
-=======
-<section className="mx-auto mt-16 w-[80%] rounded-[20px] bg-[#F6F9F7] sm:mt-20 md:mt-24">
->>>>>>> Stashed changes
   <div className="mx-auto w-[90%] py-10 sm:py-12 md:py-14">
-
-    {/* Section Label */}
-    <div className="flex flex-wrap items-center gap-3">
-      <span className="flex h-[18px] min-w-[29px] items-center justify-center rounded-[6px] bg-[#0085FF] px-2 font-inter text-[10px] font-semibold text-white">
-        06
-      </span>
-
-      <span className="font-inter text-[12px] font-semibold text-[#37413D]">
-        FAQ
-      </span>
-
-      <span className="font-inter text-[11px] text-[#8A9691]">
-        the precise mechanics, stated plainly
-      </span>
-    </div>
 
     {/* Heading */}
     <h2 className="mt-6 font-inter text-[30px] font-semibold leading-[1.15] tracking-[-0.8px] text-[#37413D] sm:text-[34px]">
@@ -365,7 +344,6 @@ export default function Referral() {
           answer:
             "No. Your code is for bringing new businesses on board, so you can't redeem your own code on your own account.",
         },
-<<<<<<< Updated upstream
       ].map((item, index) => {
         const isOpen = openFaq === index;
 
@@ -391,22 +369,6 @@ export default function Referral() {
               >
                 {item.question}
               </span>
-=======
-      ].map((item, index) => (
-        <div
-          key={index}
-          className="border-b border-[#E5EAE7] px-4 py-4 last:border-b-0 sm:px-5"
-        >
-          <h3 className="font-inter text-[13px] font-semibold leading-[1.4] text-[#37413D] sm:text-[14px]">
-            {item.question}
-          </h3>
-
-          <p className="mt-2 font-inter text-[12px] font-normal leading-[1.6] text-[#52605A] sm:text-[13px]">
-            {item.answer}
-          </p>
-        </div>
-      ))}
->>>>>>> Stashed changes
 
               {/* Add / Minus Button */}
               <span
@@ -469,48 +431,17 @@ export default function Referral() {
 
       {/* Primary Button */}
       <button
-        className="
-              h-[50px]
-              rounded-[25px]
-              border
-              border-white
-              bg-transparent
-              px-7
-              text-[13px]
-              font-semibold
-              text-white
-              transition-all
-              duration-200
-              ease-out
-              hover:-translate-y-0.5
-              hover:bg-white
-              hover:text-[#0085ff]
-              max-[600px]:w-[190px]
-            ">
+        type="button"
+        className="flex h-[41px] w-fit items-center justify-center rounded-[9px] bg-[#0085FF] px-5 font-inter text-[13px] border border-white/60 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+      >
         Go to my referral code
       </button>
 
       {/* Secondary Button */}
       <button
-       className="
-              h-[50px]
-              rounded-[25px]
-              border
-              border-white
-              bg-transparent
-              px-7
-              text-[13px]
-              font-semibold
-              text-white
-              transition-all
-              duration-200
-              ease-out
-              hover:-translate-y-0.5
-              hover:bg-white
-              hover:text-[#0085ff]
-              max-[600px]:w-[190px]
-            "
-            >
+        type="button"
+        className="flex h-[41px] w-fit items-center justify-center rounded-[9px] border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:border-white hover:bg-white hover:text-[#0085FF]"
+      >
         Start free
       </button>
 
