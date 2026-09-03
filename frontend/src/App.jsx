@@ -17,6 +17,11 @@ import ToolsMain from "./pages/ToolsMain";
 import ChecklistExplainer from "./pages/ChecklistExplainer";
 import Comparison from "./pages/Comparison";
 import CRMAudience from "./pages/CRMAudience";
+import AboutUs from "./pages/AboutUs";
+import SecurityCompliance from "./pages/SecurityCompliance";
+import Careers from "./pages/Careers";
+import ContactUs from "./pages/ContactUs";
+import Referral from "./pages/Referral";
 
 function App() {
   return (
@@ -33,11 +38,16 @@ function App() {
       <Route path="/freetools" element={<FreeTools />} />
       <Route path="/customer-stories" element={<CustomerStories />} />
       <Route path="/sub-details" element={<SubDetails />} />
-        <Route path="/invoice-preview" element={<CreateInvoice />} />
-        <Route path="/toolsmain" element={<ToolsMain />} />
-        <Route path="/checklist" element={<ChecklistExplainer />} />
-        <Route path="/comparison" element={<Comparison />} />
-        <Route path="/crm-for-audience" element={<CRMAudience/>} />
+      <Route path="/invoice-preview" element={<CreateInvoice />} />
+      <Route path="/toolsmain" element={<ToolsMain />} />
+      <Route path="/checklist" element={<ChecklistExplainer />} />
+      <Route path="/comparison" element={<Comparison />} />
+      <Route path="/crm-for-audience" element={<CRMAudience/>} />
+      <Route path="/about" element={<AboutUs/>} />
+      <Route path="/security&compliance" element={<SecurityCompliance/>} />
+      <Route path="/careers" element={<Careers/>} />
+      <Route path="/contact" element={<ContactUs/>} />
+      <Route path="/referral" element={<Referral/>} />
 
     </Routes>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { ChevronRight, ArrowRight, Check } from "lucide-react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar";
 
 const resourceTabs = [
   "1 · How-To Guide",
