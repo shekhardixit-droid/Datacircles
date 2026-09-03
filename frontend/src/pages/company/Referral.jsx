@@ -1,6 +1,9 @@
+import { useState } from "react";
 import Navbar from "../../components/Navbar";
 
 export default function Referral() {
+  const [openFaq, setOpenFaq] = useState(null);
+
   return (
     <div className="min-h-screen w-full bg-white text-[#37413D]">
 
@@ -296,7 +299,7 @@ export default function Referral() {
 {/* =========================
     SECTION 06 — FAQ
 ========================== */}
-<section className="mx-auto  w-[95%] rounded-[20px] bg-[#F6F9F7] ">
+<section className="mx-auto w-[95%] rounded-[20px] bg-[#F6F9F7]">
   <div className="mx-auto w-[90%] py-10 sm:py-12 md:py-14">
 
     {/* Heading */}
@@ -306,7 +309,6 @@ export default function Referral() {
 
     {/* FAQ List */}
     <div className="mt-5 overflow-hidden rounded-[14px] border border-[#C9D3CE] bg-white">
-
       {[
         {
           question: "When do I get my discount?",
@@ -343,23 +345,66 @@ export default function Referral() {
           answer:
             "No. Your code is for bringing new businesses on board, so you can't redeem your own code on your own account.",
         },
-      ].map((item, index) => (
-        <div
-          key={index}
-          className="group cursor-pointer border-b border-[#E5EAE7] px-4 py-4 transition-all duration-300 last:border-b-0 hover:bg-[#F6F9F7] sm:px-5"
-        >
-          {/* Question */}
-          <h3 className="font-inter text-[13px] font-semibold leading-[1.4] text-[#37413D] transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#0085FF] sm:text-[14px]">
-            {item.question}
-          </h3>
+      ].map((item, index) => {
+        const isOpen = openFaq === index;
 
-          {/* Answer */}
-          <p className="mt-2 max-h-0 overflow-hidden font-inter text-[12px] font-normal leading-[1.6] text-[#52605A] opacity-0 transition-all duration-500 ease-in-out group-hover:max-h-[100px] group-hover:opacity-100 sm:text-[13px]">
-            {item.answer}
-          </p>
-        </div>
-      ))}
+        return (
+          <div
+            key={index}
+            className={`border-b border-[#E5EAE7] last:border-b-0 transition-all duration-300 ${
+              isOpen ? "bg-[#F6F9F7]" : "bg-white"
+            }`}
+          >
+            {/* Question */}
+            <button
+              type="button"
+              onClick={() => setOpenFaq(isOpen ? null : index)}
+              className="group flex w-full items-center justify-between gap-5 px-4 py-4 text-left sm:px-5"
+            >
+              <span
+                className={`font-inter text-[13px] font-semibold leading-[1.4] transition-all duration-300 sm:text-[14px] ${
+                  isOpen
+                    ? "translate-x-1 text-[#0085FF]"
+                    : "text-[#37413D] group-hover:translate-x-1 group-hover:text-[#0085FF]"
+                }`}
+              >
+                {item.question}
+              </span>
 
+              {/* Add / Minus Button */}
+              <span
+                className={`relative flex h-[26px] w-[26px] flex-shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+                  isOpen
+                    ? "border-[#0085FF] bg-[#0085FF] text-white"
+                    : "border-[#C9D3CE] bg-white text-[#0085FF] group-hover:border-[#0085FF] group-hover:bg-[#0085FF] group-hover:text-white"
+                }`}
+              >
+                <span className="absolute h-[1.5px] w-[10px] bg-current" />
+                <span
+                  className={`absolute h-[10px] w-[1.5px] bg-current transition-transform duration-300 ${
+                    isOpen ? "rotate-90" : "rotate-0"
+                  }`}
+                />
+              </span>
+            </button>
+
+            {/* Answer */}
+            <div
+              className={`grid transition-all duration-500 ease-in-out ${
+                isOpen
+                  ? "grid-rows-[1fr] opacity-100"
+                  : "grid-rows-[0fr] opacity-0"
+              }`}
+            >
+              <div className="overflow-hidden">
+                <p className="px-4 pb-5 pr-12 font-inter text-[12px] font-normal leading-[1.6] text-[#52605A] sm:px-5 sm:text-[13px]">
+                  {item.answer}
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
 
   </div>

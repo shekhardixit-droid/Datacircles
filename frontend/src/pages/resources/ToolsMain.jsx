@@ -167,13 +167,8 @@ const ToolsMain = () => {
   );
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-white">
+    <div className="min-h-screen mt-5 w-full overflow-x-hidden bg-white">
 
-      {/* ========================================================
-          TOP STRIP
-          ======================================================== */}
-
-      <div className="h-[22px] w-full bg-[#ECECEC]"  />
 
       {/* ========================================================
           NAVBAR

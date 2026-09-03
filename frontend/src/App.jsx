@@ -23,6 +23,7 @@ import Careers from "./pages/company/Careers";
 import ContactUs from "./pages/company/ContactUs";
 import Referral from "./pages/company/Referral";
 import SolutionMain from "./pages/solutions/SolutionMain";
+import CreativeMarketing from "./pages/solutions/CreativeMarketing";
 
 function App() {
   return (
@@ -50,7 +51,7 @@ function App() {
       <Route path="/contact" element={<ContactUs/>} />
       <Route path="/referral" element={<Referral/>} />
       <Route path="/solutions" element={<SolutionMain/>} />
-
+      <Route path="/creative&marketing" element={<CreativeMarketing/>} />
     </Routes>
   );
 }
