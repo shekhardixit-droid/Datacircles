@@ -1,6 +1,7 @@
 import React from "react";
 import { ChevronRight, Check, ArrowRight } from "lucide-react";
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const checklistItems = [
   "Supplier and recipient details",
@@ -36,6 +37,7 @@ const faqItems = [
 ];
 
 export default function ChecklistExplainer() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-white text-[#000000] font-['Inter',Arial,Helvetica,sans-serif]">
       {/* Navbar */}
@@ -49,168 +51,32 @@ export default function ChecklistExplainer() {
         className="
           absolute
           left-1/2
-          top-[88px]
           z-[100]
-          w-[min(1100px,calc(100%-48px))]
           -translate-x-1/2
           overflow-x-auto
-          overscroll-x-contain
-          whitespace-nowrap
-          rounded-[10px]
           [scrollbar-width:none]
           [&::-webkit-scrollbar]:hidden
-          max-[900px]:top-[82px]
-          max-[900px]:w-[calc(100%-32px)]
-          max-[600px]:top-[78px]
-          max-[600px]:w-[calc(100%-24px)]
         "
+        style={{ top: 92, width: "min(1120px, calc(100% - 64px))" }}
       >
-        <div
-          className="
-            flex
-            w-max
-            min-w-full
-            items-center
-            justify-center
-            gap-2
-            max-[900px]:justify-start
-          "
-        >
+        <div className="flex w-max min-w-full items-center justify-start gap-2">
           {/* How-To Guide */}
-          <button
-            type="button"
-            className="
-              group
-              flex
-              h-10
-              shrink-0
-              items-center
-              justify-center
-              rounded-lg
-              border
-              border-[#dce7f0]
-              bg-white
-              px-[18px]
-              text-xs
-              font-semibold
-              leading-[17px]
-              text-[#635557]
-              transition-all
-              duration-200
-              ease-out
-             
-              hover:border-[#0085ff]
-              hover:bg-[#0085ff]
-              hover:text-white
-              active:translate-y-0
-              max-[600px]:h-9
-              max-[600px]:px-[14px]
-              max-[600px]:text-[11px]
-            "
-          >
+          <button type="button" onClick={() => navigate("/how-to-guide")} className="h-10 shrink-0 rounded-lg border border-[#dce7f0] bg-white px-[18px] text-xs font-semibold leading-[17px] text-[#635557] transition-all duration-200 ease-out hover:border-[#0085ff] hover:bg-[#0085ff] hover:text-white active:translate-y-0 max-[600px]:h-9 max-[600px]:px-[14px] max-[600px]:text-[11px]">
             1 · How-To Guide
           </button>
 
           {/* Checklist / Explainer - ACTIVE */}
-          <button
-            type="button"
-            aria-current="page"
-            className="
-              flex
-              h-10
-              shrink-0
-              items-center
-              justify-center
-              rounded-lg
-              border
-              
-              bg-[#0085ff]
-              px-[18px]
-              text-xs
-              font-semibold
-              leading-[17px]
-              text-white
-              transition-all
-              duration-200
-              ease-out
-             
-              hover:border-[#000000]
-              
-              hover:text-white
-              active:translate-y-0
-              max-[600px]:h-9
-              max-[600px]:px-[14px]
-              max-[600px]:text-[11px]
-            "
-          >
+          <button type="button" aria-current="page" onClick={() => navigate("/checklist")} className="h-10 shrink-0 rounded-lg border border-[#0085ff] bg-[#0085ff] px-[18px] text-xs font-semibold leading-[17px] text-white transition-all duration-200 ease-out hover:border-black hover:bg-black hover:text-white active:translate-y-0 max-[600px]:h-9 max-[600px]:px-[14px] max-[600px]:text-[11px]">
             2 · Checklist / Explainer
           </button>
 
           {/* Comparison */}
-          <button
-            type="button"
-            className="
-              flex
-              h-10
-              shrink-0
-              items-center
-              justify-center
-              rounded-lg
-              border
-              border-[#dce7f0]
-              bg-white
-              px-[18px]
-              text-xs
-              font-semibold
-              leading-[17px]
-              text-[#635557]
-              transition-all
-              duration-200
-              ease-out
-              
-              hover:border-[#0085ff]
-              hover:bg-[#0085ff]
-              hover:text-white
-              active:translate-y-0
-              max-[600px]:h-9
-              max-[600px]:px-[14px]
-              max-[600px]:text-[11px]
-            "
-          >
+          <button type="button" onClick={() => navigate("/comparison")} className="h-10 shrink-0 rounded-lg border border-[#dce7f0] bg-white px-[18px] text-xs font-semibold leading-[17px] text-[#635557] transition-all duration-200 ease-out hover:border-[#0085ff] hover:bg-[#0085ff] hover:text-white active:translate-y-0 max-[600px]:h-9 max-[600px]:px-[14px] max-[600px]:text-[11px]">
             3 · Comparison
           </button>
 
           {/* CRM */}
-          <button
-            type="button"
-            className="
-              flex
-              h-10
-              shrink-0
-              items-center
-              justify-center
-              rounded-lg
-              border
-              border-[#dce7f0]
-              bg-white
-              px-[18px]
-              text-xs
-              font-semibold
-              leading-[17px]
-              text-[#635557]
-              transition-all
-              duration-200
-              ease-out
-             
-              hover:border-[#0085ff]
-              hover:bg-[#0085ff]
-              hover:text-white
-              active:translate-y-0
-              max-[600px]:h-9
-              max-[600px]:px-[14px]
-              max-[600px]:text-[11px]
-            "
-          >
+          <button type="button" onClick={() => navigate("/crm-for-audience")} className="h-10 shrink-0 rounded-lg border border-[#dce7f0] bg-white px-[18px] text-xs font-semibold leading-[17px] text-[#635557] transition-all duration-200 ease-out hover:border-[#0085ff] hover:bg-[#0085ff] hover:text-white active:translate-y-0 max-[600px]:h-9 max-[600px]:px-[14px] max-[600px]:text-[11px]">
             4 · CRM for [audience]
           </button>
         </div>

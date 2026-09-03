@@ -1,6 +1,8 @@
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 export default function Blog() {
+  const navigate = useNavigate();
   /*
    * ============================================================
    * BLOG IMAGES
@@ -348,11 +350,26 @@ export default function Blog() {
           font-weight: 400;
 
           box-shadow: 0 3px 5px rgba(0, 0, 0, 0.04);
+
+          cursor: pointer;
+          transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+
+        .blog-category-button:hover {
+          background: #0085ff;
+          border-color: #0085ff;
+          color: #ffffff;
         }
 
         .blog-category-button.active {
           background: #0085ff;
           border-color: #0085ff;
+          color: #ffffff;
+        }
+
+        .blog-category-button.active:hover {
+          background: #000000;
+          border-color: #000000;
           color: #ffffff;
         }
 
@@ -1213,6 +1230,7 @@ export default function Blog() {
               <button
                 type="button"
                 className="blog-category-button crm active"
+                onClick={() => navigate("/blogs")}
               >
                 CRM Resources
               </button>
@@ -1220,6 +1238,7 @@ export default function Blog() {
               <button
                 type="button"
                 className="blog-category-button invoicing"
+                onClick={() => navigate("/invoicing-billing")}
               >
                 Invoicing Resources
               </button>
@@ -1227,6 +1246,7 @@ export default function Blog() {
               <button
                 type="button"
                 className="blog-category-button videos"
+                onClick={() => navigate("/how-to-guide")}
               >
                 Videos
               </button>
@@ -1234,6 +1254,7 @@ export default function Blog() {
               <button
                 type="button"
                 className="blog-category-button testimonials"
+                onClick={() => navigate("/customer-stories")}
               >
                 Testimonials
               </button>
@@ -1241,6 +1262,7 @@ export default function Blog() {
               <button
                 type="button"
                 className="blog-category-button support"
+                onClick={() => navigate("/freetools")}
               >
                 Support Guide
               </button>

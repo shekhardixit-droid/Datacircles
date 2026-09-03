@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import { ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function HowToGuide() {
+  const navigate = useNavigate();
   /* ============================================================
      IMAGE SLOTS
      ============================================================
@@ -206,11 +208,24 @@ export default function HowToGuide() {
           white-space: nowrap;
           cursor: pointer;
           opacity: 1;
+          transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+
+        .guide-resource-tab:hover {
+          background: #0085ff;
+          border-color: #0085ff;
+          color: #ffffff;
         }
 
         .guide-resource-tab.active {
           border-color: #0085ff;
           background: #0085ff;
+          color: #ffffff;
+        }
+
+        .guide-resource-tab.active:hover {
+          background: #000000;
+          border-color: #000000;
           color: #ffffff;
         }
 
@@ -1069,19 +1084,16 @@ export default function HowToGuide() {
 
           {/* TOP RESOURCE NAVIGATION */}
           <nav className="guide-resource-nav" aria-label="Guide sections">
-            <button type="button" className="guide-resource-tab active">
+            <button type="button" className="guide-resource-tab active" onClick={() => navigate("/how-to-guide")}>
               1 · How-To Guide
             </button>
-
-            <button type="button" className="guide-resource-tab">
+            <button type="button" className="guide-resource-tab" onClick={() => navigate("/checklist")}>
               2 · Checklist / Explainer
             </button>
-
-            <button type="button" className="guide-resource-tab">
+            <button type="button" className="guide-resource-tab" onClick={() => navigate("/comparison")}>
               3 · Comparison
             </button>
-
-            <button type="button" className="guide-resource-tab">
+            <button type="button" className="guide-resource-tab" onClick={() => navigate("/crm-for-audience")}>
               4 · CRM for [audience]
             </button>
           </nav>

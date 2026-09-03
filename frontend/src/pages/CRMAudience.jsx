@@ -1,12 +1,13 @@
 import React from "react";
 import { ChevronRight, ArrowRight, Check } from "lucide-react";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const resourceTabs = [
-  "1 · How-To Guide",
-  "2 · Checklist / Explainer",
-  "3 · Comparison",
-  "4 · CRM for [audience]",
+  { label: "1 · How-To Guide",        route: "/how-to-guide"     },
+  { label: "2 · Checklist / Explainer", route: "/checklist"       },
+  { label: "3 · Comparison",           route: "/comparison"       },
+  { label: "4 · CRM for [audience]",   route: "/crm-for-audience" },
 ];
 
 const relatedReads = [
@@ -54,6 +55,7 @@ const workflowItems = [
 ];
 
 export default function CRMAudience() {
+  const navigate = useNavigate();
   return (
     <div
       className="
@@ -86,19 +88,14 @@ export default function CRMAudience() {
         className="
           absolute
           left-1/2
-          top-[88px]
           z-[100]
-          w-[min(1100px,calc(100%-48px))]
           -translate-x-1/2
           overflow-x-auto
           whitespace-nowrap
           [scrollbar-width:none]
           [&::-webkit-scrollbar]:hidden
-          max-[900px]:top-[82px]
-          max-[900px]:w-[calc(100%-32px)]
-          max-[600px]:top-[78px]
-          max-[600px]:w-[calc(100%-24px)]
         "
+        style={{ top: 92, width: "min(1120px, calc(100% - 64px))" }}
       >
         <div
           className="
@@ -106,19 +103,18 @@ export default function CRMAudience() {
             w-max
             min-w-full
             items-center
-            justify-center
+            justify-start
             gap-2
-            max-[900px]:justify-start
           "
         >
-          {resourceTabs.map((tab, index) => {
+          {resourceTabs.map(({ label, route }, index) => {
             const active = index === 3;
-
             return (
               <button
-                key={tab}
+                key={label}
                 type="button"
                 aria-current={active ? "page" : undefined}
+                onClick={() => navigate(route)}
                 className={`
                   flex
                   h-10
@@ -160,7 +156,7 @@ export default function CRMAudience() {
                   }
                 `}
               >
-                {tab}
+                {label}
               </button>
             );
           })}
