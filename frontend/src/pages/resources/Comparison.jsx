@@ -577,7 +577,7 @@ export default function Comparison() {
         <div className="mt-7 flex justify-center gap-3 max-[600px]:flex-col max-[600px]:items-center">
           <button
             type="button"
-            className="h-[50px] rounded-[25px] bg-white px-7 text-[13px] font-semibold text-[#0085ff] transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:text-white max-[600px]:w-[190px]"
+            className="h-[50px] rounded-[25px] border border-white bg-transparent px-7 text-[13px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-[#0085ff] max-[600px]:w-[190px]"
           >
             Create Account
           </button>

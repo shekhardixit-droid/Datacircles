@@ -311,12 +311,13 @@ function Hero() {
               font-medium
               leading-[54px]
               tracking-[-2.7px]
+              items-center
               text-[#231014]
             "
           >
             From first enquiry to final payment,
             <br />
-            all in once place
+                         all in once place
           </h1>
 
         </div>

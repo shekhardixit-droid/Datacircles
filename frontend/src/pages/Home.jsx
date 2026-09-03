@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
 import CRMPrice from "../components/CRMPrice";
 
@@ -3348,6 +3349,12 @@ function Home() {
   `}</style>
 
 </section>
+
+
+      {/* =====================================================
+          GLOBAL FOOTER — LAST ELEMENT ON THE PAGE
+      ====================================================== */}
+      <Footer />
 
 </main>
   );
