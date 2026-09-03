@@ -4,23 +4,22 @@ const footerSections = [
   {
     title: "Product",
     links: [
-      "Lorem ipsum dolor",
-      "Lorem ipsum dolor",
-      "Lorem ipsum dolor",
-      "Lorem ipsum dolor",
-      "Lorem ipsum dolor",
-      "Lorem ipsum dolor",
-      "Lorem ipsum dolor",
+      { label: "CRM", route: "/product-crm" },
+      { label: "Lead capture", route: "" },
+      { label: "Follow-ups & tasks", route: "" },
+      { label: "Invoicing & billing", route: "/invoicing-billing" },
+      { label: "Payments", route: "/payment1" },
+      { label: "Integrations", route: "" },
+      { label: "Platform overview", route: "/platform-overview" },
     ],
   },
   {
     title: "Solutions",
     links: [
-      "Lorem ipsum dolor",
-      "Lorem ipsum dolor",
-      "Lorem ipsum dolor",
-      "Lorem ipsum dolor",
-      "Lorem ipsum dolor",
+      { label: "Retailers & shops", route: "/solutions" },
+      { label: "Agencies & services",  route: "" },
+      { label: "Consultants & freelancers", route: "" },
+      { label: "Distributors & wholesale", route: "" },
     ],
   },
   {
@@ -76,13 +75,17 @@ const Footer = () => {
 
             {/* Description */}
             <p className="dc-footer-description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do eiusmod tempor.
+             OFFICE
+
+Regd. Office No. 721, 7th Floor,
+Centura Square IT Park, Road No. 27,
+Wagle Estate, Thane 400604,
+Maharashtra.
             </p>
 
             {/* Phone */}
             <p className="dc-footer-phone">
-              (000) 000 0000
+              +91 98922 97764
             </p>
 
             {/* Social */}
@@ -129,16 +132,36 @@ const Footer = () => {
               <div className="dc-footer-links">
                 {section.links.map((link, index) => {
                   const isRouteLink =
-                    (section.title === "Resources" ||
-                      section.title === "Company") &&
-                    typeof link === "object";
+                    typeof link === "object" &&
+                    (section.title === "Product" ||
+                      section.title === "Solutions" ||
+                      section.title === "Resources" ||
+                      section.title === "Company");
 
                   return (
                     <a
                       href={isRouteLink ? link.route : "#"}
                       key={`${section.title}-${index}`}
                     >
-                      {isRouteLink ? link.label : link}
+                      {isRouteLink ? (
+                        <>
+                          <span>{link.label}</span>
+                          {link.sub && (
+                            <span
+                              style={{
+                                fontSize: "inherit",
+                                fontWeight: 400,
+                                color: "#727687",
+                                marginLeft: 4,
+                              }}
+                            >
+                              {link.sub}
+                            </span>
+                          )}
+                        </>
+                      ) : (
+                        link
+                      )}
                     </a>
                   );
                 })}

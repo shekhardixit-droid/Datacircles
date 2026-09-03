@@ -99,6 +99,34 @@ const PRODUCT_ITEMS = {
   ],
 };
 
+const SOLUTION_ITEMS = [
+  {
+    label: "Retailers & shops",
+    sub: "Counter sales to follow-ups",
+    route: "/solutions",
+    image: "",
+  },
+  {
+    label: "Agencies & services",
+    sub: "Proposals to paid",
+    route: "",
+    image: "",
+  },
+  {
+    label: "Consultants & freelancers",
+    sub: "Simple CRM + billing",
+    route: "",
+    image: "",
+  },
+  {
+    label: "Distributors & wholesale",
+    sub: "Orders, credit & collections",
+    route: "",
+    image: "",
+  },
+];
+
+
 function ResourceImageSlot({ item }) {
   return (
     <div
@@ -123,6 +151,199 @@ function ResourceImageSlot({ item }) {
           }}
         />
       )}
+    </div>
+  );
+}
+
+function SolutionDropdown({ onNavigate }) {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: "calc(100% + 12px)",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: 760,
+        maxWidth: "calc(100vw - 32px)",
+        background: "rgba(255, 255, 255, 0.72)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        borderRadius: 16,
+        boxShadow: "none",
+        border: "1px solid rgba(255, 255, 255, 0.35)",
+        padding: "20px 20px 16px",
+        zIndex: 99999,
+        display: "flex",
+        gap: 12,
+        fontFamily: "Inter, Arial, sans-serif",
+      }}
+    >
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 700,
+            color: "#888",
+            letterSpacing: 1,
+            textTransform: "uppercase",
+            marginBottom: 10,
+          }}
+        >
+          BY BUSINESS
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            columnGap: 18,
+            rowGap: 2,
+          }}
+        >
+          {SOLUTION_ITEMS.map((item) => (
+            <button
+              key={item.label}
+              type="button"
+              onClick={() => item.route && onNavigate(item.route)}
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 10,
+                width: "100%",
+                minWidth: 0,
+                padding: "8px 10px",
+                borderRadius: 8,
+                border: "none",
+                background: "transparent",
+                cursor: item.route ? "pointer" : "default",
+                textAlign: "left",
+                marginBottom: 2,
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background =
+                  "rgba(244, 248, 255, 0.30)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+              }}
+            >
+              <ResourceImageSlot item={item} />
+
+              <div style={{ minWidth: 0, paddingTop: 2 }}>
+                <div
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "#111",
+                    lineHeight: "17px",
+                    transition: "color 0.15s",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (item.route) e.currentTarget.style.color = "#0085FF";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "#111";
+                  }}
+                >
+                  {item.label}
+
+                  <span
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 400,
+                      color: "#777",
+                      marginLeft: 4,
+                    }}
+                  >
+                    {item.sub}
+                  </span>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ width: 216, flexShrink: 0 }}>
+        <div
+          style={{
+            background: "rgba(232, 240, 254, 0.48)",
+            borderRadius: 12,
+            padding: "14px 14px 12px",
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            border: "1px solid rgba(255, 255, 255, 0.30)",
+          }}
+        >
+          <div
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: 8,
+              background: "rgba(0, 133, 255, 0.15)",
+              marginBottom: 10,
+              overflow: "hidden",
+              flexShrink: 0,
+            }}
+          />
+
+          <div
+            style={{
+              fontSize: 10,
+              fontWeight: 700,
+              color: "#0085FF",
+              textTransform: "uppercase",
+              letterSpacing: 0.5,
+              marginBottom: 4,
+            }}
+          >
+            MAKING THE SWITCH
+          </div>
+
+          <div
+            style={{
+              fontSize: 13,
+              fontWeight: 700,
+              color: "#111",
+              lineHeight: "17px",
+              marginBottom: 6,
+            }}
+          >
+            Moving from Excel or Tally?
+          </div>
+
+          <div
+            style={{
+              fontSize: 11,
+              color: "#555",
+              lineHeight: "15px",
+              marginBottom: 10,
+              flex: 1,
+            }}
+          >
+            We import your customers and invoices in minutes — nothing lost.
+          </div>
+
+          <button
+            type="button"
+            onClick={() => onNavigate("/customer-stories")}
+            style={{
+              background: "none",
+              border: "none",
+              padding: 0,
+              fontSize: 12,
+              fontWeight: 700,
+              color: "#0085FF",
+              cursor: "pointer",
+              textAlign: "left",
+            }}
+          >
+            Read a switch story
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -665,6 +886,8 @@ function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
   const [productPinned, setProductPinned] = useState(false);
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [solutionsPinned, setSolutionsPinned] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [resourcesPinned, setResourcesPinned] = useState(false);
 
@@ -703,10 +926,50 @@ function Navbar() {
     });
   };
 
+  const handleSolutionsEnter = () => {
+    clearTimeout(closeTimer.current);
+    setProductOpen(false);
+    setProductPinned(false);
+    setSolutionsOpen(false);
+    setSolutionsPinned(false);
+    setResourcesOpen(false);
+    setResourcesPinned(false);
+    setSolutionsOpen(true);
+  };
+
+  const handleSolutionsLeave = () => {
+    if (solutionsPinned) return;
+
+    closeTimer.current = setTimeout(() => {
+      setSolutionsOpen(false);
+    }, 150);
+  };
+
+  const handleSolutionsClick = () => {
+    clearTimeout(closeTimer.current);
+
+    setSolutionsOpen((current) => {
+      const next = !current;
+
+      if (next) {
+        setProductOpen(false);
+        setProductPinned(false);
+        setResourcesOpen(false);
+        setResourcesPinned(false);
+      }
+
+      setSolutionsPinned(next);
+
+      return next;
+    });
+  };
+
   const handleResourcesEnter = () => {
     clearTimeout(closeTimer.current);
     setProductOpen(false);
     setProductPinned(false);
+    setSolutionsOpen(false);
+    setSolutionsPinned(false);
     setResourcesOpen(true);
   };
 
@@ -727,6 +990,8 @@ function Navbar() {
       if (next) {
         setProductOpen(false);
         setProductPinned(false);
+        setSolutionsOpen(false);
+        setSolutionsPinned(false);
       }
 
       setResourcesPinned(next);
@@ -752,12 +1017,13 @@ function Navbar() {
           mx-auto
           flex
           h-[56px]
-          w-fit
+          w-max
           max-w-[calc(100vw-32px)]
           items-center
+          gap-[28px]
           rounded-full
           bg-black
-          px-[4px]
+          px-[12px]
           font-inter
           max-[600px]:h-[52px]
           max-[400px]:h-[50px]
@@ -766,7 +1032,7 @@ function Navbar() {
         {/* Logo */}
         <a
           href="/"
-          className="ml-[8px] flex w-[180px] shrink-0 items-center max-[600px]:ml-[7px] max-[600px]:w-auto"
+          className="flex w-[180px] shrink-0 items-center max-[600px]:ml-[7px] max-[600px]:w-auto"
         >
           <img
             src={LOGO_URL}
@@ -815,12 +1081,32 @@ function Navbar() {
           </div>
 
           {/* SOLUTIONS */}
-          <a
-            href="/solutions"
-            className="whitespace-nowrap text-[14px] font-normal leading-none text-white"
+          <div
+            className="relative z-[9999]"
+            onMouseEnter={handleSolutionsEnter}
+            onMouseLeave={handleSolutionsLeave}
           >
-            Solutions
-          </a>
+            <button
+              type="button"
+              onClick={handleSolutionsClick}
+              className="flex items-center whitespace-nowrap text-[14px] font-normal leading-none text-white"
+              style={{
+                color: solutionsOpen ? "#0085FF" : undefined,
+              }}
+            >
+              <span>Solutions</span>
+            </button>
+
+            {solutionsOpen && (
+              <div
+                className="absolute left-1/2 top-full z-[99999] -translate-x-1/2 pt-[12px]"
+                onMouseEnter={handleSolutionsEnter}
+                onMouseLeave={handleSolutionsLeave}
+              >
+                <SolutionDropdown onNavigate={handleNavigate} />
+              </div>
+            )}
+          </div>
 
           {/* RESOURCES */}
           <div
@@ -859,7 +1145,7 @@ function Navbar() {
         </div>
 
         {/* Desktop Login + Book a demo */}
-        <div className="ml-[12px] mr-[4px] flex shrink-0 items-center gap-[12px] max-[600px]:hidden">
+        <div className="flex shrink-0 items-center gap-[28px] max-[600px]:hidden">
           <a
             href="/login"
             className="whitespace-nowrap text-[14px] font-normal leading-none text-white"
@@ -928,13 +1214,28 @@ function Navbar() {
               )}
             </div>
 
-            <a
-              href="/solutions"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-xl px-4 py-3 text-[14px] text-white transition hover:bg-white/10"
-            >
-              Solutions
-            </a>
+            {/* Solutions mobile items */}
+            <div className="rounded-xl px-4 py-2">
+              <div className="mb-1 text-[11px] font-semibold text-white/50">
+                Solutions
+              </div>
+
+              {SOLUTION_ITEMS.map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  disabled={!item.route}
+                  onClick={() => {
+                    if (!item.route) return;
+                    setMobileOpen(false);
+                    navigate(item.route);
+                  }}
+                  className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
 
             {/* Resources mobile items */}
             <div className="rounded-xl px-4 py-2">

@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 
  const teamMembers = [
@@ -714,6 +715,7 @@ export default function AboutUs() {
 </section>
   
 
+      <Footer />
     </div>
   );
 }

@@ -123,43 +123,70 @@ export default function Blog() {
 
         .blog-hero-grid {
           position: absolute;
-          top: 313px;
+          top: 430px;
           left: 50%;
           transform: translateX(-50%);
-
           width: 1340px;
-          height: 1078px;
-
+          height: 820px;
           pointer-events: none;
-          opacity: 1;
-
-          background-image:
-            linear-gradient(
-              #ffffff 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              90deg,
-              #ffffff 1px,
-              transparent 1px
-            );
-
-          background-size: 135px 135px;
-
-          mask-image: linear-gradient(
-            to bottom,
-            #000000 0%,
-            #000000 80%,
-            transparent 100%
-          );
-
-          -webkit-mask-image: linear-gradient(
-            to bottom,
-            #000000 0%,
-            #000000 80%,
-            transparent 100%
-          );
+          z-index: 1;
+          overflow: hidden;
         }
+
+        .blog-crystal-tile {
+          position: absolute;
+          width: 156px;
+          height: 156px;
+          border-radius: 7px;
+          border: 1px solid rgba(255, 255, 255, 0.42);
+          background: linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.20),
+            rgba(255, 255, 255, 0.055)
+          );
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.28),
+            0 12px 32px rgba(66, 143, 208, 0.08);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Multiple staggered crystal tiles across the whole blue region */
+        .blog-crystal-tile:nth-child(1)  { left: 0;    top: -65px; }
+        .blog-crystal-tile:nth-child(2)  { left: 170px; top: 35px; }
+        .blog-crystal-tile:nth-child(3)  { left: 340px; top: -25px; }
+        .blog-crystal-tile:nth-child(4)  { left: 510px; top: 55px; }
+        .blog-crystal-tile:nth-child(5)  { left: 680px; top: -35px; }
+        .blog-crystal-tile:nth-child(6)  { left: 850px; top: 45px; }
+        .blog-crystal-tile:nth-child(7)  { left: 1020px; top: -20px; }
+        .blog-crystal-tile:nth-child(8)  { left: 1184px; top: 60px; }
+
+        .blog-crystal-tile:nth-child(9)  { left: 55px;  top: 135px; }
+        .blog-crystal-tile:nth-child(10) { left: 225px; top: 215px; }
+        .blog-crystal-tile:nth-child(11) { left: 395px; top: 155px; }
+        .blog-crystal-tile:nth-child(12) { left: 565px; top: 235px; }
+        .blog-crystal-tile:nth-child(13) { left: 735px; top: 145px; }
+        .blog-crystal-tile:nth-child(14) { left: 905px; top: 225px; }
+        .blog-crystal-tile:nth-child(15) { left: 1075px; top: 155px; }
+        .blog-crystal-tile:nth-child(16) { left: 1184px; top: 245px; }
+
+        .blog-crystal-tile:nth-child(17) { left: 0;    top: 330px; }
+        .blog-crystal-tile:nth-child(18) { left: 170px; top: 405px; }
+        .blog-crystal-tile:nth-child(19) { left: 340px; top: 345px; }
+        .blog-crystal-tile:nth-child(20) { left: 510px; top: 425px; }
+        .blog-crystal-tile:nth-child(21) { left: 680px; top: 335px; }
+        .blog-crystal-tile:nth-child(22) { left: 850px; top: 415px; }
+        .blog-crystal-tile:nth-child(23) { left: 1020px; top: 350px; }
+        .blog-crystal-tile:nth-child(24) { left: 1184px; top: 430px; }
+
+        .blog-crystal-tile:nth-child(25) { left: 55px;  top: 525px; }
+        .blog-crystal-tile:nth-child(26) { left: 225px; top: 600px; }
+        .blog-crystal-tile:nth-child(27) { left: 395px; top: 540px; }
+        .blog-crystal-tile:nth-child(28) { left: 565px; top: 620px; }
+        .blog-crystal-tile:nth-child(29) { left: 735px; top: 530px; }
+        .blog-crystal-tile:nth-child(30) { left: 905px; top: 610px; }
+        .blog-crystal-tile:nth-child(31) { left: 1075px; top: 545px; }
+        .blog-crystal-tile:nth-child(32) { left: 1184px; top: 625px; }
 
         /* ============================================================
            HERO (untouched)
@@ -962,6 +989,17 @@ export default function Blog() {
         }
 
         @media (max-width: 1000px) {
+          .blog-hero-grid {
+            left: 24px;
+            transform: none;
+            width: calc(100% - 48px);
+          }
+
+          .blog-crystal-tile {
+            width: 120px;
+            height: 120px;
+          }
+
           .blog-hero-title {
             width: 720px;
             font-size: 43px;
@@ -1170,7 +1208,12 @@ export default function Blog() {
               ========================================================== */}
 
           <div className="blog-hero-background" />
-          <div className="blog-hero-grid" />
+
+          <div className="blog-hero-grid" aria-hidden="true">
+            {Array.from({ length: 32 }).map((_, index) => (
+              <div className="blog-crystal-tile" key={index} />
+            ))}
+          </div>
 
           {/* ==========================================================
               HERO

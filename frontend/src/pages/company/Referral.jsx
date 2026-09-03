@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 export default function Referral() {
   const [openFaq, setOpenFaq] = useState(null);
@@ -452,6 +453,7 @@ export default function Referral() {
         
       </main>
 
+      <Footer />
     </div>
   );
 }

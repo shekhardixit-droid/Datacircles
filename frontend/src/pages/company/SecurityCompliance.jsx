@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 
 export default function SecurityCompliance() {
@@ -497,6 +498,7 @@ export default function SecurityCompliance() {
 
 
       </main>
+      <Footer />
     </div>
   );
 }
