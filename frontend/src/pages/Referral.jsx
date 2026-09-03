@@ -379,7 +379,46 @@ export default function Referral() {
   </div>
 </section>
 
+{/* =========================
+    SECTION 07 — FINAL CTA
+========================== */}
+<section className="mx-auto mt-16 w-[100%]  bg-[#0085FF] sm:mt-20 md:mt-24">
+  <div className="mx-auto flex w-[90%] flex-col items-center py-10 text-center sm:py-12 md:py-14">
 
+    
+    {/* Heading */}
+    <h2 className="mt-6 font-inter text-[30px] font-semibold leading-[1.15] tracking-[-0.8px] text-white sm:text-[34px]">
+      Know a business that could use this?
+    </h2>
+
+    {/* Description */}
+    <p className="mt-3 font-inter text-[13px] font-normal leading-[1.6] text-white/80 sm:text-[14px]">
+      Open your settings, grab your code, and share it. You both save 3 months.
+    </p>
+
+    {/* Buttons */}
+    <div className="mt-5 flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
+
+      {/* Primary Button */}
+      <button
+        type="button"
+        className="flex h-[41px] w-fit items-center justify-center rounded-[9px] bg-[#0085FF] px-5 font-inter text-[13px] border border-white/60 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+      >
+        Go to my referral code
+      </button>
+
+      {/* Secondary Button */}
+      <button
+        type="button"
+        className="flex h-[41px] w-fit items-center justify-center rounded-[9px] border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:border-white hover:bg-white hover:text-[#0085FF]"
+      >
+        Start free
+      </button>
+
+    </div>
+
+  </div>
+</section>
         
       </main>
 
