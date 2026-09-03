@@ -401,17 +401,48 @@ export default function Referral() {
 
       {/* Primary Button */}
       <button
-        type="button"
-        className="flex h-[41px] w-fit items-center justify-center rounded-[9px] bg-[#0085FF] px-5 font-inter text-[13px] border border-white/60 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
-      >
+        className="
+              h-[50px]
+              rounded-[25px]
+              border
+              border-white
+              bg-transparent
+              px-7
+              text-[13px]
+              font-semibold
+              text-white
+              transition-all
+              duration-200
+              ease-out
+              hover:-translate-y-0.5
+              hover:bg-white
+              hover:text-[#0085ff]
+              max-[600px]:w-[190px]
+            ">
         Go to my referral code
       </button>
 
       {/* Secondary Button */}
       <button
-        type="button"
-        className="flex h-[41px] w-fit items-center justify-center rounded-[9px] border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:border-white hover:bg-white hover:text-[#0085FF]"
-      >
+       className="
+              h-[50px]
+              rounded-[25px]
+              border
+              border-white
+              bg-transparent
+              px-7
+              text-[13px]
+              font-semibold
+              text-white
+              transition-all
+              duration-200
+              ease-out
+              hover:-translate-y-0.5
+              hover:bg-white
+              hover:text-[#0085ff]
+              max-[600px]:w-[190px]
+            "
+            >
         Start free
       </button>
 
