@@ -6,22 +6,23 @@ import ProductCRM from "./pages/ProductCRM";
 import Payment1 from "./pages/Payment1";
 import Payment2 from "./pages/Payment2";
 import InvoicingBilling from "./pages/InvoicingBilling";
-import Blog from "./pages/Blog";
-import HowToGuide from "./pages/HowToGuide";
+import Blog from "./pages/resources/Blog";
+import HowToGuide from "./pages/resources/HowToGuide";
 import PlatformOverview2 from "./pages/PlatformOverview2";
-import FreeTools from "./pages/FreeTools";
-import CustomerStories from "./pages/CustomerStories";
-import SubDetails from "./pages/SubDetails";
+import FreeTools from "./pages/resources/FreeTools";
+import CustomerStories from "./pages/resources/CustomerStories";
+import SubDetails from "./pages/resources/SubDetails";
 import CreateInvoice from "./components/invoice/CreateInvoice";
-import ToolsMain from "./pages/ToolsMain";
-import ChecklistExplainer from "./pages/ChecklistExplainer";
-import Comparison from "./pages/Comparison";
-import CRMAudience from "./pages/CRMAudience";
-import AboutUs from "./pages/AboutUs";
-import SecurityCompliance from "./pages/SecurityCompliance";
-import Careers from "./pages/Careers";
-import ContactUs from "./pages/ContactUs";
-import Referral from "./pages/Referral";
+import ToolsMain from "./pages/resources/ToolsMain";
+import ChecklistExplainer from "./pages/resources/ChecklistExplainer";
+import Comparison from "./pages/resources/Comparison";
+import CRMAudience from "./pages/resources/CRMAudience";
+import AboutUs from "./pages/company/AboutUs";
+import SecurityCompliance from "./pages/company/SecurityCompliance";
+import Careers from "./pages/company/Careers";
+import ContactUs from "./pages/company/ContactUs";
+import Referral from "./pages/company/Referral";
+import SolutionMain from "./pages/solutions/SolutionMain";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
       <Route path="/careers" element={<Careers/>} />
       <Route path="/contact" element={<ContactUs/>} />
       <Route path="/referral" element={<Referral/>} />
+      <Route path="/solutions" element={<SolutionMain/>} />
 
     </Routes>
   );

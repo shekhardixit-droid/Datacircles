@@ -46,14 +46,14 @@ export default function SolutionMain() {
             type="button"
             className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
           >
-            Get Started
+            Start free
           </button>
 
           <button
             type="button"
             className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
           >
-            Learn More
+          Book a Demo
           </button>
         </div>
 
