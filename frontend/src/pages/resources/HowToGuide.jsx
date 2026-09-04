@@ -1260,7 +1260,8 @@ export default function HowToGuide() {
                     to paid.
                   </p>
 
-                  <button type="button" className="guide-article-cta-button">
+                  
+                  <button type="button" className="guide-article-cta-button" onClick={() => window.location.href = "/pricing"}>
                     Start free
                   </button>
                 </div>
