@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 const footerSections = [
   {
@@ -45,11 +45,10 @@ const footerSections = [
   },
   {
     title: "Legal",
-    links: ["Terms & Conditions", "Privacy Policy", "Refund & Cancellation"],
     links: [
       { label: "Terms & Conditions", route: "/terms-of-service" },
       { label: "Privacy Policy", route: "/privacy-policy" },
-      { label: "Security & Compliance", route: "/security-compliance" },
+      { label: "Refund & Cancellation", route: "/refund-cancellation" },
     ],
   },
 ];
@@ -77,7 +76,7 @@ const LinkedInIcon = () => (
 
 const Footer = () => {
   return (
-    <footer className="relative w-[100%] overflow-hidden bg-black text-white">
+    <footer className="relative w-full overflow-hidden bg-black text-white">
       <div className="mx-auto w-full max-w-[1440px] pb-10 pt-[100px] font-inter sm:px-8 lg:px-6">
         {/* TOP FOOTER */}
         <div className="grid grid-cols-2 gap-x-5 gap-y-[45px] min-[421px]:gap-x-7 min-[421px]:gap-y-[45px] lg:grid-cols-3 lg:gap-y-[55px] xl:grid-cols-[minmax(330px,2fr)_repeat(5,minmax(120px,1fr))] xl:gap-x-[42px]">
@@ -139,35 +138,39 @@ const Footer = () => {
 
               <div className="flex flex-col gap-3 sm:gap-[14px]">
                 {section.links.map((link, index) => {
-                  const isRouteLink =
+                  const hasRoute =
                     typeof link === "object" &&
-                    ["Product", "Solutions", "Resources", "Company"].includes(
-                      section.title
-                    );
-                    (section.title === "Product" ||
-                      section.title === "Solutions" ||
-                      section.title === "Resources" ||
-                      section.title === "Company" ||
-                      section.title === "Legal");
+                    typeof link.route === "string" &&
+                    link.route.trim() !== "";
 
-                  return (
-                    <a
-                      href={isRouteLink ? link.route : "#"}
+                  const label =
+                    typeof link === "object" ? link.label : link;
+
+                  const route =
+                    typeof link === "object" ? link.route : "";
+
+                  return hasRoute ? (
+                    <Link
+                      to={route}
                       key={`${section.title}-${index}`}
                       className="text-[12px] font-normal leading-[1.25] text-[#727687] no-underline transition-colors duration-200 hover:text-[#0085FF] sm:text-[13px] lg:text-[16px]"
                     >
-                      {isRouteLink ? (
-                        <>
-                          <span>{link.label}</span>
-                          {link.sub && (
-                            <span className="ml-1 text-inherit font-normal">
-                              {link.sub}
-                            </span>
-                          )}
-                        </>
-                      ) : (
-                        link
+                      <span>{label}</span>
+
+                      {typeof link === "object" && link.sub && (
+                        <span className="ml-1 font-normal text-inherit">
+                          {link.sub}
+                        </span>
                       )}
+                    </Link>
+                  ) : (
+                    <a
+                      href="#"
+                      key={`${section.title}-${index}`}
+                      className="text-[12px] font-normal leading-[1.25] text-[#727687] no-underline transition-colors duration-200 hover:text-[#0085FF] sm:text-[13px] lg:text-[16px]"
+                      onClick={(event) => event.preventDefault()}
+                    >
+                      {label}
                     </a>
                   );
                 })}
@@ -185,7 +188,7 @@ const Footer = () => {
         </div>
 
         {/* LARGE BRAND IMAGE */}
-        <div className="mt-8  -mb-10 w-[100%] overflow-hidden select-none pointer-events-none sm:mt-8 lg:mt-11 xl:mt-14">
+        <div className="pointer-events-none -mb-10 mt-8 w-full select-none overflow-hidden sm:mt-8 lg:mt-11 xl:mt-14">
           <img
             src="/src/assets/DataCircles®.svg"
             alt="DataCircles"
