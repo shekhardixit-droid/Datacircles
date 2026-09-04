@@ -3,6 +3,10 @@ const Invoice = require("../models/Invoice");
 
 const router = express.Router();
 
+router.get("/", async (req, res) => {
+  res.json({ success: true, message: "Invoices API is working" });
+});
+
 router.post("/", async (req, res) => {
   try {
     const invoice = await Invoice.create(req.body);
