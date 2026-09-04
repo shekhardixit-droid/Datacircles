@@ -12,7 +12,7 @@ connectDB();
 
 app.use(cors({
   origin: [
-    "https://datacircles.vercel.app",
+    "https://datacircless.vercel.app",
     "http://localhost:5173",
     "http://localhost:3000",
   ],
