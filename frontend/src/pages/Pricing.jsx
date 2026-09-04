@@ -1,6 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 
 export default function Pricing() {
+  const [billingPeriod, setBillingPeriod] = useState("annual");
+
   return (
     <div className="min-h-screen w-full bg-white text-[#37413D]">
       <section className="relative mt-5 w-full">
@@ -23,7 +28,7 @@ export default function Pricing() {
 </div>
 
         {/* Main Text */}
-        <div className="mt-6 flex h-auto whitespace-nowrap w-full max-w-[700px] items-center justify-center text-center">
+        <div className="mt-6 flex h-auto w-full max-w-[700px] items-center justify-center text-center">
           <h1 className="font-inter text-[32px] font-semibold leading-[1.1] text-black sm:text-[40px] md:text-[48px]">
             One price for CRM and invoicing together.
            
@@ -38,17 +43,27 @@ export default function Pricing() {
         </div>
 
         {/* Billing Toggle */}
-<div className="mx-auto mt-4 flex h-[38px] w-fit items-center rounded-full border border-[#C9D3CE] bg-[#EEF2F0] p-1">
+<div className="mx-auto mt-4 gap-1 flex h-[38px] w-fit items-center rounded-full border border-[#C9D3CE] bg-[#EEF2F0] p-1">
   <button
     type="button"
-    className="flex h-[30px] items-center justify-center rounded-full px-4 font-inter text-[12px] font-semibold text-[#52605A] transition-all duration-200 hover:text-[#0085FF]"
+    onClick={() => setBillingPeriod("monthly")}
+    className={`flex h-[30px] cursor-pointer items-center justify-center rounded-full px-4 font-inter text-[12px] font-semibold transition-all duration-200 active:scale-95 ${
+      billingPeriod === "monthly"
+        ? "bg-white text-[#0085FF] shadow-sm"
+        : "text-[#52605A] hover:bg-white/60 hover:text-[#0085FF]"
+    }`}
   >
     Monthly
   </button>
 
   <button
     type="button"
-    className="flex h-[30px] items-center justify-center gap-2 rounded-full bg-white px-4 font-inter text-[12px] font-semibold text-[#0085FF] shadow-sm transition-all duration-200 hover:bg-[#0085FF] hover:text-white"
+    onClick={() => setBillingPeriod("annual")}
+    className={`flex h-[30px] cursor-pointer items-center justify-center gap-2 rounded-full px-4 font-inter text-[12px] font-semibold transition-all duration-200 active:scale-95 ${
+      billingPeriod === "annual"
+        ? "bg-white text-[#0085FF] shadow-sm"
+        : "text-[#52605A] hover:bg-white/60 hover:text-[#0085FF]"
+    }`}
   >
     <span>Annual</span>
     <span className="whitespace-nowrap text-[11px]">
@@ -81,6 +96,8 @@ export default function Pricing() {
             "For solo owners and small teams getting organised.",
           price: "₹199",
           monthly: "₹250 if monthly",
+          annualPrice: "₹199",
+          monthlyPrice: "₹250",
           features: [
             "1 sales pipeline",
             "10 custom fields and 10 tags",
@@ -96,6 +113,8 @@ export default function Pricing() {
             "For teams running more than one sales process.",
           price: "₹399",
           monthly: "₹450 if monthly",
+          annualPrice: "₹399",
+          monthlyPrice: "₹450",
           popular: true,
           features: [
             "3 sales pipelines",
@@ -113,6 +132,8 @@ export default function Pricing() {
             "For larger teams that need room to work.",
           price: "₹599",
           monthly: "₹650 if monthly",
+          annualPrice: "₹599",
+          monthlyPrice: "₹650",
           features: [
             "5 sales pipelines",
             "50 custom fields and 50 tags",
@@ -153,7 +174,7 @@ export default function Pricing() {
           {/* Price */}
           <div className="mt-5 flex items-baseline gap-1">
             <span className="font-inter text-[34px] font-semibold leading-none tracking-[-1px] text-black">
-              {plan.price}
+              {billingPeriod === "annual" ? plan.annualPrice : plan.monthlyPrice}
             </span>
 
             <span className="font-inter text-[12px] text-[#8A9691]">
@@ -163,7 +184,9 @@ export default function Pricing() {
 
           {/* Billing */}
           <p className="mt-2 font-inter text-[12px] font-semibold text-[#0085FF]">
-            Billed annually · {plan.monthly}
+            {billingPeriod === "annual"
+              ? `Billed annually · ${plan.monthly}`
+              : "Billed monthly"}
           </p>
 
           <p className="mt-1 font-inter text-[11px] text-[#8A9691]">
@@ -270,10 +293,10 @@ export default function Pricing() {
 </section>
 
 {/* Container 20 */}
-<div className="mx-auto mt-15 flex w-[60%] flex-col items-center justify-center rounded-[14px]  bg-white px-5 py-6 text-center sm:py-7">
+<div className="mx-auto mt-15 flex w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] flex-col items-center justify-center rounded-[14px]  bg-white px-5 py-6 text-center sm:py-7">
 
   {/* Heading */}
-  <h3 className="font-inter text-[50px] font-semibold tracking-[=0.4] leading-[1.3] text-black">
+  <h3 className="font-inter text-[28px] sm:text-[36px] md:text-[42px] lg:text-[50px] font-semibold tracking-[=0.4] leading-[1.3] text-black">
     Larger team, or something<br/> specific in mind?
   </h3>
 
@@ -954,21 +977,6 @@ export default function Pricing() {
 <section className="mx-auto w-[95%] rounded-[20px] bg-[#F6F9F7]">
   <div className="mx-auto w-[90%] py-10 sm:py-12 md:py-14">
 
-    {/* Section Label */}
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="flex h-[18px] min-w-[29px] items-center justify-center rounded-[6px] bg-[#0085FF] px-2 font-inter text-[10px] font-semibold text-white">
-        10
-      </span>
-
-      <span className="font-inter text-[12px] font-semibold text-[#37413D]">
-        Pricing FAQ
-      </span>
-
-      <span className="font-inter text-[11px] text-[#8A9691]">
-        the objections that actually stop the sale
-      </span>
-    </div>
-
     {/* Heading */}
     <h2 className="mt-5 font-inter text-[26px] font-semibold leading-[1.2] tracking-[-0.7px] text-[#37413D] sm:text-[30px]">
       Questions people ask before they pay.
@@ -1074,6 +1082,46 @@ export default function Pricing() {
           </div>
         </details>
       ))}
+    </div>
+
+  </div>
+</section>
+
+{/* =========================
+    SECTION 11 — FINAL CTA
+========================== */}
+<section className="mx-auto mt-16 w-[100%] bg-[#0085FF] sm:mt-20 md:mt-24">
+  <div className="mx-auto flex w-[90%] flex-col items-center py-10 text-center sm:py-12 md:py-14">
+
+    {/* Heading */}
+    <h2 className="font-inter text-[30px] font-semibold leading-[1.15] tracking-[-0.8px] text-white sm:text-[34px]">
+      Try everything free for 7 days.
+    </h2>
+
+    {/* Description */}
+    <p className="mt-3 font-inter text-[13px] font-normal leading-[1.6] text-white/80 sm:text-[14px]">
+      No credit card, no setup fee, and a real person on the phone if you get stuck.
+    </p>
+
+    {/* Buttons */}
+    <div className="mt-5 flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
+
+      {/* Start Free */}
+      <button
+        type="button"
+         className="flex h-[41px] w-fit items-center justify-center rounded-full border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:border-white hover:bg-white hover:text-[#0085FF]"
+      >
+        Start free
+      </button>
+
+      {/* WhatsApp */}
+      <button
+        type="button"
+        className="flex h-[41px] w-fit items-center justify-center rounded-full border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:border-white hover:bg-white hover:text-[#0085FF]"
+      >
+        Talk to us on WhatsApp
+      </button>
+
     </div>
 
   </div>
