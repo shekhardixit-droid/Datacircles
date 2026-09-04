@@ -45,15 +45,12 @@ const footerSections = [
   },
   {
     title: "Legal",
-<<<<<<< Updated upstream
     links: ["Terms & Conditions", "Privacy Policy", "Refund & Cancellation"],
-=======
     links: [
       { label: "Terms & Conditions", route: "/terms-of-service" },
       { label: "Privacy Policy", route: "/privacy-policy" },
       { label: "Security & Compliance", route: "/security-compliance" },
     ],
->>>>>>> Stashed changes
   },
 ];
 
@@ -144,17 +141,14 @@ const Footer = () => {
                 {section.links.map((link, index) => {
                   const isRouteLink =
                     typeof link === "object" &&
-<<<<<<< Updated upstream
                     ["Product", "Solutions", "Resources", "Company"].includes(
                       section.title
                     );
-=======
                     (section.title === "Product" ||
                       section.title === "Solutions" ||
                       section.title === "Resources" ||
                       section.title === "Company" ||
                       section.title === "Legal");
->>>>>>> Stashed changes
 
                   return (
                     <a
