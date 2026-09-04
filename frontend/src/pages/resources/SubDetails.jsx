@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 /* =========================================================
    SUB DETAILS IMAGES
@@ -10,6 +11,7 @@ const imgMainStory = "";
 
 
 export default function SubDetails() {
+  const navigate = useNavigate();
   return (
     <>
       <style>{`
@@ -1237,6 +1239,7 @@ export default function SubDetails() {
               <button
                 type="button"
                 className="sub-details-final-button"
+                onClick={() => navigate("/pricing")}
               >
                 Start Free
               </button>

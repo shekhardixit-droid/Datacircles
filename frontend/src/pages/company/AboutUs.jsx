@@ -1,5 +1,8 @@
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { useNavigate } from "react-router-dom";
+
+
 
 
  const teamMembers = [
@@ -55,6 +58,8 @@ import Footer from "../../components/Footer";
   ];
 
 export default function AboutUs() {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen mt-5 w-full overflow-x-hidden bg-white font-inter text-black">
       <Navbar />
@@ -646,9 +651,32 @@ export default function AboutUs() {
       <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
 
         {/* Primary */}
-        <button
+       <button
           type="button"
-          className="inline-flex h-[42px] items-center justify-center rounded-[10px] border border-white bg-[#0085FF] px-6 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+          className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[142px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "
+          onClick={() => navigate("/#")}
         >
           Start free
         </button>
@@ -656,9 +684,34 @@ export default function AboutUs() {
         {/* Secondary */}
         <button
           type="button"
-          className="inline-flex h-[42px] items-center justify-center gap-2 rounded-[10px] border border-white bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+          className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[142px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "
+        
         >
+          <a href="https://wa.me/919892297764" target="_blank" rel="noopener noreferrer">
           Message us on WhatsApp
+          </a>
         </button>
 
       </div>

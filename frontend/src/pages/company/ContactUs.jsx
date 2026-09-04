@@ -1,7 +1,10 @@
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { useNavigate } from "react-router-dom";
+
 
 export default function ContactUs() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen w-full bg-white text-[#37413D]">
 
@@ -48,16 +51,18 @@ export default function ContactUs() {
           <button
             type="button"
             className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
+            onClick={() => { window.location.href = "/careers#open-roles"; }}
+
           >
             See open roles
           </button>
 
-          <button
-            type="button"
-            className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
-          >
-            Write to us
-          </button>
+          <a
+  href="mailto:careers@datacircles.in"
+  className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
+>
+  Write to us
+</a>
         </div>
 
         {/* Bottom Text */}
@@ -338,14 +343,57 @@ export default function ContactUs() {
 
       <a
         href="mailto:contact@datacircles.in"
-        className="flex h-[42px] min-w-[93px] items-center justify-center rounded-[9px] bg-[#0085FF] px-5 font-inter text-[13px] font-semibold border border-white/60 text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF] hover:border hover:border-white"
-      >
+ className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[142px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "      >
         Email us
       </a>
 
       <button
         type="button"
-        className="flex h-[42px] min-w-[126px] items-center justify-center rounded-[9px] border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+        className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[142px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "
       >
         Book a demo
       </button>

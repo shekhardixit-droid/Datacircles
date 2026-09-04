@@ -1,9 +1,13 @@
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 
 export default function SecurityCompliance() {
+  const navigate = useNavigate();
+
   return (
+    
     <div className="min-h-screen w-full bg-white text-[#37413D]">
       {/* =========================
           HERO
@@ -434,14 +438,14 @@ export default function SecurityCompliance() {
     {/* Links */}
     <div className="mt-3 flex flex-wrap gap-2">
       <a
-        href="#"
+        href="/privacy-policy"
         className="rounded-full bg-[#F1FAF6] px-4 py-1.5 font-inter text-[12px] font-semibold text-[#0085FF] transition-colors hover:bg-[#0085FF] hover:text-white"
       >
         Privacy policy
       </a>
 
       <a
-        href="#"
+        href="/terms-of-service"
         className="rounded-full bg-[#F1FAF6] px-4 py-1.5 font-inter text-[12px] font-semibold text-[#0085FF] transition-colors hover:bg-[#0085FF] hover:text-white"
       >
         Terms of service
@@ -479,16 +483,62 @@ export default function SecurityCompliance() {
     {/* Buttons */}
     <div className="mt-5 flex flex-col items-center gap-3 sm:flex-row">
       <button
-  type="button"
-  className="flex h-[42px] min-w-[101px] items-center justify-center border border-white/60 rounded-[10px] bg-[#0085FF] px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
->
+          type="button"
+          className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[136px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "
+          onClick={() => navigate("/pricing")}
+        >
   Start free
 </button>
 
       <button
-        type="button"
-        className="flex h-[42px] min-w-[103px] items-center justify-center rounded-[10px] border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
-      >
+          type="button"
+          className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[136px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "
+          onClick={() => navigate("/contact")}
+        >
         Talk to us
       </button>
     </div>

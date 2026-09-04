@@ -1,4 +1,13 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 import Home from "./pages/Home";
 import PlatformOverview from "./pages/PlatformOverview";
@@ -25,10 +34,17 @@ import Referral from "./pages/company/Referral";
 import SolutionMain from "./pages/solutions/SolutionMain";
 import CreativeMarketing from "./pages/solutions/CreativeMarketing";
 import Pricing from "./pages/Pricing";
+import TermsOfService from "./pages/Legal/Terms&Conditions";
+import PrivacyPolicy from "./pages/Legal/PrivacyPolicy";
+import SecurityCompliancePage from "./pages/Legal/Security&compliances";
+
+
 
 function App() {
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/platform-overview" element={<PlatformOverview />} />
       <Route path="/product-crm" element={<ProductCRM />} />
@@ -54,7 +70,14 @@ function App() {
       <Route path="/solutions" element={<SolutionMain/>} />
       <Route path="/creative&marketing" element={<CreativeMarketing/>} />
       <Route path="/pricing" element={<Pricing/>} />
+      <Route path="/terms-of-service" element={<TermsOfService />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/security-compliance" element={<SecurityCompliancePage />} />
+
+
+
     </Routes>
+    </>
   );
 }
 

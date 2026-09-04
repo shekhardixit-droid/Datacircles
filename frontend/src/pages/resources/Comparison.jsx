@@ -406,6 +406,8 @@ export default function Comparison() {
               hover:text-white
               active:translate-y-0
             "
+             onClick={() => window.location.href = "/product-crm"}
+
           >
             Get started
             <ArrowRight size={15} />

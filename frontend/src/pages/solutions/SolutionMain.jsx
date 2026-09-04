@@ -1,6 +1,8 @@
 import Navbar from "../../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 export default function SolutionMain() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen mt-5 w-full overflow-x-hidden bg-white font-inter text-black">
       <Navbar />
@@ -41,6 +43,7 @@ export default function SolutionMain() {
           <button
             type="button"
             className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
+            onClick={() => window.location.href = "/pricing"}
           >
             Start free
           </button>
@@ -394,6 +397,7 @@ export default function SolutionMain() {
       <button
         type="button"
         className="flex h-[42px] w-fit items-center justify-center rounded-full bg-[#0085FF] border border-white/50 px-6 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+        onClick={() => window.location.href = "/pricing"}
       >
         Start free
       </button>

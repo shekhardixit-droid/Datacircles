@@ -1,7 +1,17 @@
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { useEffect } from "react";
+
 
 export default function Careers() {
+  useEffect(() => {
+  if (window.location.hash === "#open-roles") {
+    setTimeout(() => {
+      document.getElementById("open-roles")?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  }
+}, []);
+
   return (
     <div className="min-h-screen w-full bg-white text-[#37413D]">
       
@@ -42,16 +52,19 @@ export default function Careers() {
           <button
             type="button"
             className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
+            onClick={() => document.getElementById("open-roles").scrollIntoView({ behavior: "smooth" })}
           >
             See open roles
           </button>
 
-          <button
-            type="button"
-            className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
-          >
-            Write to us
-          </button>
+      
+<a
+  href="mailto:careers@datacircles.in"
+  className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
+>
+  Write to us
+</a>
+
         </div>
 
         {/* Bottom Text */}
@@ -246,7 +259,7 @@ export default function Careers() {
 {/* =========================
     SECTION 05 — OPEN ROLES
 ========================== */}
-<section className="mx-auto mt-16 w-[95%] rounded-[20px]  bg-[#F6F9F7] px-6 py-10 sm:mt-20 sm:px-8 sm:py-12 md:mt-24 md:px-10 md:py-14">
+<section id="open-roles" className="mx-auto mt-16 w-[95%] rounded-[20px]  bg-[#F6F9F7] px-6 py-10 sm:mt-20 sm:px-8 sm:py-12 md:mt-24 md:px-10 md:py-14">
   <div className="w-full">
 
 
@@ -535,16 +548,61 @@ export default function Careers() {
     {/* Buttons */}
     <div className="mt-5 flex flex-col items-center gap-3 sm:flex-row">
 
-      <button
-        type="button"
-        className="flex h-[42px] min-w-[138px] items-center justify-center rounded-[10px] border border-white/60 bg-[#0085FF] px-5 font-inter text-[13px] font-semibold text-white  transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
-      >
+       <button
+          type="button"
+          className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[142px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "
+          onClick={() => document.getElementById("open-roles").scrollIntoView({ behavior: "smooth" })}
+        >
         See open roles
       </button>
 
       <a
         href="mailto:careers@datacircles.in"
-        className="flex h-[42px] min-w-[112px] items-center justify-center rounded-[10px] border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
+        className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[142px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "
       >
         Write to us
       </a>

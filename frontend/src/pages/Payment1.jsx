@@ -52,7 +52,7 @@ const Payment1 = () => {
           <div className="mt-5 flex h-auto w-full max-w-[307px] flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
            <button
   className="flex h-[49px] w-full sm:w-[149px] items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white"
->
+   onClick={() => window.location.href = "/pricing"}>
   Get Started
 </button>
 

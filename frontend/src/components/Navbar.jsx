@@ -1051,19 +1051,27 @@ function Navbar() {
         {/* Logo */}
         <a
           href="/"
-          className="flex w-[180px] shrink-0 items-center max-[600px]:ml-[7px] max-[600px]:w-auto"
+          className="flex w-[180px] shrink-0 items-center max-[1024px]:ml-[7px] max-[1024px]:w-auto"
         >
           <img
             src={LOGO_URL}
             alt="DataCircles"
+<<<<<<< Updated upstream
             className="h-auto w-[180px] object-contain brightness-0 invert opacity-[0.22] max-[900px]:w-[150px] max-[600px]:w-[145px] max-[480px]:w-[130px] max-[400px]:w-[120px]"
+=======
+            className="h-auto w-[180px] object-contain brightness-0 invert opacity-[0.22] max-[1024px]:w-[145px] max-[480px]:w-[130px] max-[400px]:w-[120px]"
+>>>>>>> Stashed changes
             fetchPriority="high"
             decoding="async"
           />
         </a>
 
         {/* Desktop Nav */}
+<<<<<<< Updated upstream
         <div className="flex h-full shrink-0 items-center justify-center gap-[28px] max-[900px]:gap-[16px] max-[600px]:hidden">
+=======
+        <div className="flex h-full shrink-0 items-center justify-center gap-[28px] max-[1024px]:hidden">
+>>>>>>> Stashed changes
           <a
             href="/"
             className="whitespace-nowrap text-[14px] font-normal leading-none text-white"
@@ -1164,7 +1172,11 @@ function Navbar() {
         </div>
 
         {/* Desktop Login + Book a demo */}
+<<<<<<< Updated upstream
         <div className="flex shrink-0 items-center gap-[28px] max-[900px]:gap-[16px] max-[600px]:hidden">
+=======
+        <div className="flex shrink-0 items-center gap-[28px] max-[1024px]:hidden">
+>>>>>>> Stashed changes
           <a
             href="/login"
             className="whitespace-nowrap text-[14px] font-normal leading-none text-white"
@@ -1185,8 +1197,13 @@ function Navbar() {
           type="button"
           aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={mobileOpen}
+<<<<<<< Updated upstream
           onClick={handleMobileToggle}
           className="ml-auto mr-[6px] hidden h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-[#1683F7] text-white transition hover:bg-[#087de4] max-[600px]:flex max-[480px]:mr-[5px] max-[480px]:h-[40px] max-[480px]:w-[40px] max-[400px]:h-[38px] max-[400px]:w-[38px]"
+=======
+          onClick={() => setMobileOpen((o) => !o)}
+          className="ml-auto mr-[6px] hidden h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-[#1683F7] text-white transition hover:bg-[#087de4] max-[1024px]:flex max-[480px]:mr-[5px] max-[480px]:h-[40px] max-[480px]:w-[40px] max-[400px]:h-[38px] max-[400px]:w-[38px]"
+>>>>>>> Stashed changes
         >
           {mobileOpen ? (
             <X size={20} strokeWidth={2} />
@@ -1198,8 +1215,13 @@ function Navbar() {
 
       {/* Mobile Navigation */}
       {mobileOpen && (
+<<<<<<< Updated upstream
         <div className="absolute left-1/2 top-[64px] z-[9999] w-[calc(100%-24px)] max-w-[360px] -translate-x-1/2 overflow-hidden rounded-[20px] bg-black p-3 shadow-2xl min-[601px]:hidden max-[400px]:top-[58px] max-[400px]:w-[calc(100%-16px)]">
           <div className="flex max-h-[70vh] flex-col gap-1 overflow-y-auto">
+=======
+        <div className="absolute left-1/2 top-[64px] z-[9999] w-[calc(100%-24px)] max-w-[360px] -translate-x-1/2 overflow-hidden rounded-[20px] bg-black p-3 shadow-2xl min-[1025px]:hidden max-[400px]:top-[58px] max-[400px]:w-[calc(100%-16px)]">
+          <div className="flex flex-col gap-1">
+>>>>>>> Stashed changes
             <a
               href="/"
               onClick={() => setMobileOpen(false)}

@@ -1543,6 +1543,7 @@ export default function Blog() {
             hover:bg-white
             hover:text-[#014c6c]
           "
+          onClick={() => navigate("/pricing")}
         >
           Start Free
         </button>
@@ -1573,6 +1574,7 @@ export default function Blog() {
             hover:bg-white
             hover:text-[#014c6c]
           "
+          onClick={() => navigate("/pricing")}
         >
           See Pricing
         </button>

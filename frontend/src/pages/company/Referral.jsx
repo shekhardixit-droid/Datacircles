@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -65,7 +66,7 @@ export default function Referral() {
 <div className="mt-5 flex h-auto w-full flex-col items-center justify-center gap-3 sm:flex-row">
   <button
     type="button"
-    className="flex h-[49px] w-fit items-center justify-center rounded-full bg-[#E5EDF5] px-6 font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white"
+    className="flex h-[49px] w-fit items-center justify-center rounded-full bg-[#E5EDF5] px-6 font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white whitespace-nowrap"
   >
     Go to my referral code
   </button>
@@ -261,7 +262,7 @@ export default function Referral() {
       {/* CTA */}
       <button
         type="button"
-        className="flex h-[40px] w-full items-center justify-center rounded-[9px] border border-[#0085FF] bg-white px-5 font-inter text-[13px] font-semibold text-[#0085FF] transition-all duration-200 hover:bg-[#0085FF] hover:text-white md:w-fit"
+        className="flex h-[40px] w-full items-center justify-center rounded-[9px] border border-[#0085FF] bg-white px-5 font-inter text-[13px] font-semibold text-[#0085FF] transition-all duration-200 hover:bg-[#0085FF] hover:text-white md:w-fit whitespace-nowrap"
       >
         Go to my referral code
       </button>
@@ -433,16 +434,59 @@ export default function Referral() {
       {/* Primary Button */}
       <button
         type="button"
-        className="flex h-[41px] w-fit items-center justify-center rounded-[9px] bg-[#0085FF] px-5 font-inter text-[13px] border border-white/60 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
-      >
+className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[160px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+            whitespace-nowrap
+          "      >
         Go to my referral code
       </button>
 
       {/* Secondary Button */}
       <button
         type="button"
-        className="flex h-[41px] w-fit items-center justify-center rounded-[9px] border border-white/60 bg-transparent px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:border-white hover:bg-white hover:text-[#0085FF]"
-      >
+className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[142px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "      >
         Start free
       </button>
 

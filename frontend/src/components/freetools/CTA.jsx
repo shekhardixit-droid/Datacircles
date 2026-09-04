@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function CTA() {
+  const navigate = useNavigate();
   return (
     <section
       className="
@@ -92,6 +94,7 @@ function CTA() {
             hover:bg-white
             hover:text-[#014c6c]
           "
+          onClick={() => window.location.href = "/pricing"}
         >
           Start Free
         </button>
@@ -122,6 +125,7 @@ function CTA() {
             hover:bg-white
             hover:text-[#014c6c]
           "
+          onClick={() => window.location.href = "/pricing"}
         >
           See Pricing
         </button>

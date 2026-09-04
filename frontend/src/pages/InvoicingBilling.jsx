@@ -288,7 +288,8 @@ function Hero() {
             onMouseLeave={(event) => {
               event.currentTarget.style.transform = "translateY(0)";
             }}
-          >
+           onClick={() => window.location.href = "/pricing"}>
+
             Start Free
           </button>
 
