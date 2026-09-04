@@ -1,18 +1,25 @@
 const mongoose = require("mongoose");
 
-let isConnected = false;
+// Cache connection across serverless invocations
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
 
 const connectDB = async () => {
-  if (isConnected) return;
+  if (cached.conn) return cached.conn;
 
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    isConnected = true;
-    console.log("MongoDB Atlas connected successfully");
-  } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
-    // Don't call process.exit — it crashes Vercel serverless functions
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(process.env.MONGO_URI, {
+      bufferCommands: false,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 10000,
+    }).then((m) => m);
   }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
 };
 
 module.exports = connectDB;
