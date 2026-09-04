@@ -174,11 +174,12 @@ function SolutionDropdown({ onNavigate }) {
         padding: "20px 20px 16px",
         zIndex: 99999,
         display: "flex",
+        flexWrap: "wrap",
         gap: 12,
         fontFamily: "Inter, Arial, sans-serif",
       }}
     >
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div style={{ flex: "1 1 320px", minWidth: 0 }}>
         <div
           style={{
             fontSize: 10,
@@ -265,7 +266,7 @@ function SolutionDropdown({ onNavigate }) {
         </div>
       </div>
 
-      <div style={{ width: 216, flexShrink: 0 }}>
+      <div style={{ flex: "0 1 216px", width: 216, minWidth: 160 }}>
         <div
           style={{
             background: "rgba(232, 240, 254, 0.48)",
@@ -378,7 +379,7 @@ function ProductDropdown({ onNavigate }) {
     >
       <ResourceImageSlot item={item} />
 
-      <div>
+      <div style={{ minWidth: 0 }}>
         <div
           style={{
             fontSize: 13,
@@ -418,6 +419,7 @@ function ProductDropdown({ onNavigate }) {
         left: "50%",
         transform: "translateX(-50%)",
         width: 620,
+        maxWidth: "calc(100vw - 32px)",
         background: "rgba(255, 255, 255, 0.72)",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
@@ -427,11 +429,12 @@ function ProductDropdown({ onNavigate }) {
         padding: "20px 20px 16px",
         zIndex: 99999,
         display: "flex",
+        flexWrap: "wrap",
         gap: 12,
         fontFamily: "Inter, Arial, sans-serif",
       }}
     >
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: "1 1 200px", minWidth: 0 }}>
         <div
           style={{
             fontSize: 10,
@@ -448,7 +451,7 @@ function ProductDropdown({ onNavigate }) {
         {PRODUCT_ITEMS.billing.map(renderProductItem)}
       </div>
 
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: "1 1 200px", minWidth: 0 }}>
         <div
           style={{
             fontSize: 10,
@@ -465,7 +468,7 @@ function ProductDropdown({ onNavigate }) {
         {PRODUCT_ITEMS.payments.map(renderProductItem)}
       </div>
 
-      <div style={{ width: 150, flexShrink: 0 }}>
+      <div style={{ flex: "0 1 150px", width: 150, minWidth: 130 }}>
         <div
           style={{
             background: "rgba(244, 248, 255, 0.35)",
@@ -603,6 +606,7 @@ function ResourcesDropdown({ onNavigate }) {
         zIndex: 99999,
 
         display: "flex",
+        flexWrap: "wrap",
         gap: 12,
 
         fontFamily: "Inter, Arial, sans-serif",
@@ -611,8 +615,8 @@ function ResourcesDropdown({ onNavigate }) {
       {/* LEARN */}
       <div
         style={{
-          width: 205,
-          flexShrink: 0,
+          flex: "1 1 190px",
+          minWidth: 0,
         }}
       >
         <div
@@ -657,7 +661,7 @@ function ResourcesDropdown({ onNavigate }) {
           >
             <ResourceImageSlot item={item} />
 
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div
                 style={{
                   fontSize: 13,
@@ -693,8 +697,7 @@ function ResourcesDropdown({ onNavigate }) {
       {/* TOOLS & PROOF */}
       <div
         style={{
-          width: 335,
-          flexShrink: 0,
+          flex: "1 1 300px",
           minWidth: 0,
         }}
       >
@@ -784,7 +787,7 @@ function ResourcesDropdown({ onNavigate }) {
       </div>
 
       {/* TRY IT NOW CARD */}
-      <div style={{ width: 170, flexShrink: 0 }}>
+      <div style={{ flex: "0 1 170px", width: 170, minWidth: 140 }}>
         <div
           style={{
             background: "rgba(244, 248, 255, 0.35)",
@@ -884,6 +887,7 @@ function ResourcesDropdown({ onNavigate }) {
 
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSection, setMobileSection] = useState(null);
   const [productOpen, setProductOpen] = useState(false);
   const [productPinned, setProductPinned] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
@@ -1008,8 +1012,20 @@ function Navbar() {
     navigate(route);
   };
 
+  const toggleMobileSection = (section) => {
+    setMobileSection((current) => (current === section ? null : section));
+  };
+
+  const handleMobileToggle = () => {
+    setMobileOpen((o) => {
+      const next = !o;
+      if (!next) setMobileSection(null);
+      return next;
+    });
+  };
+
   return (
-    <div className="relative z-[100] w-full">
+    <div className="relative  z-[100] w-full">
       <nav
         className="
           relative
@@ -1018,6 +1034,7 @@ function Navbar() {
           flex
           h-[56px]
           w-max
+          
           max-w-[calc(100vw-32px)]
           items-center
           gap-[28px]
@@ -1025,6 +1042,8 @@ function Navbar() {
           bg-black
           px-[12px]
           font-inter
+          max-[900px]:gap-[18px]
+          max-[900px]:px-[10px]
           max-[600px]:h-[52px]
           max-[400px]:h-[50px]
         "
@@ -1037,14 +1056,14 @@ function Navbar() {
           <img
             src={LOGO_URL}
             alt="DataCircles"
-            className="h-auto w-[180px] object-contain brightness-0 invert opacity-[0.22] max-[600px]:w-[145px] max-[480px]:w-[130px] max-[400px]:w-[120px]"
+            className="h-auto w-[180px] object-contain brightness-0 invert opacity-[0.22] max-[900px]:w-[150px] max-[600px]:w-[145px] max-[480px]:w-[130px] max-[400px]:w-[120px]"
             fetchPriority="high"
             decoding="async"
           />
         </a>
 
         {/* Desktop Nav */}
-        <div className="flex h-full shrink-0 items-center justify-center gap-[28px] max-[600px]:hidden">
+        <div className="flex h-full shrink-0 items-center justify-center gap-[28px] max-[900px]:gap-[16px] max-[600px]:hidden">
           <a
             href="/"
             className="whitespace-nowrap text-[14px] font-normal leading-none text-white"
@@ -1145,7 +1164,7 @@ function Navbar() {
         </div>
 
         {/* Desktop Login + Book a demo */}
-        <div className="flex shrink-0 items-center gap-[28px] max-[600px]:hidden">
+        <div className="flex shrink-0 items-center gap-[28px] max-[900px]:gap-[16px] max-[600px]:hidden">
           <a
             href="/login"
             className="whitespace-nowrap text-[14px] font-normal leading-none text-white"
@@ -1166,7 +1185,7 @@ function Navbar() {
           type="button"
           aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen((o) => !o)}
+          onClick={handleMobileToggle}
           className="ml-auto mr-[6px] hidden h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-[#1683F7] text-white transition hover:bg-[#087de4] max-[600px]:flex max-[480px]:mr-[5px] max-[480px]:h-[40px] max-[480px]:w-[40px] max-[400px]:h-[38px] max-[400px]:w-[38px]"
         >
           {mobileOpen ? (
@@ -1180,7 +1199,7 @@ function Navbar() {
       {/* Mobile Navigation */}
       {mobileOpen && (
         <div className="absolute left-1/2 top-[64px] z-[9999] w-[calc(100%-24px)] max-w-[360px] -translate-x-1/2 overflow-hidden rounded-[20px] bg-black p-3 shadow-2xl min-[601px]:hidden max-[400px]:top-[58px] max-[400px]:w-[calc(100%-16px)]">
-          <div className="flex flex-col gap-1">
+          <div className="flex max-h-[70vh] flex-col gap-1 overflow-y-auto">
             <a
               href="/"
               onClick={() => setMobileOpen(false)}
@@ -1190,73 +1209,126 @@ function Navbar() {
             </a>
 
             {/* Product mobile items */}
-            <div className="rounded-xl px-4 py-2">
-              <div className="mb-1 text-[11px] font-semibold text-white/50">
-                Product
-              </div>
+            <div className="rounded-xl px-2">
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("product")}
+                aria-expanded={mobileSection === "product"}
+                className="flex w-full items-center justify-between rounded-xl px-2 py-3 text-left text-[14px] text-white transition hover:bg-white/10"
+              >
+                <span>Product</span>
+                <ChevronDown
+                  size={16}
+                  strokeWidth={2}
+                  className={`text-white/50 transition-transform duration-200 ${
+                    mobileSection === "product" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-              {[...PRODUCT_ITEMS.billing, ...PRODUCT_ITEMS.payments].map(
-                (item) => (
-                  <button
-                    key={item.label}
-                    type="button"
-                    disabled={!item.route}
-                    onClick={() => {
-                      if (!item.route) return;
-                      setMobileOpen(false);
-                      navigate(item.route);
-                    }}
-                    className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
-                  >
-                    {item.label}
-                  </button>
-                )
+              {mobileSection === "product" && (
+                <div className="pb-2 pl-2">
+                  {[...PRODUCT_ITEMS.billing, ...PRODUCT_ITEMS.payments].map(
+                    (item) => (
+                      <button
+                        key={item.label}
+                        type="button"
+                        disabled={!item.route}
+                        onClick={() => {
+                          if (!item.route) return;
+                          setMobileOpen(false);
+                          setMobileSection(null);
+                          navigate(item.route);
+                        }}
+                        className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
+                      >
+                        {item.label}
+                      </button>
+                    )
+                  )}
+                </div>
               )}
             </div>
 
             {/* Solutions mobile items */}
-            <div className="rounded-xl px-4 py-2">
-              <div className="mb-1 text-[11px] font-semibold text-white/50">
-                Solutions
-              </div>
+            <div className="rounded-xl px-2">
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("solutions")}
+                aria-expanded={mobileSection === "solutions"}
+                className="flex w-full items-center justify-between rounded-xl px-2 py-3 text-left text-[14px] text-white transition hover:bg-white/10"
+              >
+                <span>Solutions</span>
+                <ChevronDown
+                  size={16}
+                  strokeWidth={2}
+                  className={`text-white/50 transition-transform duration-200 ${
+                    mobileSection === "solutions" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-              {SOLUTION_ITEMS.map((item) => (
-                <button
-                  key={item.label}
-                  type="button"
-                  disabled={!item.route}
-                  onClick={() => {
-                    if (!item.route) return;
-                    setMobileOpen(false);
-                    navigate(item.route);
-                  }}
-                  className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
-                >
-                  {item.label}
-                </button>
-              ))}
+              {mobileSection === "solutions" && (
+                <div className="pb-2 pl-2">
+                  {SOLUTION_ITEMS.map((item) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      disabled={!item.route}
+                      onClick={() => {
+                        if (!item.route) return;
+                        setMobileOpen(false);
+                        setMobileSection(null);
+                        navigate(item.route);
+                      }}
+                      className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Resources mobile items */}
-            <div className="rounded-xl px-4 py-2">
-              <div className="mb-1 text-[11px] font-semibold text-white/50">
-                Resources
-              </div>
+            <div className="rounded-xl px-2">
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("resources")}
+                aria-expanded={mobileSection === "resources"}
+                className="flex w-full items-center justify-between rounded-xl px-2 py-3 text-left text-[14px] text-white transition hover:bg-white/10"
+              >
+                <span>Resources</span>
+                <ChevronDown
+                  size={16}
+                  strokeWidth={2}
+                  className={`text-white/50 transition-transform duration-200 ${
+                    mobileSection === "resources" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-              {[...RESOURCES_ITEMS.learn, ...RESOURCES_ITEMS.tools].map(
-                (item) => (
-                  <button
-                    key={item.label}
-                    type="button"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      navigate(item.route);
-                    }}
-                    className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10"
-                  >
-                    {item.label}
-                  </button>
-                )
+              {mobileSection === "resources" && (
+                <div className="pb-2 pl-2">
+                  {[...RESOURCES_ITEMS.learn, ...RESOURCES_ITEMS.tools].map(
+                    (item) => (
+                      <button
+                        key={item.label}
+                        type="button"
+                        disabled={!item.route}
+                        onClick={() => {
+                          if (!item.route) return;
+                          setMobileOpen(false);
+                          setMobileSection(null);
+                          navigate(item.route);
+                        }}
+                        className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
+                      >
+                        {item.label}
+                      </button>
+                    )
+                  )}
+                </div>
               )}
             </div>
 
