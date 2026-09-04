@@ -1,9 +1,13 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LOGO_URL =
   "https://res.cloudinary.com/tpxo8m6a/image/upload/v1787721139/36b813d8bb9bc0141c6a096a0d4f0ae45d345450.png";
+
+/* -------------------------------------------------------------------------- */
+/* RESOURCES                                                                  */
+/* -------------------------------------------------------------------------- */
 
 const RESOURCES_ITEMS = {
   learn: [
@@ -36,7 +40,7 @@ const RESOURCES_ITEMS = {
     },
     {
       label: "Templates",
-      sub: "quotation formats",
+      sub: "Quotation formats",
       route: "",
       image: "",
     },
@@ -48,12 +52,16 @@ const RESOURCES_ITEMS = {
     },
     {
       label: "Comparisons",
-      sub: "vs the alternatives",
+      sub: "Vs the alternatives",
       route: "/comparison",
       image: "",
     },
   ],
 };
+
+/* -------------------------------------------------------------------------- */
+/* PRODUCT                                                                    */
+/* -------------------------------------------------------------------------- */
 
 const PRODUCT_ITEMS = {
   billing: [
@@ -99,6 +107,10 @@ const PRODUCT_ITEMS = {
   ],
 };
 
+/* -------------------------------------------------------------------------- */
+/* SOLUTIONS                                                                  */
+/* -------------------------------------------------------------------------- */
+
 const SOLUTION_ITEMS = [
   {
     label: "Retailers & shops",
@@ -126,6 +138,9 @@ const SOLUTION_ITEMS = [
   },
 ];
 
+/* -------------------------------------------------------------------------- */
+/* IMAGE SLOT                                                                 */
+/* -------------------------------------------------------------------------- */
 
 function ResourceImageSlot({ item }) {
   return (
@@ -154,6 +169,10 @@ function ResourceImageSlot({ item }) {
     </div>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* SOLUTION DROPDOWN                                                          */
+/* -------------------------------------------------------------------------- */
 
 function SolutionDropdown({ onNavigate }) {
   return (
@@ -205,7 +224,12 @@ function SolutionDropdown({ onNavigate }) {
             <button
               key={item.label}
               type="button"
-              onClick={() => item.route && onNavigate(item.route)}
+              disabled={!item.route}
+              onClick={() => {
+                if (item.route) {
+                  onNavigate(item.route);
+                }
+              }}
               style={{
                 display: "flex",
                 alignItems: "flex-start",
@@ -220,10 +244,13 @@ function SolutionDropdown({ onNavigate }) {
                 textAlign: "left",
                 marginBottom: 2,
                 transition: "background 0.15s",
+                opacity: item.route ? 1 : 0.7,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background =
-                  "rgba(244, 248, 255, 0.30)";
+                if (item.route) {
+                  e.currentTarget.style.background =
+                    "rgba(244, 248, 255, 0.30)";
+                }
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "transparent";
@@ -236,15 +263,8 @@ function SolutionDropdown({ onNavigate }) {
                   style={{
                     fontSize: 13,
                     fontWeight: 600,
-                    color: "#111",
+                    color: item.route ? "#111" : "#555",
                     lineHeight: "17px",
-                    transition: "color 0.15s",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (item.route) e.currentTarget.style.color = "#0085FF";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "#111";
                   }}
                 >
                   {item.label}
@@ -349,12 +369,21 @@ function SolutionDropdown({ onNavigate }) {
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* PRODUCT DROPDOWN                                                           */
+/* -------------------------------------------------------------------------- */
+
 function ProductDropdown({ onNavigate }) {
   const renderProductItem = (item) => (
     <button
       key={item.label}
       type="button"
-      onClick={() => item.route && onNavigate(item.route)}
+      disabled={!item.route}
+      onClick={() => {
+        if (item.route) {
+          onNavigate(item.route);
+        }
+      }}
       style={{
         display: "flex",
         alignItems: "center",
@@ -368,10 +397,13 @@ function ProductDropdown({ onNavigate }) {
         textAlign: "left",
         marginBottom: 2,
         transition: "background 0.15s",
+        opacity: item.route ? 1 : 0.7,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.background =
-          "rgba(244, 248, 255, 0.30)";
+        if (item.route) {
+          e.currentTarget.style.background =
+            "rgba(244, 248, 255, 0.30)";
+        }
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.background = "transparent";
@@ -384,14 +416,7 @@ function ProductDropdown({ onNavigate }) {
           style={{
             fontSize: 13,
             fontWeight: 600,
-            color: "#111",
-            transition: "color 0.15s",
-          }}
-          onMouseEnter={(e) => {
-            if (item.route) e.currentTarget.style.color = "#0085FF";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = "#111";
+            color: item.route ? "#111" : "#555",
           }}
         >
           {item.label}
@@ -490,9 +515,7 @@ function ProductDropdown({ onNavigate }) {
               overflow: "hidden",
               flexShrink: 0,
             }}
-          >
-            {/* Insert image here later */}
-          </div>
+          />
 
           <div
             style={{
@@ -570,13 +593,17 @@ function ProductDropdown({ onNavigate }) {
               textAlign: "left",
             }}
           >
-            Book a demo
+            View platform overview
           </button>
         </div>
       </div>
     </div>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* RESOURCES DROPDOWN                                                         */
+/* -------------------------------------------------------------------------- */
 
 function ResourcesDropdown({ onNavigate }) {
   return (
@@ -588,27 +615,17 @@ function ResourcesDropdown({ onNavigate }) {
         transform: "translateX(-50%)",
         width: 760,
         maxWidth: "calc(100vw - 32px)",
-
-        /* TRANSPARENT GLASS EFFECT */
         background: "rgba(255, 255, 255, 0.72)",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
-
         borderRadius: 16,
-
-        /* NO SHADOW */
         boxShadow: "none",
-
         border: "1px solid rgba(255, 255, 255, 0.35)",
-
         padding: "20px 20px 16px",
-
         zIndex: 99999,
-
         display: "flex",
         flexWrap: "wrap",
         gap: 12,
-
         fontFamily: "Inter, Arial, sans-serif",
       }}
     >
@@ -636,7 +653,12 @@ function ResourcesDropdown({ onNavigate }) {
           <button
             key={item.label}
             type="button"
-            onClick={() => onNavigate(item.route)}
+            disabled={!item.route}
+            onClick={() => {
+              if (item.route) {
+                onNavigate(item.route);
+              }
+            }}
             style={{
               display: "flex",
               alignItems: "center",
@@ -646,14 +668,17 @@ function ResourcesDropdown({ onNavigate }) {
               borderRadius: 8,
               border: "none",
               background: "transparent",
-              cursor: "pointer",
+              cursor: item.route ? "pointer" : "default",
               textAlign: "left",
               marginBottom: 2,
               transition: "background 0.15s",
+              opacity: item.route ? 1 : 0.7,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "rgba(244, 248, 255, 0.30)";
+              if (item.route) {
+                e.currentTarget.style.background =
+                  "rgba(244, 248, 255, 0.30)";
+              }
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = "transparent";
@@ -666,14 +691,7 @@ function ResourcesDropdown({ onNavigate }) {
                 style={{
                   fontSize: 13,
                   fontWeight: 600,
-                  color: "#111",
-                  transition: "color 0.15s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#0085FF";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "#111";
+                  color: item.route ? "#111" : "#555",
                 }}
               >
                 {item.label}
@@ -726,7 +744,12 @@ function ResourcesDropdown({ onNavigate }) {
             <button
               key={item.label}
               type="button"
-              onClick={() => item.route && onNavigate(item.route)}
+              disabled={!item.route}
+              onClick={() => {
+                if (item.route) {
+                  onNavigate(item.route);
+                }
+              }}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -741,10 +764,13 @@ function ResourcesDropdown({ onNavigate }) {
                 textAlign: "left",
                 marginBottom: 2,
                 transition: "background 0.15s",
+                opacity: item.route ? 1 : 0.7,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background =
-                  "rgba(244, 248, 255, 0.30)";
+                if (item.route) {
+                  e.currentTarget.style.background =
+                    "rgba(244, 248, 255, 0.30)";
+                }
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "transparent";
@@ -757,14 +783,7 @@ function ResourcesDropdown({ onNavigate }) {
                   style={{
                     fontSize: 13,
                     fontWeight: 600,
-                    color: "#111",
-                    transition: "color 0.15s",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (item.route) e.currentTarget.style.color = "#0085FF";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "#111";
+                    color: item.route ? "#111" : "#555",
                   }}
                 >
                   {item.label}
@@ -787,7 +806,13 @@ function ResourcesDropdown({ onNavigate }) {
       </div>
 
       {/* TRY IT NOW CARD */}
-      <div style={{ flex: "0 1 170px", width: 170, minWidth: 140 }}>
+      <div
+        style={{
+          flex: "0 1 170px",
+          width: 170,
+          minWidth: 140,
+        }}
+      >
         <div
           style={{
             background: "rgba(244, 248, 255, 0.35)",
@@ -799,7 +824,6 @@ function ResourcesDropdown({ onNavigate }) {
             border: "1px solid rgba(255, 255, 255, 0.30)",
           }}
         >
-          {/* IMAGE SLOT */}
           <div
             style={{
               width: 36,
@@ -810,9 +834,7 @@ function ResourcesDropdown({ onNavigate }) {
               overflow: "hidden",
               flexShrink: 0,
             }}
-          >
-            {/* Insert image here later */}
-          </div>
+          />
 
           <div
             style={{
@@ -868,7 +890,7 @@ function ResourcesDropdown({ onNavigate }) {
               gap: 4,
             }}
           >
-            Open the tool{" "}
+            Open the tool
             <span
               style={{
                 color: "#1683F7",
@@ -885,24 +907,67 @@ function ResourcesDropdown({ onNavigate }) {
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* NAVBAR                                                                     */
+/* -------------------------------------------------------------------------- */
+
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState(null);
+
   const [productOpen, setProductOpen] = useState(false);
   const [productPinned, setProductPinned] = useState(false);
+
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [solutionsPinned, setSolutionsPinned] = useState(false);
+
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [resourcesPinned, setResourcesPinned] = useState(false);
 
   const navigate = useNavigate();
   const closeTimer = useRef(null);
 
-  const handleProductEnter = () => {
-    clearTimeout(closeTimer.current);
+  /* ------------------------------------------------------------------------ */
+  /* CLEANUP DROPDOWN TIMER                                                   */
+  /* ------------------------------------------------------------------------ */
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) {
+        clearTimeout(closeTimer.current);
+      }
+    };
+  }, []);
+
+  /* ------------------------------------------------------------------------ */
+  /* CLOSE ALL DROPDOWNS                                                      */
+  /* ------------------------------------------------------------------------ */
+
+  const closeAllDropdowns = () => {
+    setProductOpen(false);
+    setProductPinned(false);
+
+    setSolutionsOpen(false);
+    setSolutionsPinned(false);
+
     setResourcesOpen(false);
     setResourcesPinned(false);
+  };
+
+  /* ------------------------------------------------------------------------ */
+  /* PRODUCT                                                                  */
+  /* ------------------------------------------------------------------------ */
+
+  const handleProductEnter = () => {
+    clearTimeout(closeTimer.current);
+
     setProductOpen(true);
+
+    setSolutionsOpen(false);
+    setSolutionsPinned(false);
+
+    setResourcesOpen(false);
+    setResourcesPinned(false);
   };
 
   const handleProductLeave = () => {
@@ -920,6 +985,9 @@ function Navbar() {
       const next = !current;
 
       if (next) {
+        setSolutionsOpen(false);
+        setSolutionsPinned(false);
+
         setResourcesOpen(false);
         setResourcesPinned(false);
       }
@@ -930,15 +998,20 @@ function Navbar() {
     });
   };
 
+  /* ------------------------------------------------------------------------ */
+  /* SOLUTIONS                                                                */
+  /* ------------------------------------------------------------------------ */
+
   const handleSolutionsEnter = () => {
     clearTimeout(closeTimer.current);
+
+    setSolutionsOpen(true);
+
     setProductOpen(false);
     setProductPinned(false);
-    setSolutionsOpen(false);
-    setSolutionsPinned(false);
+
     setResourcesOpen(false);
     setResourcesPinned(false);
-    setSolutionsOpen(true);
   };
 
   const handleSolutionsLeave = () => {
@@ -958,6 +1031,7 @@ function Navbar() {
       if (next) {
         setProductOpen(false);
         setProductPinned(false);
+
         setResourcesOpen(false);
         setResourcesPinned(false);
       }
@@ -968,13 +1042,20 @@ function Navbar() {
     });
   };
 
+  /* ------------------------------------------------------------------------ */
+  /* RESOURCES                                                                */
+  /* ------------------------------------------------------------------------ */
+
   const handleResourcesEnter = () => {
     clearTimeout(closeTimer.current);
+
+    setResourcesOpen(true);
+
     setProductOpen(false);
     setProductPinned(false);
+
     setSolutionsOpen(false);
     setSolutionsPinned(false);
-    setResourcesOpen(true);
   };
 
   const handleResourcesLeave = () => {
@@ -994,6 +1075,7 @@ function Navbar() {
       if (next) {
         setProductOpen(false);
         setProductPinned(false);
+
         setSolutionsOpen(false);
         setSolutionsPinned(false);
       }
@@ -1004,28 +1086,61 @@ function Navbar() {
     });
   };
 
+  /* ------------------------------------------------------------------------ */
+  /* NAVIGATION                                                                */
+  /* ------------------------------------------------------------------------ */
+
   const handleNavigate = (route) => {
-    setProductOpen(false);
-    setProductPinned(false);
-    setResourcesOpen(false);
-    setResourcesPinned(false);
+    if (!route) return;
+
+    clearTimeout(closeTimer.current);
+
+    closeAllDropdowns();
+
+    setMobileOpen(false);
+    setMobileSection(null);
+
     navigate(route);
   };
 
+  /* ------------------------------------------------------------------------ */
+  /* MOBILE                                                                    */
+  /* ------------------------------------------------------------------------ */
+
   const toggleMobileSection = (section) => {
-    setMobileSection((current) => (current === section ? null : section));
+    setMobileSection((current) =>
+      current === section ? null : section
+    );
   };
 
   const handleMobileToggle = () => {
-    setMobileOpen((o) => {
-      const next = !o;
-      if (!next) setMobileSection(null);
+    setMobileOpen((current) => {
+      const next = !current;
+
+      if (!next) {
+        setMobileSection(null);
+      }
+
       return next;
     });
   };
 
+  const handleMobileNavigation = (route) => {
+    if (!route) return;
+
+    setMobileOpen(false);
+    setMobileSection(null);
+    closeAllDropdowns();
+
+    navigate(route);
+  };
+
   return (
-    <div className="relative  z-[100] w-full">
+    <div className="relative z-[100] w-full">
+      {/* ------------------------------------------------------------------ */}
+      {/* DESKTOP NAVBAR                                                     */}
+      {/* ------------------------------------------------------------------ */}
+
       <nav
         className="
           relative
@@ -1034,7 +1149,6 @@ function Navbar() {
           flex
           h-[56px]
           w-max
-          
           max-w-[calc(100vw-32px)]
           items-center
           gap-[28px]
@@ -1048,9 +1162,9 @@ function Navbar() {
           max-[400px]:h-[50px]
         "
       >
-        {/* Logo */}
-        <a
-          href="/"
+        {/* LOGO */}
+        <Link
+          to="/"
           className="flex w-[180px] shrink-0 items-center max-[1024px]:ml-[7px] max-[1024px]:w-auto"
         >
           <img
@@ -1060,16 +1174,17 @@ function Navbar() {
             fetchPriority="high"
             decoding="async"
           />
-        </a>
+        </Link>
 
-        {/* Desktop Nav */}
+        {/* DESKTOP NAV */}
         <div className="flex h-full shrink-0 items-center justify-center gap-[28px] max-[1024px]:hidden">
-          <a
-            href="/"
+          {/* HOME */}
+          <Link
+            to="/"
             className="whitespace-nowrap text-[14px] font-normal leading-none text-white"
           >
             Home
-          </a>
+          </Link>
 
           {/* PRODUCT */}
           <div
@@ -1080,12 +1195,20 @@ function Navbar() {
             <button
               type="button"
               onClick={handleProductClick}
+              aria-expanded={productOpen}
               className="flex items-center whitespace-nowrap text-[14px] font-normal leading-none text-white"
               style={{
-                color: productOpen ? "#1683F7" : undefined,
+                color: productOpen ? "#1683F7" : "#FFFFFF",
               }}
             >
               <span>Product</span>
+              <ChevronDown
+                size={14}
+                strokeWidth={2}
+                className={`ml-1 transition-transform duration-200 ${
+                  productOpen ? "rotate-180" : ""
+                }`}
+              />
             </button>
 
             {productOpen && (
@@ -1108,12 +1231,20 @@ function Navbar() {
             <button
               type="button"
               onClick={handleSolutionsClick}
+              aria-expanded={solutionsOpen}
               className="flex items-center whitespace-nowrap text-[14px] font-normal leading-none text-white"
               style={{
-                color: solutionsOpen ? "#0085FF" : undefined,
+                color: solutionsOpen ? "#0085FF" : "#FFFFFF",
               }}
             >
               <span>Solutions</span>
+              <ChevronDown
+                size={14}
+                strokeWidth={2}
+                className={`ml-1 transition-transform duration-200 ${
+                  solutionsOpen ? "rotate-180" : ""
+                }`}
+              />
             </button>
 
             {solutionsOpen && (
@@ -1136,12 +1267,20 @@ function Navbar() {
             <button
               type="button"
               onClick={handleResourcesClick}
+              aria-expanded={resourcesOpen}
               className="flex items-center whitespace-nowrap text-[14px] font-normal leading-none text-white"
               style={{
-                color: resourcesOpen ? "#1683F7" : undefined,
+                color: resourcesOpen ? "#1683F7" : "#FFFFFF",
               }}
             >
               <span>Resources</span>
+              <ChevronDown
+                size={14}
+                strokeWidth={2}
+                className={`ml-1 transition-transform duration-200 ${
+                  resourcesOpen ? "rotate-180" : ""
+                }`}
+              />
             </button>
 
             {resourcesOpen && (
@@ -1155,37 +1294,38 @@ function Navbar() {
             )}
           </div>
 
-          <a
-            href="/pricing"
+          {/* PRICING */}
+          <Link
+            to="/pricing"
             className="whitespace-nowrap text-[14px] font-normal leading-none text-white"
           >
             Pricing
-          </a>
+          </Link>
         </div>
 
-        {/* Desktop Login + Book a demo */}
+        {/* DESKTOP ACTIONS */}
         <div className="flex shrink-0 items-center gap-[28px] max-[1024px]:hidden">
-          <a
-            href="/login"
+          <Link
+            to="/login"
             className="whitespace-nowrap text-[14px] font-normal leading-none text-white"
           >
             Login
-          </a>
+          </Link>
 
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="flex h-[40px] w-[112px] items-center justify-center rounded-full bg-[#0085FF] text-[13px] font-semibold leading-none text-white transition hover:bg-[#087de4]"
           >
             Book a demo
-          </a>
+          </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* MOBILE MENU BUTTON */}
         <button
           type="button"
           aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen((o) => !o)}
+          onClick={handleMobileToggle}
           className="ml-auto mr-[6px] hidden h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-[#1683F7] text-white transition hover:bg-[#087de4] max-[1024px]:flex max-[480px]:mr-[5px] max-[480px]:h-[40px] max-[480px]:w-[40px] max-[400px]:h-[38px] max-[400px]:w-[38px]"
         >
           {mobileOpen ? (
@@ -1196,19 +1336,23 @@ function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Navigation */}
+      {/* ------------------------------------------------------------------ */}
+      {/* MOBILE NAVIGATION                                                  */}
+      {/* ------------------------------------------------------------------ */}
+
       {mobileOpen && (
         <div className="absolute left-1/2 top-[64px] z-[9999] w-[calc(100%-24px)] max-w-[360px] -translate-x-1/2 overflow-hidden rounded-[20px] bg-black p-3 shadow-2xl min-[1025px]:hidden max-[400px]:top-[58px] max-[400px]:w-[calc(100%-16px)]">
           <div className="flex flex-col gap-1">
-            <a
-              href="/"
-              onClick={() => setMobileOpen(false)}
+            {/* HOME */}
+            <Link
+              to="/"
+              onClick={() => handleMobileNavigation("/")}
               className="rounded-xl px-4 py-3 text-[14px] text-white transition hover:bg-white/10"
             >
               Home
-            </a>
+            </Link>
 
-            {/* Product mobile items */}
+            {/* PRODUCT */}
             <div className="rounded-xl px-2">
               <button
                 type="button"
@@ -1217,6 +1361,7 @@ function Navbar() {
                 className="flex w-full items-center justify-between rounded-xl px-2 py-3 text-left text-[14px] text-white transition hover:bg-white/10"
               >
                 <span>Product</span>
+
                 <ChevronDown
                   size={16}
                   strokeWidth={2}
@@ -1228,29 +1373,25 @@ function Navbar() {
 
               {mobileSection === "product" && (
                 <div className="pb-2 pl-2">
-                  {[...PRODUCT_ITEMS.billing, ...PRODUCT_ITEMS.payments].map(
-                    (item) => (
-                      <button
-                        key={item.label}
-                        type="button"
-                        disabled={!item.route}
-                        onClick={() => {
-                          if (!item.route) return;
-                          setMobileOpen(false);
-                          setMobileSection(null);
-                          navigate(item.route);
-                        }}
-                        className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
-                      >
-                        {item.label}
-                      </button>
-                    )
-                  )}
+                  {[
+                    ...PRODUCT_ITEMS.billing,
+                    ...PRODUCT_ITEMS.payments,
+                  ].map((item) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      disabled={!item.route}
+                      onClick={() => handleMobileNavigation(item.route)}
+                      className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
 
-            {/* Solutions mobile items */}
+            {/* SOLUTIONS */}
             <div className="rounded-xl px-2">
               <button
                 type="button"
@@ -1259,6 +1400,7 @@ function Navbar() {
                 className="flex w-full items-center justify-between rounded-xl px-2 py-3 text-left text-[14px] text-white transition hover:bg-white/10"
               >
                 <span>Solutions</span>
+
                 <ChevronDown
                   size={16}
                   strokeWidth={2}
@@ -1275,12 +1417,7 @@ function Navbar() {
                       key={item.label}
                       type="button"
                       disabled={!item.route}
-                      onClick={() => {
-                        if (!item.route) return;
-                        setMobileOpen(false);
-                        setMobileSection(null);
-                        navigate(item.route);
-                      }}
+                      onClick={() => handleMobileNavigation(item.route)}
                       className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
                     >
                       {item.label}
@@ -1290,7 +1427,7 @@ function Navbar() {
               )}
             </div>
 
-            {/* Resources mobile items */}
+            {/* RESOURCES */}
             <div className="rounded-xl px-2">
               <button
                 type="button"
@@ -1299,6 +1436,7 @@ function Navbar() {
                 className="flex w-full items-center justify-between rounded-xl px-2 py-3 text-left text-[14px] text-white transition hover:bg-white/10"
               >
                 <span>Resources</span>
+
                 <ChevronDown
                   size={16}
                   strokeWidth={2}
@@ -1310,51 +1448,50 @@ function Navbar() {
 
               {mobileSection === "resources" && (
                 <div className="pb-2 pl-2">
-                  {[...RESOURCES_ITEMS.learn, ...RESOURCES_ITEMS.tools].map(
-                    (item) => (
-                      <button
-                        key={item.label}
-                        type="button"
-                        disabled={!item.route}
-                        onClick={() => {
-                          if (!item.route) return;
-                          setMobileOpen(false);
-                          setMobileSection(null);
-                          navigate(item.route);
-                        }}
-                        className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
-                      >
-                        {item.label}
-                      </button>
-                    )
-                  )}
+                  {[
+                    ...RESOURCES_ITEMS.learn,
+                    ...RESOURCES_ITEMS.tools,
+                  ].map((item) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      disabled={!item.route}
+                      onClick={() => handleMobileNavigation(item.route)}
+                      className="block w-full rounded-lg px-2 py-2 text-left text-[13px] text-white transition hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
 
-            <a
-              href="/pricing"
-              onClick={() => setMobileOpen(false)}
+            {/* PRICING */}
+            <Link
+              to="/pricing"
+              onClick={() => handleMobileNavigation("/pricing")}
               className="rounded-xl px-4 py-3 text-[14px] text-white transition hover:bg-white/10"
             >
               Pricing
-            </a>
+            </Link>
 
-            <a
-              href="/login"
-              onClick={() => setMobileOpen(false)}
+            {/* LOGIN */}
+            <Link
+              to="/login"
+              onClick={() => handleMobileNavigation("/login")}
               className="rounded-xl px-4 py-3 text-[14px] text-white transition hover:bg-white/10"
             >
               Login
-            </a>
+            </Link>
 
-            <a
-              href="/contact"
-              onClick={() => setMobileOpen(false)}
+            {/* BOOK A DEMO */}
+            <Link
+              to="/contact"
+              onClick={() => handleMobileNavigation("/contact")}
               className="mt-2 flex h-[44px] items-center justify-center rounded-full bg-[#1683F7] text-[14px] font-semibold text-white transition hover:bg-[#087de4]"
             >
               Book a demo
-            </a>
+            </Link>
           </div>
         </div>
       )}
