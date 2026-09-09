@@ -39,6 +39,13 @@ import PrivacyPolicy from "./pages/Legal/PrivacyPolicy";
 import SecurityCompliancePage from "./pages/Legal/Security&compliances";
 
 
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Verification from "./components/login/Verification";
+import ForgotPass from "./components/login/ForgotPass";
+import AccountSetup from "./pages/AccountSetup";
+import StartFromScratch from "./components/accountSetup/StartFromScratch";
+import ImportCompany from "./components/accountSetup/ImportCompany";
 
 function App() {
   return (
@@ -76,6 +83,13 @@ function App() {
 
 
 
+      <Route path="/register" element={<Register/>} />
+      <Route path="/login" element={<Login/>} />
+      <Route path="/verification" element={<Verification/>} />
+      <Route path="/forgot-password" element={<ForgotPass/>} />
+      <Route path="/account-setup" element={<AccountSetup/>} />
+      <Route path="/start-from-scratch" element={<StartFromScratch/>} />
+      <Route path="/import-company" element={<ImportCompany/>} />
     </Routes>
     </>
   );

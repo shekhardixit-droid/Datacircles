@@ -77,7 +77,7 @@ const LinkedInIcon = () => (
 const Footer = () => {
   return (
     <footer className="relative w-full overflow-hidden bg-black text-white">
-      <div className="mx-auto w-full max-w-[1440px] pb-10 pt-[100px] font-inter sm:px-8 lg:px-6">
+      <div className="mx-auto w-full max-w-[1440px] px-6 pb-10 pt-[100px] font-inter sm:px-8 lg:px-6">
         {/* TOP FOOTER */}
         <div className="grid grid-cols-2 gap-x-5 gap-y-[45px] min-[421px]:gap-x-7 min-[421px]:gap-y-[45px] lg:grid-cols-3 lg:gap-y-[55px] xl:grid-cols-[minmax(330px,2fr)_repeat(5,minmax(120px,1fr))] xl:gap-x-[42px]">
           {/* BRAND / CONTACT */}
@@ -85,7 +85,7 @@ const Footer = () => {
             {/* Logo image */}
             <div className="mb-6 flex w-fit items-center sm:mb-8">
               <img
-                src="https://res.cloudinary.com/tpxo8m6a/image/upload/v1787721139/36b813d8bb9bc0141c6a096a0d4f0ae45d345450.png"
+                src="/images/DataCircles®.svg"
                 alt="DataCircles"
                 className="h-auto w-[160px] object-contain sm:w-[180px]"
               />
@@ -188,7 +188,7 @@ const Footer = () => {
         </div>
 
         {/* LARGE BRAND IMAGE */}
-        <div className="pointer-events-none -mb-10 mt-8 w-full select-none overflow-hidden sm:mt-8 lg:mt-11 xl:mt-14">
+        <div className="mt-8  w-full overflow-hidden select-none pointer-events-none sm:mt-8 lg:mt-11 xl:mt-14">
           <img
             src="/src/assets/DataCircles®.svg"
             alt="DataCircles"
