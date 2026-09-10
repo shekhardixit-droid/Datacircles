@@ -190,7 +190,7 @@ const Footer = () => {
         {/* LARGE BRAND IMAGE */}
         <div className="mt-8  w-full overflow-hidden select-none pointer-events-none sm:mt-8 lg:mt-11 xl:mt-14">
           <img
-            src="/src/assets/DataCircles®.svg"
+            src="/assets/DataCircles®.svg"
             alt="DataCircles"
             className="block h-auto w-full object-contain"
           />
