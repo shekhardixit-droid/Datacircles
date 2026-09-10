@@ -81,34 +81,35 @@ const ForgotPass = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#EAEAEA] p-2 sm:p-4 font-inter">
-      <div className="flex w-full items-start gap-4">
+    <div className="min-h-[100dvh] w-full overflow-x-hidden bg-[#EAEAEA] p-2 font-inter sm:p-4">
+      <div className="flex min-h-[calc(100dvh-1rem)] w-full flex-col items-stretch gap-4 lg:h-[calc(100dvh-2rem)] lg:min-h-0 lg:flex-row">
 
         {/* ==================================================
             LEFT SECTION — SAME AS LOGIN
             HIDDEN ON MOBILE / TABLET, SHOWN FROM lg UP
             ================================================== */}
-        <div className="relative hidden h-[905px] w-[599px] shrink-0 overflow-hidden rounded-[18px] bg-white lg:block">
+        <div className="relative hidden min-h-0 shrink-0 overflow-hidden rounded-[18px] bg-white lg:block lg:h-full lg:w-[42%]">
 
           {/* TOP TRANSPARENT IMAGE */}
           <img
             src="/Ellipse 2.png"
             alt=""
-            className="absolute left-0 -top-40 z-10 h-auto w-full object-contain"
+            className="absolute left-1/2 -top-[18%] z-10 h-auto w-full max-w-none -translate-x-1/2 object-contain"
           />
 
           {/* BOTTOM TRANSPARENT IMAGE */}
           <img
             src="/Ellipse 1.png"
             alt=""
-            className="absolute left-0 z-10 h-[120%] w-full object-contain"
+            className="absolute -bottom-20 left-1/2 z-10 h-auto w-full max-w-none -translate-x-1/2 object-contain"
           />
 
-          {/* BOTTOM CONTENT — SAME AS LOGIN */}
-          <div className="absolute bottom-[32px] mb-20 left-1/2 z-20 h-[286px] w-[448px] -translate-x-1/2">
+         {/* BOTTOM CONTENT */}
+          <div className="absolute bottom-[5%] left-1/2 z-20 flex w-[88%] max-w-[448px] -translate-x-1/2 flex-col items-center text-center">
 
-            {/* DATACIRCLES ICON — EXACT SAME AS LOGIN */}
-            <div className="absolute left-[178px] top-0 flex h-[92px] w-[92px] items-center justify-center rounded-[16px] bg-[#0085FF]">
+            {/* ICON */}
+            <div className="mx-auto flex aspect-square h-[clamp(56px,10vh,92px)] w-auto items-center justify-center rounded-[16px] bg-[#0085FF]">
+
               <svg
                 width="40"
                 height="40"
@@ -119,7 +120,7 @@ const ForgotPass = () => {
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
-                  d="M20 10C15.0294 10 11 14.0294 11 19V31.0498C11 31.5743 10.5743 32 10.0498 32C9.798 31.9999 9.557 31.8997 9.3789 31.7217L0 22.3428V26.585L7.2578 33.8428C7.9984 34.5834 9.002 34.9999 10.0498 35C12.2312 35 14 33.2312 14 31.0498V19C14 15.6863 16.6863 13 20 13C23.3137 13 26 15.6863 26 19V31.0498C26 33.2312 27.7688 35 29.9502 35C30.998 34.9999 32.0016 34.5834 32.7422 33.8428L34.707 31.8785L37.707 28.8785L40 26.585V22.3428L37.8789 24.4639L35.585 26.7574L32.585 29.7574L30.6211 31.7217C30.443 31.8997 30.202 31.9999 29.9502 32C29.4257 32 29 31.5743 29 31.0498V19C29 14.0294 24.9706 10 20 10ZM20 15C17.7909 15 16 16.7909 16 19V31.0498C16 34.3358 13.3358 37 10.0498 37C8.472 36.9999 6.958 36.3735 5.8428 35.2578L0 29.4141V33.6562L3.722 37.3789C5.400 39.0572 7.676 39.9999 10.0498 40C14.9926 39.9999 19 35.9926 19 31.0498V19C19 18.4477 19.4477 18 20 18C20.5523 18 21 18.4477 21 19V31.0498C21 35.9926 25.0074 40 29.9502 40C32.324 39.9999 34.6 39.0572 36.278 37.3789L40 33.6562V29.4141L34.1572 35.2578C33.042 36.3734 31.528 36.9999 29.9502 37C26.6642 37 24 34.3358 24 31.0498V19C24 16.7909 22.2091 15 20 15Z"
+                  d="M20 10C15.0294 10 11 14.0294 11 19V31.0498C11 31.5743 10.5743 32 10.0498 32C9.798 31.9999 9.557 31.8997 9.3789 31.7217L0 22.3428V26.585L7.2578 33.8428C7.9984 34.5834 9.002 34.9999 10.0498 35C12.2312 35 14 33.2312 14 31.0498V19C14 15.6863 16.6863 13 20 13C23.3137 13 26 15.6863 26 19V31.0498C26 33.2312 27.7688 35 29.9502 35C30.998 34.9999 32.0016 34.5834 32.7422 33.8428L34.707 31.8785L37.707 28.8785L40 26.585V22.3428L37.8789 24.4639L35.585 26.7574L32.585 29.7574L30.6211 31.7217C30.443 31.8997 30.202 31.9999 29.9502 32C29.4257 32 29 31.5743 29 31.0498V19C29 14.0294 24.9706 10 20 10ZM20 15C17.7909 15 16 16.7909 16 19V31.0498C16 34.3358 13.3358 37 10.0498 37C8.472 36.9999 6.958 36.3735 5.8428 35.2578L0 29.4141V33.6562L3.722 37.3789C5.400 39.0572 7.676 39.9999 10.0498 40C14.9926 40 19 35.9926 19 31.0498V19C19 18.4477 19.4477 18 20 18C20.5523 18 21 18.4477 21 19V31.0498C21 35.9926 25.0074 40 29.9502 40C32.324 39.9999 34.6 39.0572 36.278 37.3789L40 33.6562V29.4141L34.1572 35.2578C33.042 36.3734 31.528 36.9999 29.9502 37C26.6642 37 24 34.3358 24 31.0498V19C24 16.7909 22.2091 15 20 15Z"
                   fill="#F8FAFC"
                 />
 
@@ -133,11 +134,12 @@ const ForgotPass = () => {
                   fill="#F8FAFC"
                 />
               </svg>
+
             </div>
 
             {/* DATACIRCLES TEXT */}
-            <div className="absolute left-0 top-[122px] w-full text-center">
-              <span className="font-inter text-[29px] font-bold leading-none tracking-[-1.5px] text-black">
+            <div className="mt-[clamp(18px,3vh,30px)] w-full text-center">
+              <span className="font-inter text-[clamp(20px,2.2vw,29px)] font-bold leading-tight tracking-[-1.5px] text-black">
                 One Platform for Every Business and Revenue Decision
               </span>
             </div>
@@ -148,12 +150,12 @@ const ForgotPass = () => {
             RIGHT SECTION
             FULL WIDTH ON MOBILE (LEFT PANEL IS HIDDEN)
             ================================================== */}
-        <div className="min-h-screen w-full flex-1 overflow-hidden rounded-[18px] bg-white lg:h-[899px] lg:min-h-0">
+        <div className="min-h-0 w-full min-w-0 flex-1 overflow-hidden rounded-[18px] bg-white lg:h-full">
 
           {/* CENTERED CONTENT */}
-          <div className="flex h-full w-full items-center justify-center px-4 py-10 sm:px-6 lg:px-0 lg:py-0">
+          <div className="flex min-h-0 w-full items-center justify-center overflow-y-auto px-[clamp(12px,4vw,40px)] py-[clamp(16px,3vh,32px)] lg:h-full lg:overflow-y-auto lg:overscroll-contain">
 
-            <div className="relative flex w-full max-w-[449px] flex-col lg:h-[692px] lg:w-[449px] lg:block">
+            <div className="relative flex min-h-0 w-full max-w-[449px] flex-col justify-center lg:min-h-full lg:w-full lg:max-w-[449px]">
 
               {/* ==================================================
                   SCREEN 3 — CREATE NEW PASSWORD
@@ -166,18 +168,18 @@ const ForgotPass = () => {
                       ================================================== */}
 
                  {/* SUCCESS ICON */}
-<div className="h-[56px] w-[56px] flex items-center justify-center rounded-full ">
+<div className="flex h-[clamp(48px,7vh,56px)] w-[clamp(48px,7vh,56px)] items-center justify-center rounded-full">
   <img
     src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/signup/Frame%2025%20(1).png"
     alt=""
-    className="h-[56px] w-[56px] object-contain"
+    className="h-full w-full object-contain"
   />
 </div>
 
                   {/* HEADING */}
                   <h1
                     className="
-                      mt-[20px]
+                      mt-[clamp(14px,2.5vh,20px)]
                       font-['Inter']
                       text-[22px]
                       sm:text-[28px]
@@ -205,7 +207,7 @@ const ForgotPass = () => {
                     "
                   >
                     Your password has been successfully reset.
-                    <br className="hidden sm:block" />
+                    <br className="hidden md:block" />
                     Click below to log in magically.
                   </p>
 
@@ -214,8 +216,8 @@ const ForgotPass = () => {
                     type="button"
                     onClick={handleBackToLogin}
                     className="
-                      mt-[32px]
-                      h-[48px]
+                      mt-[clamp(20px,4vh,32px)]
+                      h-[clamp(42px,5.5vh,48px)]
                       w-full
                       rounded-full
                       bg-[#0085FF]
@@ -236,7 +238,7 @@ const ForgotPass = () => {
                     type="button"
                     onClick={handleBackToLogin}
                     className="
-                      mt-[18px]
+                      mt-[clamp(14px,2.5vh,18px)]
                       w-full
                       font-['Inter']
                       text-[14px]
@@ -249,11 +251,11 @@ const ForgotPass = () => {
                   </button>
 
                   {/* FOOTER */}
-                  <div className="relative mt-16 w-full lg:absolute lg:-bottom-21.5 lg:left-0 lg:mt-0 lg:w-[448px]">
+                  <div className="relative mt-[clamp(18px,4vh,56px)] w-full lg:mt-[clamp(24px,5vh,56px)] lg:w-full">
 
-                    <div className="h-px w-full bg-[#E2E8F0] lg:w-[120%] lg:-translate-x-10" />
+                    <div className="h-px w-full bg-[#E2E8F0]" />
 
-                    <div className="mt-[20px] flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8 sm:whitespace-nowrap">
+                    <div className="mt-[clamp(14px,2.5vh,20px)] flex w-full flex-wrap items-center justify-center gap-3 sm:gap-8 lg:flex-nowrap lg:whitespace-nowrap">
 
                       <span
                         className="
@@ -311,18 +313,18 @@ const ForgotPass = () => {
                   <div className="w-full">
 
                     {/* 56 × 56 ICON */}
-                    <div className="h-[56px] w-[56px]">
+                    <div className="h-[clamp(48px,7vh,56px)] w-[clamp(48px,7vh,56px)]">
                       <img
                         src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/signup/Frame%2026%20(1).png"
                         alt=""
-                        className="h-[56px] w-[56px] object-contain"
+                        className="h-full w-full object-contain"
                       />
                     </div>
 
                     {/* HEADING */}
                     <h1
                       className="
-                        mt-[20px]
+                        mt-[clamp(14px,2.5vh,20px)]
                         font-['Inter']
                         text-[22px]
                         sm:text-[28px]
@@ -350,13 +352,13 @@ const ForgotPass = () => {
                       "
                     >
                       Your new password must be different from previous
-                      <br className="hidden sm:block" />
+                      <br className="hidden md:block" />
                       used passwords.
                     </p>
                   </div>
 
                   {/* PASSWORD FORM */}
-                  <div className="mt-[24px] w-full">
+                  <div className="mt-[clamp(18px,3vh,24px)] w-full">
 
                     {/* PASSWORD */}
                     <div className="w-full">
@@ -390,7 +392,7 @@ const ForgotPass = () => {
                           }}
                           placeholder="ex.***********"
                           className="
-                            h-[48px]
+                            h-[clamp(42px,5.5vh,48px)]
                             w-full
                             rounded-full
                             border
@@ -482,7 +484,7 @@ const ForgotPass = () => {
                     </div>
 
                     {/* CONFIRM PASSWORD */}
-                    <div className="mt-[25px] w-full">
+                    <div className="mt-[clamp(18px,3vh,25px)] w-full">
 
                       <label
                         className="
@@ -513,7 +515,7 @@ const ForgotPass = () => {
                           }}
                           placeholder="ex.***********"
                           className="
-                            h-[48px]
+                            h-[clamp(42px,5.5vh,48px)]
                             w-full
                             rounded-full
                             border
@@ -611,8 +613,8 @@ const ForgotPass = () => {
                       type="button"
                       onClick={handleResetPassword}
                       className="
-                        mt-[32px]
-                        h-[48px]
+                        mt-[clamp(20px,4vh,32px)]
+                        h-[clamp(42px,5.5vh,48px)]
                         w-full
                         rounded-full
                         bg-[#0085FF]
@@ -679,11 +681,11 @@ const ForgotPass = () => {
                   </div>
 
                   {/* FOOTER — SAME AS CURRENT FORGOTPASS */}
-                  <div className="relative mt-16 w-full lg:absolute lg:-bottom-21.5 lg:left-0 lg:mt-0 lg:w-[448px]">
+                  <div className="relative mt-[clamp(18px,4vh,56px)] w-full lg:mt-[clamp(24px,5vh,56px)] lg:w-full">
 
-                    <div className="h-px w-full bg-[#E2E8F0] lg:w-[120%] lg:-translate-x-10" />
+                    <div className="h-px w-full bg-[#E2E8F0]" />
 
-                    <div className="mt-[20px] flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8 sm:whitespace-nowrap">
+                    <div className="mt-[clamp(14px,2.5vh,20px)] flex w-full flex-wrap items-center justify-center gap-3 sm:gap-8 lg:flex-nowrap lg:whitespace-nowrap">
 
                       <span
                         className="
@@ -744,18 +746,18 @@ const ForgotPass = () => {
                   <div className="w-full">
 
                     {/* ICON */}
-                    <div className="h-[56px] w-[56px]">
+                    <div className="h-[clamp(48px,7vh,56px)] w-[clamp(48px,7vh,56px)]">
                       <img
                         src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/signup/Frame%2025.png"
                         alt=""
-                        className="h-[56px] w-[56px] object-contain"
+                        className="h-full w-full object-contain"
                       />
                     </div>
 
                     {/* HEADING */}
                     <h1
                       className="
-                        mt-[20px]
+                        mt-[clamp(14px,2.5vh,20px)]
                         font-['Inter']
                         text-[22px]
                         sm:text-[28px]
@@ -788,7 +790,7 @@ const ForgotPass = () => {
                   </div>
 
                   {/* FORM */}
-                  <div className="mt-[24px] w-full">
+                  <div className="mt-[clamp(18px,3vh,24px)] w-full">
 
                     {/* EMAIL LABEL */}
                     <label
@@ -816,7 +818,7 @@ const ForgotPass = () => {
                       placeholder="ex.johndoe@example.com"
                       className={`
                         mt-[8px]
-                        h-[49px]
+                        h-[clamp(42px,5.5vh,49px)]
                         w-full
                         rounded-full
                         border
@@ -892,7 +894,7 @@ const ForgotPass = () => {
                       disabled={isSending}
                       className="
                         mt-[16px]
-                        h-[48px]
+                        h-[clamp(42px,5.5vh,48px)]
                         w-full
                         rounded-full
                         bg-[#0085FF]
@@ -917,7 +919,7 @@ const ForgotPass = () => {
                       type="button"
                       onClick={handleBackToLogin}
                       className="
-                        mt-[18px]
+                        mt-[clamp(14px,2.5vh,18px)]
                         w-full
                         font-['Inter']
                         text-[14px]
@@ -932,11 +934,11 @@ const ForgotPass = () => {
                   </div>
 
                   {/* FOOTER */}
-                  <div className="relative mt-16 w-full lg:absolute lg:-bottom-21.5 lg:left-0 lg:mt-0 lg:w-[448px]">
+                  <div className="relative mt-[clamp(18px,4vh,56px)] w-full lg:mt-[clamp(24px,5vh,56px)] lg:w-full">
 
-                    <div className="h-px w-full bg-[#E2E8F0] lg:w-[120%] lg:-translate-x-10" />
+                    <div className="h-px w-full bg-[#E2E8F0]" />
 
-                    <div className="mt-[20px] flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8 sm:whitespace-nowrap">
+                    <div className="mt-[clamp(14px,2.5vh,20px)] flex w-full flex-wrap items-center justify-center gap-3 sm:gap-8 lg:flex-nowrap lg:whitespace-nowrap">
 
                       <span
                         className="
@@ -995,18 +997,18 @@ const ForgotPass = () => {
                 <>
 
                   {/* ICON */}
-                  <div className="h-[56px] w-[56px]">
+                  <div className="h-[clamp(48px,7vh,56px)] w-[clamp(48px,7vh,56px)]">
                     <img
                       src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/signup/plus%203.png?updatedAt=1788850900880"
                       alt=""
-                      className="h-[56px] w-[56px] object-contain"
+                      className="h-full w-full object-contain"
                     />
                   </div>
 
                   {/* HEADING */}
                   <h1
                     className="
-                      mt-[20px]
+                      mt-[clamp(14px,2.5vh,20px)]
                       font-['Inter']
                       text-[22px]
                       sm:text-[28px]
@@ -1041,8 +1043,8 @@ const ForgotPass = () => {
                     type="button"
                     onClick={() => setIsResetPage(true)}
                     className="
-                      mt-[24px]
-                      h-[48px]
+                      mt-[clamp(18px,3vh,24px)]
+                      h-[clamp(42px,5.5vh,48px)]
                       w-full
                       rounded-full
                       bg-[#0085FF]
@@ -1061,7 +1063,7 @@ const ForgotPass = () => {
                   {/* SPAM MESSAGE */}
                   <p
                     className="
-                      mt-[18px]
+                      mt-[clamp(14px,2.5vh,18px)]
                       w-full
                       text-center
                       font-['Inter']
@@ -1076,11 +1078,11 @@ const ForgotPass = () => {
                   </p>
 
                   {/* FOOTER */}
-                  <div className="relative mt-16 w-full lg:absolute lg:-bottom-21.5 lg:left-0 lg:mt-0 lg:w-[448px]">
+                  <div className="relative mt-[clamp(18px,4vh,56px)] w-full lg:mt-[clamp(24px,5vh,56px)] lg:w-full">
 
-                    <div className="h-px w-full bg-[#E2E8F0] lg:w-[120%] lg:-translate-x-10" />
+                    <div className="h-px w-full bg-[#E2E8F0]" />
 
-                    <div className="mt-[20px] flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8 sm:whitespace-nowrap">
+                    <div className="mt-[clamp(14px,2.5vh,20px)] flex w-full flex-wrap items-center justify-center gap-3 sm:gap-8 lg:flex-nowrap lg:whitespace-nowrap">
 
                       <span
                         className="

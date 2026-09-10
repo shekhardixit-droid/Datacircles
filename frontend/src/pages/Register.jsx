@@ -174,35 +174,35 @@ export default function Register() {
   // ==================================================
 
   return (
-    <div className="min-h-screen w-full bg-[#EAEAEA] p-2 font-inter sm:p-4">
-      <div className="flex w-full flex-col items-stretch gap-4 lg:flex-row lg:items-start">
+    <div className="min-h-[100dvh] w-full overflow-x-hidden bg-[#EAEAEA] p-2 font-inter sm:p-4">
+      <div className="flex min-h-[calc(100dvh-1rem)] w-full flex-col items-stretch gap-4 lg:h-[calc(100dvh-2rem)] lg:min-h-0 lg:flex-row">
 
         {/* ==================================================
             LEFT SECTION
             HIDDEN ON MOBILE
             ================================================== */}
 
-        <div className="relative hidden h-[905px] w-[599px] shrink-0 overflow-hidden rounded-[18px] bg-white lg:block">
+        <div className="relative hidden min-h-0 shrink-0 overflow-hidden rounded-[18px] bg-white lg:block lg:h-full lg:w-[42%]">
 
           {/* TOP TRANSPARENT IMAGE */}
           <img
-            src="Ellipse 2.png"
+            src="/Ellipse 2.png"
             alt=""
-            className="absolute left-0 -top-40 z-10 h-auto w-full object-contain"
+            className="absolute left-1/2 top-0 z-10 h-auto w-full max-w-none -translate-x-1/2 object-contain"
           />
 
           {/* BOTTOM TRANSPARENT IMAGE */}
           <img
-            src="Ellipse 1.png"
+            src="/Ellipse 1.png"
             alt=""
-            className="absolute left-0 z-10 h-[120%] w-full object-contain"
+            className="absolute -bottom-20 left-1/2 z-10 h-auto w-full max-w-none -translate-x-1/2 object-contain"
           />
 
           {/* BOTTOM CONTENT */}
-          <div className="absolute bottom-[32px] left-1/2 z-20 mb-20 h-[286px] w-[448px] -translate-x-1/2">
+          <div className="absolute bottom-[5%] left-1/2 z-20 flex w-[88%] max-w-[448px] -translate-x-1/2 flex-col items-center text-center">
 
             {/* ICON */}
-            <div className="absolute left-[178px] top-0 flex h-[92px] w-[92px] items-center justify-center rounded-[16px] bg-[#0085FF]">
+            <div className="mx-auto flex aspect-square h-[clamp(56px,10vh,92px)] w-auto items-center justify-center rounded-[16px] bg-[#0085FF]">
 
               <svg
                 width="40"
@@ -232,8 +232,8 @@ export default function Register() {
             </div>
 
             {/* DATACIRCLES TEXT */}
-            <div className="absolute left-0 top-[122px] w-full text-center">
-              <span className="font-inter text-[29px] font-bold leading-none tracking-[-1.5px] text-black">
+            <div className="mt-[2.5vh] flex w-full justify-center text-center">
+              <span className="font-inter text-[clamp(20px,2.2vw,29px)] font-bold leading-tight tracking-[-1.5px] text-black">
                 One Platform for Every Business and Revenue Decision
               </span>
             </div>
@@ -245,10 +245,10 @@ export default function Register() {
             RIGHT SECTION
             ================================================== */}
 
-        <div className="min-h-screen w-full min-w-0 flex-1 overflow-hidden rounded-[18px] bg-white lg:h-[899px] lg:min-h-0">
+        <div className="min-h-0 w-full min-w-0 flex-1 overflow-hidden rounded-[18px] bg-white lg:h-full lg:min-h-0">
 
           {/* CENTERED CONTENT */}
-          <div className="flex min-h-full w-full items-center justify-center px-4 py-8 sm:px-6 lg:px-4">
+          <div className="flex h-full min-h-0 w-full items-center justify-center px-[clamp(12px,4vw,40px)] py-[clamp(16px,3vh,32px)]">
 
             {accountCreated ? (
 
@@ -256,10 +256,10 @@ export default function Register() {
                  ACCOUNT CREATED SUCCESSFULLY
                  ================================================== */
 
-              <div className="flex w-full max-w-[449px] flex-col items-center justify-center text-center">
+              <div className="flex w-full max-w-[449px] flex-col items-center justify-center py-[clamp(2px,0.8vh,12px)] text-center">
 
                 {/* Success Icon */}
-                <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[#F1F5F9]">
+                <div className="flex h-[clamp(48px,7vh,56px)] w-[clamp(48px,7vh,56px)] items-center justify-center rounded-full bg-[#F1F5F9]">
 
                   <svg
                     width="28"
@@ -282,11 +282,11 @@ export default function Register() {
                 {/* Heading */}
                 <h1
                   className="
-                    mt-[20px]
+                    mt-[clamp(12px,2.2vh,20px)]
                     font-['Inter']
-                    text-[28px]
+                    text-[clamp(22px,3.2vh,28px)]
                     font-semibold
-                    leading-[36px]
+                    leading-[clamp(28px,4vh,36px)]
                     tracking-[-0.14px]
                     text-[#0F172A]
                   "
@@ -297,11 +297,11 @@ export default function Register() {
                 {/* Description */}
                 <p
                   className="
-                    mt-[8px]
+                    mt-[clamp(6px,1.2vh,8px)]
                     font-['Inter']
-                    text-[18px]
+                    text-[clamp(15px,2.2vh,18px)]
                     font-medium
-                    leading-[28px]
+                    leading-[clamp(22px,3.2vh,28px)]
                     text-[#475569]
                   "
                 >
@@ -314,13 +314,13 @@ export default function Register() {
                   type="button"
                   onClick={() => navigate("/login")}
                   className="
-                    mt-[32px]
-                    h-[48px]
+                    mt-[clamp(20px,3.5vh,32px)]
+                    h-[clamp(42px,5.5vh,48px)]
                     w-full
                     rounded-full
                     bg-[#0085FF]
                     font-['Inter']
-                    text-[14px]
+                    text-[clamp(12px,1.4vw,14px)]
                     font-medium
                     leading-[20px]
                     text-white
@@ -339,28 +339,28 @@ export default function Register() {
                  SIGNUP CONTENT
                  ================================================== */
 
-              <div className="h-auto min-h-[692px] w-full max-w-[449px] shrink-0">
+              <div className="w-full max-w-[449px] py-[clamp(2px,0.8vh,12px)]">
 
                 {/* TOP SECTION */}
                 <div className="w-full">
 
                   {/* 32 × 32 Icon */}
-                  <div className="h-[32px] w-[32px]">
+                  <div className="h-[clamp(24px,3.2vh,32px)] w-[clamp(24px,3.2vh,32px)]">
                     <img
                       src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/signup/Logo.png"
                       alt="logo"
-                      className="h-[32px] w-[32px] object-contain"
+                      className="h-[clamp(24px,3.2vh,32px)] w-[clamp(24px,3.2vh,32px)] object-contain"
                     />
                   </div>
 
                   {/* Heading */}
                   <h1
                     className="
-                      mt-[20px]
+                      mt-[clamp(12px,2.2vh,20px)]
                       font-['Inter']
-                      text-[28px]
+                      text-[clamp(22px,3.2vh,28px)]
                       font-semibold
-                      leading-[36px]
+                      leading-[clamp(28px,4vh,36px)]
                       tracking-[-0.14px]
                       text-[#0F172A]
                     "
@@ -371,11 +371,11 @@ export default function Register() {
                   {/* Description */}
                   <p
                     className="
-                      mt-[8px]
+                      mt-[clamp(6px,1.2vh,8px)]
                       font-['Inter']
-                      text-[18px]
+                      text-[clamp(15px,2.2vh,18px)]
                       font-medium
-                      leading-[28px]
+                      leading-[clamp(22px,3.2vh,28px)]
                       tracking-[0]
                       text-[#475569]
                     "
@@ -390,19 +390,19 @@ export default function Register() {
                     FORM SECTION
                     ================================================== */}
 
-                <div className="mt-[24px] w-full">
+                <div className="mt-[clamp(16px,2.5vh,24px)] w-full">
 
                   {/* Full Name + Work Email */}
-                  <div className="flex w-full flex-col gap-[25px] sm:flex-row">
+                  <div className="flex w-full flex-col gap-[clamp(14px,2.5vh,25px)] sm:flex-row">
 
                     {/* FULL NAME */}
-                    <div className="w-full sm:w-[212px]">
+                    <div className="w-full sm:w-[calc(50%-8px)]">
 
                       <label
                         className="
                           block
                           font-['Inter']
-                          text-[14px]
+                          text-[clamp(12px,1.4vw,14px)]
                           font-medium
                           leading-[20px]
                           text-[#0F172A]
@@ -426,15 +426,15 @@ export default function Register() {
                           }));
                         }}
                         className={`
-                          mt-[8px]
-                          h-[48px]
+                          mt-[clamp(6px,1.2vh,8px)]
+                          h-[clamp(42px,5.5vh,48px)]
                           w-full
                           rounded-full
                           border
                           bg-white
-                          px-[16px]
+                          px-[clamp(12px,1.5vw,16px)]
                           font-['Inter']
-                          text-[14px]
+                          text-[clamp(12px,1.4vw,14px)]
                           font-normal
                           leading-[20px]
                           text-[#0F172A]
@@ -449,7 +449,7 @@ export default function Register() {
                       />
 
                       {errors.fullName && (
-                        <p className="mt-[4px] text-[12px] font-medium leading-[16px] text-[#DC2626]">
+                        <p className="mt-[4px] text-[clamp(11px,0.9vw,12px)] font-medium leading-[clamp(15px,2vh,16px)] text-[#DC2626]">
                           {errors.fullName}
                         </p>
                       )}
@@ -457,13 +457,13 @@ export default function Register() {
                     </div>
 
                     {/* WORK EMAIL */}
-                    <div className="w-full sm:w-[212px]">
+                    <div className="w-full sm:w-[calc(50%-8px)]">
 
                       <label
                         className="
                           block
                           font-['Inter']
-                          text-[14px]
+                          text-[clamp(12px,1.4vw,14px)]
                           font-medium
                           leading-[20px]
                           text-[#0F172A]
@@ -487,15 +487,15 @@ export default function Register() {
                           }));
                         }}
                         className={`
-                          mt-[8px]
-                          h-[48px]
+                          mt-[clamp(6px,1.2vh,8px)]
+                          h-[clamp(42px,5.5vh,48px)]
                           w-full
                           rounded-full
                           border
                           bg-white
-                          px-[16px]
+                          px-[clamp(12px,1.5vw,16px)]
                           font-['Inter']
-                          text-[14px]
+                          text-[clamp(12px,1.4vw,14px)]
                           font-normal
                           leading-[20px]
                           text-[#0F172A]
@@ -510,7 +510,7 @@ export default function Register() {
                       />
 
                       {errors.workEmail && (
-                        <p className="mt-[4px] text-[12px] font-medium leading-[16px] text-[#DC2626]">
+                        <p className="mt-[4px] text-[clamp(11px,0.9vw,12px)] font-medium leading-[clamp(15px,2vh,16px)] text-[#DC2626]">
                           {errors.workEmail}
                         </p>
                       )}
@@ -523,13 +523,13 @@ export default function Register() {
                       PASSWORD
                       ================================================== */}
 
-                  <div className="mt-[25px] w-full">
+                  <div className="mt-[clamp(16px,2.8vh,25px)] w-full">
 
                     <label
                       className="
                         block
                         font-['Inter']
-                        text-[14px]
+                        text-[clamp(12px,1.4vw,14px)]
                         font-medium
                         leading-[20px]
                         text-[#0F172A]
@@ -539,7 +539,7 @@ export default function Register() {
                       <span className="text-[#DC2626]">*</span>
                     </label>
 
-                    <div className="relative mt-[8px]">
+                    <div className="relative mt-[clamp(6px,1.2vh,8px)]">
 
                       <input
                         type={showPassword ? "text" : "password"}
@@ -556,15 +556,15 @@ export default function Register() {
                           }));
                         }}
                         className={`
-                          h-[48px]
+                          h-[clamp(42px,5.5vh,48px)]
                           w-full
                           rounded-full
                           border
                           bg-white
-                          px-[16px]
-                          pr-[45px]
+                          px-[clamp(12px,1.5vw,16px)]
+                          pr-[clamp(38px,3vw,45px)]
                           font-['Inter']
-                          text-[14px]
+                          text-[clamp(12px,1.4vw,14px)]
                           font-normal
                           leading-[20px]
                           text-[#0F172A]
@@ -649,7 +649,7 @@ export default function Register() {
                     </div>
 
                     {errors.password && (
-                      <p className="mt-[4px] text-[12px] font-medium leading-[16px] text-[#DC2626]">
+                      <p className="mt-[4px] text-[clamp(11px,0.9vw,12px)] font-medium leading-[clamp(15px,2vh,16px)] text-[#DC2626]">
                         {errors.password}
                       </p>
                     )}
@@ -660,13 +660,13 @@ export default function Register() {
                       CONFIRM PASSWORD
                       ================================================== */}
 
-                  <div className="mt-[25px] w-full">
+                  <div className="mt-[clamp(16px,2.8vh,25px)] w-full">
 
                     <label
                       className="
                         block
                         font-['Inter']
-                        text-[14px]
+                        text-[clamp(12px,1.4vw,14px)]
                         font-medium
                         leading-[20px]
                         text-[#0F172A]
@@ -676,7 +676,7 @@ export default function Register() {
                       <span className="text-[#DC2626]">*</span>
                     </label>
 
-                    <div className="relative mt-[8px]">
+                    <div className="relative mt-[clamp(6px,1.2vh,8px)]">
 
                       <input
                         type={
@@ -696,15 +696,15 @@ export default function Register() {
                           }));
                         }}
                         className={`
-                          h-[48px]
+                          h-[clamp(42px,5.5vh,48px)]
                           w-full
                           rounded-full
                           border
                           bg-white
-                          px-[16px]
-                          pr-[45px]
+                          px-[clamp(12px,1.5vw,16px)]
+                          pr-[clamp(38px,3vw,45px)]
                           font-['Inter']
-                          text-[14px]
+                          text-[clamp(12px,1.4vw,14px)]
                           font-normal
                           leading-[20px]
                           text-[#0F172A]
@@ -791,7 +791,7 @@ export default function Register() {
                     </div>
 
                     {errors.confirmPassword && (
-                      <p className="mt-[4px] text-[12px] font-medium leading-[16px] text-[#DC2626]">
+                      <p className="mt-[4px] text-[clamp(11px,0.9vw,12px)] font-medium leading-[clamp(15px,2vh,16px)] text-[#DC2626]">
                         {errors.confirmPassword}
                       </p>
                     )}
@@ -803,7 +803,7 @@ export default function Register() {
                       ================================================== */}
 
                   {errors.general && (
-                    <div className="mt-[12px] flex items-center gap-[8px]">
+                    <div className="mt-[clamp(8px,1.5vh,12px)] flex items-center gap-[8px]">
 
                       <svg
                         width="18"
@@ -837,7 +837,7 @@ export default function Register() {
                       <span
                         className="
                           font-['Inter']
-                          text-[13px]
+                          text-[clamp(12px,1.3vw,13px)]
                           font-medium
                           leading-[20px]
                           text-[#DC2626]
@@ -858,13 +858,13 @@ export default function Register() {
                     onClick={handleSignup}
                     disabled={isCreatingAccount}
                     className="
-                      mt-[32px]
-                      h-[48px]
+                      mt-[clamp(20px,3.5vh,32px)]
+                      h-[clamp(42px,5.5vh,48px)]
                       w-full
                       rounded-full
                       bg-[#0085FF]
                       font-['Inter']
-                      text-[14px]
+                      text-[clamp(12px,1.4vw,14px)]
                       font-medium
                       leading-[20px]
                       text-white
@@ -885,7 +885,7 @@ export default function Register() {
                     SOCIAL + LOGIN SECTION
                     ================================================== */}
 
-                <div className="mt-[24px] w-full">
+                <div className="mt-[clamp(16px,2.5vh,24px)] w-full">
 
                   {/* Or Continue With */}
                   <div className="flex w-full items-center">
@@ -894,10 +894,10 @@ export default function Register() {
 
                     <span
                       className="
-                        mx-[16px]
+                        mx-[clamp(8px,1.5vw,16px)]
                         whitespace-nowrap
                         font-['Inter']
-                        text-[14px]
+                        text-[clamp(12px,1.4vw,14px)]
                         font-normal
                         leading-[20px]
                         text-[#64748B]
@@ -911,66 +911,66 @@ export default function Register() {
                   </div>
 
                   {/* Social Icons */}
-                  <div className="mt-[16px] flex h-[42px] items-center justify-center gap-[6px]">
+                  <div className="mt-[clamp(10px,1.8vh,16px)] flex h-[clamp(36px,5vh,42px)] items-center justify-center gap-[clamp(4px,0.6vw,6px)]">
 
                     {/* Google */}
                     <button
                       type="button"
-                      className="flex h-[42px] w-[42px] items-center justify-center"
+                      className="flex h-[clamp(36px,5vh,42px)] w-[clamp(36px,5vh,42px)] items-center justify-center"
                     >
                       <img
                         src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/signup/Rectangle%2034624569.png"
                         alt="Google"
-                        className="h-[42px] w-[42px]"
+                        className="h-[clamp(36px,5vh,42px)] w-[clamp(36px,5vh,42px)]"
                       />
                     </button>
 
                     {/* Github */}
                     <button
                       type="button"
-                      className="flex h-[42px] w-[42px] items-center justify-center"
+                      className="flex h-[clamp(36px,5vh,42px)] w-[clamp(36px,5vh,42px)] items-center justify-center"
                     >
                       <img
                         src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/signup/Rectangle%2034624566.png"
                         alt="Github"
-                        className="h-[42px] w-[42px]"
+                        className="h-[clamp(36px,5vh,42px)] w-[clamp(36px,5vh,42px)]"
                       />
                     </button>
 
                     {/* Facebook */}
                     <button
                       type="button"
-                      className="flex h-[42px] w-[42px] items-center justify-center"
+                      className="flex h-[clamp(36px,5vh,42px)] w-[clamp(36px,5vh,42px)] items-center justify-center"
                     >
                       <img
                         src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/signup/Rectangle%2034624567.png"
                         alt="Facebook"
-                        className="h-[42px] w-[42px]"
+                        className="h-[clamp(36px,5vh,42px)] w-[clamp(36px,5vh,42px)]"
                       />
                     </button>
 
                     {/* Phone */}
                     <button
                       type="button"
-                      className="flex h-[42px] w-[42px] items-center justify-center"
+                      className="flex h-[clamp(36px,5vh,42px)] w-[clamp(36px,5vh,42px)] items-center justify-center"
                     >
                       <img
                         src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/signup/Rectangle%2034624568.png"
                         alt="Phone"
-                        className="h-[42px] w-[42px]"
+                        className="h-[clamp(36px,5vh,42px)] w-[clamp(36px,5vh,42px)]"
                       />
                     </button>
 
                   </div>
 
                   {/* Login Text */}
-                  <div className="mt-[17px] flex justify-center">
+                  <div className="mt-[clamp(10px,2vh,17px)] flex justify-center">
 
                     <p
                       className="
                         text-center
                         font-['Inter']
-                        text-[14px]
+                        text-[clamp(12px,1.4vw,14px)]
                         font-normal
                         leading-[20px]
                         text-[#0F172A]
@@ -985,7 +985,7 @@ export default function Register() {
                           ml-[3px]
                           cursor-pointer
                           font-['Inter']
-                          text-[14px]
+                          text-[clamp(12px,1.4vw,14px)]
                           font-semibold
                           leading-[20px]
                           text-[#0085FF]
@@ -999,30 +999,30 @@ export default function Register() {
                   </div>
 
                   {/* FOOTER */}
-                  <div className="mt-20 w-full justify-center sm:mt-35">
+                  <div className="mt-[clamp(18px,4vh,56px)] whitespace-nowrap w-full justify-center">
 
                     {/* DIVIDER */}
                     <div className="h-px w-full bg-[#E2E8F0]" />
 
                     {/* Footer Content */}
-                    <div className="mt-[20px] flex w-full flex-wrap items-center justify-center gap-4 sm:gap-8">
+                    <div className="mt-[clamp(10px,2vh,20px)] flex w-full flex-wrap items-center justify-center gap-[clamp(8px,1.5vw,32px)] pb-2 lg:flex-nowrap">
 
-                      <span className="text-center font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]">
+                      <span className="text-center font-['Inter'] text-[clamp(12px,1.4vw,14px)] font-normal leading-[20px] text-[#475569]">
                         2026 Datacircles. All Rights Reserved.
                       </span>
 
-                      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-[32px]">
+                      <div className="flex flex-wrap items-center justify-center gap-[clamp(10px,1.5vw,32px)] lg:flex-nowrap">
 
                         <button
                           type="button"
-                          className="font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]"
+                          className="font-['Inter'] text-[clamp(12px,1.4vw,14px)] font-normal leading-[20px] text-[#475569]"
                         >
                           Privacy Policy
                         </button>
 
                         <button
                           type="button"
-                          className="font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]"
+                          className="font-['Inter'] text-[clamp(12px,1.4vw,14px)] font-normal leading-[20px] text-[#475569]"
                         >
                           Terms of Service
                         </button>

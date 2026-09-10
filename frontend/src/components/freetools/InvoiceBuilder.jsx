@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 
 /* ============================================================= */
 /* SHARED TOKENS (kept as JS objects so nothing depends on a      */
@@ -6,6 +6,7 @@ import React, { useState, useMemo } from "react";
 /* ============================================================= */
 
 const colorsPalette = [
+  "#0085FF",
   "#008F70",
   "#2864E5",
   "#334155",
@@ -36,23 +37,154 @@ const num = (n) =>
   });
 
 /* ============================================================= */
+/* PRINT / PAGE-SIZE CONSTANTS                                    */
+/* A4 at 96dpi is 794x1123px. We standardise on a single 12mm     */
+/* @page margin everywhere (in-app print AND the download popup)  */
+/* so the two print paths can never drift apart, and so the       */
+/* on-screen "page break" preview lines line up with reality.     */
+/* ============================================================= */
+
+const A4_PAGE_WIDTH_PX = 794;
+const A4_PAGE_HEIGHT_PX = 1123;
+const PRINT_MARGIN_MM = 12;
+const PRINT_MARGIN_PX = Math.round((PRINT_MARGIN_MM / 25.4) * 96); // ≈45px
+const PAGE_CONTENT_HEIGHT_PX = A4_PAGE_HEIGHT_PX - PRINT_MARGIN_PX * 2;
+
+/* ============================================================= */
 /* PRINT STYLES                                                   */
 /* Only elements marked .invoice-paper survive @media print.      */
 /* Everything else (builder panel, preview chrome, page padding)  */
 /* is explicitly hidden via .no-print so "Download Invoice"       */
-/* produces just the A4 sheet when the user chooses               */
+/* produces just the A4 sheet when the user chooses                */
 /* "Save as PDF" in the print dialog.                              */
+/*                                                                 */
+/* invoicePrintRules is the SINGLE source of truth for how the    */
+/* invoice itself is laid out on paper. It is shared, verbatim,   */
+/* by both print paths (in-app Ctrl+P below, and the standalone   */
+/* popup window used by the "Download Invoice" button) so the     */
+/* two can never disagree on borders, spacing, or pagination.     */
 /* ============================================================= */
+
+const invoicePrintRules = `
+  .invoice-paper {
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+    border: 1.5px solid #000000 !important;
+  }
+
+  .invoice-paper table {
+    width: 100% !important;
+    margin: 0 !important;
+    border-collapse: collapse !important;
+  }
+
+  /* Keep long item names/descriptions and address blocks from
+     overflowing their cell and visually breaking the table's
+     border lines when printed at fixed column widths. */
+  .invoice-paper td,
+  .invoice-paper th,
+  .invoice-paper p {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Repeat the column headers on every printed page, and make sure
+     the totals block in tfoot only ever appears once (right after
+     the last item row) instead of repeating like a header would. */
+  .invoice-paper thead {
+    display: table-header-group !important;
+  }
+  .invoice-paper tfoot {
+    display: table-row-group !important;
+  }
+
+  .invoice-paper th,
+  .invoice-paper td {
+    padding: 6px 8px !important;
+    line-height: 1.3 !important;
+    vertical-align: middle !important;
+  }
+
+  .invoice-paper table {
+    orphans: 3 !important;
+    widows: 3 !important;
+  }
+
+  .invoice-paper p {
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+    line-height: 1.3 !important;
+  }
+
+  .invoice-paper h1,
+  .invoice-paper h2,
+  .invoice-paper h3 {
+    margin-top: 0 !important;
+    margin-bottom: 4px !important;
+    line-height: 1.2 !important;
+  }
+
+  .invoice-paper img {
+    max-height: 45px !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+
+  .invoice-paper img.invoice-qr {
+    max-height: none !important;
+  }
+
+  /* Never let a table row, or a top-level section (seller block,
+     bank/signature block, etc.), split across a page break — each
+     one prints whole, on whichever page it lands on. This is what
+     actually produces clean multi-page invoices instead of a
+     section being torn in half. */
+  .invoice-paper tr,
+  .invoice-paper > div {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* ...except the items table wrapper: a long item list is allowed
+     to flow across pages (individual rows still won't split, thanks
+     to the "tr" rule above, and the header repeats via
+     table-header-group). Without this override the whole table
+     would be forced to try to fit on one page. */
+  .invoice-paper > div.invoice-items-wrapper {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  .invoice-download-paper {
+    page-break-after: avoid !important;
+    break-after: avoid-page !important;
+  }
+`;
 
 const PrintStyles = () => (
   <style>{`
     @media print {
       html, body {
-              margin: 0 !important;
-              padding: 0 !important;
-              width: auto !important;
-              background: #fff !important;
-            }
+        margin: 0 !important;
+        padding: 0 !important;
+        width: auto !important;
+        background: #fff !important;
+      }
+
+      /* Force background colours (table header shading, coloured
+         accent bars, etc.) to survive printing in every browser. */
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
 
       /* Bulletproof isolation: hide every single element in the
          document, then explicitly re-show only the invoice sheet
@@ -68,28 +200,12 @@ const PrintStyles = () => (
         visibility: visible !important;
       }
 
-      .invoice-paper {
-              position: static !important;
-              width: 100% !important;
-              max-width: none !important;
-              min-height: 0 !important;
-              height: auto !important;
-              margin: 0 !important;
-              padding: 0 !important;
-              overflow: visible !important;
-              box-shadow: none !important;
-              border: none !important;
-              box-sizing: border-box !important;
-              page-break-inside: avoid !important;
-              break-inside: avoid !important;
-              line-height: 1.22 !important;
-              font-size: 9.5px !important;
-            }
+      ${invoicePrintRules}
 
       @page {
-              size: A4;
-              margin: 10mm;
-            }
+        size: A4;
+        margin: ${PRINT_MARGIN_MM}mm;
+      }
     }
 
     @media (min-width: 1024px) {
@@ -101,53 +217,7 @@ const PrintStyles = () => (
       .sm-grid-2 { grid-template-columns: 1fr 1fr !important; }
       .sm-grid-3 { grid-template-columns: 1fr 1fr 1fr !important; }
     }
-  
-.invoice-paper table {
-              width: 100% !important;
-              margin: 4px 0 !important;
-              border-collapse: collapse !important;
-            }
-
-            .invoice-paper th,
-            .invoice-paper td {
-              padding: 4px 6px !important;
-              line-height: 1.2 !important;
-              vertical-align: middle !important;
-            }
-
-            .invoice-paper p {
-              margin-top: 2px !important;
-              margin-bottom: 2px !important;
-              line-height: 1.22 !important;
-            }
-
-            .invoice-paper h1,
-            .invoice-paper h2,
-            .invoice-paper h3 {
-              margin-top: 0 !important;
-              margin-bottom: 4px !important;
-              line-height: 1.15 !important;
-            }
-
-            .invoice-paper img {
-              max-height: 42px !important;
-              width: auto !important;
-              object-fit: contain !important;
-            }
-
-            .invoice-paper tr,
-            .invoice-paper > div {
-              page-break-inside: avoid !important;
-              break-inside: avoid !important;
-            }
-
-            .invoice-download-paper {
-              page-break-after: avoid !important;
-              break-after: avoid-page !important;
-            }
-`}
-            
-</style>
+  `}</style>
 );
 
 /* ============================================================= */
@@ -383,6 +453,9 @@ const InvoiceBuilder = () => {
         <head>
           <title>${formData.invoiceNumber || "Invoice"}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
           <style>
             * {
               box-sizing: border-box;
@@ -399,41 +472,7 @@ const InvoiceBuilder = () => {
 
             body {
               width: auto;
-              margin: 0;
-              padding: 0;
-            }
-
-            .invoice-paper {
-              position: static !important;
-              width: 100% !important;
-              max-width: none !important;
-              min-height: 0 !important;
-              height: auto !important;
-              margin: 0 !important;
-              box-sizing: border-box !important;
-              overflow: visible !important;
-              box-shadow: none !important;
-              border: none !important;
-              page-break-inside: auto !important;
-              break-inside: auto !important;
-              line-height: 1.35 !important;
-            }
-
-            /* Keep the downloaded invoice visually compact and aligned. */
-            .invoice-paper p,
-            .invoice-paper h1,
-            .invoice-paper h2,
-            .invoice-paper h3 {
-              margin-block-start: 0;
-            }
-
-            .invoice-paper table {
-              margin: 0 !important;
-            }
-
-            .invoice-paper th,
-            .invoice-paper td {
-              vertical-align: middle !important;
+              font-family: 'Inter', Arial, sans-serif;
             }
 
             .invoice-paper img {
@@ -441,25 +480,14 @@ const InvoiceBuilder = () => {
               max-width: 100%;
             }
 
-            .invoice-download-paper > div,
-            .invoice-download-paper > table {
-              break-inside: avoid;
-            }
-
-            .invoice-download-paper tr {
-              break-inside: avoid;
-              page-break-inside: avoid;
-            }
-
-            .invoice-download-paper td,
-            .invoice-download-paper th {
-              padding-top: 7px !important;
-              padding-bottom: 7px !important;
-            }
+            /* Same rules the in-app print path uses (see invoicePrintRules
+               above) so a Ctrl+P print and a "Download Invoice" PDF always
+               come out identical. */
+            ${invoicePrintRules}
 
             @page {
               size: A4;
-              margin: 14mm;
+              margin: ${PRINT_MARGIN_MM}mm;
             }
           </style>
         </head>
@@ -470,12 +498,42 @@ const InvoiceBuilder = () => {
     `);
     printWindow.document.close();
 
+    // Wait for every image (logo, signature, UPI QR code) plus web
+    // fonts to actually finish loading before invoking print() —
+    // otherwise a slow network can hand the print dialog a page with
+    // missing images or a fallback font, which then gets baked into
+    // the saved PDF. Falls back to a fixed delay if loading stalls.
+    const waitForPrintReady = () => {
+      const images = Array.from(printWindow.document.images || []);
+      const imagesReady = Promise.all(
+        images.map((img) =>
+          img.complete
+            ? Promise.resolve()
+            : new Promise((resolve) => {
+                img.addEventListener("load", resolve, { once: true });
+                img.addEventListener("error", resolve, { once: true });
+              })
+        )
+      );
+      const fontsReady =
+        printWindow.document.fonts && printWindow.document.fonts.ready
+          ? printWindow.document.fonts.ready
+          : Promise.resolve();
+      const timeout = new Promise((resolve) => setTimeout(resolve, 2500));
+
+      return Promise.race([Promise.all([imagesReady, fontsReady]), timeout]);
+    };
+
     const startPrint = () => {
-      setTimeout(() => {
+      waitForPrintReady().then(() => {
         printWindow.focus();
         printWindow.print();
-      }, 300);
+      });
     };
+
+    // Close the popup once the print dialog is dismissed so the user
+    // isn't left with a stray blank tab after saving/printing.
+    printWindow.onafterprint = () => printWindow.close();
 
     if (printWindow.document.readyState === "complete") {
       startPrint();
@@ -1545,7 +1603,8 @@ export const InvoicePreview = ({
   const previewColor =
     selectedColor === "rainbow" ? "#0085FF" : selectedColor;
 
-  const borderColor = "#111827";
+  const borderColor = "#000000";
+  const outerBorder = "1.5px solid #000000";
   const muted = "#4B5563";
   const lightBorder = "#D1D5DB";
 
@@ -1563,6 +1622,99 @@ export const InvoicePreview = ({
       : {};
 
   const amountInWords = numberToWordsIndian(total);
+
+  // Work out exactly where the browser's print engine will actually break
+  // pages, instead of naively dividing total height by page height. Every
+  // top-level section on the invoice has page-break-inside: avoid, so a
+  // section that doesn't fully fit in the space left on the current page
+  // gets pushed, whole, onto the next one — the invoice only ever moves
+  // to a 2nd page once page 1 truly can't fit the next section (or row).
+  // This walks the real rendered DOM and simulates that same rule, so
+  // matches exactly where the browser's print engine will actually break.
+  const paperRef = useRef(null);
+  const [pageBreaks, setPageBreaks] = useState([]);
+
+  useEffect(() => {
+    const node = paperRef.current;
+    if (!node) return undefined;
+
+    const recompute = () => {
+      const sections = Array.from(node.children).filter(
+        (el) => el.tagName === "DIV"
+      );
+
+      let cumulative = 0; // position in the continuous on-screen layout
+      let used = 0; // space filled on the current *simulated printed* page
+      const breaks = [];
+
+      const placeBlock = (height) => {
+        if (used > 0 && used + height > PAGE_CONTENT_HEIGHT_PX) {
+          breaks.push(cumulative);
+          used = 0;
+        }
+        used += height;
+        cumulative += height;
+      };
+
+      sections.forEach((section) => {
+        if (section.classList.contains("invoice-items-wrapper")) {
+          // The items table is the one section allowed to split: its
+          // header (table-header-group) repeats on every printed page it
+          // spans, and each row avoids splitting individually, so we walk
+          // row by row instead of treating the whole table as one block.
+          const table = section.querySelector("table");
+          const theadEl = table && table.querySelector("thead");
+          const tfootEl = table && table.querySelector("tfoot");
+          const rows = table
+            ? Array.from(table.querySelectorAll("tbody > tr"))
+            : [];
+          const theadHeight = theadEl
+            ? theadEl.getBoundingClientRect().height
+            : 0;
+          const tfootHeight = tfootEl
+            ? tfootEl.getBoundingClientRect().height
+            : 0;
+
+          if (used > 0 && used + theadHeight > PAGE_CONTENT_HEIGHT_PX) {
+            breaks.push(cumulative);
+            used = 0;
+          }
+          used += theadHeight;
+          cumulative += theadHeight;
+
+          rows.forEach((row) => {
+            const rowHeight = row.getBoundingClientRect().height;
+            if (used + rowHeight > PAGE_CONTENT_HEIGHT_PX) {
+              breaks.push(cumulative);
+              used = theadHeight; // header reprints at the top of the new page
+            }
+            used += rowHeight;
+            cumulative += rowHeight;
+          });
+
+          if (used + tfootHeight > PAGE_CONTENT_HEIGHT_PX) {
+            breaks.push(cumulative);
+            used = theadHeight;
+          }
+          used += tfootHeight;
+          cumulative += tfootHeight;
+        } else {
+          placeBlock(section.getBoundingClientRect().height);
+        }
+      });
+
+      setPageBreaks(breaks);
+    };
+
+    recompute();
+
+    if (typeof ResizeObserver === "undefined") return undefined;
+    const observer = new ResizeObserver(recompute);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [items, formData, selectedLayout, selectedColor]);
+
+  const pageCount = pageBreaks.length + 1;
 
   return (
     <div
@@ -1585,9 +1737,10 @@ export const InvoicePreview = ({
     alignItems: "center",
     borderBottom: "1px solid #E5E5E5",
     padding: "0 16px",
+    gap: 12,
   }}
 >
-  <div>
+  <div style={{ minWidth: 0 }}>
     <span
       style={{
         fontSize: 14,
@@ -1625,23 +1778,35 @@ export const InvoicePreview = ({
       >
         {/* =========================================================
             A4 INVOICE PAPER
+            Wrapped in a relatively-positioned container so the
+            (screen-only) page-break markers can be laid on top at
+            the exact pixel offsets where the printed PDF will break.
            ========================================================= */}
         <div
-          className="invoice-paper invoice-download-paper"
           style={{
+            position: "relative",
             margin: "0 auto",
             width: "100%",
-            maxWidth: 794,
-            minHeight: 1123,
-            overflow: "hidden",
-            background: "#fff",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-            fontFamily: "Inter, Arial, sans-serif",
-            fontSize: 11,
-            color: "#111827",
-            ...paperBorder,
+            maxWidth: A4_PAGE_WIDTH_PX,
           }}
         >
+          <div
+            ref={paperRef}
+            className="invoice-paper invoice-download-paper"
+            style={{
+              boxSizing: "border-box",
+              width: "100%",
+              minHeight: A4_PAGE_HEIGHT_PX,
+              overflow: "hidden",
+              background: "#fff",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+              fontFamily: "Inter, Arial, sans-serif",
+              fontSize: 11,
+              color: "#111827",
+              border: outerBorder,
+              ...paperBorder,
+            }}
+          >
           {/* ===================== TITLE ===================== */}
 
           <div
@@ -1649,12 +1814,23 @@ export const InvoicePreview = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              border: `1px solid ${borderColor}`,
-              borderBottom: "none",
+              borderBottom: `1px solid ${borderColor}`,
               padding: "9px 12px",
             }}
           >
-            <span style={{ fontSize: 8, color: muted, visibility: "hidden" }}>spacer</span>
+            <p
+              aria-hidden="true"
+              style={{
+                margin: 0,
+                fontSize: 9,
+                color: muted,
+                textTransform: "uppercase",
+                whiteSpace: "nowrap",
+                visibility: "hidden",
+              }}
+            >
+              ORIGINAL FOR RECIPIENT
+            </p>
             <h1
               style={{
                 margin: 0,
@@ -1688,7 +1864,7 @@ export const InvoicePreview = ({
             style={{
               display: "grid",
               gridTemplateColumns: "1.15fr 0.85fr",
-              border: `1px solid ${borderColor}`,
+              borderBottom: `1px solid ${borderColor}`,
             }}
           >
             {/* Seller */}
@@ -1745,13 +1921,14 @@ export const InvoicePreview = ({
                   )}
                 </div>
 
-                <div style={{ minWidth: 0 }}>
+                <div style={{ minWidth: 0, flex: 1 }}>
                   <h2
                     style={{
                       margin: 0,
                       fontSize: 16,
                       fontWeight: 700,
                       color: "#111827",
+                      wordBreak: "break-word",
                     }}
                   >
                     {formData.businessName || "Your Business Name"}
@@ -1844,8 +2021,6 @@ export const InvoicePreview = ({
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              borderLeft: `1px solid ${borderColor}`,
-              borderRight: `1px solid ${borderColor}`,
               borderBottom: `1px solid ${borderColor}`,
             }}
           >
@@ -1873,13 +2048,14 @@ export const InvoicePreview = ({
                   margin: 0,
                   fontSize: 12,
                   fontWeight: 700,
+                  wordBreak: "break-word",
                 }}
               >
                 {formData.clientName || "Client Name"}
               </p>
 
               {formData.clientCompany && (
-                <p style={{ margin: "2px 0 0", fontSize: 11, fontWeight: 700 }}>
+                <p style={{ margin: "2px 0 0", fontSize: 11, fontWeight: 700, wordBreak: "break-word" }}>
                   {formData.clientCompany}
                 </p>
               )}
@@ -1980,12 +2156,7 @@ export const InvoicePreview = ({
 
           {/* ===================== ITEMS TABLE ===================== */}
 
-          <div
-            style={{
-              borderLeft: `1px solid ${borderColor}`,
-              borderRight: `1px solid ${borderColor}`,
-            }}
-          >
+          <div className="invoice-items-wrapper">
             <table
               style={{
                 width: "100%",
@@ -2129,6 +2300,7 @@ export const InvoicePreview = ({
                           fontSize: 10,
                           fontWeight: 700,
                           color: "#111827",
+                          wordBreak: "break-word",
                         }}
                       >
                         {item.item || "Item name"}
@@ -2142,6 +2314,7 @@ export const InvoicePreview = ({
                             fontSize: 9,
                             lineHeight: "14px",
                             color: muted,
+                            wordBreak: "break-word",
                           }}
                         >
                           {item.description}
@@ -2367,8 +2540,7 @@ export const InvoicePreview = ({
 
           <div
             style={{
-              border: `1px solid ${borderColor}`,
-              borderTop: "none",
+              borderBottom: `1px solid ${borderColor}`,
               padding: "9px 10px",
               lineHeight: "15px",
             }}
@@ -2401,8 +2573,6 @@ export const InvoicePreview = ({
 
           <div
             style={{
-              borderLeft: `1px solid ${borderColor}`,
-              borderRight: `1px solid ${borderColor}`,
               borderBottom: `1px solid ${borderColor}`,
             }}
           >
@@ -2489,10 +2659,8 @@ export const InvoicePreview = ({
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr 1fr",
-              borderLeft: `1px solid ${borderColor}`,
-              borderRight: `1px solid ${borderColor}`,
               borderBottom: `1px solid ${borderColor}`,
-              minHeight: 155,
+              minHeight: 165,
             }}
           >
             {/* Bank Details */}
@@ -2531,11 +2699,15 @@ export const InvoicePreview = ({
               style={{
                 borderRight: `1px solid ${borderColor}`,
                 padding: 12,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
               <h3
                 style={{
                   margin: "0 0 10px",
+                  alignSelf: "flex-start",
                   fontSize: 10,
                   fontWeight: 700,
                 }}
@@ -2544,19 +2716,50 @@ export const InvoicePreview = ({
               </h3>
 
               {formData.upiId ? (
-                <img
-                  src={`https://quickchart.io/qr?size=140&text=${encodeURIComponent(
-                    `upi://pay?pa=${formData.upiId}&pn=${
-                      formData.businessName || "Business"
-                    }&am=${Number(total || 0).toFixed(2)}&cu=INR`
-                  )}`}
-                  alt="UPI payment QR code"
-                  style={{
-                    display: "block",
-                    height: 90,
-                    width: 90,
-                  }}
-                />
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: 118,
+                      width: 118,
+                      padding: 6,
+                      border: `1px solid ${lightBorder}`,
+                      borderRadius: 6,
+                      background: "#fff",
+                    }}
+                  >
+                    <img
+                      className="invoice-qr"
+                      src={`https://quickchart.io/qr?size=400&margin=1&ecLevel=Q&text=${encodeURIComponent(
+                        `upi://pay?pa=${formData.upiId}&pn=${
+                          formData.businessName || "Business"
+                        }&am=${Number(total || 0).toFixed(2)}&cu=INR`
+                      )}`}
+                      alt="UPI payment QR code"
+                      style={{
+                        display: "block",
+                        height: 106,
+                        width: 106,
+                        imageRendering: "crisp-edges",
+                      }}
+                    />
+                  </div>
+                  <p
+                    style={{
+                      margin: "6px 0 0",
+                      fontSize: 8,
+                      textAlign: "center",
+                      color: muted,
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    Scan to pay {currency(total)}
+                    <br />
+                    {formData.upiId}
+                  </p>
+                </>
               ) : (
                 <p
                   style={{
@@ -2585,6 +2788,8 @@ export const InvoicePreview = ({
                   margin: 0,
                   fontSize: 10,
                   fontWeight: 700,
+                  textAlign: "right",
+                  wordBreak: "break-word",
                 }}
               >
                 For {formData.businessName || "Your Business"}
@@ -2644,8 +2849,6 @@ export const InvoicePreview = ({
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              borderLeft: `1px solid ${borderColor}`,
-              borderRight: `1px solid ${borderColor}`,
               borderBottom: `1px solid ${borderColor}`,
             }}
           >
@@ -2674,6 +2877,7 @@ export const InvoicePreview = ({
                   fontSize: 9,
                   lineHeight: "14px",
                   color: muted,
+                  wordBreak: "break-word",
                 }}
               >
                 {formData.notes || "No notes added."}
@@ -2706,7 +2910,9 @@ export const InvoicePreview = ({
                   color: muted,
                 }}
               >
-              
+                <li>Goods once sold will not be taken back or exchanged.</li>
+                <li>Interest @18% p.a. will be charged on unpaid invoices beyond the due date.</li>
+                <li>Subject to local jurisdiction only.</li>
               </ol>
             </div>
           </div>
@@ -2715,16 +2921,16 @@ export const InvoicePreview = ({
 
           <div
             style={{
-              borderLeft: `1px solid ${borderColor}`,
-              borderRight: `1px solid ${borderColor}`,
-              borderBottom: `1px solid ${borderColor}`,
               padding: "7px 10px",
               textAlign: "center",
               fontSize: 8,
               color: muted,
             }}
           >
-            Page 1 / 1 • This is a digitally generated document.
+            {pageCount > 1
+              ? `This is a digitally generated document, printed across ${pageCount} pages.`
+              : "This is a digitally generated document."}
+          </div>
           </div>
         </div>
       </div>
@@ -2758,6 +2964,7 @@ const InvoiceInfoRow = ({ label, value, last = false, borderRight = false }) => 
       style={{
         margin: "3px 0 0",
         fontSize: 10,
+        wordBreak: "break-word",
       }}
     >
       {value}
