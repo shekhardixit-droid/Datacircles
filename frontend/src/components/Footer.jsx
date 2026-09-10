@@ -190,7 +190,7 @@ const Footer = () => {
         {/* LARGE BRAND IMAGE */}
         <div className="mt-8  w-full overflow-hidden select-none pointer-events-none sm:mt-8 lg:mt-11 xl:mt-14">
           <img
-            src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/DataCircles%C2%AE.svg"
+            src="assets/DataCircles®.svg"
             alt="DataCircles"
             className="block h-auto w-full object-contain"
           />
