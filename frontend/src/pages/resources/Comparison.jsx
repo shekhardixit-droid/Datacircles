@@ -67,42 +67,6 @@ export default function Comparison() {
       </div>
 
       {/* ============================================================
-          RESOURCE NAVIGATION
-         ============================================================ */}
-      <nav
-        aria-label="Guide sections"
-        className="
-          absolute
-          left-1/2
-          z-[100]
-          -translate-x-1/2
-          overflow-x-auto
-          whitespace-nowrap
-          [scrollbar-width:none]
-          [&::-webkit-scrollbar]:hidden
-        "
-        style={{ top: 92, width: "min(1120px, calc(100% - 64px))" }}
-      >
-        <div className="flex w-max min-w-full items-center justify-start gap-2">
-          <button type="button" className="h-10 shrink-0 rounded-lg border border-[#dce7f0] bg-white px-[18px] text-xs font-semibold leading-[17px] text-[#635557] transition-all duration-200 ease-out hover:border-[#0085ff] hover:bg-[#0085ff] hover:text-white active:translate-y-0 max-[600px]:h-9 max-[600px]:px-[14px] max-[600px]:text-[11px]" onClick={() => navigate("/how-to-guide")}>
-            1 · How-To Guide
-          </button>
-
-          <button type="button" className="h-10 shrink-0 rounded-lg border border-[#dce7f0] bg-white px-[18px] text-xs font-semibold leading-[17px] text-[#635557] transition-all duration-200 ease-out hover:border-[#0085ff] hover:bg-[#0085ff] hover:text-white active:translate-y-0 max-[600px]:h-9 max-[600px]:px-[14px] max-[600px]:text-[11px]" onClick={() => navigate("/checklist")}>
-            2 · Checklist / Explainer
-          </button>
-
-          <button type="button" aria-current="page" className="h-10 shrink-0 rounded-lg border border-[#0085ff] bg-[#0085ff] px-[18px] text-xs font-semibold leading-[17px] text-white transition-all duration-200 ease-out hover:border-[#000000] hover:bg-[#000000] active:translate-y-0 max-[600px]:h-9 max-[600px]:px-[14px] max-[600px]:text-[11px]" onClick={() => navigate("/comparison")}>
-            3 · Comparison
-          </button>
-
-          <button type="button" className="h-10 shrink-0 rounded-lg border border-[#dce7f0] bg-white px-[18px] text-xs font-semibold leading-[17px] text-[#635557] transition-all duration-200 ease-out hover:border-[#0085ff] hover:bg-[#0085ff] hover:text-white active:translate-y-0 max-[600px]:h-9 max-[600px]:px-[14px] max-[600px]:text-[11px]" onClick={() => navigate("/crm-for-audience")}>
-            4 · CRM for [audience]
-          </button>
-        </div>
-      </nav>
-
-      {/* ============================================================
           HERO
          ============================================================ */}
       <header className="relative w-full overflow-hidden bg-white">

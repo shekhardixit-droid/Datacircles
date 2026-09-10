@@ -81,88 +81,6 @@ export default function CRMAudience() {
       </div>
 
       {/* ============================================================
-          RESOURCE NAVIGATION
-         ============================================================ */}
-      <nav
-        aria-label="Guide sections"
-        className="
-          absolute
-          left-1/2
-          z-[100]
-          -translate-x-1/2
-          overflow-x-auto
-          whitespace-nowrap
-          [scrollbar-width:none]
-          [&::-webkit-scrollbar]:hidden
-        "
-        style={{ top: 92, width: "min(1120px, calc(100% - 64px))" }}
-      >
-        <div
-          className="
-            flex
-            w-max
-            min-w-full
-            items-center
-            justify-start
-            gap-2
-          "
-        >
-          {resourceTabs.map(({ label, route }, index) => {
-            const active = index === 3;
-            return (
-              <button
-                key={label}
-                type="button"
-                aria-current={active ? "page" : undefined}
-                onClick={() => navigate(route)}
-                className={`
-                  flex
-                  h-10
-                  shrink-0
-                  items-center
-                  justify-center
-                  rounded-lg
-                  border
-                  px-[18px]
-                  text-xs
-                  font-semibold
-                  leading-[17px]
-                  transition-all
-                  duration-200
-                  ease-out
-                  hover:-translate-y-0.5
-                  active:translate-y-0
-                  max-[600px]:h-9
-                  max-[600px]:px-[14px]
-                  max-[600px]:text-[11px]
-                  ${
-                    active
-                      ? `
-                        border-[#0085ff]
-                        bg-[#0085ff]
-                        text-white
-                        hover:border-[#000000]
-                        hover:bg-[#000000]
-                        hover:text-white
-                      `
-                      : `
-                        border-[#dce7f0]
-                        bg-white
-                        text-[#635557]
-                        hover:border-[#0085ff]
-                        hover:bg-[#0085ff]
-                        hover:text-white
-                      `
-                  }
-                `}
-              >
-                {label}
-              </button>
-            );
-          })}
-        </div>
-      </nav>
-
       {/* ============================================================
           HERO
          ============================================================ */}
@@ -864,46 +782,58 @@ export default function CRMAudience() {
         >
           <button
             type="button"
-            className="
-              h-[50px]
-              rounded-[25px]
-              bg-white
-              px-7
-              text-[13px]
-              font-semibold
-              text-[#0085ff]
-              transition-all
-              duration-200
-              ease-out
-              hover:-translate-y-0.5
-              hover:bg-black
-              hover:text-white
-              max-[600px]:w-[190px]
-            "
+          className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[136px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "
           >
             Create Account
           </button>
 
           <button
-            type="button"
-            className="
-              h-[50px]
-              rounded-[25px]
-              border
-              border-white
-              bg-transparent
-              px-7
-              text-[13px]
-              font-semibold
-              text-white
-              transition-all
-              duration-200
-              ease-out
-              hover:-translate-y-0.5
-              hover:bg-white
-              hover:text-[#0085ff]
-              max-[600px]:w-[190px]
-            "
+             type="button"
+          className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[136px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "
           >
             Book a Demo
           </button>

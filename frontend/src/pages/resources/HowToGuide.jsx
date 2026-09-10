@@ -1082,22 +1082,6 @@ export default function HowToGuide() {
             <Navbar />
           </div>
 
-          {/* TOP RESOURCE NAVIGATION */}
-          <nav className="guide-resource-nav" aria-label="Guide sections">
-            <button type="button" className="guide-resource-tab active" onClick={() => navigate("/how-to-guide")}>
-              1 · How-To Guide
-            </button>
-            <button type="button" className="guide-resource-tab" onClick={() => navigate("/checklist")}>
-              2 · Checklist / Explainer
-            </button>
-            <button type="button" className="guide-resource-tab" onClick={() => navigate("/comparison")}>
-              3 · Comparison
-            </button>
-            <button type="button" className="guide-resource-tab" onClick={() => navigate("/crm-for-audience")}>
-              4 · CRM for [audience]
-            </button>
-          </nav>
-
           {/* HERO / ARTICLE HEADER */}
           <header className="guide-header">
             <div className="guide-header-inner">
