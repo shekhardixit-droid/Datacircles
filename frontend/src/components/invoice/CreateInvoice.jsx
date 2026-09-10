@@ -210,10 +210,35 @@ const CreateInvoice = () => {
 
     try {
       const API_URL = import.meta.env.VITE_API_URL || "https://datacircles.vercel.app";
+
+      // Map CreateInvoice form shape → backend Invoice model shape
+      const payload = {
+        businessName:    invoice.seller?.name        || "",
+        businessLogo:    invoice.seller?.website      || "",
+        businessAddress: invoice.seller?.address      || "",
+        clientName:      invoice.customer?.companyName || invoice.customer?.contactPerson || "",
+        email:           invoice.customer?.email       || invoice.seller?.email || "",
+        clientAddress:   invoice.customer?.address     || "",
+        clientPhone:     invoice.customer?.phone       || invoice.seller?.mobile || "",
+        invoiceNumber:   invoice.invoiceNumber         || "",
+        dueDate:         invoice.dueDate               || "",
+        notes:           invoice.notes                 || "",
+        items: (invoice.items || []).map((it) => ({
+          item:        it.name        || "",
+          description: it.description || "",
+          rate:        Number(it.rate)     || 0,
+          quantity:    Number(it.quantity) || 1,
+        })),
+        taxRate:   Number(invoice.items?.[0]?.taxRate) || 0,
+        subtotal:  0,
+        taxAmount: 0,
+        total:     0,
+      };
+
       const response = await fetch(`${API_URL}/api/invoices`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(invoice),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
