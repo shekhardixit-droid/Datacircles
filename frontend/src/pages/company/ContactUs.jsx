@@ -275,6 +275,7 @@ export default function ContactUs() {
             <button
               type="button"
               className="mt-2 font-inter text-[13px] font-semibold text-[#0085FF] transition-colors hover:text-[#37413D]"
+               onClick={() => navigate("/careers#open-roles")}
             >
               See careers →
             </button>
