@@ -8,18 +8,14 @@ const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
-connectDB();
-
-app.use(
-  cors({
-    origin: [
-      "https://datacircles.vercel.app",
-      "http://localhost:5173",
-      "http://localhost:3000",
-    ],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: [
+    "https://datacircless.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:3000",
+  ],
+  credentials: true,
+}));
 
 app.use(express.json());
 
@@ -33,20 +29,15 @@ app.get("/", (req, res) => {
   res.json({ message: "DataCircles backend is running" });
 });
 
-// Invoice routes
 app.use("/api/invoices", invoiceRoutes);
-// Authentication routes
 app.use("/api/auth", authRoutes);
 
+// Only listen locally — Vercel handles this in production
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
 }
-// Authentication routes
-app.use("/api/auth", authRoutes);
-
-const PORT = process.env.PORT || 5000;
 
 module.exports = app;
