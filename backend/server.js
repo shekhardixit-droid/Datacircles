@@ -15,6 +15,7 @@ app.use(cors({
     "http://localhost:3000",
   ],
   credentials: true,
+  maxAge: 86400, // cache preflight for 24h — browser won't send OPTIONS every request
 }));
 
 app.use(express.json());
