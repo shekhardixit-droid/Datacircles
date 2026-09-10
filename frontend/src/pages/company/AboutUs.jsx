@@ -619,7 +619,7 @@ export default function AboutUs() {
     {/* CTA */}
     <button
       type="button"
-      className="inline-flex h-[44px] w-full shrink-0 items-center justify-center gap-2 rounded-[10px] bg-[#0085FF] px-5 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:opacity-90 sm:ml-6 sm:w-auto"
+className="inline-flex h-[44px] w-full shrink-0 items-center justify-center gap-2 rounded-[10px] border border-[#0085FF] bg-white px-5 font-inter text-[13px] font-semibold text-[#0085FF] transition-all duration-200 hover:bg-[#0085FF] hover:text-white sm:ml-6 sm:w-auto"       onClick={() => navigate("/careers#open-roles")}
     >
       See open roles
       <span className="text-[17px] leading-none">→</span>

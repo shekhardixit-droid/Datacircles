@@ -48,7 +48,7 @@ const footerSections = [
     links: [
       { label: "Terms & Conditions", route: "/terms-of-service" },
       { label: "Privacy Policy", route: "/privacy-policy" },
-      { label: "Refund & Cancellation", route: "/refund-cancellation" },
+      { label: "Refund & Cancellation", route: "/security-compliance" },
     ],
   },
 ];
