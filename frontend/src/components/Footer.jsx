@@ -85,7 +85,7 @@ const Footer = () => {
             {/* Logo image */}
             <div className="mb-6 flex w-fit items-center sm:mb-8">
               <img
-                src="/images/DataCircles®.svg"
+                src="/DataCircles®.svg"
                 alt="DataCircles"
                 className="h-auto w-[160px] object-contain sm:w-[180px]"
               />
@@ -188,13 +188,23 @@ const Footer = () => {
         </div>
 
         {/* LARGE BRAND IMAGE */}
-        <div className="mt-8  w-full overflow-hidden select-none pointer-events-none sm:mt-8 lg:mt-11 xl:mt-14">
-          <img
-            src="/DataCircles®.svg"
-            alt="DataCircles"
-            className="block h-auto w-full object-contain"
-          />
-        </div>
+<div className="relative mt-8 -mb-10 w-full overflow-hidden select-none pointer-events-none sm:mt-8 lg:mt-11 xl:mt-14">
+
+  {/* DataCircles Wordmark */}
+  <img
+    src="/DataCircles®.svg"
+    alt="DataCircles"
+    className="relative z-10 block h-auto w-full object-contain"
+  />
+
+  {/* Gradient/Image Layer */}
+<img 
+  src="/wordmark layer.png" 
+  alt="" 
+  className="absolute inset-0 z-20 h-full w-full object-cover" 
+/>
+
+</div>
       </div>
     </footer>
   );
