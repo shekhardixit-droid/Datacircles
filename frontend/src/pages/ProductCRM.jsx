@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
 import CTA from "../components/product-crm/CTA";
-import CRMPrice from "../components/CRMPrice";
+import PricingSection from "../components/PricingSection";
 
 /* =========================================================
    FIGMA ASSETS
@@ -289,21 +289,20 @@ function Hero() {
         {/* BUTTONS */}
         <div className="mt-7 flex flex-col items-center">
           <div className="flex flex-col gap-[10px] sm:flex-row">
-            <BlueButton width="149px">Start Free</BlueButton>
+            <button
+              type="button"
+              className={`
+               flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]
+                ${buttonEffect}
+              `}
+            >
+              Start Free
+            </button>
 
             <button
               type="button"
               className={`
-                flex
-                h-[49px]
-                w-[148px]
-                items-center
-                justify-center
-                rounded-full
-                bg-[#e5edf5]
-                text-[15.3px]
-                font-medium
-                text-[#231014]
+               flex h-[49px] w-full items-center justify-center rounded-full bg-[#E5EDF5] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]
                 ${buttonEffect}
               `}
             >
@@ -1371,7 +1370,7 @@ export default function ProductCRM() {
 
       <WorkStyle />
 
-      <CRMPrice />
+      <PricingSection />
 
       <CTA />
       <Footer />

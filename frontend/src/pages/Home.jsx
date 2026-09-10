@@ -635,13 +635,13 @@ function Home() {
           <div className="mt-[16px] flex h-[49px] w-[307px] origin-left items-center gap-[8px] scale-[0.7] min-[900px]:scale-[0.85] min-[1200px]:scale-100">
             <a
               href="/signup"
-              className="flex h-[49px] w-[144px] items-center justify-center rounded-full bg-[#1683F7] text-[13px] font-medium leading-none text-white transition-colors hover:bg-[#0878E8]"
+            className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#FFFFFF] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
             >
               Start Free
             </a>
             <a
               href="/demo"
-              className="flex h-[49px] w-[155px] items-center justify-center rounded-full bg-white text-[13px] font-medium leading-none text-[#171717] shadow-[0_1px_5px_rgba(0,0,0,0.04)] transition-shadow hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
+            className="flex h-[49px] w-full items-center justify-center rounded-full bg-[#FFFFFF] font-inter text-[14px] font-medium text-black transition-colors duration-200 hover:bg-[#0085FF] hover:text-white sm:w-[149px]"
             >
               Book a Demo
             </a>

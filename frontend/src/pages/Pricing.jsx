@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function Pricing() {
   const [billingPeriod, setBillingPeriod] = useState("annual");
@@ -1126,7 +1127,7 @@ export default function Pricing() {
 
   </div>
 </section>
-
+<Footer />
       </main>
     </div>
   );
