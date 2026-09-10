@@ -175,28 +175,28 @@ const ConfigureBasics = ({ onContinue, onBack }) => {
   };
 
   return (
-   <div className="w-[596px] pt-[64px]">
+   <div className="w-full max-w-[596px] px-[16px] pt-[24px] sm:px-0 sm:pt-[40px] lg:pt-[64px]">
       {/* HEADING */}
-      <div className="mb-[40px]">
-        <h1 className="text-[30px] font-semibold leading-[38px] tracking-[-0.6px] text-[#0F172A]">
+      <div className="mb-[24px] sm:mb-[40px]">
+        <h1 className="text-[22px] sm:text-[30px] font-semibold leading-[30px] sm:leading-[38px] tracking-[-0.6px] text-[#0F172A]">
           Configure your basics
         </h1>
 
-        <p className="mt-[6px] max-w-[650px] text-[16px] font-normal leading-[24px] text-[#475569]">
+        <p className="mt-[6px] max-w-full sm:max-w-[650px] text-[14px] sm:text-[16px] font-normal leading-[22px] sm:leading-[24px] text-[#475569]">
           A few details help DataCircles tailor your workspace to how your
           business operates.
         </p>
       </div>
 
       {/* FORM CARD */}
-      <div className="w-full rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] p-[24px]">
+      <div className="w-full rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] p-[16px] sm:p-[24px]">
         {/* BUSINESS TYPE */}
         <div>
           <label className="block text-[14px] font-medium leading-[20px] text-[#0F172A]">
             Business Type <span className="text-[#DC2626]">*</span>
           </label>
 
-          <div className="mt-[10px] grid grid-cols-2 gap-[16px]">
+          <div className="mt-[10px] grid grid-cols-1 gap-[10px] sm:grid-cols-2 sm:gap-[16px]">
             {businessTypes.map((type) => {
               const isSelected = businessType === type.label;
 
@@ -274,7 +274,7 @@ const ConfigureBasics = ({ onContinue, onBack }) => {
     GST Registered? <span className="text-[#DC2626]">*</span>
   </label>
 
-  <div className="mt-[10px] grid grid-cols-2 gap-[16px]">
+  <div className="mt-[10px] grid grid-cols-2 gap-[10px] sm:gap-[16px]">
     <button
       type="button"
       onClick={() => {
@@ -329,7 +329,7 @@ const ConfigureBasics = ({ onContinue, onBack }) => {
       </div>
 
       {/* ACTIONS */}
-      <div className="mt-[24px] flex w-full items-center justify-between">
+      <div className="mt-[24px] flex w-full items-center justify-between pb-[24px] sm:pb-0">
         <button
           type="button"
           onClick={onBack}

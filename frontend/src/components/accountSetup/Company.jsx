@@ -30,23 +30,23 @@ const Company = ({
   };
 
   return (
-    <div className="w-[596px] pt-[64px]">
+    <div className="w-full max-w-[596px] px-[16px] pt-[24px] sm:px-0 sm:pt-[40px] lg:pt-[64px]">
       {/* HEADING */}
-      <div className="mb-[40px]">
-        <h1 className="text-[30px] font-semibold leading-[38px] tracking-[-0.6px] text-[#0F172A]">
+      <div className="mb-[24px] sm:mb-[40px]">
+        <h1 className="text-[22px] sm:text-[30px] font-semibold leading-[30px] sm:leading-[38px] tracking-[-0.6px] text-[#0F172A]">
           How Would You Like to Get Started?
         </h1>
 
-        <p className="mt-[6px] text-[16px] font-normal leading-[24px] text-[#475569]">
+        <p className="mt-[6px] text-[14px] sm:text-[16px] font-normal leading-[22px] sm:leading-[24px] text-[#475569]">
           Start with a new project or bring your existing BOQ into your
           workspace.
         </p>
       </div>
 
       {/* OPTIONS */}
-      <div className="grid grid-cols-2 gap-[24px]">
+      <div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2 sm:gap-[24px]">
         {/* START FROM SCRATCH */}
-        <div className="flex h-[284px] flex-col rounded-[20px] border border-[#E2E8F0] bg-white p-[24px]">
+        <div className="flex h-auto flex-col rounded-[20px] border border-[#E2E8F0] bg-white p-[16px] sm:h-[284px] sm:p-[24px]">
           <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[#F1F5F9]">
             <svg
               width="28"
@@ -83,7 +83,7 @@ const Company = ({
             Start From Scratch
           </h2>
 
-          <p className="mt-[4px] text-[16px] font-normal leading-[22px] text-[#475569]">
+          <p className="mt-[4px] text-[15px] sm:text-[16px] font-normal leading-[22px] text-[#475569]">
             Create your first company and build a structured contact from the
             ground up.
           </p>
@@ -91,14 +91,14 @@ const Company = ({
           <button
             type="button"
             onClick={handleCreateProject}
-            className="mt-10 h-[48px] w-full rounded-full bg-[#0085FF] text-[14px] font-medium text-white transition hover:bg-[#0078E8]"
+            className="mt-[24px] sm:mt-10 h-[48px] w-full rounded-full bg-[#0085FF] text-[14px] font-medium text-white transition hover:bg-[#0078E8]"
           >
             Create a Project
           </button>
         </div>
 
         {/* IMPORT EXISTING COMPANY */}
-        <div className="flex h-[284px] flex-col rounded-[20px] border border-[#E2E8F0] bg-white p-[24px]">
+        <div className="flex h-auto flex-col rounded-[20px] border border-[#E2E8F0] bg-white p-[16px] sm:h-[284px] sm:p-[24px]">
           <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[#F1F5F9]">
             <svg
               width="28"
@@ -135,14 +135,14 @@ const Company = ({
             Import an existing Company
           </h2>
 
-          <p className="mt-[4px] text-[16px] font-normal leading-[22px] text-[#475569]">
+          <p className="mt-[4px] text-[15px] sm:text-[16px] font-normal leading-[22px] text-[#475569]">
             Bring your Excel or CSV data into a structured Company workflow.
           </p>
 
           <button
             type="button"
             onClick={handleImportBOQ}
-            className="mt-4 h-[48px] w-full rounded-full bg-[#0085FF] text-[14px] font-medium text-white transition hover:bg-[#0078E8]"
+            className="mt-[16px] sm:mt-4 h-[48px] w-full rounded-full bg-[#0085FF] text-[14px] font-medium text-white transition hover:bg-[#0078E8]"
           >
             Import BOQ
           </button>
@@ -150,11 +150,11 @@ const Company = ({
       </div>
 
       {/* BOTTOM ACTIONS */}
-      <div className="mt-[24px] flex w-full items-center justify-between">
+      <div className="mt-[24px] flex w-full flex-col items-center gap-[16px] pb-[24px] sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:pb-0">
         <button
           type="button"
           onClick={onBack}
-          className="h-[48px] rounded-full border border-[#E2E8F0] bg-white px-[30px] text-[14px] font-medium text-[#0F172A] transition hover:bg-[#F8FAFC]"
+          className="h-[48px] w-full rounded-full border border-[#E2E8F0] bg-white px-[30px] text-[14px] font-medium text-[#0F172A] transition hover:bg-[#F8FAFC] sm:w-auto"
         >
           Back
         </button>

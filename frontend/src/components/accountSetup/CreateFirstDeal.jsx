@@ -79,22 +79,22 @@ const CreateFirstDeal = ({ onBack }) => {
   }
 
   return (
-    <div className="w-[596px] pt-[64px]">
+    <div className="w-full max-w-[596px] px-[16px] pt-[24px] sm:px-0 sm:pt-[40px] lg:pt-[64px]">
       {/* HEADING */}
-      <div className="mb-[40px]">
-        <h1 className="text-[30px] font-semibold leading-[38px] tracking-[-0.6px] text-[#0F172A]">
+      <div className="mb-[24px] sm:mb-[40px]">
+        <h1 className="text-[22px] sm:text-[30px] font-semibold leading-[30px] sm:leading-[38px] tracking-[-0.6px] text-[#0F172A]">
           Create your First Deal
         </h1>
 
-        <p className="mt-[6px] w-[560px] text-[16px] font-normal leading-[24px] text-[#475569]">
+        <p className="mt-[6px] w-full max-w-[560px] text-[14px] sm:text-[16px] font-normal leading-[22px] sm:leading-[24px] text-[#475569]">
           Turn your first opportunity into a trackable deal and start
-          <br />
+          <br className="hidden sm:block" />
           managing your pipeline.
         </p>
       </div>
 
       {/* DEAL DETAILS */}
-      <div className="w-[596px] rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] p-[24px]">
+      <div className="w-full max-w-[596px] rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] p-[16px] sm:p-[24px]">
         {/* DEAL NAME */}
         <div>
           <label className="block text-[14px] font-medium leading-[20px] text-[#0F172A]">
@@ -114,7 +114,7 @@ const CreateFirstDeal = ({ onBack }) => {
         </div>
 
         {/* COMPANY NAME + CONTACT */}
-        <div className="mt-[24px] grid grid-cols-2 gap-[24px]">
+        <div className="mt-[24px] grid grid-cols-1 gap-[16px] sm:grid-cols-2 sm:gap-[24px]">
           {/* COMPANY NAME */}
           <div>
             <label className="block text-[14px] font-medium leading-[20px] text-[#0F172A]">
@@ -153,7 +153,7 @@ const CreateFirstDeal = ({ onBack }) => {
         </div>
 
         {/* DEAL VALUE + PIPELINE STAGE */}
-        <div className="mt-[24px] grid grid-cols-2 gap-[24px]">
+        <div className="mt-[24px] grid grid-cols-1 gap-[16px] sm:grid-cols-2 sm:gap-[24px]">
           {/* DEAL VALUE */}
           <div>
             <label className="block text-[14px] font-medium leading-[20px] text-[#0F172A]">
@@ -231,11 +231,11 @@ const CreateFirstDeal = ({ onBack }) => {
       </div>
 
       {/* ACTIONS */}
-      <div className="mt-[24px] flex w-[596px] items-center justify-between">
+      <div className="mt-[24px] flex w-full max-w-[596px] flex-col items-stretch gap-[12px] pb-[24px] sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:pb-0">
         <button
           type="button"
           onClick={onBack}
-          className="h-[48px] rounded-full border border-[#E2E8F0] bg-white px-[20px] text-[14px] font-medium text-[#0F172A] transition hover:bg-[#F8FAFC]"
+          className="h-[48px] rounded-full border border-[#E2E8F0] bg-white px-[20px] text-[14px] font-medium text-[#0F172A] transition hover:bg-[#F8FAFC] order-2 sm:order-1"
         >
           Back
         </button>
@@ -243,7 +243,7 @@ const CreateFirstDeal = ({ onBack }) => {
         <button
           type="button"
           onClick={handleCreateDeal}
-          className="h-[48px] rounded-full bg-[#0085FF] px-[21px] text-[14px] font-medium text-white transition hover:bg-[#0078E8]"
+          className="h-[48px] rounded-full bg-[#0085FF] px-[21px] text-[14px] font-medium text-white transition hover:bg-[#0078E8] order-1 sm:order-2"
         >
           Create Deal
         </button>

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -119,14 +120,15 @@ export default function Verification() {
   const formattedTime = `00:${String(timeLeft).padStart(2, "0")}`;
 
   return (
-    <div className="min-h-screen w-full bg-[#EAEAEA] p-4 font-inter">
+    <div className="min-h-screen w-full bg-[#EAEAEA] p-2 font-inter">
       <div className="flex w-full items-start gap-4">
 
         {/* ==================================================
             LEFT SECTION — SAME AS REGISTER
+            HIDDEN ON MOBILE
             ================================================== */}
 
-        <div className="relative h-[905px] w-[599px] shrink-0 overflow-hidden rounded-[18px] bg-white">
+        <div className="relative hidden h-[905px] w-[599px] shrink-0 overflow-hidden rounded-[18px] bg-white lg:block">
 
           {/* TOP TRANSPARENT IMAGE */}
           <img
@@ -192,14 +194,14 @@ export default function Verification() {
         <div className="h-[899px] min-w-0 flex-1 overflow-hidden rounded-[18px] bg-white">
 
           {/* CENTERED CONTENT */}
-          <div className="flex h-full w-full items-center justify-center">
+          <div className="flex h-full w-full items-center justify-center px-4 sm:px-0">
 
             {/* ==================================================
                 ONLY THIS CENTER CONTENT IS REPLACED
                 449 × 692
                 ================================================== */}
 
-            <div className="h-[692px] w-[449px] shrink-0">
+            <div className="h-[692px] w-full max-w-[449px] shrink-0">
 
               <div className="relative h-full w-full">
 
@@ -267,6 +269,7 @@ export default function Verification() {
                     left-0
                     top-[160px]
                     m-0
+                    max-w-full
                     font-['Inter']
                     text-[18px]
                     font-medium
@@ -292,8 +295,10 @@ export default function Verification() {
                     left-0
                     top-[214px]
                     flex
-                    w-[449px]
+                    w-full
                     justify-between
+                    gap-2
+                    sm:gap-0
                   "
                   onPaste={handlePaste}
                 >
@@ -318,7 +323,7 @@ export default function Verification() {
                       }
                       className="
                         h-[48px]
-                        w-[69px]
+                        w-[calc((100%-40px)/6)]
                         rounded-full
                         border
                         border-[#E2E8F0]
@@ -332,6 +337,8 @@ export default function Verification() {
                         outline-none
                         transition
                         focus:border-[#0085FF]
+                        sm:h-[48px]
+                        sm:w-[69px]
                       "
                     />
                   ))}
@@ -347,7 +354,7 @@ export default function Verification() {
                     left-0
                     top-[290px]
                     flex
-                    w-[449px]
+                    w-full
                     items-center
                     justify-center
                   "
@@ -395,7 +402,7 @@ export default function Verification() {
                     left-0
                     top-[341px]
                     flex
-                    w-[449px]
+                    w-full
                     items-center
                     justify-center
                   "
@@ -439,7 +446,7 @@ export default function Verification() {
                     left-0
                     top-[390px]
                     h-[48px]
-                    w-[449px]
+                    w-full
                     rounded-full
                     bg-[#0085FF]
                     font-['Inter']
@@ -459,41 +466,39 @@ export default function Verification() {
               </div>
 
               {/* FOOTER */}
-                <div className="mt-35 justify-center w-[448px]">
+              <div className="mt-35 w-full justify-center">
 
-                  {/* DIVIDER */}
-                  <div className="h-px w-[120%] -translate-x-10 bg-[#E2E8F0]" />
+                {/* DIVIDER */}
+                <div className="h-px w-[120%] -translate-x-10 bg-[#E2E8F0]" />
 
-                    {/* Footer Content */}
-                    <div className="mt-[20px] flex w-full items-center justify-center gap-8 whitespace-nowrap">
+                {/* Footer Content */}
+                <div className="mt-[20px] flex w-full items-center justify-center gap-8 whitespace-nowrap">
 
-                      <span className="font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]">
-                        2026 Datacircles. All Rights Reserved.
-                      </span>
+                  <span className="font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]">
+                    2026 Datacircles. All Rights Reserved.
+                  </span>
 
-                      <div className="flex items-center gap-[32px]">
+                  <div className="flex items-center gap-[32px]">
 
-                        <button
-                          type="button"
-                          className="font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]"
-                        >
-                          Privacy Policy
-                        </button>
+                    <button
+                      type="button"
+                      className="font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]"
+                    >
+                      Privacy Policy
+                    </button>
 
-                        <button
-                          type="button"
-                          className="font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]"
-                        >
-                          Terms of Service
-                        </button>
-
-                      </div>
-
-                    </div>
+                    <button
+                      type="button"
+                      className="font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]"
+                    >
+                      Terms of Service
+                    </button>
 
                   </div>
 
                 </div>
+
+              </div>
 
             </div>
 
@@ -502,6 +507,9 @@ export default function Verification() {
         </div>
 
       </div>
-    
+    </div>
   );
 }
+
+
+

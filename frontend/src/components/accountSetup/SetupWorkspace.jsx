@@ -104,21 +104,21 @@ const SetupWorkspace = ({ onContinue, onBack }) => {
   };
 
   return (
-    <div className="w-[596px] pt-[64px]">
+    <div className="w-full max-w-[596px] px-[16px] pt-[24px] sm:px-0 sm:pt-[40px] lg:pt-[64px]">
 
       {/* HEADING */}
-      <h1 className="text-[28px] font-semibold leading-[36px] tracking-[-0.14px] text-[#0F172A]">
+      <h1 className="text-[22px] sm:text-[28px] font-semibold leading-[30px] sm:leading-[36px] tracking-[-0.14px] text-[#0F172A]">
         Set Up Your Workspace
       </h1>
 
-      <p className="mt-[8px] w-[560px] text-[18px] font-medium leading-[28px] text-[#475569]">
+      <p className="mt-[8px] w-full max-w-[560px] text-[15px] sm:text-[18px] font-medium leading-[24px] sm:leading-[28px] text-[#475569]">
         Create your DataCircles workspace and bring your
-        <br />
+        <br className="hidden sm:block" />
         business operations into one place.
       </p>
 
       {/* FORM CARD */}
-      <div className="mt-[40px] w-[596px] rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] p-[24px]">
+      <div className="mt-[24px] sm:mt-[40px] w-full max-w-[596px] rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] p-[16px] sm:p-[24px]">
 
         {/* WORKSPACE NAME */}
         <div>
@@ -193,6 +193,8 @@ const SetupWorkspace = ({ onContinue, onBack }) => {
               rounded-[20px]
               border
               bg-white
+              px-[12px]
+              text-center
               transition
               ${
                 isDragging
@@ -211,7 +213,7 @@ const SetupWorkspace = ({ onContinue, onBack }) => {
                   />
                 </div>
 
-                <p className="mt-[10px] text-[14px] font-medium text-[#0F172A]">
+                <p className="mt-[10px] max-w-full truncate px-[8px] text-[14px] font-medium text-[#0F172A]">
                   {logo?.name}
                 </p>
 
@@ -273,7 +275,7 @@ const SetupWorkspace = ({ onContinue, onBack }) => {
             <span className="text-[#DC2626]">*</span>
           </label>
 
-          <div className="mt-[8px] flex items-center gap-[16px]">
+          <div className="mt-[8px] flex flex-wrap items-center gap-[10px] sm:gap-[16px]">
 
             {teamSizes.map((size) => (
   <button
@@ -336,7 +338,7 @@ const SetupWorkspace = ({ onContinue, onBack }) => {
       </div>
 
       {/* ACTIONS */}
-      <div className="mt-[24px] flex w-[596px] items-center justify-between">
+      <div className="mt-[24px] flex w-full max-w-[596px] items-center justify-between pb-[24px] sm:pb-0">
 
         <button
           type="button"

@@ -42,14 +42,15 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#EAEAEA] p-4 font-inter">
-      <div className="flex w-full items-start gap-4">
+    <div className="min-h-screen w-full bg-[#EAEAEA] p-2 font-inter sm:p-4">
+      <div className="flex w-full flex-col items-stretch gap-4 lg:flex-row lg:items-start">
 
         {/* ==================================================
             LEFT SECTION
+            HIDDEN ON MOBILE
             ================================================== */}
 
-        <div className="relative h-[905px] w-[599px] shrink-0 overflow-hidden rounded-[18px] bg-white">
+        <div className="relative hidden h-[905px] w-[599px] shrink-0 overflow-hidden rounded-[18px] bg-white lg:block">
 
           {/* TOP TRANSPARENT IMAGE */}
           <img
@@ -66,7 +67,7 @@ export default function Login() {
           />
 
           {/* BOTTOM CONTENT */}
-          <div className="absolute bottom-[32px] mb-20 left-1/2 z-20 h-[286px] w-[448px] -translate-x-1/2">
+          <div className="absolute bottom-[32px] left-1/2 z-20 mb-20 h-[286px] w-[448px] -translate-x-1/2">
 
             {/* ICON */}
             <div className="absolute left-[178px] top-0 flex h-[92px] w-[92px] items-center justify-center rounded-[16px] bg-[#0085FF]">
@@ -112,28 +113,26 @@ export default function Login() {
             RIGHT SECTION
             ================================================== */}
 
-        <div className="h-[899px] min-w-0 flex-1 overflow-hidden rounded-[18px] bg-white">
+        <div className="min-h-screen w-full min-w-0 flex-1 overflow-hidden rounded-[18px] bg-white lg:h-[899px] lg:min-h-0">
 
           {/* CENTERED CONTENT */}
-          <div className="flex h-full w-full items-center justify-center">
+          <div className="flex min-h-full w-full items-center justify-center px-4 py-8 sm:px-6 lg:px-4">
 
-            <div className="h-[692px] w-[449px]">
+            <div className="h-auto min-h-[620px] w-full max-w-[449px] lg:h-[692px]">
 
               {/* ==================================================
                   TOP SECTION
                   ================================================== */}
 
-              <div className="w-[449px]">
+              <div className="w-full">
 
                 {/* LOGO */}
                 <div className="h-[32px] w-[32px]">
-
                   <img
                     src="https://ik.imagekit.io/qiap0iq38/DATACIRCLES_PROJECT/signup/Logo.png"
                     alt="logo"
                     className="h-[32px] w-[32px] object-contain"
                   />
-
                 </div>
 
                 {/* HEADING */}
@@ -172,10 +171,10 @@ export default function Login() {
                   FORM
                   ================================================== */}
 
-              <div className="mt-[24px] w-[449px]">
+              <div className="mt-[24px] w-full">
 
                 {/* EMAIL */}
-                <div className="w-[449px]">
+                <div className="w-full">
 
                   <label
                     className="
@@ -202,7 +201,7 @@ export default function Login() {
                     className={`
                       mt-[8px]
                       h-[48px]
-                      w-[449px]
+                      w-full
                       rounded-full
                       border
                       bg-white
@@ -225,7 +224,7 @@ export default function Login() {
                 </div>
 
                 {/* PASSWORD */}
-                <div className="mt-[25px] w-[449px]">
+                <div className="mt-[25px] w-full">
 
                   <label
                     className="
@@ -253,7 +252,7 @@ export default function Login() {
                       placeholder="ex.**********"
                       className={`
                         h-[48px]
-                        w-[449px]
+                        w-full
                         rounded-full
                         border
                         bg-white
@@ -352,19 +351,19 @@ export default function Login() {
                 <div className="mt-[12px] flex justify-end">
 
                   <button
-  type="button"
-  onClick={() => navigate("/forgot-password")}
-  className="
-    font-['Inter']
-    cursor-pointer
-    text-[14px]
-    font-medium
-    leading-[20px]
-    text-[#0085FF]
-  "
->
-  Forgot Password?
-</button>
+                    type="button"
+                    onClick={() => navigate("/forgot-password")}
+                    className="
+                      cursor-pointer
+                      font-['Inter']
+                      text-[14px]
+                      font-medium
+                      leading-[20px]
+                      text-[#0085FF]
+                    "
+                  >
+                    Forgot Password?
+                  </button>
 
                 </div>
 
@@ -425,7 +424,7 @@ export default function Login() {
                   className="
                     mt-[24px]
                     h-[48px]
-                    w-[449px]
+                    w-full
                     rounded-full
                     bg-[#0085FF]
                     font-['Inter']
@@ -446,7 +445,7 @@ export default function Login() {
                   SOCIAL LOGIN
                   ================================================== */}
 
-              <div className="mt-[24px] w-[449px]">
+              <div className="mt-[24px] w-full">
 
                 {/* OR CONTINUE */}
                 <div className="flex w-full items-center">
@@ -553,6 +552,7 @@ export default function Login() {
 
                   <p
                     className="
+                      text-center
                       font-['Inter']
                       text-[14px]
                       font-normal
@@ -583,13 +583,13 @@ export default function Login() {
                 </div>
 
                 {/* FOOTER */}
-                <div className="mt-35 justify-center w-[448px]">
+                <div className="mt-20 w-full justify-center sm:mt-35">
 
                   {/* DIVIDER */}
-                  <div className="h-px w-[120%] -translate-x-10 bg-[#E2E8F0]" />
+                  <div className="h-px w-full bg-[#E2E8F0]" />
 
                   {/* FOOTER CONTENT */}
-                  <div className="mt-[20px] flex w-full items-center justify-center gap-8 whitespace-nowrap">
+                  <div className="mt-[20px] flex w-full flex-wrap items-center justify-center gap-4 sm:gap-8">
 
                     <span
                       className="
@@ -603,7 +603,7 @@ export default function Login() {
                       2026 Datacircles. All Rights Reserved.
                     </span>
 
-                    <div className="flex items-center gap-[32px]">
+                    <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-[32px]">
 
                       <button
                         type="button"

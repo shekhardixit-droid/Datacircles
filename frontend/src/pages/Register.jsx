@@ -174,31 +174,32 @@ export default function Register() {
   // ==================================================
 
   return (
-    <div className="min-h-screen w-full bg-[#EAEAEA] p-4 font-inter">
-      <div className="flex w-full items-start gap-4">
+    <div className="min-h-screen w-full bg-[#EAEAEA] p-2 font-inter sm:p-4">
+      <div className="flex w-full flex-col items-stretch gap-4 lg:flex-row lg:items-start">
 
         {/* ==================================================
-            LEFT SECTION — 599 × 905
+            LEFT SECTION
+            HIDDEN ON MOBILE
             ================================================== */}
 
-        <div className="relative h-[905px] w-[599px] shrink-0 overflow-hidden rounded-[18px] bg-white">
+        <div className="relative hidden h-[905px] w-[599px] shrink-0 overflow-hidden rounded-[18px] bg-white lg:block">
 
           {/* TOP TRANSPARENT IMAGE */}
           <img
-            src="/src/assets/Ellipse 2.png"
+            src="Ellipse 2.png"
             alt=""
             className="absolute left-0 -top-40 z-10 h-auto w-full object-contain"
           />
 
           {/* BOTTOM TRANSPARENT IMAGE */}
           <img
-            src="/src/assets/Ellipse 1.png"
+            src="Ellipse 1.png"
             alt=""
             className="absolute left-0 z-10 h-[120%] w-full object-contain"
           />
 
-          {/* BOTTOM CONTENT — 448 × 286 */}
-          <div className="absolute bottom-[32px] mb-20 left-1/2 z-20 h-[286px] w-[448px] -translate-x-1/2">
+          {/* BOTTOM CONTENT */}
+          <div className="absolute bottom-[32px] left-1/2 z-20 mb-20 h-[286px] w-[448px] -translate-x-1/2">
 
             {/* ICON */}
             <div className="absolute left-[178px] top-0 flex h-[92px] w-[92px] items-center justify-center rounded-[16px] bg-[#0085FF]">
@@ -240,15 +241,14 @@ export default function Register() {
           </div>
         </div>
 
-
         {/* ==================================================
             RIGHT SECTION
             ================================================== */}
 
-        <div className="h-[899px] min-w-0 flex-1 overflow-hidden rounded-[18px] bg-white">
+        <div className="min-h-screen w-full min-w-0 flex-1 overflow-hidden rounded-[18px] bg-white lg:h-[899px] lg:min-h-0">
 
           {/* CENTERED CONTENT */}
-          <div className="flex h-full w-full items-center justify-center">
+          <div className="flex min-h-full w-full items-center justify-center px-4 py-8 sm:px-6 lg:px-4">
 
             {accountCreated ? (
 
@@ -256,7 +256,7 @@ export default function Register() {
                  ACCOUNT CREATED SUCCESSFULLY
                  ================================================== */
 
-              <div className="flex w-[449px] flex-col items-center justify-center text-center">
+              <div className="flex w-full max-w-[449px] flex-col items-center justify-center text-center">
 
                 {/* Success Icon */}
                 <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[#F1F5F9]">
@@ -316,7 +316,7 @@ export default function Register() {
                   className="
                     mt-[32px]
                     h-[48px]
-                    w-[449px]
+                    w-full
                     rounded-full
                     bg-[#0085FF]
                     font-['Inter']
@@ -339,10 +339,10 @@ export default function Register() {
                  SIGNUP CONTENT
                  ================================================== */
 
-              <div className="h-[692px] w-[449px] shrink-0">
+              <div className="h-auto min-h-[692px] w-full max-w-[449px] shrink-0">
 
                 {/* TOP SECTION */}
-                <div className="w-[449px]">
+                <div className="w-full">
 
                   {/* 32 × 32 Icon */}
                   <div className="h-[32px] w-[32px]">
@@ -386,18 +386,17 @@ export default function Register() {
 
                 </div>
 
-
                 {/* ==================================================
                     FORM SECTION
                     ================================================== */}
 
-                <div className="mt-[24px] w-[449px]">
+                <div className="mt-[24px] w-full">
 
                   {/* Full Name + Work Email */}
-                  <div className="flex w-full gap-[25px]">
+                  <div className="flex w-full flex-col gap-[25px] sm:flex-row">
 
                     {/* FULL NAME */}
-                    <div className="w-[212px]">
+                    <div className="w-full sm:w-[212px]">
 
                       <label
                         className="
@@ -429,7 +428,7 @@ export default function Register() {
                         className={`
                           mt-[8px]
                           h-[48px]
-                          w-[212px]
+                          w-full
                           rounded-full
                           border
                           bg-white
@@ -457,9 +456,8 @@ export default function Register() {
 
                     </div>
 
-
                     {/* WORK EMAIL */}
-                    <div className="w-[212px]">
+                    <div className="w-full sm:w-[212px]">
 
                       <label
                         className="
@@ -491,7 +489,7 @@ export default function Register() {
                         className={`
                           mt-[8px]
                           h-[48px]
-                          w-[212px]
+                          w-full
                           rounded-full
                           border
                           bg-white
@@ -521,12 +519,11 @@ export default function Register() {
 
                   </div>
 
-
                   {/* ==================================================
                       PASSWORD
                       ================================================== */}
 
-                  <div className="mt-[25px] w-[449px]">
+                  <div className="mt-[25px] w-full">
 
                     <label
                       className="
@@ -560,7 +557,7 @@ export default function Register() {
                         }}
                         className={`
                           h-[48px]
-                          w-[449px]
+                          w-full
                           rounded-full
                           border
                           bg-white
@@ -659,12 +656,11 @@ export default function Register() {
 
                   </div>
 
-
                   {/* ==================================================
                       CONFIRM PASSWORD
                       ================================================== */}
 
-                  <div className="mt-[25px] w-[449px]">
+                  <div className="mt-[25px] w-full">
 
                     <label
                       className="
@@ -701,7 +697,7 @@ export default function Register() {
                         }}
                         className={`
                           h-[48px]
-                          w-[449px]
+                          w-full
                           rounded-full
                           border
                           bg-white
@@ -802,7 +798,6 @@ export default function Register() {
 
                   </div>
 
-
                   {/* ==================================================
                       GENERAL SIGNUP ERROR
                       ================================================== */}
@@ -854,7 +849,6 @@ export default function Register() {
                     </div>
                   )}
 
-
                   {/* ==================================================
                       CREATE ACCOUNT BUTTON
                       ================================================== */}
@@ -866,7 +860,7 @@ export default function Register() {
                     className="
                       mt-[32px]
                       h-[48px]
-                      w-[449px]
+                      w-full
                       rounded-full
                       bg-[#0085FF]
                       font-['Inter']
@@ -887,12 +881,11 @@ export default function Register() {
 
                 </div>
 
-
                 {/* ==================================================
                     SOCIAL + LOGIN SECTION
                     ================================================== */}
 
-                <div className="mt-[24px] w-[449px]">
+                <div className="mt-[24px] w-full">
 
                   {/* Or Continue With */}
                   <div className="flex w-full items-center">
@@ -916,7 +909,6 @@ export default function Register() {
                     <div className="h-px flex-1 bg-[#E2E8F0]" />
 
                   </div>
-
 
                   {/* Social Icons */}
                   <div className="mt-[16px] flex h-[42px] items-center justify-center gap-[6px]">
@@ -971,12 +963,12 @@ export default function Register() {
 
                   </div>
 
-
                   {/* Login Text */}
                   <div className="mt-[17px] flex justify-center">
 
                     <p
                       className="
+                        text-center
                         font-['Inter']
                         text-[14px]
                         font-normal
@@ -1006,20 +998,20 @@ export default function Register() {
 
                   </div>
 
- {/* FOOTER */}
-                <div className="mt-35 justify-center w-[448px]">
+                  {/* FOOTER */}
+                  <div className="mt-20 w-full justify-center sm:mt-35">
 
-                  {/* DIVIDER */}
-                  <div className="h-px w-[120%] -translate-x-10 bg-[#E2E8F0]" />
+                    {/* DIVIDER */}
+                    <div className="h-px w-full bg-[#E2E8F0]" />
 
                     {/* Footer Content */}
-                    <div className="mt-[20px] flex w-full items-center justify-center gap-8 whitespace-nowrap">
+                    <div className="mt-[20px] flex w-full flex-wrap items-center justify-center gap-4 sm:gap-8">
 
-                      <span className="font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]">
+                      <span className="text-center font-['Inter'] text-[14px] font-normal leading-[20px] text-[#475569]">
                         2026 Datacircles. All Rights Reserved.
                       </span>
 
-                      <div className="flex items-center gap-[32px]">
+                      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-[32px]">
 
                         <button
                           type="button"

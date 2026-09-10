@@ -99,15 +99,15 @@ const ImportCompany = ({ onBack }) => {
   };
 
   return (
-    <div className="w-[596px] pt-[64px]">
+    <div className="w-full max-w-[596px] px-[16px] pt-[24px] sm:px-0 sm:pt-[40px] lg:pt-[64px]">
 
       {/* HEADING */}
-      <div className="mb-[40px]">
-        <h1 className="text-[30px] font-semibold leading-[38px] tracking-[-0.6px] text-[#0F172A]">
+      <div className="mb-[24px] sm:mb-[40px]">
+        <h1 className="text-[22px] sm:text-[30px] font-semibold leading-[30px] sm:leading-[38px] tracking-[-0.6px] text-[#0F172A]">
           Import Your Existing Company
         </h1>
 
-        <p className="mt-[6px] text-[16px] font-normal leading-[24px] text-[#475569]">
+        <p className="mt-[6px] text-[14px] sm:text-[16px] font-normal leading-[22px] sm:leading-[24px] text-[#475569]">
           Upload an Excel or CSV file and we’ll help structure your Company
           data.
         </p>
@@ -119,7 +119,7 @@ const ImportCompany = ({ onBack }) => {
         onDragEnter={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        className={`flex h-[252px] w-[596px] flex-col items-center justify-center rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] transition ${
+        className={`flex h-auto min-h-[220px] w-full flex-col items-center justify-center rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] px-[16px] py-[24px] text-center transition sm:h-[252px] sm:py-0 ${
           isDragging ? "border-[#0085FF] bg-[#F0F8FF]" : ""
         }`}
       >
@@ -178,7 +178,7 @@ const ImportCompany = ({ onBack }) => {
         <button
           type="button"
           onClick={handleUploadClick}
-          className="mt-[24px] text-[14px] font-medium leading-[20px] text-[#0F172A] hover:text-[#0085FF]"
+          className="mt-[24px] max-w-full truncate px-[8px] text-[14px] font-medium leading-[20px] text-[#0F172A] hover:text-[#0085FF]"
         >
           {selectedFile ? selectedFile.name : "Drag & Drop Your File Here"}
         </button>
@@ -230,7 +230,7 @@ const ImportCompany = ({ onBack }) => {
       )}
 
       {/* IMPORT INSTRUCTIONS */}
-      <div className="mt-[24px] w-[596px] rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] px-[16px] py-[12px]">
+      <div className="mt-[24px] w-full max-w-[596px] rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] px-[16px] py-[12px]">
 
         {/* TITLE */}
         <div className="flex items-center gap-[10px]">
@@ -270,7 +270,7 @@ const ImportCompany = ({ onBack }) => {
         </div>
 
         {/* INSTRUCTIONS */}
-        <ul className="mt-[8px] ml-[32px] list-disc text-[13px] font-normal leading-[20px] text-[#64748B]">
+        <ul className="mt-[8px] ml-[20px] sm:ml-[32px] list-disc text-[13px] font-normal leading-[20px] text-[#64748B]">
           <li>
             Your CSV should include column headers in the first row
           </li>
@@ -294,7 +294,7 @@ const ImportCompany = ({ onBack }) => {
       </div>
 
       {/* ACTION */}
-      <div className="mt-[24px] flex w-[596px] items-center justify-between">
+      <div className="mt-[24px] flex w-full max-w-[596px] items-center justify-between pb-[24px] sm:pb-0">
         <button
           type="button"
           onClick={onBack}

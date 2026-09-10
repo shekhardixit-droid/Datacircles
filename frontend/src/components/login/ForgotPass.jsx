@@ -81,24 +81,25 @@ const ForgotPass = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#EAEAEA] p-4 font-inter">
+    <div className="min-h-screen w-full bg-[#EAEAEA] p-2 sm:p-4 font-inter">
       <div className="flex w-full items-start gap-4">
 
         {/* ==================================================
             LEFT SECTION — SAME AS LOGIN
+            HIDDEN ON MOBILE / TABLET, SHOWN FROM lg UP
             ================================================== */}
-        <div className="relative h-[905px] w-[599px] shrink-0 overflow-hidden rounded-[18px] bg-white">
+        <div className="relative hidden h-[905px] w-[599px] shrink-0 overflow-hidden rounded-[18px] bg-white lg:block">
 
           {/* TOP TRANSPARENT IMAGE */}
           <img
-            src="/src/assets/Ellipse 2.png"
+            src="/Ellipse 2.png"
             alt=""
             className="absolute left-0 -top-40 z-10 h-auto w-full object-contain"
           />
 
           {/* BOTTOM TRANSPARENT IMAGE */}
           <img
-            src="/src/assets/Ellipse 1.png"
+            src="/Ellipse 1.png"
             alt=""
             className="absolute left-0 z-10 h-[120%] w-full object-contain"
           />
@@ -145,13 +146,14 @@ const ForgotPass = () => {
 
         {/* ==================================================
             RIGHT SECTION
+            FULL WIDTH ON MOBILE (LEFT PANEL IS HIDDEN)
             ================================================== */}
-        <div className="h-[899px] min-w-0 flex-1 overflow-hidden rounded-[18px] bg-white">
+        <div className="min-h-screen w-full flex-1 overflow-hidden rounded-[18px] bg-white lg:h-[899px] lg:min-h-0">
 
           {/* CENTERED CONTENT */}
-          <div className="flex h-full w-full items-center justify-center">
+          <div className="flex h-full w-full items-center justify-center px-4 py-10 sm:px-6 lg:px-0 lg:py-0">
 
-            <div className="relative h-[692px] w-[449px] shrink-0">
+            <div className="relative flex w-full max-w-[449px] flex-col lg:h-[692px] lg:w-[449px] lg:block">
 
               {/* ==================================================
                   SCREEN 3 — CREATE NEW PASSWORD
@@ -177,9 +179,11 @@ const ForgotPass = () => {
                     className="
                       mt-[20px]
                       font-['Inter']
-                      text-[28px]
+                      text-[22px]
+                      sm:text-[28px]
                       font-semibold
-                      leading-[36px]
+                      leading-[30px]
+                      sm:leading-[36px]
                       tracking-[-0.14px]
                       text-[#0F172A]
                     "
@@ -192,14 +196,16 @@ const ForgotPass = () => {
                     className="
                       mt-[8px]
                       font-['Inter']
-                      text-[18px]
+                      text-[15px]
+                      sm:text-[18px]
                       font-medium
-                      leading-[28px]
+                      leading-[24px]
+                      sm:leading-[28px]
                       text-[#475569]
                     "
                   >
                     Your password has been successfully reset.
-                    <br />
+                    <br className="hidden sm:block" />
                     Click below to log in magically.
                   </p>
 
@@ -210,7 +216,7 @@ const ForgotPass = () => {
                     className="
                       mt-[32px]
                       h-[48px]
-                      w-[449px]
+                      w-full
                       rounded-full
                       bg-[#0085FF]
                       font-['Inter']
@@ -243,16 +249,17 @@ const ForgotPass = () => {
                   </button>
 
                   {/* FOOTER */}
-                  <div className="absolute -bottom-21.5 left-0 w-[448px]">
+                  <div className="relative mt-16 w-full lg:absolute lg:-bottom-21.5 lg:left-0 lg:mt-0 lg:w-[448px]">
 
-                    <div className="h-px w-[120%] -translate-x-10 bg-[#E2E8F0]" />
+                    <div className="h-px w-full bg-[#E2E8F0] lg:w-[120%] lg:-translate-x-10" />
 
-                    <div className="mt-[20px] flex w-full items-center justify-center gap-8 whitespace-nowrap">
+                    <div className="mt-[20px] flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8 sm:whitespace-nowrap">
 
                       <span
                         className="
                           font-['Inter']
-                          text-[14px]
+                          text-[13px]
+                          sm:text-[14px]
                           font-normal
                           leading-[20px]
                           text-[#475569]
@@ -261,13 +268,14 @@ const ForgotPass = () => {
                         2026 Datacircles. All Rights Reserved.
                       </span>
 
-                      <div className="flex items-center gap-[32px]">
+                      <div className="flex items-center gap-[24px] sm:gap-[32px]">
 
                         <button
                           type="button"
                           className="
                             font-['Inter']
-                            text-[14px]
+                            text-[13px]
+                            sm:text-[14px]
                             font-normal
                             leading-[20px]
                             text-[#475569]
@@ -280,7 +288,8 @@ const ForgotPass = () => {
                           type="button"
                           className="
                             font-['Inter']
-                            text-[14px]
+                            text-[13px]
+                            sm:text-[14px]
                             font-normal
                             leading-[20px]
                             text-[#475569]
@@ -299,7 +308,7 @@ const ForgotPass = () => {
                 <>
 
                   {/* TOP SECTION */}
-                  <div className="w-[449px]">
+                  <div className="w-full">
 
                     {/* 56 × 56 ICON */}
                     <div className="h-[56px] w-[56px]">
@@ -315,9 +324,11 @@ const ForgotPass = () => {
                       className="
                         mt-[20px]
                         font-['Inter']
-                        text-[28px]
+                        text-[22px]
+                        sm:text-[28px]
                         font-semibold
-                        leading-[36px]
+                        leading-[30px]
+                        sm:leading-[36px]
                         tracking-[-0.14px]
                         text-[#0F172A]
                       "
@@ -330,23 +341,25 @@ const ForgotPass = () => {
                       className="
                         mt-[8px]
                         font-['Inter']
-                        text-[18px]
+                        text-[15px]
+                        sm:text-[18px]
                         font-medium
-                        leading-[28px]
+                        leading-[24px]
+                        sm:leading-[28px]
                         text-[#475569]
                       "
                     >
                       Your new password must be different from previous
-                      <br />
+                      <br className="hidden sm:block" />
                       used passwords.
                     </p>
                   </div>
 
                   {/* PASSWORD FORM */}
-                  <div className="mt-[24px] w-[449px]">
+                  <div className="mt-[24px] w-full">
 
                     {/* PASSWORD */}
-                    <div className="w-[449px]">
+                    <div className="w-full">
 
                       <label
                         className="
@@ -378,7 +391,7 @@ const ForgotPass = () => {
                           placeholder="ex.***********"
                           className="
                             h-[48px]
-                            w-[449px]
+                            w-full
                             rounded-full
                             border
                             border-[#E2E8F0]
@@ -469,7 +482,7 @@ const ForgotPass = () => {
                     </div>
 
                     {/* CONFIRM PASSWORD */}
-                    <div className="mt-[25px] w-[449px]">
+                    <div className="mt-[25px] w-full">
 
                       <label
                         className="
@@ -501,7 +514,7 @@ const ForgotPass = () => {
                           placeholder="ex.***********"
                           className="
                             h-[48px]
-                            w-[449px]
+                            w-full
                             rounded-full
                             border
                             border-[#E2E8F0]
@@ -600,7 +613,7 @@ const ForgotPass = () => {
                       className="
                         mt-[32px]
                         h-[48px]
-                        w-[449px]
+                        w-full
                         rounded-full
                         bg-[#0085FF]
                         font-['Inter']
@@ -666,16 +679,17 @@ const ForgotPass = () => {
                   </div>
 
                   {/* FOOTER — SAME AS CURRENT FORGOTPASS */}
-                  <div className="absolute -bottom-21.5 left-0 w-[448px]">
+                  <div className="relative mt-16 w-full lg:absolute lg:-bottom-21.5 lg:left-0 lg:mt-0 lg:w-[448px]">
 
-                    <div className="h-px w-[120%] -translate-x-10 bg-[#E2E8F0]" />
+                    <div className="h-px w-full bg-[#E2E8F0] lg:w-[120%] lg:-translate-x-10" />
 
-                    <div className="mt-[20px] flex w-full items-center justify-center gap-8 whitespace-nowrap">
+                    <div className="mt-[20px] flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8 sm:whitespace-nowrap">
 
                       <span
                         className="
                           font-['Inter']
-                          text-[14px]
+                          text-[13px]
+                          sm:text-[14px]
                           font-normal
                           leading-[20px]
                           text-[#475569]
@@ -684,13 +698,14 @@ const ForgotPass = () => {
                         2026 Datacircles. All Rights Reserved.
                       </span>
 
-                      <div className="flex items-center gap-[32px]">
+                      <div className="flex items-center gap-[24px] sm:gap-[32px]">
 
                         <button
                           type="button"
                           className="
                             font-['Inter']
-                            text-[14px]
+                            text-[13px]
+                            sm:text-[14px]
                             font-normal
                             leading-[20px]
                             text-[#475569]
@@ -703,7 +718,8 @@ const ForgotPass = () => {
                           type="button"
                           className="
                             font-['Inter']
-                            text-[14px]
+                            text-[13px]
+                            sm:text-[14px]
                             font-normal
                             leading-[20px]
                             text-[#475569]
@@ -725,7 +741,7 @@ const ForgotPass = () => {
                 <>
 
                   {/* TOP SECTION */}
-                  <div className="w-[449px]">
+                  <div className="w-full">
 
                     {/* ICON */}
                     <div className="h-[56px] w-[56px]">
@@ -741,9 +757,11 @@ const ForgotPass = () => {
                       className="
                         mt-[20px]
                         font-['Inter']
-                        text-[28px]
+                        text-[22px]
+                        sm:text-[28px]
                         font-semibold
-                        leading-[36px]
+                        leading-[30px]
+                        sm:leading-[36px]
                         tracking-[-0.14px]
                         text-[#0F172A]
                       "
@@ -756,9 +774,11 @@ const ForgotPass = () => {
                       className="
                         mt-[8px]
                         font-['Inter']
-                        text-[18px]
+                        text-[15px]
+                        sm:text-[18px]
                         font-medium
-                        leading-[28px]
+                        leading-[24px]
+                        sm:leading-[28px]
                         text-[#475569]
                       "
                     >
@@ -768,7 +788,7 @@ const ForgotPass = () => {
                   </div>
 
                   {/* FORM */}
-                  <div className="mt-[24px] w-[449px]">
+                  <div className="mt-[24px] w-full">
 
                     {/* EMAIL LABEL */}
                     <label
@@ -797,7 +817,7 @@ const ForgotPass = () => {
                       className={`
                         mt-[8px]
                         h-[49px]
-                        w-[449px]
+                        w-full
                         rounded-full
                         border
                         bg-white
@@ -873,7 +893,7 @@ const ForgotPass = () => {
                       className="
                         mt-[16px]
                         h-[48px]
-                        w-[449px]
+                        w-full
                         rounded-full
                         bg-[#0085FF]
                         font-['Inter']
@@ -912,16 +932,17 @@ const ForgotPass = () => {
                   </div>
 
                   {/* FOOTER */}
-                  <div className="absolute -bottom-21.5 left-0 w-[448px]">
+                  <div className="relative mt-16 w-full lg:absolute lg:-bottom-21.5 lg:left-0 lg:mt-0 lg:w-[448px]">
 
-                    <div className="h-px w-[120%] -translate-x-10 bg-[#E2E8F0]" />
+                    <div className="h-px w-full bg-[#E2E8F0] lg:w-[120%] lg:-translate-x-10" />
 
-                    <div className="mt-[20px] flex w-full items-center justify-center gap-8 whitespace-nowrap">
+                    <div className="mt-[20px] flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8 sm:whitespace-nowrap">
 
                       <span
                         className="
                           font-['Inter']
-                          text-[14px]
+                          text-[13px]
+                          sm:text-[14px]
                           font-normal
                           leading-[20px]
                           text-[#475569]
@@ -930,13 +951,14 @@ const ForgotPass = () => {
                         2026 Datacircles. All Rights Reserved.
                       </span>
 
-                      <div className="flex items-center gap-[32px]">
+                      <div className="flex items-center gap-[24px] sm:gap-[32px]">
 
                         <button
                           type="button"
                           className="
                             font-['Inter']
-                            text-[14px]
+                            text-[13px]
+                            sm:text-[14px]
                             font-normal
                             leading-[20px]
                             text-[#475569]
@@ -949,7 +971,8 @@ const ForgotPass = () => {
                           type="button"
                           className="
                             font-['Inter']
-                            text-[14px]
+                            text-[13px]
+                            sm:text-[14px]
                             font-normal
                             leading-[20px]
                             text-[#475569]
@@ -985,9 +1008,11 @@ const ForgotPass = () => {
                     className="
                       mt-[20px]
                       font-['Inter']
-                      text-[28px]
+                      text-[22px]
+                      sm:text-[28px]
                       font-semibold
-                      leading-[36px]
+                      leading-[30px]
+                      sm:leading-[36px]
                       tracking-[-0.14px]
                       text-[#0F172A]
                     "
@@ -1000,9 +1025,11 @@ const ForgotPass = () => {
                     className="
                       mt-[8px]
                       font-['Inter']
-                      text-[18px]
+                      text-[15px]
+                      sm:text-[18px]
                       font-medium
-                      leading-[28px]
+                      leading-[24px]
+                      sm:leading-[28px]
                       text-[#475569]
                     "
                   >
@@ -1016,7 +1043,7 @@ const ForgotPass = () => {
                     className="
                       mt-[24px]
                       h-[48px]
-                      w-[449px]
+                      w-full
                       rounded-full
                       bg-[#0085FF]
                       font-['Inter']
@@ -1035,7 +1062,7 @@ const ForgotPass = () => {
                   <p
                     className="
                       mt-[18px]
-                      w-[449px]
+                      w-full
                       text-center
                       font-['Inter']
                       text-[14px]
@@ -1049,16 +1076,17 @@ const ForgotPass = () => {
                   </p>
 
                   {/* FOOTER */}
-                  <div className="absolute -bottom-21.5 left-0 w-[448px]">
+                  <div className="relative mt-16 w-full lg:absolute lg:-bottom-21.5 lg:left-0 lg:mt-0 lg:w-[448px]">
 
-                    <div className="h-px w-[120%] -translate-x-10 bg-[#E2E8F0]" />
+                    <div className="h-px w-full bg-[#E2E8F0] lg:w-[120%] lg:-translate-x-10" />
 
-                    <div className="mt-[20px] flex w-full items-center justify-center gap-8 whitespace-nowrap">
+                    <div className="mt-[20px] flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8 sm:whitespace-nowrap">
 
                       <span
                         className="
                           font-['Inter']
-                          text-[14px]
+                          text-[13px]
+                          sm:text-[14px]
                           font-normal
                           leading-[20px]
                           text-[#475569]
@@ -1067,13 +1095,14 @@ const ForgotPass = () => {
                         2026 Datacircles. All Rights Reserved.
                       </span>
 
-                      <div className="flex items-center gap-[32px]">
+                      <div className="flex items-center gap-[24px] sm:gap-[32px]">
 
                         <button
                           type="button"
                           className="
                             font-['Inter']
-                            text-[14px]
+                            text-[13px]
+                            sm:text-[14px]
                             font-normal
                             leading-[20px]
                             text-[#475569]
@@ -1086,7 +1115,8 @@ const ForgotPass = () => {
                           type="button"
                           className="
                             font-['Inter']
-                            text-[14px]
+                            text-[13px]
+                            sm:text-[14px]
                             font-normal
                             leading-[20px]
                             text-[#475569]

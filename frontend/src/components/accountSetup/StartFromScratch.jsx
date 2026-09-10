@@ -62,28 +62,28 @@ const StartFromScratch = ({ onContinue, onBack }) => {
   };
 
   return (
-    <div className="w-[584px] mb-10 pt-[64px]">
+    <div className="w-full max-w-[584px] px-[16px] mb-10 pt-[24px] sm:px-0 sm:pt-[40px] lg:pt-[64px]">
 
       {/* ==================================================
           HEADING
           ================================================== */}
-      <h1 className="text-[28px] font-semibold leading-[36px] tracking-[-0.14px] text-[#0F172A]">
+      <h1 className="text-[22px] sm:text-[28px] font-semibold leading-[30px] sm:leading-[36px] tracking-[-0.14px] text-[#0F172A]">
         Add your first company
       </h1>
 
-      <p className="mt-[8px] w-[560px] text-[16px] font-medium leading-[22px] text-[#475569]">
+      <p className="mt-[8px] w-full max-w-[560px] text-[14px] sm:text-[16px] font-medium leading-[20px] sm:leading-[22px] text-[#475569]">
         Start your CRM with a company you already do business with.
-        <br />
+        <br className="hidden sm:block" />
         You can add more companies anytime.
       </p>
 
       {/* ==================================================
           COMPANY DETAILS
           ================================================== */}
-      <div className="mt-[40px] w-[584px] rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] p-[24px]">
+      <div className="mt-[24px] sm:mt-[40px] w-full max-w-[584px] rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] p-[16px] sm:p-[24px]">
 
         {/* COMPANY NAME + INDUSTRY */}
-        <div className="grid grid-cols-2 gap-[24px]">
+        <div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2 sm:gap-[24px]">
 
           {/* COMPANY NAME */}
           <div>
@@ -280,10 +280,10 @@ const StartFromScratch = ({ onContinue, onBack }) => {
       {/* ==================================================
           CONTACT DETAILS
           ================================================== */}
-      <div className="mt-[24px] w-[584px] rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] p-[24px]">
+      <div className="mt-[24px] w-full max-w-[584px] rounded-[20px] border border-[#E2E8F0] bg-[#F1F3F3] p-[16px] sm:p-[24px]">
 
         {/* CONTACT NAME + WORK EMAIL */}
-        <div className="grid grid-cols-2 gap-[24px]">
+        <div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2 sm:gap-[24px]">
 
           {/* CONTACT NAME */}
           <div>
@@ -432,7 +432,7 @@ const StartFromScratch = ({ onContinue, onBack }) => {
       {/* ==================================================
           ACTIONS
           ================================================== */}
-      <div className="mt-[24px] flex w-[584px] items-center justify-between">
+      <div className="mt-[24px] flex w-full max-w-[584px] flex-col items-stretch gap-[12px] sm:flex-row sm:items-center sm:justify-between sm:gap-0">
 
         <button
           type="button"
@@ -449,6 +449,8 @@ const StartFromScratch = ({ onContinue, onBack }) => {
             text-[#0F172A]
             transition
             hover:bg-[#F8FAFC]
+            order-2
+            sm:order-1
           "
         >
           Back
@@ -467,6 +469,8 @@ const StartFromScratch = ({ onContinue, onBack }) => {
             text-white
             transition
             hover:bg-[#0078E8]
+            order-1
+            sm:order-2
           "
         >
           Create Company & Continue

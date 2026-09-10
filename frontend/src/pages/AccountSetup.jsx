@@ -8,6 +8,17 @@ import ImportCompany from "../components/accountSetup/ImportCompany";
 import CreateFirstDeal from "../components/accountSetup/CreateFirstDeal";
 import SetupComplete from "../components/accountSetup/SetupComplete";
 
+// ==================================================
+// STEP META — used only by the compact mobile stepper
+// (the desktop sidebar below still hardcodes its own copy,
+// left untouched)
+// ==================================================
+const STEP_META = [
+  { title: "Workspace", description: "Tell us about your business" },
+  { title: "Configure Basics", description: "Configure a few basics." },
+  { title: "Company", description: "Start with new or Existing" },
+  { title: "Create First Deal", description: "Start with the Deal" },
+];
 
 const AccountSetup = () => {
   const navigate = useNavigate();
@@ -35,16 +46,17 @@ const AccountSetup = () => {
       {/* ==================================================
           TOP HEADER — NEVER CHANGES
           ================================================== */}
-      <div className="relative h-[88px] w-full border-b border-dashed border-[#E2E8F0]">
+      <div className="relative h-[72px] sm:h-[88px] w-full border-b border-dashed border-[#E2E8F0]">
 
         {/* DATACIRCLES LOGO */}
-        <div className="absolute left-[44px] top-[24px] flex h-[40px] w-[40px] items-center justify-center">
+        <div className="absolute left-[16px] top-[16px] flex h-[36px] w-[36px] items-center justify-center sm:left-[44px] sm:top-[24px] sm:h-[40px] sm:w-[40px]">
           <svg
             width="40"
             height="40"
             viewBox="0 0 40 40"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="h-full w-full"
           >
             <path
               fillRule="evenodd"
@@ -70,19 +82,24 @@ const AccountSetup = () => {
           type="button"
           className="
             absolute
-            right-[44px]
-            top-[26px]
+            right-[16px]
+            top-[18px]
             flex
-            h-[36px]
-            w-[101px]
+            h-[32px]
+            w-[84px]
             items-center
             justify-center
-            gap-[10px]
+            gap-[6px]
             rounded-full
             border
             border-[#E2E8F0]
             bg-white
             text-[#0F172A]
+            sm:right-[44px]
+            sm:top-[26px]
+            sm:h-[36px]
+            sm:w-[101px]
+            sm:gap-[10px]
           "
         >
           <svg
@@ -114,7 +131,7 @@ const AccountSetup = () => {
             />
           </svg>
 
-          <span className="text-[14px] font-normal">
+          <span className="text-[13px] sm:text-[14px] font-normal">
             ENG
           </span>
 
@@ -135,14 +152,93 @@ const AccountSetup = () => {
       </div>
 
       {/* ==================================================
+          MOBILE / TABLET STEP INDICATOR — hidden at lg
+          Compact horizontal progress bar + current step label,
+          replaces the vertical sidebar below lg.
+          ================================================== */}
+      <div className="border-b border-dashed border-[#E2E8F0] px-[16px] py-[16px] lg:hidden">
+
+        <div className="flex w-full items-center">
+          {STEP_META.map((step, idx) => {
+            const stepNumber = idx + 1;
+            const isComplete = currentStep > stepNumber;
+            const isActive = currentStep >= stepNumber;
+
+            return (
+              <React.Fragment key={step.title}>
+                <div
+                  className={`
+                    flex
+                    h-[17px]
+                    w-[17px]
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-full
+                    border-2
+                    bg-white
+                    ${
+                      isActive
+                        ? "border-[#16A34A]"
+                        : "border-[#94A3B8]"
+                    }
+                  `}
+                >
+                  {isComplete && (
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 10 10"
+                      fill="none"
+                    >
+                      <path
+                        d="M2 5L4.2 7L8 3"
+                        stroke="#16A34A"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                </div>
+
+                {idx < STEP_META.length - 1 && (
+                  <div
+                    className={`
+                      mx-[6px]
+                      h-px
+                      flex-1
+                      ${
+                        currentStep > stepNumber
+                          ? "bg-[#16A34A]"
+                          : "bg-[#94A3B8]"
+                      }
+                    `}
+                  />
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
+
+        <p className="mt-[12px] text-[14px] font-semibold leading-[20px] text-[#0F172A]">
+          Step {currentStep} of {STEP_META.length} — {STEP_META[currentStep - 1]?.title}
+        </p>
+
+        <p className="mt-[1px] text-[12px] font-normal leading-[18px] text-[#64748B]">
+          {STEP_META[currentStep - 1]?.description}
+        </p>
+      </div>
+
+      {/* ==================================================
           MAIN CONTENT
           ================================================== */}
-      <div className="flex min-h-[812px] w-full">
+      <div className="flex min-h-0 w-full flex-col lg:min-h-[812px] lg:flex-row">
 
         {/* ==================================================
-            LEFT SIDEBAR — NEVER CHANGES
+            LEFT SIDEBAR — NEVER CHANGES (desktop only, lg+)
             ================================================== */}
-        <div className="w-[350px] shrink-0 border-r border-dashed border-[#E2E8F0]">
+        <div className="hidden w-[350px] shrink-0 border-r border-dashed border-[#E2E8F0] lg:block">
 
           <div className="ml-[50px] mt-[64px]">
 
@@ -529,7 +625,7 @@ const AccountSetup = () => {
         {/* ==================================================
             CHANGING CENTER CONTENT
             ================================================== */}
-        <div className="flex min-w-0 flex-1 items-center justify-center">
+        <div className="flex w-full min-w-0 flex-1 items-center justify-center px-[16px] py-[32px] sm:px-[24px] lg:px-0 lg:py-0">
 
           {/* STEP 1 */}
           {currentStep === 1 && (
