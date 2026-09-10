@@ -119,15 +119,27 @@ function Hero() {
           ===================================================== */}
 
       <div
-        style={{
-          position: "absolute",
-          top: "30px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 100,
-          width: "720px",
-          maxWidth: "calc(100% - 40px)",
-        }}
+       className="
+    absolute
+    left-1/2
+    top-[0.7%]
+    z-50
+    -translate-x-1/2
+    scale-[0.5]
+    min-[1000px]:scale-[0.75]
+    min-[1400px]:scale-100
+
+    max-[768px]:left-0
+    max-[768px]:top-[12px]
+    max-[768px]:w-full
+    max-[768px]:translate-x-0
+    max-[768px]:scale-100
+    max-[768px]:px-[8px]
+    max-[768px]:flex
+    max-[768px]:justify-center
+    max-[768px]:[&>*]:w-full
+    max-[768px]:[&>*]:max-w-full
+  "
       >
         <Navbar />
       </div>

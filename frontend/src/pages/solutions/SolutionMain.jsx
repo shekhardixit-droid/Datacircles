@@ -396,8 +396,29 @@ export default function SolutionMain() {
       {/* Start Free */}
       <button
         type="button"
-        className="flex h-[42px] w-fit items-center justify-center rounded-full bg-[#0085FF] border border-white/50 px-6 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:bg-white hover:text-[#0085FF]"
-        onClick={() => window.location.href = "/pricing"}
+className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[136px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "        onClick={() => window.location.href = "/pricing"}
       >
         Start free
       </button>
@@ -405,8 +426,29 @@ export default function SolutionMain() {
       {/* Book a Demo */}
       <button
         type="button"
-        className="flex h-[42px] w-fit items-center justify-center rounded-full border border-white/50 bg-transparent px-6 font-inter text-[13px] font-semibold text-white transition-all duration-200 hover:border-white hover:bg-white hover:text-[#0085FF]"
-      >
+className="
+            flex
+            h-[42px]
+            w-full
+            sm:w-[136px]
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-full
+            border
+            border-white
+            bg-transparent
+            px-[12px]
+            text-center
+            text-[14px]
+            font-medium
+            leading-[1.2]
+            text-white
+            transition-all
+            duration-200
+            hover:bg-white
+            hover:text-[#014c6c]
+          "      >
         Book a demo
       </button>
 
