@@ -205,13 +205,29 @@ const CreateInvoice = () => {
   // SUBMIT
   // -----------------------------
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Invoice Data:", invoice);
+    try {
+      const API_URL = import.meta.env.VITE_API_URL || "https://datacircles.vercel.app";
+      const response = await fetch(`${API_URL}/api/invoices`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(invoice),
+      });
 
-    // Later:
-    // axios.post("/api/invoices", invoice)
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to save invoice");
+      }
+
+      window.alert("Invoice saved successfully!");
+      console.log("Saved invoice:", data);
+    } catch (error) {
+      console.error("Save invoice error:", error);
+      window.alert("Failed to save invoice: " + error.message);
+    }
   };
 
   return (
