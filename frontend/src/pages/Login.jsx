@@ -53,14 +53,14 @@ export default function Login() {
 
           {/* TOP TRANSPARENT IMAGE */}
           <img
-            src="/src/assets/Ellipse 2.png"
+            src="/Ellipse 2.png"
             alt=""
             className="absolute left-0 -top-40 z-10 h-auto w-full object-contain"
           />
 
           {/* BOTTOM TRANSPARENT IMAGE */}
           <img
-            src="/src/assets/Ellipse 1.png"
+            src="/Ellipse 1.png"
             alt=""
             className="absolute left-0 z-10 h-[120%] w-full object-contain"
           />
