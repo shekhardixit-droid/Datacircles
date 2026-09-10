@@ -313,26 +313,33 @@ const InvoiceBuilder = () => {
   const handleSaveInvoice = async () => {
     try {
       const invoiceData = {
-        ...formData,
-        items: items.map((item) => ({
-          item: item.item,
-          description: item.description,
-          hsn: item.hsn,
-          unit: item.unit,
-          rate: parseFloat(String(item.rate).replace(/[^0-9.]/g, "")) || 0,
-          quantity: parseFloat(item.quantity) || 1,
-        })),
+        businessName:    formData.businessName    || "",
+        businessAddress: formData.businessAddress || "",
+        clientName:      formData.clientName      || "",
+        email:           formData.email           || "",
+        clientAddress:   formData.clientAddress   || "",
+        clientPhone:     formData.clientPhone      || "",
+        invoiceNumber:   formData.invoiceNumber   || "",
+        dueDate:         formData.dueDate         || "",
+        notes:           formData.notes           || "",
+        signedBy:        formData.signedBy        || "",
+        taxRate:         parseFloat(formData.taxRate) || 0,
+        upiId:           formData.upiId           || "",
         subtotal,
         taxAmount,
         total,
+        items: items.map((item) => ({
+          item:        item.item        || "",
+          description: item.description || "",
+          rate:        parseFloat(String(item.rate).replace(/[^0-9.]/g, "")) || 0,
+          quantity:    parseFloat(item.quantity) || 1,
+        })),
       };
 
       const API_URL = import.meta.env.VITE_API_URL || "https://datacircles.vercel.app";
       const response = await fetch(`${API_URL}/api/invoices`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(invoiceData),
       });
 
