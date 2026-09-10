@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -1480,6 +1481,7 @@ export default function HowToGuide() {
           </section>
 
         </div>
+        <Footer/>
       </div>
     </>
   );

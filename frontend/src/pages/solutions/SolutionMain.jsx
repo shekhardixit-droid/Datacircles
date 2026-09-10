@@ -1,5 +1,6 @@
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 export default function SolutionMain() {
   const navigate = useNavigate();
@@ -456,6 +457,7 @@ className="
 
   </div>
 </section>
+ <Footer />
 
       </main>
     </div>

@@ -1,4 +1,4 @@
-
+import Footer from "../../components/Footer";
 import React from "react";
 import Navbar from "../../components/Navbar";
 import FAQ from "../../components/freetools/FAQ";
@@ -510,7 +510,7 @@ const FreeTools = () => {
           </div>
 
         </section>
-
+ <Footer />
       </main>
 
     </div>

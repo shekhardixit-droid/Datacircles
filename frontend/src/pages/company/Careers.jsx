@@ -13,15 +13,15 @@ export default function Careers() {
 }, []);
 
   return (
-    <div className="min-h-screen w-full bg-white text-[#37413D]">
-      
-  
-      <Navbar />
-      
+        <div className="relative min-h-screen w-full bg-white text-[#37413D]">
 
       <main className="w-full">
 
-    <section className="flex h-auto w-full flex-col items-center mt-12 md:mt-16 lg:mt-20 px-4 sm:px-6">
+    <section className="relative flex h-auto w-full flex-col items-center px-4 pt-[120px] sm:px-6 md:pt-[130px] lg:pt-[140px]">
+      <div className="absolute left-1/2 top-[0.7%] z-50 flex -translate-x-1/2 justify-center scale-[0.5] min-[900px]:scale-[0.7] min-[1200px]:scale-[0.85] min-[1400px]:scale-100 max-[768px]:left-0 max-[768px]:top-[12px] max-[768px]:w-full max-[768px]:translate-x-0 max-[768px]:scale-100 max-[768px]:px-[8px] max-[768px]:[&>*]:w-full max-[768px]:[&>*]:max-w-full">
+        <Navbar />
+      </div>
+
         {/* Top Pill */}
         <div className="flex h-[25px] w-[160px] items-center justify-start gap-2 rounded-full px-3 bg-[#EBE6E033]">
           <span className="h-[7px] w-[7px] rounded-full bg-[#0085FF]" />

@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 export default function Blog() {
@@ -1583,7 +1584,10 @@ export default function Blog() {
     </section>
 
         </div>
-
+  {/* FOOTER - FULL WIDTH */}
+        <div className="relative left-1/2 w-screen -translate-x-1/2">
+          <Footer />
+        </div>
       </div>
     </>
   );

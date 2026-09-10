@@ -1,5 +1,6 @@
 import React from "react";
 import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
+import Footer from "../components/Footer";
 import CTA from "../components/invoicing-billing/CTA";
 import Navbar from "../components/Navbar";
 import CreateInvoiceSection from "../components/invoice/CreateInvoiceSection";
@@ -2448,6 +2449,7 @@ export default function ProductCRM() {
         <div className="product-crm-final">
           <CTA />
         </div>
+        <Footer />
 
       </main>
 

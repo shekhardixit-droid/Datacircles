@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import TrustedAndUsedBy from "../components/TrustedAndUsedBy";
 import CTA from "../components/product-crm/CTA";
 import CRMPrice from "../components/CRMPrice";
@@ -1373,6 +1374,7 @@ export default function ProductCRM() {
       <CRMPrice />
 
       <CTA />
+      <Footer />
     </main>
   );
 }

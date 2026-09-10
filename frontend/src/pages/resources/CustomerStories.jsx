@@ -1,5 +1,6 @@
 import Navbar from "../../components/Navbar";
 import CTA from "../../components/payments/CTA";
+import Footer from "../../components/Footer";
 
 /* =========================================================
    CUSTOMER STORY IMAGES
@@ -1131,6 +1132,7 @@ export default function CustomerStories() {
 
 
         </div>
+        <Footer/>
       </div>
     </>
   );
